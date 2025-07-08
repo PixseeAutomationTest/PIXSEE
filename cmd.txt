@@ -1,0 +1,5 @@
+appium --use-plugins=inspector --allow-cors
+
+appium driver list
+
+appium plugin list
