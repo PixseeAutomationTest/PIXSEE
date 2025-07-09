@@ -91,30 +91,30 @@ class BabyMonitorPage():
         element = self.driver.find_element("id", self.muteButton)
         element.click()
 
-        def is_in_baby_monitor_page(self):
-            try:
-                WebDriverWait(self.driver, 20).until(
-                    EC.presence_of_element_located((AppiumBy.ID, self.babyMonitorScreen))
-                )
-                self.driver.find_element(AppiumBy.ID, self.babyMonitorScreen)
-                return True
-
-            except:
-                return False
-
-        def wait_for_tutor_by_id(self, tutor_id, timeout=20):
-            """等待 tutor 元素出現，並回傳元素文字"""
-            WebDriverWait(self.driver, timeout).until(
-                EC.presence_of_element_located((AppiumBy.ID, tutor_id))
+    def is_in_baby_monitor_page(self):
+        try:
+            WebDriverWait(self.driver, 20).until(
+                EC.presence_of_element_located((AppiumBy.ID, self.babyMonitorScreen))
             )
-            return self.driver.find_element(AppiumBy.ID, tutor_id).text
+            self.driver.find_element(AppiumBy.ID, self.babyMonitorScreen)
+            return True
 
-        def click_stream_title(self):
-            """點擊畫面標題"""
-            self.driver.find_element(AppiumBy.ID, "com.compal.bioslab.pixsee.pixm01:id/tvStreamTitle").click()
+        except:
+            return False
 
-        def click_home(self):
-            self.driver.find_element(AppiumBy.ID, "com.compal.bioslab.pixsee.pixm01:id/ibMenuButtonHome").click()
+    def wait_for_tutor_by_id(self, tutor_id, timeout=20):
+        """等待 tutor 元素出現，並回傳元素文字"""
+        WebDriverWait(self.driver, timeout).until(
+            EC.presence_of_element_located((AppiumBy.ID, tutor_id))
+        )
+        return self.driver.find_element(AppiumBy.ID, tutor_id).text
+
+    def click_stream_title(self):
+        """點擊畫面標題"""
+        self.driver.find_element(AppiumBy.ID, "com.compal.bioslab.pixsee.pixm01:id/tvStreamTitle").click()
+
+    def click_home(self):
+        self.driver.find_element(AppiumBy.ID, "com.compal.bioslab.pixsee.pixm01:id/ibMenuButtonHome").click()
 
 
 
