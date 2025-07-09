@@ -18,6 +18,9 @@ class BabyMonitorPage():
         self.captureButton = "com.compal.bioslab.pixsee.pixm01:id/btnSwipeCapture"
         self.changeQualityButton = "com.compal.bioslab.pixsee.pixm01:id/ibQualityStream"
         self.muteButton = "com.compal.bioslab.pixsee.pixm01:id/bStreamOptions"
+        self.home = "com.compal.bioslab.pixsee.pixm01:id/ibMenuButtonHome"
+        self.stream_title = "com.compal.bioslab.pixsee.pixm01:id/tvStreamTitle"
+        self.tutor_id = "com.compal.bioslab.pixsee.pixm01:id/tvDescription"
 
     def click_sleep(self):
         WebDriverWait(self.driver, 10).until(
@@ -102,19 +105,25 @@ class BabyMonitorPage():
         except:
             return False
 
-    def wait_for_tutor_by_id(self, tutor_id, timeout=20):
+    def wait_for_tutor_by_id(self, timeout=20):
         """等待 tutor 元素出現，並回傳元素文字"""
         WebDriverWait(self.driver, timeout).until(
-            EC.presence_of_element_located((AppiumBy.ID, tutor_id))
+            EC.presence_of_element_located((AppiumBy.ID, self.tutor_id))
         )
-        return self.driver.find_element(AppiumBy.ID, tutor_id).text
+        return self.driver.find_element(AppiumBy.ID, self.tutor_id).text
 
     def click_stream_title(self):
         """點擊畫面標題"""
-        self.driver.find_element(AppiumBy.ID, "com.compal.bioslab.pixsee.pixm01:id/tvStreamTitle").click()
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((AppiumBy.ID, self.stream_title))
+        )
+        self.driver.find_element(AppiumBy.ID, self.stream_title).click()
 
     def click_home(self):
-        self.driver.find_element(AppiumBy.ID, "com.compal.bioslab.pixsee.pixm01:id/ibMenuButtonHome").click()
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((AppiumBy.ID, self.home))
+        )
+        self.driver.find_element(AppiumBy.ID, self.home).click()
 
 
 

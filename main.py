@@ -1,5 +1,5 @@
 import unittest
-from tests.familyPhoto import FamilyAlbumCase
+from test.familyPhoto import FamilyAlbumCase
 
 if __name__ == '__main__':
     loader = unittest.TestLoader()

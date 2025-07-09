@@ -3,15 +3,17 @@ import unittest
 from pages.login_page import LoginPage
 from pages.baby_monitor_page import BabyMonitorPage
 import time
+from pages.menu_page import MenuPage
 
 from pages.menu_page import MenuPage
 
 
 class TutorCase(BaseTestCase):
 
-        @classmethod
-        def setUpClass(cls):
+
+        def setUp(self):
                 super().setUp(no_reset=False)
+                self.tutor_id = "com.compal.bioslab.pixsee.pixm01:id/tvDescription"
 
         def test_first_three_tutor_success(self):
                 login_page = LoginPage(self.driver)
@@ -21,7 +23,6 @@ class TutorCase(BaseTestCase):
 
 
 
-                tutor_id = "com.compal.bioslab.pixsee.pixm01:id/tvDescription"
                 expected_texts = [
                         "Hold and swipe up\nto switch on timer.\nDevice will flash\nwhile shooting."
                         , "Drag to view daily cover"
@@ -29,8 +30,9 @@ class TutorCase(BaseTestCase):
                         ]
 
                 for i in range(3):
+
                         try:
-                                actual_text = baby_monitor_page.wait_for_tutor_by_id(tutor_id)
+                                actual_text = baby_monitor_page.wait_for_tutor_by_id()
                                 self.assertEqual(actual_text, expected_texts[i])
                                 print(f"no.{i + 1} tutor success")
                         except AssertionError:
@@ -47,13 +49,14 @@ class TutorCase(BaseTestCase):
         def test_menu_tutor(self):
                 menu_page = MenuPage(self.driver)
                 baby_monitor_page = BabyMonitorPage(self.driver)
+
                 baby_monitor_page.click_home()
-                tutor_id = "com.compal.bioslab.pixsee.pixm01:id/tvDescription"
                 expected_texts = [
                         "Pixsee Friends specially created as companion toys to the Pixsee Play AI Smart Baby Camera."
                 ]
-                click_id = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsAbout"
-                self.verify_text_and_click(tutor_id, expected_texts, click_id, "menu")
+                self.verify_text_and_click(self.tutor_id, expected_texts,  "menu")
+                menu_page.click_about()
+
 
 
 

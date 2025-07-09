@@ -1,5 +1,5 @@
 from pages.base import BaseTestCase
-import unittest
+
 from pages.login_page import LoginPage
 from pages.baby_monitor_page import BabyMonitorPage
 
@@ -13,32 +13,62 @@ class LoginCase(BaseTestCase):
                 baby_monitor_page = BabyMonitorPage(self.driver)
 
                 login_page.login("jackypixsee02@gmail.com", "@Aa12345")
-
-                self.assertTrue(baby_monitor_page.is_in_baby_monitor_page())
+                try:
+                        self.assertTrue(baby_monitor_page.is_in_baby_monitor_page())
+                        print("Login test success")
+                except:
+                        print("Login test failed")
+                        raise AssertionError("Login failed, not in baby monitor page")
 
         def test_login_wrong_email_failure(self):
                 login_page = LoginPage(self.driver)
 
                 login_page.login("jackypixsee02", "@Aa12345")
-                self.assertEqual(login_page.get_email_error_text(),"Please enter a valid email address")
+                hint = "請輸入有效電子郵件"
+                # hint = "Please enter a valid email address"
+                try:
+                        self.assertEqual(login_page.get_email_error_text(), hint)
+                        print("Wrong email test success")
+                except AssertionError:
+                        print("Wrong email test failed")
+                        raise AssertionError("Wrong email test failed, expected error message not found")
 
         def test_login_wrong_password_failure(self):
                 login_page = LoginPage(self.driver)
 
                 login_page.login("jackypixsee02@gmail.com", "aiwu464")
-                self.assertEqual(login_page.get_password_error_text(), "Wrong password")
+                hint = "密碼輸入不符合"
+                # hint = "Wrong password"
+                try:
+                        self.assertEqual(login_page.get_password_error_text(), hint)
+                        print("Wrong password test success")
+                except AssertionError:
+                        print("Wrong password test failed")
+                        raise AssertionError("Wrong password test failed, expected error message not found")
 
         def test_login_empty_email_failure(self):
                 login_page = LoginPage(self.driver)
 
                 login_page.login("", "@Aa12345")
-                self.assertEqual(login_page.get_email_error_text(), "Please enter an email")
+                hint = "請輸入電子郵件"
+                # hint = "Please enter an email"
+                try:
+                        self.assertEqual(login_page.get_email_error_text(), hint)
+                        print("Empty email test success")
+                except AssertionError:
+                        print("Empty email test failed")
+                        raise AssertionError("Empty email test failed, expected error message not found")
 
         def test_login_empty_password_failure(self):
                 login_page = LoginPage(self.driver)
 
                 login_page.login("jackypixsee02@gmail.com", "")
-                self.assertEqual(login_page.get_password_error_text(), "Please enter password.")
+                hint = "請輸入密碼"
+                # hint = "Please enter password"
+                try:
+                        self.assertEqual(login_page.get_password_error_text(), hint)
+                        print("Empty password test success")
+                except AssertionError:
+                        print("Empty password test failed")
+                        raise AssertionError("Empty password test failed, expected error message not found")
 
-if __name__ == "__main__":
-    unittest.main()

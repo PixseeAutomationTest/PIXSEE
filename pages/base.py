@@ -23,7 +23,7 @@ class BaseTestCase(unittest.TestCase):
 
         self.driver = webdriver.Remote("http://localhost:4723", options=capabilities)
 
-    def verify_text_and_click(self, element_id, expected_text, click_id, name, timeout=20):
+    def verify_text_and_click(self, element_id, expected_text, name, timeout=20):
         """
         等待元素、比對文字、點擊另一個元素
         """
@@ -38,42 +38,47 @@ class BaseTestCase(unittest.TestCase):
             print(f"{name} tutor FAIL: {str(ae)}")
         except Exception as e:
             print(f"{name} tutor FAIL: Exception occurred - {str(e)}")
-        finally:
-            try:
-                if click_id:
-                    self.driver.find_element(AppiumBy.ID, click_id).click()
-                    time.sleep(1)
-            except:
-                print(" Failed to click title")
 
 
-    def right_wipe(self):
+    # 向左滑
+    def left_wipe(self):
         time.sleep(0.5)
         self.driver.find_element(
             AppiumBy.ANDROID_UIAUTOMATOR,
             'new UiScrollable(new UiSelector().scrollable(true)).setAsHorizontalList().scrollToEnd(1)'
         )
-
-    def left_wipe(self):
+    # 向右滑動
+    def right_wipe(self):
         time.sleep(0.5)
         self.driver.find_element(
             AppiumBy.ANDROID_UIAUTOMATOR,
             'new UiScrollable(new UiSelector().scrollable(true)).setAsHorizontalList().scrollToBeginning(1)'
         )
-
-    def up_scroll(self):
+    #下拉
+    def down_scroll(self):
         time.sleep(0.5)
         self.driver.find_element(
             AppiumBy.ANDROID_UIAUTOMATOR,
             'new UiScrollable(new UiSelector().scrollable(true)).setAsVerticalList().scrollToBeginning(1)'
         )
-
-    def down_scroll(self):
+    #上拉
+    def up_scroll(self):
         time.sleep(0.5)
         self.driver.find_element(
             AppiumBy.ANDROID_UIAUTOMATOR,
             'new UiScrollable(new UiSelector().scrollable(true)).setAsVerticalList().scrollToEnd(1)'
         )
+
+    def click_middle(self):
+        size = self.driver.get_window_size()
+        x = size['width'] // 2
+        y = size['height'] // 2
+
+        self.driver.execute_script("mobile: clickGesture", {
+            "x": x,
+            "y": y
+        })
+        time.sleep(1)
 
     def tearDown(self):
             pass
