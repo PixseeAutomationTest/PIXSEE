@@ -16,7 +16,7 @@ class MenuPage():
 	
 	def click_name(self):
 		self.driver.find_element(AppiumBy.ID, "com.compal.bioslab.pixsee.pixm01:id/ibMenuButtonHome").click()
-	
+
 	def click_members(self):
 		self.driver.find_element(AppiumBy.ID, "com.compal.bioslab.pixsee.pixm01:id/ibMenuButtonHome").click()
 	
@@ -28,7 +28,7 @@ class MenuPage():
 	
 	def click_faces(self):
 		self.driver.find_element(AppiumBy.ID,).click()
-	
+
 	def click_frames(self):
 		self.driver.find_element(AppiumBy.ID, "com.compal.bioslab.pixsee.pixm01:id/ibMenuButtonHome").click()
 	
@@ -43,6 +43,6 @@ class MenuPage():
 	
 	def click_logout(self):
 		self.driver.find_element(AppiumBy.ID, "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsLogout").click()
-
-
+	
+	
 
