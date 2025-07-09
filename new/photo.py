@@ -1,5 +1,6 @@
 #測試機型帶有錯誤SD卡，所以本程式包含關閉SD卡之按鈕，正常機型會比較拖時間
 #如果你的機型正常可以註解掉約第70行和其後續
+#如果可以的話從pixsee設定關閉所有通知
 #2025/7/8-新增當日照片判斷，無SD卡通知機型運行，小幅調正等待時間
 import unittest
 from appium import webdriver
@@ -52,11 +53,17 @@ class PhotoCheck:
         fun.login_password_input(password)
         # sign-in
         fun.click_btn(sign_in_button)
-        '''time.sleep(15)
-        element = self.driver.find_element(AppiumBy.ID,"com.compal.bioslab.pixsee.pixm01:id/btnPositiveAlertDialog");
-        element.click()'''
-        try:
+        try:#等待SD卡確認按鈕出現，如果沒有就跳過
             element = WebDriverWait(self.driver, 15).until(
+                EC.presence_of_element_located((AppiumBy.ID, "com.compal.bioslab.pixsee.pixm01:id/btnPositiveAlertDialog"))
+            )
+            if element.is_displayed():
+                element.click()
+                time.sleep(0.5)
+        except:
+            pass
+        try:
+            element = WebDriverWait(self.driver, 16).until(
                 EC.presence_of_element_located((AppiumBy.ID, baby_monitor))
             )
             if element.is_displayed():
@@ -68,15 +75,7 @@ class PhotoCheck:
         except Exception as e:
             print(f"其他登入錯誤")
 
-        try:#等待SD卡確認按鈕出現，如果沒有就跳過
-            element = WebDriverWait(self.driver, 15).until(
-                EC.presence_of_element_located((AppiumBy.ID, "com.compal.bioslab.pixsee.pixm01:id/btnPositiveAlertDialog"))
-            )
-            if element.is_displayed():
-                element.click()
-                time.sleep(0.5)
-        except:
-            pass
+
         for i in range(4):
             fun.click()
             time.sleep(0.5)
@@ -137,9 +136,7 @@ class PhotoCheck:
             print("拍照失敗，請重試或檢查連線")
 
 go=PhotoCheck()
-
 go.start()
-#go.disable_app_notifications()
 go.test_login_success()
 go.photo()
 count1=go.count()

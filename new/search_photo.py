@@ -25,9 +25,7 @@ class Search:
         self.driver.swipe(x, start_y, x, end_y, 500)  # 500 毫秒完成滑動
         time.sleep(1)
 
-    from datetime import datetime
-    from appium.webdriver.common.appiumby import AppiumBy
-    import time
+
 
     def find_thumbnails_between_dates(self, target_date_str):
         target_date = datetime.strptime(target_date_str, "%Y/%m/%d")
@@ -43,15 +41,14 @@ class Search:
             if top_date != target_date:
                 print(f"今天{target_date_str}沒有照片")
                 return []
-            else:
-                print("今日有照片，沒問題")
+
         except:
             print("畫面上找不到任何日期，可能畫面尚未載入或元素不存在")
             return []
 
         collecting = False
         found_new_date = False
-        print("找照片")
+
         while not found_new_date:
             all_blocks = self.driver.find_elements(AppiumBy.XPATH, "//android.view.ViewGroup")
 
