@@ -9,7 +9,7 @@ class MenuPage:
 			self.driver = driver
 
 		def tutor_friends(self):
-
+			pass
 
 		def click_profile(self):
 			self.driver.find_element(AppiumBy.ID, "com.compal.bioslab.pixsee.pixm01:id/ibMenuButtonHome").click()

@@ -77,4 +77,22 @@ class BaseTestCase(unittest.TestCase):
 
     def tearDown(self):
             pass
+    def click(self):
+        size = self.driver.get_window_size()
+        x = size['width'] // 2
+        y = size['height'] // 2
 
+        self.driver.execute_script("mobile: clickGesture", {
+            "x": x,
+            "y": y
+        })
+    def skip_SD(self):
+        try:#等待SD卡確認按鈕出現，如果沒有就跳過
+            element = WebDriverWait(self.driver, 15).until(
+                EC.presence_of_element_located((AppiumBy.ID, "com.compal.bioslab.pixsee.pixm01:id/btnPositiveAlertDialog"))
+            )
+            if element.is_displayed():
+                element.click()
+                time.sleep(0.5)
+        except:
+            pass
