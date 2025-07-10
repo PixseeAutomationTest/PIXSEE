@@ -8,16 +8,16 @@ import time
 class MenuPage():
 	def __init__(self, driver):
 		self.driver = driver
-		self.profileButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsProfile"
-		self.nameButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsName"
-		self.membersButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsMembers"
-		self.settingsButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsSettings"
-		self.friendsButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsFriends"
+		self.profileButton = "com.compal.bioslab.pixsee.pixm01:id/tvUserNameSettings"
+		self.nameButton = "com.compal.bioslab.pixsee.pixm01:id/tvBabyNameSettings"
+		self.membersButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsAccount"
+		self.settingsButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsDevice"
+		self.friendsButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsDoll"
 		self.albumButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsGallery"
-		self.facesButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsFaces"
-		self.framesButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsFrames"
-		self.subscriptionButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsSubscription"
-		self.assistantButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsAssistant"
+		self.facesButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsFamilyFace"
+		self.framesButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsSpecialCards"
+		self.subscriptionButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsStore"
+		self.assistantButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsHelp"
 		self.aboutButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsAbout"
 		self.logoutButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsLogout"
 
