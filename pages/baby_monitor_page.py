@@ -22,6 +22,8 @@ class BabyMonitorPage():
         self.stream_title = "com.compal.bioslab.pixsee.pixm01:id/tvStreamTitle"
         self.tutor_id = "com.compal.bioslab.pixsee.pixm01:id/tvDescription"
 
+        self.captureButton_xpath = '//android.widget.RelativeLayout[@resource-id="com.compal.bioslab.pixsee.pixm01:id/btnSwipeCapture"]/android.widget.ImageView[2]'
+
     def click_sleep(self):
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located(("id", self.sleepButton))
@@ -52,9 +54,9 @@ class BabyMonitorPage():
 
     def click_capture(self):
         WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located(("id", self.captureButton))
+            EC.presence_of_element_located(("xpath", self.captureButton_xpath))
         )
-        element = self.driver.find_element("id", self.captureButton)
+        element = self.driver.find_element("xpath", self.captureButton_xpath)
         element.click()
 
     def change_camera_mode(self):

@@ -8,11 +8,12 @@ import time
 class MenuPage():
 	def __init__(self, driver):
 		self.driver = driver
-		self.profileButton = "com.compal.bioslab.pixsee.pixm01:id/tvUserNameSettings"
-		self.nameButton = "com.compal.bioslab.pixsee.pixm01:id/tvBabyNameSettings"
-		self.membersButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsAccount"
-		self.settingsButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsDevice"
-		self.friendsButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsDoll"
+		self.profileButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsProfile"
+		self.notificationsButton = "com.compal.bioslab.pixsee.pixm01:id/btNotificationCenter"
+		self.nameButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsName"
+		self.membersButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsMembers"
+		self.settingsButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsSettings"
+		self.friendsButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsFriends"
 		self.albumButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsGallery"
 		self.facesButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsFamilyFace"
 		self.framesButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsSpecialCards"
@@ -29,6 +30,13 @@ class MenuPage():
 		)
 		self.driver.find_element(AppiumBy.ID, self.profileButton).click()
 		time.sleep(1)  # 等待頁面加載完成，必要時可調整時間
+
+	def click_notification(self):
+		WebDriverWait(self.driver, 20).until(
+			EC.presence_of_element_located(("id", self.notificationsButton))
+		)
+		self.driver.find_element(AppiumBy.ID, self.notificationsButton).click()
+		time.sleep(1)
 
 	def click_name(self):
 		WebDriverWait(self.driver, 20).until(
