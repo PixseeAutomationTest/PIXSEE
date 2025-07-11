@@ -24,7 +24,7 @@ class LoginCase(BaseTestCase):
                 login_page = LoginPage(self.driver)
 
                 login_page.login("jackypixsee02", "@Aa12345")
-                hint = "請輸入有效電子郵件"
+                hint = self.get_string("field_validation_invalid_email")
                 # hint = "Please enter a valid email address"
                 try:
                         self.assertEqual(login_page.get_email_error_text(), hint)
@@ -37,7 +37,7 @@ class LoginCase(BaseTestCase):
                 login_page = LoginPage(self.driver)
 
                 login_page.login("jackypixsee02@gmail.com", "aiwu464")
-                hint = "密碼輸入不符合"
+                hint = self.get_string("e10016")
                 # hint = "Wrong password"
                 try:
                         self.assertEqual(login_page.get_password_error_text(), hint)
@@ -50,7 +50,9 @@ class LoginCase(BaseTestCase):
                 login_page = LoginPage(self.driver)
 
                 login_page.login("", "@Aa12345")
-                hint = "請輸入電子郵件"
+                # hint = self.strings["e10001"]
+                hint = self.get_string("e10001")
+
                 # hint = "Please enter an email"
                 try:
                         self.assertEqual(login_page.get_email_error_text(), hint)
@@ -63,7 +65,7 @@ class LoginCase(BaseTestCase):
                 login_page = LoginPage(self.driver)
 
                 login_page.login("jackypixsee02@gmail.com", "")
-                hint = "請輸入密碼"
+                hint = self.get_string("e10002")
                 # hint = "Please enter password"
                 try:
                         self.assertEqual(login_page.get_password_error_text(), hint)
