@@ -6,12 +6,22 @@ class AssistantPage():
     def __init__(self, driver):
         self.driver = driver
 
+        self.pageTitleText = "com.compal.bioslab.pixsee.pixm01:id/tvHelpMenuBarTitle"
+
+        self.returnButton = "com.compal.bioslab.pixsee.pixm01:id/ibHelpMenuBackButton"
         self.backgroundPlayButton = "com.compal.bioslab.pixsee.pixm01:id/clBackgroundPlayContainer"
         self.pixseeCloudButton = "com.compal.bioslab.pixsee.pixm01:id/clPixseeCloudAssistant"
         self.tutorialButton = "com.compal.bioslab.pixsee.pixm01:id/clTutorialButton"
         self.qaButton = "com.compal.bioslab.pixsee.pixm01:id/clQeAButton"
         self.contactUsButton = "com.compal.bioslab.pixsee.pixm01:id/clTroubleShootingButton"
         self.sendErrorButton = "com.compal.bioslab.pixsee.pixm01:id/clSendReportError"
+
+    def click_return(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(("id", self.returnButton))
+        )
+        element = self.driver.find_element("id", self.returnButton)
+        element.click()
 
     def click_background_play(self):
         WebDriverWait(self.driver, 10).until(
@@ -54,3 +64,13 @@ class AssistantPage():
         )
         element = self.driver.find_element("id", self.sendErrorButton)
         element.click()
+
+    def is_in_assistant_page(self):
+        try:
+            WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located(("id", self.backgroundPlayButton))
+            )
+            self.driver.find_element("id", self.backgroundPlayButton)
+            return True
+        except:
+            return False

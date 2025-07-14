@@ -8,9 +8,9 @@ import time
 class MenuPage():
 	def __init__(self, driver):
 		self.driver = driver
-		self.profileButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsProfile"
+		self.profileButton = "com.compal.bioslab.pixsee.pixm01:id/civProfileWelcomeAct"
 		self.notificationsButton = "com.compal.bioslab.pixsee.pixm01:id/btNotificationCenter"
-		self.nameButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsName"
+		self.babyListButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsBabiesList"
 		self.membersButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsMembers"
 		self.settingsButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsSettings"
 		self.friendsButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsFriends"
@@ -115,6 +115,16 @@ class MenuPage():
 		)
 		self.driver.find_element(AppiumBy.ID, self.logoutButton).click()
 		time.sleep(1)
+
+	def is_in_menu_page(self):
+		try:
+			WebDriverWait(self.driver, 10).until(
+				EC.presence_of_element_located(("id", self.profileButton))
+			)
+			self.driver.find_element(AppiumBy.ID, self.profileButton)
+			return True
+		except:
+			return False
 
 	
 

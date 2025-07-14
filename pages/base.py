@@ -6,6 +6,7 @@ import time
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import csv
+from appium.webdriver.extensions.android.nativekey import AndroidKey
 
 class BaseTestCase(unittest.TestCase):
     def setUp(self, no_reset=True):
@@ -25,10 +26,11 @@ class BaseTestCase(unittest.TestCase):
         self.driver = webdriver.Remote("http://localhost:4723", options=capabilities)
 
     def open_app(self):
-        self.driver.activate_app(self.driver.capabilities.get("app_package"))
+        self.driver.activate_app(self.driver.capabilities.get("appPackage"))
+        time.sleep(5)
 
     def shutdown_app(self):
-        self.driver.terminate_app(self.driver.capabilities.get("app_package"))
+        self.driver.terminate_app(self.driver.capabilities.get("appPackage"))
 
 
     def verify_text_and_click(self, element_id, expected_text, name, timeout=20):
@@ -87,6 +89,9 @@ class BaseTestCase(unittest.TestCase):
             "y": y
         })
         time.sleep(1)
+
+    def go_to_home_screen(self):
+        self.driver.press_keycode(AndroidKey.HOME)
 
     def get_string(self, key=""):
         device_language = self.driver.capabilities.get("language")
