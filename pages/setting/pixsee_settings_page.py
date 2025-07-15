@@ -43,20 +43,20 @@ class PixseeSettingsPage():
 		self.VoiceServicetxt = "com.compal.bioslab.pixsee.pixm01:id/tvVoiceCommand"
 
 		self.ShutterSoundSwitch = "com.compal.bioslab.pixsee.pixm01:id/capture_sound_switch"
-		self.ShutterSoundTitle = "com.compal.bioslab.pixsee.pixm01:id/clCaptureSound"
+		# self.ShutterSoundTitle = "com.compal.bioslab.pixsee.pixm01:id/clCaptureSound"
 		self.ShutterSoundtxt = "com.compal.bioslab.pixsee.pixm01:id/tvCaptureSound"
 
 		self.LEDindicatorSwitch = "com.compal.bioslab.pixsee.pixm01:id/led_switch"
-		self.LEDindicatorTitle = "com.compal.bioslab.pixsee.pixm01:id/clIndicatorLed"
+		# self.LEDindicatorTitle = "com.compal.bioslab.pixsee.pixm01:id/clIndicatorLed"
 		self.LEDindicatortxt = "com.compal.bioslab.pixsee.pixm01:id/tvIndicatorLedSettings"
 
 		self.NightModeSwitch = "com.compal.bioslab.pixsee.pixm01:id/night_vision_switch"
-		self.NightModeTitle = "com.compal.bioslab.pixsee.pixm01:id/detection_settings_night_vision_label"
+		# self.NightModeTitle = "com.compal.bioslab.pixsee.pixm01:id/detection_settings_night_vision_label"
 		self.NightModetxt = "com.compal.bioslab.pixsee.pixm01:id/detection_settings_night_vision_text"
 		self.NightModeSubtext = "com.compal.bioslab.pixsee.pixm01:id/detection_settings_night_vision_subtitle"
 
 		self.PrivacySettingsSwitch = "com.compal.bioslab.pixsee.pixm01:id/privacy_control_switch"
-		self.PrivacySettingsTitle = "com.compal.bioslab.pixsee.pixm01:id/privacy_control_label"
+		# self.PrivacySettingsTitle = "com.compal.bioslab.pixsee.pixm01:id/privacy_control_label"
 		self.PrivacySettingstxt = "com.compal.bioslab.pixsee.pixm01:id/privacy_control_text"
 		self.PrivacySettingsSubtext = "com.compal.bioslab.pixsee.pixm01:id/privacy_control_subtitle"
 
@@ -79,7 +79,7 @@ class PixseeSettingsPage():
 			return True
 		except:
 			return False
-
+	# click
 	def click_PixseeProfile(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.PixseeProfile))
@@ -87,7 +87,6 @@ class PixseeSettingsPage():
 		element = self.driver.find_element("id", self.PixseeProfile)
 		element.click()
 		time.sleep(1)
-
 	def click_WifiSettings(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.WifiSettings))
@@ -95,7 +94,6 @@ class PixseeSettingsPage():
 		element = self.driver.find_element("id", self.WifiSettings)
 		element.click()
 		time.sleep(1)
-
 	def click_PixseeFriendsDetection(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.PixseeFriendsDetection))
@@ -103,7 +101,6 @@ class PixseeSettingsPage():
 		element = self.driver.find_element("id", self.PixseeFriendsDetection)
 		element.click()
 		time.sleep(1)
-
 	def click_EnvironmentSettings(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.EnvironmentSettings))
@@ -111,7 +108,6 @@ class PixseeSettingsPage():
 		element = self.driver.find_element("id", self.EnvironmentSettings)
 		element.click()
 		time.sleep(1)
-
 	def click_CryDetection(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.CryDetection))
@@ -119,7 +115,6 @@ class PixseeSettingsPage():
 		element = self.driver.find_element("id", self.CryDetection)
 		element.click()
 		time.sleep(1)
-
 	def click_AreaDetection(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.AreaDetection))
@@ -127,7 +122,6 @@ class PixseeSettingsPage():
 		element = self.driver.find_element("id", self.AreaDetection)
 		element.click()
 		time.sleep(1)
-
 	def click_CoveredFaceDetection(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.CoveredFaceDetection))
@@ -135,7 +129,6 @@ class PixseeSettingsPage():
 		element = self.driver.find_element("id", self.CoveredFaceDetection)
 		element.click()
 		time.sleep(1)
-
 	def click_TimeLapseVideo(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.TimeLapseVideo))
@@ -143,7 +136,6 @@ class PixseeSettingsPage():
 		element = self.driver.find_element("id", self.TimeLapseVideo)
 		element.click()
 		time.sleep(1)
-
 	def click_VoiceService(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.VoiceService))
@@ -151,7 +143,6 @@ class PixseeSettingsPage():
 		element = self.driver.find_element("id", self.VoiceService)
 		element.click()
 		time.sleep(1)
-
 	def click_ShutterSoundSwitch(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.ShutterSoundSwitch))
@@ -159,15 +150,13 @@ class PixseeSettingsPage():
 		element = self.driver.find_element("id", self.ShutterSoundSwitch)
 		element.click()
 		time.sleep(1)
-
-	def click_LEDindicatorSwitch(self):
+	def click_LEDIndicatorSwitch(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.LEDindicatorSwitch))
 		)
 		element = self.driver.find_element("id", self.LEDindicatorSwitch)
 		element.click()
 		time.sleep(1)
-
 	def click_NightModeSwitch(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.NightModeSwitch))
@@ -175,16 +164,13 @@ class PixseeSettingsPage():
 		element = self.driver.find_element("id", self.NightModeSwitch)
 		element.click()
 		time.sleep(1)
-
-	def click_PrivacySettingsSwitch(self):
+	def click_PrivacyModeSwitch(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.PrivacySettingsSwitch))
 		)
 		element = self.driver.find_element("id", self.PrivacySettingsSwitch)
 		element.click()
 		time.sleep(1)
-
-
 	def click_SDcard(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.SDcard))
@@ -192,7 +178,7 @@ class PixseeSettingsPage():
 		element = self.driver.find_element("id", self.SDcard)
 		element.click()
 		time.sleep(1)
-
+	# text
 	def profile_text(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
@@ -202,7 +188,6 @@ class PixseeSettingsPage():
 			return element.text
 		except:
 			return None
-
 	def wifi_text(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
@@ -212,7 +197,6 @@ class PixseeSettingsPage():
 			return element.text
 		except:
 			return None
-
 	def pixsee_friends_detection_text(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
@@ -366,7 +350,7 @@ class PixseeSettingsPage():
 			return element.text
 		except:
 			return None
-	def privacy_settings_text(self):
+	def privacy_mode_text(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
 				EC.presence_of_element_located(("id", self.PrivacySettingstxt))
@@ -375,7 +359,7 @@ class PixseeSettingsPage():
 			return element.text
 		except:
 			return None
-	def privacy_settings_subtext(self):
+	def privacy_mode_subtext(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
 				EC.presence_of_element_located(("id", self.PrivacySettingsSubtext))
@@ -391,6 +375,43 @@ class PixseeSettingsPage():
 			)
 			element = self.driver.find_element("id", self.SDcardStatustxt)
 			return element.text
+		except:
+			return None
+	# switch
+	def shutter_sound_switch_status(self):
+		try:
+			WebDriverWait(self.driver, 10).until(
+				EC.presence_of_element_located(("id", self.ShutterSoundSwitch))
+			)
+			element = self.driver.find_element("id", self.ShutterSoundSwitch)
+			return element.checked
+		except:
+			return None
+	def led_indicator_switch_status(self):
+		try:
+			WebDriverWait(self.driver, 10).until(
+				EC.presence_of_element_located(("id", self.LEDindicatorSwitch))
+			)
+			element = self.driver.find_element("id", self.LEDindicatorSwitch)
+			return element.checked
+		except:
+			return None
+	def night_mode_switch_status(self):
+		try:
+			WebDriverWait(self.driver, 10).until(
+				EC.presence_of_element_located(("id", self.NightModeSwitch))
+			)
+			element = self.driver.find_element("id", self.NightModeSwitch)
+			return element.checked
+		except:
+			return None
+	def privacy_mode_switch_status(self):
+		try:
+			WebDriverWait(self.driver, 10).until(
+				EC.presence_of_element_located(("id", self.PrivacySettingsSwitch))
+			)
+			element = self.driver.find_element("id", self.PrivacySettingsSwitch)
+			return element.checked
 		except:
 			return None
 

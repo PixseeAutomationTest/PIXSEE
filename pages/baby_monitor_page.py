@@ -4,6 +4,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.actions.pointer_input import PointerInput
 from selenium.webdriver.common.action_chains import ActionChains
+from pages.base import BaseTestCase
+import time
 from selenium.webdriver.common.actions.interaction import Interaction
 
 class BabyMonitorPage():
@@ -114,6 +116,12 @@ class BabyMonitorPage():
             EC.presence_of_element_located((AppiumBy.ID, self.tutor_id))
         )
         return self.driver.find_element(AppiumBy.ID, self.tutor_id).text
+
+    def skip_first_four_tutor(self):
+        base = BaseTestCase(self.driver)
+        for i in range(4):
+            base.click_middle()
+            time.sleep(1)
 
     def click_stream_title(self):
         """點擊畫面標題"""

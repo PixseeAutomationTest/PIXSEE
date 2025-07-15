@@ -3,6 +3,8 @@ from appium import webdriver
 from appium.options.android import UiAutomator2Options
 from appium.webdriver.common.appiumby import AppiumBy
 import time
+
+from selenium.common import NoSuchElementException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import csv
@@ -109,6 +111,38 @@ class BaseTestCase(unittest.TestCase):
                 if row["Identifier Android"] == key:
                     return row.get(device_language, f"[Missing:{key}]")
         return f"[NotFound:{key}]"
+
+
+
+    def check_switch_and_content(self, expected_on: bool, itemid):
+        if expected_on:
+            try:
+                is_visible = len(self.driver.find_elements(AppiumBy.ID, itemid)) > 0
+                assert is_visible, "switch on failed"
+                print("switch on success")
+            except AssertionError:
+                print("switch on failed")
+        else:
+            try:
+                # check findable
+                is_visible =  len(self.driver.find_elements(AppiumBy.ID, itemid)) > 0
+                assert not is_visible, "switch off failed"
+                print("switch off success")
+            except NoSuchElementException:
+                print("switch off success")
+    def tap_on_visibility(self, itemid, name, should_be_visible=True):
+        try:
+            is_visible = len(self.driver.find_elements(AppiumBy.ID, itemid)) > 0
+            if should_be_visible:
+                assert is_visible, f"tap on {name} failed"
+            else:
+                assert not is_visible, f"tap on {name} failed"
+            print(f"tap on {name} success")
+        except AssertionError:
+            print(f"tap on {name} failed")
+
+
+
 
     def tearDown(self):
             pass
