@@ -141,7 +141,6 @@ class PixseeFriendsDetTest(BaseTestCase):
 		else:
 			print("save function failed")
 			raise AssertionError("save function failed, status not changed")
-
 	def test_04_friends_detection_tap_on(self):
 		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
 		menu_page = MenuPage(self.driver)
@@ -192,9 +191,9 @@ class PixseeFriendsDetTest(BaseTestCase):
 			raise AssertionError("Friends detection set time text mismatch")
 		# check clickable
 		pixsee_friends_page.click_set_time()
-		self.tap_on_visibility(pixsee_friends_page.SetTime, "Set Time",True)
+		self.tap_on_visibility(pixsee_friends_page.TimeSpan, "Set Time",True)
 		pixsee_friends_page.click_all_day()
-		self.tap_on_visibility(pixsee_friends_page.AllDay, "All Day", False)
+		self.tap_on_visibility(pixsee_friends_page.TimeSpan, "All Day", False)
 
 
 
