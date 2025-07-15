@@ -3,7 +3,7 @@ from pages.base import BaseTestCase
 from pages.baby_monitor_page import BabyMonitorPage
 from pages.menu_page import MenuPage
 from pages.menu_pages.assistant_page import AssistantPage
-from pages.assistant_pages.background_play_page import BackgroundPlayPage
+from pages.menu_pages.assistant_pages.background_play_page import BackgroundPlayPage
 
 class BackgroundPlayTest(BaseTestCase):
 
@@ -106,16 +106,20 @@ class BackgroundPlayTest(BaseTestCase):
             background_play_page.click_save()
             self.assertTrue(assistant_page.is_in_assistant_page(), "Assistant Page is not opened after saving settings") #spec doesn't write about this.
 
+            '''Go back to baby monitor page'''
             assistant_page.click_return()
             self.assertTrue(menu_page.is_in_menu_page(), "Menu Page is not opened after saving settings")
-            menu_page.click_
+            menu_page.click_home()
+            self.assertTrue(baby_monitor_page.is_in_baby_monitor_page(), "Baby Monitor Page is not opened after saving settings")
+
+            '''Go to home screen and check floating video'''
+            #TODO: Find picture-in-picture element in home screen
             self.go_to_home_screen()
-            self.shutdown_app()
         except AssertionError as ae:
             print(f"Test failed with assertion error: {ae}")
-            self.shutdown_app()
             raise ae
         except Exception as e:
             print(f"Test failed with exception: {e}")
-            self.shutdown_app()
             raise e
+        finally:
+            self.shutdown_app()

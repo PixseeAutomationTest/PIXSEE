@@ -92,6 +92,11 @@ class BaseTestCase(unittest.TestCase):
 
     def go_to_home_screen(self):
         self.driver.press_keycode(AndroidKey.HOME)
+        time.sleep(1)
+
+    def go_back(self):
+        self.driver.press_keycode(AndroidKey.BACK)
+        time.sleep(1)
 
     def get_string(self, key=""):
         device_language = self.driver.capabilities.get("language")
