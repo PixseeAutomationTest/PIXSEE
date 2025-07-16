@@ -336,7 +336,7 @@ class PixseeFriendsDetTest(BaseTestCase):
 				raise AssertionError("Discard dialog title mismatch")
 			try:
 				yes = pixsee_friends_page.discard_yes_txt()
-				hint = self.get_string("pixsee_friends_detection_popup_discard_yes")
+				hint = self.get_string("yes")
 				self.assertEqual(yes, hint)
 				print("Discard dialog yes text right")
 			except AssertionError:
@@ -344,7 +344,7 @@ class PixseeFriendsDetTest(BaseTestCase):
 				raise AssertionError("Discard dialog yes text mismatch")
 			try:
 				no = pixsee_friends_page.discard_no_txt()
-				hint = self.get_string("pixsee_friends_detection_popup_discard_no")
+				hint = self.get_string("no")
 				self.assertEqual(no, hint)
 				print("Discard dialog no text right")
 			except AssertionError:
