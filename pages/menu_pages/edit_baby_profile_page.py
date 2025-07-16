@@ -2,7 +2,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 
-class BabyProfilePage():
+class EditBabyProfilePage():
     def __init__(self, driver):
         self.driver = driver
 
@@ -14,4 +14,4 @@ class BabyProfilePage():
         self.genderBoyButton = "com.compal.bioslab.pixsee.pixm01:id/baby_profile_gender_boy_radio"
         self.genderGirlButton = "com.compal.bioslab.pixsee.pixm01:id/baby_profile_gender_girl_radio"
         self.birthdayEditText = "com.compal.bioslab.pixsee.pixm01:id/baby_profile_birthday_edx"
-        self.nationEditText = "com.compal.bioslab.pixsee.pixm01:id/baby_profile_nation_borders"
+        self.nationButton = "com.compal.bioslab.pixsee.pixm01:id/baby_profile_nation_borders"
