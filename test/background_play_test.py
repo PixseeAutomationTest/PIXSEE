@@ -26,20 +26,32 @@ class BackgroundPlayTest(BaseTestCase):
             self.assertTrue(background_play_page.is_in_background_play_page(), "Can't go to Background Play Page")
 
             '''Discard Settings'''
+            before_status = background_play_page.get_keep_playing_status()
             background_play_page.click_keep_playing()
             background_play_page.click_return()
 
+            '''Checking words in "Discard Settings" window'''
+            self.assertEqual(self.get_string("bg_play_discard_changes_message"),background_play_page.get_discard_message(), "Text \"Discard background monitoring settings ?\" is not properly displayed")
+            self.assertEqual(self.get_string("yes"), background_play_page.get_discard_yes_button_text(), "\"Yes\" Button is not properly displayed")
+            self.assertEqual(self.get_string("no"), background_play_page.get_discard_no_button_text(), "\"No\" Button is not properly displayed")
+
+            '''Discard Settings'''
             background_play_page.click_discard_yes()
             self.assertTrue(assistant_page.is_in_assistant_page(), "Background Play Page is not closed after discard settings")
-            self.shutdown_app()
+
+            '''Checking status of "Keep Playing" button'''
+            assistant_page.click_background_play()
+            self.assertTrue(background_play_page.is_in_background_play_page(), "Can't go to Background Play Page")
+            after_status = background_play_page.get_keep_playing_status()
+            self.assertEqual(before_status, after_status)
         except AssertionError as ae:
             print(f"Test failed with assertion error: {ae}")
-            self.shutdown_app()
             raise ae
         except Exception as e:
             print(f"Test failed with exception: {e}")
-            self.shutdown_app()
             raise e
+        finally:
+            self.shutdown_app()
 
     def test_cancel_discard_settings(self):
         self.open_app()
@@ -60,25 +72,30 @@ class BackgroundPlayTest(BaseTestCase):
             self.assertTrue(background_play_page.is_in_background_play_page(), "Can't go to Background Play Page")
 
             '''Discard Settings'''
+            before_status = background_play_page.get_keep_playing_status()
             background_play_page.click_keep_playing()
             background_play_page.click_return()
 
             '''Checking words in "Discard Settings" window'''
-            self.assertEqual(self.get_string("bg_play_discard_changes_message"), background_play_page.get_discard_message(), 'Text "Discard background monitoring settings ?" is not properly displayed')
-            self.assertEqual(self.get_string("yes"), background_play_page.get_discard_yes_button_text(), '"Yes" Button is not properly displayed')
-            self.assertEqual(self.get_string("no"), background_play_page.get_discard_no_button_text(), '"No" Button is not properly displayed')
+            self.assertEqual(self.get_string("bg_play_discard_changes_message"), background_play_page.get_discard_message(), "Text \"Discard background monitoring settings ?\" is not properly displayed")
+            self.assertEqual(self.get_string("yes"), background_play_page.get_discard_yes_button_text(), "\"Yes\" Button is not properly displayed")
+            self.assertEqual(self.get_string("no"), background_play_page.get_discard_no_button_text(), "\"No\" Button is not properly displayed")
 
+            '''Discard Settings'''
             background_play_page.click_discard_no()
-            self.assertTrue(background_play_page.is_in_background_play_page(), "Background Play Page is not opened after cancel discarding settings")
-            self.shutdown_app()
+            self.assertTrue(background_play_page.is_in_background_play_page(), "Background Play Page is not closed after discard settings")
+
+            '''Checking status of "Keep Playing" button'''
+            after_status = background_play_page.get_keep_playing_status()
+            self.assertNotEqual(before_status, after_status)
         except AssertionError as ae:
             print(f"Test failed with assertion error: {ae}")
-            self.shutdown_app()
             raise ae
         except Exception as e:
             print(f"Test failed with exception: {e}")
-            self.shutdown_app()
             raise e
+        finally:
+            self.shutdown_app()
 
     def test_floating_video(self):
         self.open_app()

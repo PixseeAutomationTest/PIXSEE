@@ -22,12 +22,12 @@ class AboutTest(BaseTestCase):
             self.assertTrue(about_page.is_in_about_page(), "Can't go to About Page")
 
             '''Verify About Page content'''
-            self.assertEqual(about_page.get_page_title_text(), self.get_string("about_menu_bar_title"))
-            self.assertEqual(about_page.get_about_pixsee_text(), self.get_string("about_pixsee_bar_title"))
-            self.assertEqual(about_page.get_terms_of_service_text(), self.get_string("about_terms_bar_title"))
-            self.assertEqual(about_page.get_privacy_policy_text(), self.get_string("privacy_policy"))
-            self.assertEqual(about_page.get_app_version_text().split(':')[0] + ": ", self.get_string("about_app_version").split('%')[0])
-            self.assertEqual(about_page.get_camera_version_text().split(':')[0] + ": ", self.get_string("about_device_version").split('%')[0])
+            self.assertEqual(about_page.get_page_title_text(), self.get_string("about_menu_bar_title"), "Text \"About\" is not properly displayed")
+            self.assertEqual(about_page.get_about_pixsee_text(), self.get_string("about_pixsee_bar_title"), "Text \"About FFI00\" is not properly displayed")
+            self.assertEqual(about_page.get_terms_of_service_text(), self.get_string("about_terms_bar_title"), "Text \"Terms of Service\" is not properly displayed")
+            self.assertEqual(about_page.get_privacy_policy_text(), self.get_string("privacy_policy"), "Text \"Privacy Policy\" is not properly displayed")
+            self.assertEqual(about_page.get_app_version_text().split(':')[0] + ": ", self.get_string("about_app_version").split('%')[0], "Text \"App version: 'version number(%d)'\" is not properly displayed")
+            self.assertEqual(about_page.get_camera_version_text().split(':')[0] + ": ", self.get_string("about_device_version").split('%')[0], "Text \"devices version: 'version number(%d)'\" is not properly displayed")
 
             '''Click Privacy Policy and verify content'''
             about_page.click_about_pixsee()
@@ -63,16 +63,16 @@ class AboutTest(BaseTestCase):
             self.assertTrue(about_page.is_in_about_page(), "Can't go to About Page")
 
             '''Verify About Page content'''
-            self.assertEqual(about_page.get_page_title_text(), self.get_string("about_menu_bar_title"))
-            self.assertEqual(about_page.get_about_pixsee_text(), self.get_string("about_pixsee_bar_title"))
-            self.assertEqual(about_page.get_terms_of_service_text(), self.get_string("about_terms_bar_title"))
-            self.assertEqual(about_page.get_privacy_policy_text(), self.get_string("privacy_policy"))
-            self.assertEqual(about_page.get_app_version_text().split(':')[0] + ": ", self.get_string("about_app_version").split('%')[0])
-            self.assertEqual(about_page.get_camera_version_text().split(':')[0] + ": ", self.get_string("about_device_version").split('%')[0])
+            self.assertEqual(about_page.get_page_title_text(), self.get_string("about_menu_bar_title"), "Text \"About\" is not properly displayed")
+            self.assertEqual(about_page.get_about_pixsee_text(), self.get_string("about_pixsee_bar_title"), "Text \"About FFI00\" is not properly displayed")
+            self.assertEqual(about_page.get_terms_of_service_text(), self.get_string("about_terms_bar_title"), "Text \"Terms of Service\" is not properly displayed")
+            self.assertEqual(about_page.get_privacy_policy_text(), self.get_string("privacy_policy"), "Text \"Privacy Policy\" is not properly displayed")
+            self.assertEqual(about_page.get_app_version_text().split(':')[0] + ": ", self.get_string("about_app_version").split('%')[0], "Text \"App version: 'version number(%d)'\" is not properly displayed")
+            self.assertEqual(about_page.get_camera_version_text().split(':')[0] + ": ", self.get_string("about_device_version").split('%')[0], "Text \"devices version: 'version number(%d)'\" is not properly displayed")
 
             '''Click Privacy Policy and verify content'''
             about_page.click_privacy_policy()
-            self.assertEqual(about_page.get_website_title_text(), self.get_string("privacy_policy"))
+            self.assertEqual(about_page.get_website_title_text(), self.get_string("privacy_policy"), "Text \"Privacy policy\" is not properly displayed")
             self.assertTrue(about_page.is_in_embedded_website(), "Can't go to Privacy Policy website")
             '''Go back to About Page from Privacy Policy website'''
             about_page.click_website_return()
@@ -104,16 +104,16 @@ class AboutTest(BaseTestCase):
             self.assertTrue(about_page.is_in_about_page(), "Can't go to About Page")
 
             '''Verify About Page content'''
-            self.assertEqual(about_page.get_page_title_text(), self.get_string("about_menu_bar_title"))
-            self.assertEqual(about_page.get_about_pixsee_text(), self.get_string("about_pixsee_bar_title"))
-            self.assertEqual(about_page.get_terms_of_service_text(), self.get_string("about_terms_bar_title"))
-            self.assertEqual(about_page.get_privacy_policy_text(), self.get_string("privacy_policy"))
-            self.assertEqual(about_page.get_app_version_text().split(':')[0] + ": ", self.get_string("about_app_version").split('%')[0])
-            self.assertEqual(about_page.get_camera_version_text().split(':')[0] + ": ", self.get_string("about_device_version").split('%')[0])
+            self.assertEqual(about_page.get_page_title_text(), self.get_string("about_menu_bar_title"), "Text \"About\" is not properly displayed")
+            self.assertEqual(about_page.get_about_pixsee_text(), self.get_string("about_pixsee_bar_title"), "Text \"About FFI00\" is not properly displayed")
+            self.assertEqual(about_page.get_terms_of_service_text(), self.get_string("about_terms_bar_title"), "Text \"Terms of Service\" is not properly displayed")
+            self.assertEqual(about_page.get_privacy_policy_text(), self.get_string("privacy_policy"), "Text \"Privacy Policy\" is not properly displayed")
+            self.assertNotEqual(about_page.get_app_version_text().split(':')[0] + ": ", self.get_string("about_app_version").split('%')[0], "Text \"App version: 'version number(%d)'\" is not properly displayed")
+            self.assertEqual(about_page.get_camera_version_text().split(':')[0] + ": ", self.get_string("about_device_version").split('%')[0], "Text \"devices version: 'version number(%d)'\" is not properly displayed")
 
             '''Click Terms Of Service and verify content'''
             about_page.click_terms_of_service()
-            self.assertEqual(about_page.get_website_title_text(), self.get_string("about_terms_bar_title"))
+            self.assertEqual(about_page.get_website_title_text(), self.get_string("about_terms_bar_title"), "Text \"Terms of services\" is not properly displayed")
             self.assertTrue(about_page.is_in_embedded_website(), "Can't go to Terms Of Service website")
             '''Go back to About Page from Terms Of Service website'''
             about_page.click_website_return()
