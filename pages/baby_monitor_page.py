@@ -32,28 +32,24 @@ class BabyMonitorPage():
         )
         element = self.driver.find_element("id", self.sleepButton)
         element.click()
-
     def click_two_way_talk(self):
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located(("id", self.twoWayTalkButton))
         )
         element = self.driver.find_element("id", self.twoWayTalkButton)
         element.click()
-
     def click_music(self):
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located(("id", self.musicButton))
         )
         element = self.driver.find_element("id", self.musicButton)
         element.click()
-
     def click_record(self):
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located(("id", self.recordButton))
         )
         element = self.driver.find_element("id", self.recordButton)
         element.click()
-
     def click_capture(self):
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located(("xpath", self.captureButton_xpath))
@@ -84,21 +80,18 @@ class BabyMonitorPage():
         actions.w3c_actions.pointer_action.pointer_up()
 
         actions.perform()
-
     def click_change_quality(self):
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located(("id", self.changeQualityButton))
         )
         element = self.driver.find_element("id", self.changeQualityButton)
         element.click()
-
     def click_mute(self):
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located(("id", self.muteButton))
         )
         element = self.driver.find_element("id", self.muteButton)
         element.click()
-
     def is_in_baby_monitor_page(self):
         try:
             WebDriverWait(self.driver, 20).until(
@@ -109,27 +102,23 @@ class BabyMonitorPage():
 
         except:
             return False
-
     def wait_for_tutor_by_id(self, timeout=20):
         """等待 tutor 元素出現，並回傳元素文字"""
         WebDriverWait(self.driver, timeout).until(
             EC.presence_of_element_located((AppiumBy.ID, self.tutor_id))
         )
         return self.driver.find_element(AppiumBy.ID, self.tutor_id).text
-
     def skip_first_four_tutor(self):
         base = BaseTestCase(self.driver)
         for i in range(4):
             base.click_middle()
             time.sleep(1)
-
     def click_stream_title(self):
         """點擊畫面標題"""
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((AppiumBy.ID, self.stream_title))
         )
         self.driver.find_element(AppiumBy.ID, self.stream_title).click()
-
     def click_home(self):
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((AppiumBy.ID, self.homeButton))

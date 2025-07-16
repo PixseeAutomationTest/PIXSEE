@@ -8,6 +8,7 @@ from selenium.common import NoSuchElementException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import csv
+import subprocess
 from appium.webdriver.extensions.android.nativekey import AndroidKey
 
 class BaseTestCase(unittest.TestCase):
@@ -24,63 +25,46 @@ class BaseTestCase(unittest.TestCase):
         capabilities.no_reset = no_reset
         capabilities.auto_grant_permissions = True
         capabilities.new_command_timeout = 300
+        subprocess.run([
+            "adb", "shell", "pm", "revoke",
+             "com.compal.bioslab.pixsee.pixm01",  # ← 這裡改成你的 app package name
+            "android.permission.POST_NOTIFICATIONS"
+        ])
 
         self.driver = webdriver.Remote("http://localhost:4723", options=capabilities)
-
     def open_app(self):
         self.driver.activate_app(self.driver.capabilities.get("appPackage"))
         time.sleep(5)
-
     def shutdown_app(self):
-        self.driver.terminate_app(self.driver.capabilities.get("appPackage"))
-
-
-    def verify_text_and_click(self, element_id, expected_text, name, timeout=20):
-        """
-        等待元素、比對文字、點擊另一個元素
-        """
-        try:
-            WebDriverWait(self.driver, timeout).until(
-                EC.presence_of_element_located((AppiumBy.ID, element_id))
-            )
-            actual_text = self.driver.find_element(AppiumBy.ID, element_id).text
-            assert actual_text == expected_text, f"Text mismatch! Expected: '{expected_text}', Got: '{actual_text}'"
-            print(f"{name} tutor success")
-        except AssertionError as ae:
-            print(f"{name} tutor FAIL: {str(ae)}")
-        except Exception as e:
-            print(f"{name} tutor FAIL: Exception occurred - {str(e)}")
-
-
-    # 向左滑
+        self.driver.terminate_app(self.driver.capabilities.get("app_package"))
+    # from right to left
     def left_wipe(self):
         time.sleep(0.5)
         self.driver.find_element(
             AppiumBy.ANDROID_UIAUTOMATOR,
             'new UiScrollable(new UiSelector().scrollable(true)).setAsHorizontalList().scrollToEnd(1)'
         )
-    # 向右滑動
+    # from left to right
     def right_wipe(self):
         time.sleep(0.5)
         self.driver.find_element(
             AppiumBy.ANDROID_UIAUTOMATOR,
             'new UiScrollable(new UiSelector().scrollable(true)).setAsHorizontalList().scrollToBeginning(1)'
         )
-    #下拉
+    # from top to bottom
     def down_scroll(self):
         time.sleep(0.5)
         self.driver.find_element(
             AppiumBy.ANDROID_UIAUTOMATOR,
             'new UiScrollable(new UiSelector().scrollable(true)).setAsVerticalList().scrollToBeginning(1)'
         )
-    #上拉
+    # from bottom to top
     def up_scroll(self):
         time.sleep(0.5)
         self.driver.find_element(
             AppiumBy.ANDROID_UIAUTOMATOR,
             'new UiScrollable(new UiSelector().scrollable(true)).setAsVerticalList().scrollToEnd(1)'
         )
-
     def click_middle(self):
         size = self.driver.get_window_size()
         x = size['width'] // 2
@@ -111,9 +95,6 @@ class BaseTestCase(unittest.TestCase):
                 if row["Identifier Android"] == key:
                     return row.get(device_language, f"[Missing:{key}]")
         return f"[NotFound:{key}]"
-
-
-
     def check_switch_and_content(self, expected_on: bool, itemid):
         if expected_on:
             try:
@@ -140,10 +121,6 @@ class BaseTestCase(unittest.TestCase):
             print(f"tap on {name} success")
         except AssertionError:
             print(f"tap on {name} failed")
-
-
-
-
     def tearDown(self):
             pass
 
