@@ -3,6 +3,9 @@ from pages.setting.pixsee_settings_page import PixseeSettingsPage
 from pages.base import BaseTestCase
 from pages.baby_monitor_page import BabyMonitorPage
 from pages.login_page import LoginPage
+from pages.setting.pixsee_friends_det_page import PixseeFriendsDetPage
+from pages.setting.envir_set_page import PixseeFriendsEnvirPage
+from pages.setting.SD_card_stat_page import PixseeFriendsSDcardPage
 import time
 
 from appium.webdriver.common.appiumby import AppiumBy
@@ -10,8 +13,206 @@ from appium.webdriver.common.appiumby import AppiumBy
 class PixseeSettingsTest(BaseTestCase):
 	def setUp(self):
 		super().setUp(no_reset=False)
+	def test_01_enter_pixsee_profile(self):
+		menu_page = MenuPage(self.driver)
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+		login_page = LoginPage(self.driver)
+		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
 
-	def test_01_pixsee_settings(self):
+		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		baby_monitor_page.is_in_baby_monitor_page()
+		baby_monitor_page.skip_first_four_tutor()
+		baby_monitor_page.click_home()
+		# skip menu tutor
+		self.click_middle()
+		menu_page.click_settings()
+		# check pixsee profile title on settings page
+		try:
+			hint = self.get_string("profile_settings")
+			self.assertEqual(pixsee_settings_page.profile_text(),hint)
+		except AssertionError:
+			print("Pixsee profile title wrong")
+			raise AssertionError("Pixsee profile title mismatch")
+		# enter pixsee profile page
+		pixsee_settings_page.click_PixseeProfile()
+		# check if is in pixsee profile page
+	def test_02_enter_wifi_settings(self):
+		menu_page = MenuPage(self.driver)
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+		login_page = LoginPage(self.driver)
+		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
+
+		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		baby_monitor_page.is_in_baby_monitor_page()
+		baby_monitor_page.skip_first_four_tutor()
+		baby_monitor_page.click_home()
+		# skip menu tutor
+		self.click_middle()
+		menu_page.click_settings()
+		# check wifi settings title on settings page
+		try:
+			hint = self.get_string("wifi_settings")
+			self.assertEqual(pixsee_settings_page.wifi_text(), hint)
+			print("Wifi settings title right")
+		except AssertionError:
+			print("Wifi settings title wrong")
+			raise AssertionError("Wifi settings title mismatch")
+		# enter wifi settings page
+		pixsee_settings_page.click_WifiSettings()
+		# check if is in wifi settings page
+	def test_03_enter_pixsee_friends_detection(self):
+		menu_page = MenuPage(self.driver)
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+		login_page = LoginPage(self.driver)
+		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
+
+		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		baby_monitor_page.is_in_baby_monitor_page()
+		baby_monitor_page.skip_first_four_tutor()
+		baby_monitor_page.click_home()
+		# skip menu tutor
+		self.click_middle()
+
+		menu_page.click_settings()
+
+		# check friends detection title on settings page
+		try:
+			hint = self.get_string("pixsee_settings_menu_pixsee_friends_detection_title_menu")
+			self.assertEqual(pixsee_settings_page.pixsee_friends_detection_text(), hint)
+			print("Friends detection title right")
+		except AssertionError:
+			print("Friends detection title wrong")
+			raise AssertionError("Friends detection title mismatch")
+		# enter friends detection page
+		pixsee_settings_page.click_PixseeFriendsDetection()
+
+		# check if is in friends detection page
+		try:
+			self.assertTrue(pixsee_friends_page.is_in_pixsee_friends_det_page())
+			print("In Pixsee Friends Detection page")
+		except AssertionError:
+			print("Not in Pixsee Friends Detection page")
+			raise AssertionError("Not in Pixsee Friends Detection page")
+	def test_04_enter_environment_settings(self):
+		menu_page = MenuPage(self.driver)
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+		login_page = LoginPage(self.driver)
+		environment_settings_page = PixseeFriendsEnvirPage(self.driver)
+
+		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		baby_monitor_page.is_in_baby_monitor_page()
+		baby_monitor_page.skip_first_four_tutor()
+		baby_monitor_page.click_home()
+		# skip menu tutor
+		self.click_middle()
+		menu_page.click_settings()
+		# check environment settings title on settings page
+		try:
+			hint = self.get_string("sensor_settings")
+			self.assertEqual(pixsee_settings_page.environment_settings_text(), hint)
+			print("Environment settings title right")
+		except AssertionError:
+			print("Environment settings title wrong")
+			raise AssertionError("Environment settings title mismatch")
+		# enter environment settings page
+		pixsee_settings_page.click_EnvironmentSettings()
+		# check if is in environment settings page
+		try:
+			self.assertTrue(environment_settings_page.is_in_envir_page())
+			print("In Environment Settings page")
+		except AssertionError:
+			print("Not in Environment Settings page")
+			raise AssertionError("Not in Environment Settings page")
+	def test_05_enter_cry_detection(self):
+		menu_page = MenuPage(self.driver)
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+		login_page = LoginPage(self.driver)
+		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
+
+		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		baby_monitor_page.is_in_baby_monitor_page()
+		baby_monitor_page.skip_first_four_tutor()
+		baby_monitor_page.click_home()
+		# skip menu tutor
+		self.click_middle()
+		menu_page.click_settings()
+		# check cry detection title on settings page
+		try:
+			hint = self.get_string("crying_detection")
+			self.assertEqual(pixsee_settings_page.cry_detection_text(), hint)
+			print("Cry detection title right")
+		except AssertionError:
+			print("Cry detection title wrong")
+			raise AssertionError("Cry detection title mismatch")
+		# enter cry detection page
+		pixsee_settings_page.click_CryDetection()
+		# check if is in cry detection page
+	def test_06_enter_area_detection(self):
+		menu_page = MenuPage(self.driver)
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+		login_page = LoginPage(self.driver)
+		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
+
+		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		baby_monitor_page.is_in_baby_monitor_page()
+		baby_monitor_page.skip_first_four_tutor()
+		baby_monitor_page.click_home()
+		# skip menu tutor
+		self.click_middle()
+
+		menu_page.click_settings()
+	def test_07_enter_covered_face_detection(self):
+		menu_page = MenuPage(self.driver)
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+		login_page = LoginPage(self.driver)
+		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
+
+		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		baby_monitor_page.is_in_baby_monitor_page()
+		baby_monitor_page.skip_first_four_tutor()
+		baby_monitor_page.click_home()
+		# skip menu tutor
+		self.click_middle()
+
+		menu_page.click_settings()
+	def test_08_enter_timelapse_video(self):
+		menu_page = MenuPage(self.driver)
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+		login_page = LoginPage(self.driver)
+		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
+
+		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		baby_monitor_page.is_in_baby_monitor_page()
+		baby_monitor_page.skip_first_four_tutor()
+		baby_monitor_page.click_home()
+		# skip menu tutor
+		self.click_middle()
+
+		menu_page.click_settings()
+	def test_09_enter_voice_service(self):
+		menu_page = MenuPage(self.driver)
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+		login_page = LoginPage(self.driver)
+		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
+
+		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		baby_monitor_page.is_in_baby_monitor_page()
+		baby_monitor_page.skip_first_four_tutor()
+		baby_monitor_page.click_home()
+		# skip menu tutor
+		self.click_middle()
+
+		menu_page.click_settings()
+	def test_10_pixsee_settings(self):
 		menu_page = MenuPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -43,7 +244,7 @@ class PixseeSettingsTest(BaseTestCase):
 		except AssertionError:
 			print("Not in Pixsee Settings page")
 			raise AssertionError("Not in Pixsee Settings page")
-	def test_02_shutter_sound(self):
+	def test_11_shutter_sound(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
@@ -83,7 +284,7 @@ class PixseeSettingsTest(BaseTestCase):
 
 
 		pixsee_settings_page.click_ShutterSoundSwitch()
-	def test_03_LED_indicator(self):
+	def test_12_LED_indicator(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
@@ -115,7 +316,7 @@ class PixseeSettingsTest(BaseTestCase):
 
 		assert new_status != current_status, "LED indicator switch fail"
 		print("LED indicator switch status changed successfully")
-	def test_04_night_mode(self):
+	def test_13_night_mode(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
@@ -155,7 +356,7 @@ class PixseeSettingsTest(BaseTestCase):
 
 		assert new_status != current_status, "Night mode switch fail"
 		print("Night mode switch status changed successfully")
-	def test_05_privacy_mode(self):
+	def test_14_privacy_mode(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
@@ -198,6 +399,40 @@ class PixseeSettingsTest(BaseTestCase):
 		assert new_status != current_status, "Privacy mode switch fail"
 		print("Privacy mode switch status changed successfully")
 		self.shutdown_app()
+	def test_15_enter_SDcard_status(self):
+		menu_page = MenuPage(self.driver)
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+		login_page = LoginPage(self.driver)
+		sd_card_page = PixseeFriendsSDcardPage(self.driver)
+
+		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		baby_monitor_page.is_in_baby_monitor_page()
+		baby_monitor_page.skip_first_four_tutor()
+		baby_monitor_page.click_home()
+		# skip menu tutor
+		self.click_middle()
+		menu_page.click_settings()
+		# check SD card status title on settings page
+		try:
+			hint = self.get_string("sd_card_status")
+			self.assertEqual(pixsee_settings_page.sdcard_status_text(), hint)
+			print("SD card status title right")
+		except AssertionError:
+			print("SD card status title wrong")
+			raise AssertionError("SD card status title mismatch")
+		# enter SD card status page
+		pixsee_settings_page.click_SDcard()
+		# check if is in SD card status page
+		try:
+			self.assertTrue(sd_card_page.is_in_sdcard_page())
+			print("In SD card status page")
+		except AssertionError:
+			print("Not in SD card status page")
+			raise AssertionError("Not in SD card status page")
+
+
+
 
 
 

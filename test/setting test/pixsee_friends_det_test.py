@@ -17,41 +17,7 @@ class PixseeFriendsDetTest(BaseTestCase):
 		super().setUp(no_reset=False)
 
 
-	def test_01_enter_page(self):
-		menu_page = MenuPage(self.driver)
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		login_page = LoginPage(self.driver)
-		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
-
-		login_page.login("amypixsee03@gmail.com", "@Aa12345")
-		baby_monitor_page.is_in_baby_monitor_page()
-		baby_monitor_page.skip_first_four_tutor()
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		self.click_middle()
-
-		menu_page.click_settings()
-
-		# check friends detection title on settings page
-		try:
-			hint = self.get_string("pixsee_settings_menu_pixsee_friends_detection_title_menu")
-			self.assertEqual(pixsee_settings_page.pixsee_friends_detection_text(), hint)
-			print("Friends detection title right")
-		except AssertionError:
-			print("Friends detection title wrong")
-			raise AssertionError("Friends detection title mismatch")
-		# enter friends detection page
-		pixsee_settings_page.click_PixseeFriendsDetection()
-
-		# check if is in friends detection page
-		try:
-			self.assertTrue(pixsee_friends_page.is_in_pixsee_friends_det_page())
-			print("In Pixsee Friends Detection page")
-		except AssertionError:
-			print("Not in Pixsee Friends Detection page")
-			raise AssertionError("Not in Pixsee Friends Detection page")
-	def test_02_friends_detection_switch(self):
+	def test_01_friends_detection_switch(self):
 		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -99,7 +65,7 @@ class PixseeFriendsDetTest(BaseTestCase):
 		except AssertionError:
 			print("Friends detection switch is off")
 			raise AssertionError("Friends detection switch is off")
-	def test_03_friends_detection_save(self):
+	def test_02_friends_detection_save(self):
 		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
