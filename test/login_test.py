@@ -8,19 +8,8 @@ class LoginCase(BaseTestCase):
         def setUp(self):
                 super().setUp(no_reset=False)
 
-        def test_login_success(self):
-                login_page = LoginPage(self.driver)
-                baby_monitor_page = BabyMonitorPage(self.driver)
 
-                login_page.login("amypixsee03@gmail.com", "@Aa12345")
-                try:
-                        self.assertTrue(baby_monitor_page.is_in_baby_monitor_page())
-                        print("Login test success")
-                except:
-                        print("Login test failed")
-                        raise AssertionError("Login failed, not in baby monitor page")
-
-        def test_login_wrong_email_failure(self):
+        def test_01_login_wrong_email_failure(self):
                 login_page = LoginPage(self.driver)
 
                 login_page.login("amypixsee03", "@Aa12345")
@@ -33,7 +22,7 @@ class LoginCase(BaseTestCase):
                         print("Wrong email test failed")
                         raise AssertionError("Wrong email test failed, expected error message not found")
 
-        def test_login_wrong_password_failure(self):
+        def test_02_login_wrong_password_failure(self):
                 login_page = LoginPage(self.driver)
 
                 login_page.login("amypixsee03@gmail.com", "aiwu464")
@@ -46,7 +35,7 @@ class LoginCase(BaseTestCase):
                         print("Wrong password test failed")
                         raise AssertionError("Wrong password test failed, expected error message not found")
 
-        def test_login_empty_email_failure(self):
+        def test_03_login_empty_email_failure(self):
                 login_page = LoginPage(self.driver)
 
                 login_page.login("", "@Aa12345")
@@ -61,7 +50,7 @@ class LoginCase(BaseTestCase):
                         print("Empty email test failed")
                         raise AssertionError("Empty email test failed, expected error message not found")
 
-        def test_login_empty_password_failure(self):
+        def test_04_login_empty_password_failure(self):
                 login_page = LoginPage(self.driver)
 
                 login_page.login("amypixsee03@gmail.com", "")
@@ -74,3 +63,14 @@ class LoginCase(BaseTestCase):
                         print("Empty password test failed")
                         raise AssertionError("Empty password test failed, expected error message not found")
 
+        def test_05_login_success(self):
+                login_page = LoginPage(self.driver)
+                baby_monitor_page = BabyMonitorPage(self.driver)
+
+                login_page.login("jackypixsee02@gmail.com", "@Aa12345")
+                try:
+                        self.assertTrue(baby_monitor_page.is_in_baby_monitor_page())
+                        print("Login test success")
+                except:
+                        print("Login test failed")
+                        raise AssertionError("Login failed, not in baby monitor page")

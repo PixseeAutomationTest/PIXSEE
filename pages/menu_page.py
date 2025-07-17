@@ -16,6 +16,7 @@ class MenuPage():
 		self.babyAddButton = "com.compal.bioslab.pixsee.pixm01:id/baby_list_item"
 		self.membersButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsMembers"
 		self.settingsButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsSettings"
+		self.pixseesettingstxt = "com.compal.bioslab.pixsee.pixm01:id/tvPixseeSettings"
 		self.friendsButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsFriends"
 		self.albumButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsGallery"
 		self.facesButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsFamilyFace"
@@ -25,8 +26,16 @@ class MenuPage():
 		self.aboutButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsAbout"
 		self.logoutButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsLogout"
 
+	def PixseeSettingstxt_text(self):
+		try:
+			WebDriverWait(self.driver, 10).until(
+				EC.presence_of_element_located(("id", self.pixseesettingstxt))
+			)
+			element = self.driver.find_element("id", self.pixseesettingstxt)
+			return element.text
+		except:
+			return None
 
-	
 	def click_profile(self):
 		WebDriverWait(self.driver, 20).until(
 			EC.presence_of_element_located(("id", self.profileButton))

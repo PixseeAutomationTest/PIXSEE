@@ -8,7 +8,7 @@ from pages.menu_page import MenuPage
 import time
 import datetime
 
-class NewPhotoCheckTest(BaseTestCase):
+class NewPhotoCheckCase(BaseTestCase):
 	def setUp(self):
 		super().setUp(no_reset=False)
 
@@ -23,7 +23,7 @@ class NewPhotoCheckTest(BaseTestCase):
 
 
 		for i in range(4):
-			baby_monitor_page.wait_for_tutor_by_id()
+			baby_monitor_page.get_tutor_description()
 			self.click_middle()
 			time.sleep(1)
 
