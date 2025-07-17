@@ -12,7 +12,7 @@ class AddBabyTest(BaseTestCase):
 
             baby_monitor_page = BabyMonitorPage(self.driver)
             menu_page = MenuPage(self.driver)
-            add_baby_page = AddBabyProfilePage(self.driver)
+            add_baby_profile_page = AddBabyProfilePage(self.driver)
 
             '''Go to Menu Page'''
             baby_monitor_page.click_home()
@@ -20,46 +20,46 @@ class AddBabyTest(BaseTestCase):
 
             '''Go to Add Baby Profile Page'''
             menu_page.click_baby_add()
-            self.assertTrue(add_baby_page.is_in_add_baby_profile_page(), "Can't go to Add Baby Profile Page")
+            self.assertTrue(add_baby_profile_page.is_in_add_baby_profile_page(), "Can't go to Add Baby Profile Page")
 
             '''Verify Add Baby Profile Page'''
-            self.assertEqual(add_baby_page.get_page_title(), self.get_string("baby_profile_title"), "Text \"Baby's profile\" is not properly displayed")
-            self.assertTrue(add_baby_page.get_gender_boy_status() or add_baby_page.get_gender_girl_status(), "Boy button or Girl button should be selected")
-            self.assertNotEqual(add_baby_page.get_gender_boy_status(), add_baby_page.get_gender_girl_status(), "Boy button and Girl button should not be selected at the same time")
-            self.assertEqual(add_baby_page.get_name_hint(), self.get_string("baby_profile_name"), "Hint \"Name\" is not properly displayed")
-            self.assertEqual(add_baby_page.get_birthday_hint(), self.get_string("baby_profile_birthday"), "Hint \"Birthday\" is not properly displayed")
-            self.assertEqual(add_baby_page.get_finish_button_text(), self.get_string("save"), "Text \"Save\" is not properly displayed")
-            self.assertEqual(add_baby_page.get_message_text(), self.get_string("baby_profile_footer_message"), "Text \"You can change the profile from settings\" is not properly displayed")
+            self.assertEqual(add_baby_profile_page.get_page_title(), self.get_string("baby_profile_title"), "Text \"Baby's profile\" is not properly displayed")
+            self.assertTrue(add_baby_profile_page.get_gender_boy_status() or add_baby_profile_page.get_gender_girl_status(), "Boy button or Girl button should be selected")
+            self.assertNotEqual(add_baby_profile_page.get_gender_boy_status(), add_baby_profile_page.get_gender_girl_status(), "Boy button and Girl button should not be selected at the same time")
+            self.assertEqual(add_baby_profile_page.get_name_hint(), self.get_string("baby_profile_name"), "Hint \"Name\" is not properly displayed")
+            self.assertEqual(add_baby_profile_page.get_birthday_hint(), self.get_string("baby_profile_birthday"), "Hint \"Birthday\" is not properly displayed")
+            self.assertEqual(add_baby_profile_page.get_finish_button_text(), self.get_string("save"), "Text \"Save\" is not properly displayed")
+            self.assertEqual(add_baby_profile_page.get_message_text(), self.get_string("baby_profile_footer_message"), "Text \"You can change the profile from settings\" is not properly displayed")
 
             '''Select one gender and verify their status'''
-            add_baby_page.click_gender_boy()
-            self.assertTrue(add_baby_page.get_gender_boy_status(), "Gender boy should be selected")
-            self.assertFalse(add_baby_page.get_gender_girl_status(), "Gender girl should not be selected")
-            add_baby_page.click_gender_girl()
-            self.assertFalse(add_baby_page.get_gender_boy_status(), "Gender boy should not be selected")
-            self.assertTrue(add_baby_page.get_gender_girl_status(), "Gender girl should be selected")
+            add_baby_profile_page.click_gender_boy()
+            self.assertTrue(add_baby_profile_page.get_gender_boy_status(), "Gender boy should be selected")
+            self.assertFalse(add_baby_profile_page.get_gender_girl_status(), "Gender girl should not be selected")
+            add_baby_profile_page.click_gender_girl()
+            self.assertFalse(add_baby_profile_page.get_gender_boy_status(), "Gender boy should not be selected")
+            self.assertTrue(add_baby_profile_page.get_gender_girl_status(), "Gender girl should be selected")
 
             '''Input name'''
-            add_baby_page.input_name("Test Baby01")
+            add_baby_profile_page.input_name("Test Baby01")
 
             #TODO: Only click confirm button, not change date
             '''Edit birthday and check it'''
-            add_baby_page.click_birthday()
-            self.assertTrue(add_baby_page.has_calendar(), "Calendar is not displayed")
-            add_baby_page.click_calendar_done()
+            add_baby_profile_page.click_birthday()
+            self.assertTrue(add_baby_profile_page.has_calendar(), "Calendar is not displayed")
+            add_baby_profile_page.click_calendar_done()
 
             #TODO: No change nation
             '''Select nation and check it'''
-            # add_baby_page.click_nation()
-            # self.assertTrue(add_baby_page.has_list(), "Nation list is not displayed")
-            # print(add_baby_page.get_list_text(10))
+            # add_baby_profile_page.click_nation()
+            # self.assertTrue(add_baby_profile_page.has_list(), "Nation list is not displayed")
+            # print(add_baby_profile_page.get_list_text(10))
 
             # TODO: No change relative
             '''Select relative and check it'''
 
             #TODO: Incomplete Verifying
             '''Save profile and verify it'''
-            add_baby_page.click_finish()
+            add_baby_profile_page.click_finish()
 
 
         except AssertionError as ae:
