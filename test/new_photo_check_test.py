@@ -23,7 +23,7 @@ class NewPhotoCheckCase(BaseTestCase):
 
 
 		for i in range(4):
-			baby_monitor_page.wait_for_tutor_by_id()
+			baby_monitor_page.get_tutor_description()
 			self.click_middle()
 			time.sleep(1)
 

@@ -12,7 +12,7 @@ from pages.photo_page import PhotoPage
 
 class reset(BaseTestCase):
         def setUp(self):
-                super().setUp(no_reset=True)
+                super().setUp(no_reset=False)
 
 
         def test_wipe(self):

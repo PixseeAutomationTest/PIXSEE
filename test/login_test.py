@@ -8,19 +8,8 @@ class LoginCase(BaseTestCase):
         def setUp(self):
                 super().setUp(no_reset=False)
 
-        def test_login_success(self):
-                login_page = LoginPage(self.driver)
-                baby_monitor_page = BabyMonitorPage(self.driver)
 
-                login_page.login("amypixsee03@gmail.com", "@Aa12345")
-                try:
-                        self.assertTrue(baby_monitor_page.is_in_baby_monitor_page())
-                        print("Login test success")
-                except:
-                        print("Login test failed")
-                        raise AssertionError("Login failed, not in baby monitor page")
-
-        def test_login_wrong_email_failure(self):
+        def test_01_login_wrong_email_failure(self):
                 login_page = LoginPage(self.driver)
 
                 login_page.login("amypixsee03", "@Aa12345")

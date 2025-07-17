@@ -8,7 +8,6 @@ from pages.pixsee_settings.enviroment_settings_page import EnvironmentSettingsPa
 from pages.pixsee_settings.SD_card_stat_page import SDcardStatusPage
 import time
 
-from appium.webdriver.common.appiumby import AppiumBy
 
 class PixseeSettingsTest(BaseTestCase):
 	def setUp(self):

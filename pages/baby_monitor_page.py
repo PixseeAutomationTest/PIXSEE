@@ -23,6 +23,7 @@ class BabyMonitorPage():
         self.homeButton = "com.compal.bioslab.pixsee.pixm01:id/ibMenuButtonHome"
         self.stream_title = "com.compal.bioslab.pixsee.pixm01:id/tvStreamTitle"
         self.tutor_id = "com.compal.bioslab.pixsee.pixm01:id/tvDescription"
+        self.tutor_title = "com.compal.bioslab.pixsee.pixm01:id/tvTitle"
 
         self.captureButton_xpath = '//android.widget.RelativeLayout[@resource-id="com.compal.bioslab.pixsee.pixm01:id/btnSwipeCapture"]/android.widget.ImageView[2]'
 
@@ -102,14 +103,23 @@ class BabyMonitorPage():
 
         except:
             return False
-    def wait_for_tutor_by_id(self, timeout=20):
-        """等待 tutor 元素出現，並回傳元素文字"""
+    def get_tutor_description(self, timeout=20):
+        """wait for the tutor text to appear by its ID"""
         WebDriverWait(self.driver, timeout).until(
             EC.presence_of_element_located((AppiumBy.ID, self.tutor_id))
         )
         return self.driver.find_element(AppiumBy.ID, self.tutor_id).text
+    def get_tutor_title(self, timeout=20):
+        """wait for the tutor title to appear by its ID"""
+        WebDriverWait(self.driver, timeout).until(
+            EC.presence_of_element_located((AppiumBy.ID, self.tutor_title))
+        )
+        return self.driver.find_element(AppiumBy.ID, self.tutor_title).text
     def skip_first_four_tutor(self):
         base = BaseTestCase(self.driver)
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((AppiumBy.ID, self.tutor_id))
+        )
         for i in range(4):
             base.click_middle()
             time.sleep(1)

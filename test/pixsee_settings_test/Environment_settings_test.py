@@ -1,11 +1,12 @@
-
-
+from selenium.webdriver.common.actions.action_builder import ActionBuilder
+from selenium.webdriver.common.actions.pointer_input import PointerInput
 from pages.menu_page import MenuPage
 from pages.pixsee_settings.pixsee_settings_page import PixseeSettingsPage
 from pages.base import BaseTestCase
 from pages.baby_monitor_page import BabyMonitorPage
 from pages.login_page import LoginPage
 from pages.pixsee_settings.enviroment_settings_page import EnvironmentSettingsPage
+from appium.webdriver.common.appiumby import AppiumBy
 
 
 
@@ -275,41 +276,95 @@ class EnvironmentSettingsCase(BaseTestCase):
 			print("In discard dialog")
 			# check discard dialog text
 			try:
-				discard = environment_settings_page.discard_message_txt()
-				hint = self.get_string("pixsee_environment_set_popup_discard_changes")
+				discard = environment_settings_page.discard_message_text()
+				hint = self.get_string("discard_environment_detection_confirmation_message")
 				self.assertEqual(discard, hint)
-				print("Discard dialog title right")
 			except AssertionError:
 				print("Discard dialog title wrong")
 				raise AssertionError("Discard dialog title mismatch")
 			try:
-				yes = environment_settings_page.discard_yes_txt()
+				yes = environment_settings_page.discard_yes_text()
 				hint = self.get_string("yes")
 				self.assertEqual(yes, hint)
-				print("Discard dialog yes text right")
 			except AssertionError:
 				print("Discard dialog yes text wrong")
 				raise AssertionError("Discard dialog yes text mismatch")
 			try:
-				no = environment_settings_page.discard_no_txt()
+				no = environment_settings_page.discard_no_text()
 				hint = self.get_string("no")
 				self.assertEqual(no, hint)
-				print("Discard dialog no text right")
 			except AssertionError:
 				print("Discard dialog no text wrong")
 				raise AssertionError("Discard dialog no text mismatch")
 			# click yes
 			environment_settings_page.click_discard_yes()
-			new_status = pixsee_settings_page.pixsee_environment_set_status_text()
+			new_status = pixsee_settings_page.environment_settings_status_text()
 			try:
 				self.assertEqual(origin_status, new_status)
-				print("Discard function success")
 			except AssertionError:
 				print("Discard function failed")
 				raise AssertionError("Discard function failed, status changed")
 		except AssertionError:
 			print("Not in discard dialog")
 			raise AssertionError("Not in discard dialog")
+	def test_07_environment_set_temperature_scrolling_bar(self):
+		environment_settings_page = EnvironmentSettingsPage(self.driver)
+		menu_page = MenuPage(self.driver)
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+		login_page = LoginPage(self.driver)
+
+		login_page.login(self.account(), self.password())
+		baby_monitor_page.is_in_baby_monitor_page()
+		baby_monitor_page.skip_first_four_tutor()
+		baby_monitor_page.click_home()
+		# skip menu tutor
+		self.click_middle()
+
+		menu_page.click_settings()
+
+		pixsee_settings_page.click_EnvironmentSettings()
+		if environment_settings_page.is_switch_on() == "true":
+			pass
+		else:
+			environment_settings_page.click_switch()
+		# scroll
+		import re
+		text_before = environment_settings_page.temperature_range_text()  # 假設抓取的文字是 "Temperature range: ?-?℃"
+		# 用正則表達式抓出所有整數
+		numbers_before = re.findall(r'\d+', text_before)
+		# 轉成整數型別
+		numbers_before = list(map(int, numbers_before))
+		highnum_before = numbers_before[1]  # 滑動前最高溫度
+		lownum_before = numbers_before[0]  # 滑動前最低溫度
+
+		# 滑動操作
+		finger = PointerInput(kind="touch", name="finger")
+		action_builder = ActionBuilder(self.driver, mouse=finger)
+		x_start = 117
+		x_end = 300
+		y = (1197 + 1344) // 2  # = 1270
+		action_builder.pointer_action.move_to_location(x_start, y)
+		action_builder.pointer_action.pointer_down()
+		action_builder.pointer_action.pause(0.2)
+		action_builder.pointer_action.move_to_location(x_end, y)
+		action_builder.pointer_action.pointer_up()
+		action_builder.perform()
+
+		# 抓取滑動後的溫度範圍
+		text_after = environment_settings_page.temperature_range_text()  # 假設抓取的文字是 "Temperature range: ?-?℃"
+		numbers_after = re.findall(r'\d+', text_after)
+		numbers_after = list(map(int, numbers_after))
+		highnum_after = numbers_after[1]  # 滑動後最高溫度
+		lownum_after = numbers_after[0]  # 滑動後最低溫度
+
+		# 比較滑動前後的數值
+		if highnum_after > highnum_before and lownum_after < lownum_before:
+			print("Scrolling bar works")
+		else:
+			print("Scrolling bar doesn't work")
+			raise AssertionError("Scrolling bar doesn't work, values not changed")
+
 
 
 

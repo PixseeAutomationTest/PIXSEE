@@ -1,7 +1,6 @@
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
 
 class EnvironmentSettingsPage():
 	def __init__(self, driver):
@@ -33,6 +32,8 @@ class EnvironmentSettingsPage():
 		self.Celsius = "com.compal.bioslab.pixsee.pixm01:id/tvCelsiusTemperature"
 		self.Fahrenheit = "com.compal.bioslab.pixsee.pixm01:id/tvFahrenheitTemperature"
 		self.DiscardTitle = "com.compal.bioslab.pixsee.pixm01:id/tvtitleAlertDialog"
+		self.DiscardNo = "com.compal.bioslab.pixsee.pixm01:id/tvNegativeButton"
+		self.DiscardYes = "com.compal.bioslab.pixsee.pixm01:id/tvPositiveButton"
 
 	def click_back(self):
 		WebDriverWait(self.driver, 10).until(
@@ -87,6 +88,18 @@ class EnvironmentSettingsPage():
 			EC.presence_of_element_located(("id", self.Fahrenheit))
 		)
 		element = self.driver.find_element("id", self.Fahrenheit)
+		element.click()
+	def click_discard_no(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located(("id", self.DiscardNo))
+		)
+		element = self.driver.find_element("id", self.DiscardNo)
+		element.click()
+	def click_discard_yes(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located(("id", self.DiscardYes))
+		)
+		element = self.driver.find_element("id", self.DiscardYes)
 		element.click()
 
 	def header_text(self):
@@ -242,11 +255,33 @@ class EnvironmentSettingsPage():
 			return element.text
 		except:
 			return None
-
-
-
-
-
+	def discard_message_text(self):
+		try:
+			WebDriverWait(self.driver, 10).until(
+				EC.presence_of_element_located(("id", self.DiscardTitle))
+			)
+			element = self.driver.find_element("id", self.DiscardTitle)
+			return element.text
+		except:
+			return None
+	def discard_no_text(self):
+		try:
+			WebDriverWait(self.driver, 10).until(
+				EC.presence_of_element_located(("id", self.DiscardNo))
+			)
+			element = self.driver.find_element("id", self.DiscardNo)
+			return element.text
+		except:
+			return None
+	def discard_yes_text(self):
+		try:
+			WebDriverWait(self.driver, 10).until(
+				EC.presence_of_element_located(("id", self.DiscardYes))
+			)
+			element = self.driver.find_element("id", self.DiscardYes)
+			return element.text
+		except:
+			return None
 	def is_in_envir_page(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
