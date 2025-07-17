@@ -1,11 +1,11 @@
 from pages.menu_page import MenuPage
-from pages.pixsee_settings.pixsee_settings_page import PixseeSettingsPage
+from pages.menu_pages.pixsee_settings_pages.pixsee_settings_page import PixseeSettingsPage
 from pages.base import BaseTestCase
 from pages.baby_monitor_page import BabyMonitorPage
 from pages.login_page import LoginPage
-from pages.pixsee_settings.pixsee_friends_detection_page import PixseeFriendsDetPage
-from pages.pixsee_settings.enviroment_settings_page import EnvironmentSettingsPage
-from pages.pixsee_settings.SD_card_stat_page import SDcardStatusPage
+from pages.menu_pages.pixsee_settings_pages.pixsee_friends_detection_page import PixseeFriendsDetPage
+from pages.menu_pages.pixsee_settings_pages.enviroment_settings_page import EnvironmentSettingsPage
+from pages.menu_pages.pixsee_settings_pages.SD_card_stat_page import SDcardStatusPage
 import time
 
 
