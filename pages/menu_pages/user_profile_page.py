@@ -12,6 +12,7 @@ class UserProfilePage():
         self.userNameEditText = "com.compal.bioslab.pixsee.pixm01:id/tvNameUserProfileEditAct"
         self.changePasswordButton = "com.compal.bioslab.pixsee.pixm01:id/tvForgotPasswordUserProfileEditAct"
         self.birthdayEditText = "com.compal.bioslab.pixsee.pixm01:id/etBirthdayUserProfileEditAct"
+        self.backupEmailText = "com.compal.bioslab.pixsee.pixm01:id/etBackupEmail"
         self.addBackupEmailButton = "com.compal.bioslab.pixsee.pixm01:id/btAddBackupEmail"
         self.changeBackupEmailButton = "com.compal.bioslab.pixsee.pixm01:id/etBackupEmail"
         self.deleteAccountButton = "com.compal.bioslab.pixsee.pixm01:id/btDeleteAccountProfileEditAct"
@@ -75,11 +76,13 @@ class UserProfilePage():
         element = self.driver.find_element("id", self.deleteAccountButton)
         element.click()
 
-    def input_user_name(self, new_name):
+    def input_user_name(self, new_name = "Test User01"):
         WebDriverWait(self.driver, 20).until(
             EC.presence_of_element_located(("id", self.userNameEditText))
         )
         element = self.driver.find_element("id", self.userNameEditText)
+        if element.get_attribute("text") == new_name:
+            new_name = new_name + "_"
         element.clear()
         element.send_keys(new_name)
 
@@ -90,12 +93,50 @@ class UserProfilePage():
         element = self.driver.find_element("id", self.pageTitleText)
         return element.text
 
+    def get_change_password_button_text(self):
+        WebDriverWait(self.driver, 20).until(
+            EC.presence_of_element_located(("id", self.changePasswordButton))
+        )
+        element = self.driver.find_element("id", self.changePasswordButton)
+        return element.text
+
+    def get_add_backup_email_button_text(self):
+        WebDriverWait(self.driver, 20).until(
+            EC.presence_of_element_located(("id", self.addBackupEmailButton))
+        )
+        element = self.driver.find_element("id", self.addBackupEmailButton)
+        return element.text
+
+    def get_change_backup_email_button_text(self):
+        WebDriverWait(self.driver, 20).until(
+            EC.presence_of_element_located(("id", self.changeBackupEmailButton))
+        )
+        element = self.driver.find_element("id", self.changeBackupEmailButton)
+        return element.text
+
+    def get_delete_account_button_text(self):
+        WebDriverWait(self.driver, 20).until(
+            EC.presence_of_element_located(("id", self.deleteAccountButton))
+        )
+        element = self.driver.find_element("id", self.deleteAccountButton)
+        return element.text
+
     def is_in_user_profile_page(self):
         try:
             WebDriverWait(self.driver, 20).until(
                 EC.presence_of_element_located(("id", self.userPhoto))
             )
             self.driver.find_element("id", self.userPhoto)
+            return True
+        except:
+            return False
+
+    def has_backup_email(self):
+        try:
+            WebDriverWait(self.driver, 20).until(
+                EC.presence_of_element_located(("id", self.backupEmailText))
+            )
+            self.driver.find_element("id", self.backupEmailText)
             return True
         except:
             return False
