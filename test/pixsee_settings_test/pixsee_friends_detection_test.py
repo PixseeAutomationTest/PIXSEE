@@ -1,18 +1,17 @@
-from appium.webdriver.common.appiumby import AppiumBy
-from selenium.common import NoSuchElementException
+
 
 from pages.menu_page import MenuPage
-from pages.setting.pixsee_settings_page import PixseeSettingsPage
+from pages.pixsee_settings.pixsee_settings_page import PixseeSettingsPage
 from pages.base import BaseTestCase
 from pages.baby_monitor_page import BabyMonitorPage
 from pages.login_page import LoginPage
-from pages.setting.pixsee_friends_det_page import PixseeFriendsDetPage
+from pages.pixsee_settings.pixsee_friends_detection_page import PixseeFriendsDetPage
 
 
 
 
 
-class PixseeFriendsDetTest(BaseTestCase):
+class PixseeFriendsDetectionCase(BaseTestCase):
 	def setUp(self):
 		super().setUp(no_reset=False)
 
@@ -24,7 +23,7 @@ class PixseeFriendsDetTest(BaseTestCase):
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		login_page = LoginPage(self.driver)
 
-		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		baby_monitor_page.skip_first_four_tutor()
 		baby_monitor_page.click_home()
@@ -58,13 +57,6 @@ class PixseeFriendsDetTest(BaseTestCase):
 		pixsee_friends_page.click_switch()
 		after_status = pixsee_friends_page.is_switch_on()
 		self.check_switch_and_content(after_status, pixsee_friends_page.DetectionType)
-		# check switch is on
-		try:
-			self.assertTrue(pixsee_friends_page.is_switch_on())
-			print("Friends detection switch is on")
-		except AssertionError:
-			print("Friends detection switch is off")
-			raise AssertionError("Friends detection switch is off")
 	def test_02_friends_detection_save(self):
 		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
 		menu_page = MenuPage(self.driver)
@@ -72,7 +64,7 @@ class PixseeFriendsDetTest(BaseTestCase):
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		login_page = LoginPage(self.driver)
 
-		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 
 		baby_monitor_page.skip_first_four_tutor()
@@ -98,7 +90,7 @@ class PixseeFriendsDetTest(BaseTestCase):
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		login_page = LoginPage(self.driver)
 
-		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 
 		baby_monitor_page.skip_first_four_tutor()
@@ -122,7 +114,7 @@ class PixseeFriendsDetTest(BaseTestCase):
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		login_page = LoginPage(self.driver)
 
-		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		baby_monitor_page.skip_first_four_tutor()
 		baby_monitor_page.click_home()
@@ -173,7 +165,7 @@ class PixseeFriendsDetTest(BaseTestCase):
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		login_page = LoginPage(self.driver)
 
-		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		baby_monitor_page.skip_first_four_tutor()
 		baby_monitor_page.click_home()
@@ -276,7 +268,7 @@ class PixseeFriendsDetTest(BaseTestCase):
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		login_page = LoginPage(self.driver)
 
-		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		baby_monitor_page.skip_first_four_tutor()
 		baby_monitor_page.click_home()

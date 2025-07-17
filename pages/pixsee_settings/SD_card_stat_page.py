@@ -3,7 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 
-class PixseeFriendsSDcardPage():
+class SDcardStatusPage():
 	def __init__(self, driver):
 		self.driver = driver
 		self.Header = "com.compal.bioslab.pixsee.pixm01:id/tvExternalSdCardRoom"
@@ -14,6 +14,7 @@ class PixseeFriendsSDcardPage():
 		self.Dialog = "com.compal.bioslab.pixsee.pixm01:id/tvtitleAlertDialog"
 		self.Go = "com.compal.bioslab.pixsee.pixm01:id/btnPositiveAlertDialog"
 		self.No = "com.compal.bioslab.pixsee.pixm01:id/btnNegativeAlertDialog"
+		self.Formatting = "com.compal.bioslab.pixsee.pixm01:id/tvFormatting"
 
 
 
@@ -120,6 +121,14 @@ class PixseeFriendsSDcardPage():
 		try:
 			WebDriverWait(self.driver, 10).until(
 				EC.presence_of_element_located(("id", self.Dialog))
+			)
+			return True
+		except:
+			return False
+	def is_formatting(self):
+		try:
+			WebDriverWait(self.driver, 10).until(
+				EC.presence_of_element_located(("id", self.Formating))
 			)
 			return True
 		except:

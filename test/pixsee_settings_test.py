@@ -1,11 +1,11 @@
 from pages.menu_page import MenuPage
-from pages.setting.pixsee_settings_page import PixseeSettingsPage
+from pages.pixsee_settings.pixsee_settings_page import PixseeSettingsPage
 from pages.base import BaseTestCase
 from pages.baby_monitor_page import BabyMonitorPage
 from pages.login_page import LoginPage
-from pages.setting.pixsee_friends_det_page import PixseeFriendsDetPage
-from pages.setting.envir_set_page import PixseeFriendsEnvirPage
-from pages.setting.SD_card_stat_page import PixseeFriendsSDcardPage
+from pages.pixsee_settings.pixsee_friends_detection_page import PixseeFriendsDetPage
+from pages.pixsee_settings.enviroment_settings_page import EnvironmentSettingsPage
+from pages.pixsee_settings.SD_card_stat_page import SDcardStatusPage
 import time
 
 from appium.webdriver.common.appiumby import AppiumBy
@@ -20,7 +20,7 @@ class PixseeSettingsTest(BaseTestCase):
 		login_page = LoginPage(self.driver)
 		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
 
-		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		baby_monitor_page.skip_first_four_tutor()
 		baby_monitor_page.click_home()
@@ -44,7 +44,7 @@ class PixseeSettingsTest(BaseTestCase):
 		login_page = LoginPage(self.driver)
 		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
 
-		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		baby_monitor_page.skip_first_four_tutor()
 		baby_monitor_page.click_home()
@@ -69,7 +69,7 @@ class PixseeSettingsTest(BaseTestCase):
 		login_page = LoginPage(self.driver)
 		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
 
-		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		baby_monitor_page.skip_first_four_tutor()
 		baby_monitor_page.click_home()
@@ -101,9 +101,9 @@ class PixseeSettingsTest(BaseTestCase):
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		login_page = LoginPage(self.driver)
-		environment_settings_page = PixseeFriendsEnvirPage(self.driver)
+		environment_settings_page = EnvironmentSettingsPage(self.driver)
 
-		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		baby_monitor_page.skip_first_four_tutor()
 		baby_monitor_page.click_home()
@@ -134,7 +134,7 @@ class PixseeSettingsTest(BaseTestCase):
 		login_page = LoginPage(self.driver)
 		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
 
-		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		baby_monitor_page.skip_first_four_tutor()
 		baby_monitor_page.click_home()
@@ -159,7 +159,7 @@ class PixseeSettingsTest(BaseTestCase):
 		login_page = LoginPage(self.driver)
 		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
 
-		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		baby_monitor_page.skip_first_four_tutor()
 		baby_monitor_page.click_home()
@@ -174,7 +174,7 @@ class PixseeSettingsTest(BaseTestCase):
 		login_page = LoginPage(self.driver)
 		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
 
-		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		baby_monitor_page.skip_first_four_tutor()
 		baby_monitor_page.click_home()
@@ -189,7 +189,7 @@ class PixseeSettingsTest(BaseTestCase):
 		login_page = LoginPage(self.driver)
 		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
 
-		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		baby_monitor_page.skip_first_four_tutor()
 		baby_monitor_page.click_home()
@@ -204,7 +204,7 @@ class PixseeSettingsTest(BaseTestCase):
 		login_page = LoginPage(self.driver)
 		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
 
-		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		baby_monitor_page.skip_first_four_tutor()
 		baby_monitor_page.click_home()
@@ -218,7 +218,7 @@ class PixseeSettingsTest(BaseTestCase):
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		login_page = LoginPage(self.driver)
 
-		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		login_page.login(self.account(),self.password())
 
 		baby_monitor_page.skip_first_four_tutor()
 		baby_monitor_page.click_home()
@@ -250,7 +250,7 @@ class PixseeSettingsTest(BaseTestCase):
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		login_page = LoginPage(self.driver)
 
-		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		login_page.login(self.account(),self.password())
 
 		baby_monitor_page.skip_first_four_tutor()
 		baby_monitor_page.click_home()
@@ -290,7 +290,7 @@ class PixseeSettingsTest(BaseTestCase):
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		login_page = LoginPage(self.driver)
 
-		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		login_page.login(self.account(),self.password())
 
 		baby_monitor_page.skip_first_four_tutor()
 		baby_monitor_page.click_home()
@@ -322,7 +322,7 @@ class PixseeSettingsTest(BaseTestCase):
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		login_page = LoginPage(self.driver)
 
-		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		login_page.login(self.account(),self.password())
 
 		baby_monitor_page.skip_first_four_tutor()
 		baby_monitor_page.click_home()
@@ -362,7 +362,7 @@ class PixseeSettingsTest(BaseTestCase):
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		login_page = LoginPage(self.driver)
 
-		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		login_page.login(self.account(),self.password())
 
 		baby_monitor_page.skip_first_four_tutor()
 		baby_monitor_page.click_home()
@@ -404,9 +404,9 @@ class PixseeSettingsTest(BaseTestCase):
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		login_page = LoginPage(self.driver)
-		sd_card_page = PixseeFriendsSDcardPage(self.driver)
+		sd_card_page = SDcardStatusPage(self.driver)
 
-		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		baby_monitor_page.skip_first_four_tutor()
 		baby_monitor_page.click_home()

@@ -8,7 +8,7 @@ from pages.menu_page import MenuPage
 import time
 import datetime
 
-class NewPhotoCheckTest(BaseTestCase):
+class NewPhotoCheckCase(BaseTestCase):
 	def setUp(self):
 		super().setUp(no_reset=False)
 

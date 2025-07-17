@@ -8,12 +8,12 @@ class PixseeFriendsDetPage():
 		self.driver = driver
 
 		# Pixsee Friends Detection page elements
-		self.PixseeFriendsDetTitle = "com.compal.bioslab.pixsee.pixm01:id/textViewPixseeFriendsDetection"
-		self.save = "com.compal.bioslab.pixsee.pixm01:id/tvPixseeFriendsDetectionSettingsSave"
-		self.PixseeFriendsDetDesc = "com.compal.bioslab.pixsee.pixm01:id/tv_pixsee_friends_detection_status_text"
-		self.PixseeFriendsDetDescSubtitle = "com.compal.bioslab.pixsee.pixm01:id/tv_pixsee_friends_detection_subtext"
-		self.PixseeFriendsDetSwitch = "com.compal.bioslab.pixsee.pixm01:id/sw_pixsee_friends_detection_status_switch"
-		self.back = "com.compal.bioslab.pixsee.pixm01:id/ibPixseeFriendsDetectionBack"
+		self.Header = "com.compal.bioslab.pixsee.pixm01:id/textViewPixseeFriendsDetection"
+		self.Save = "com.compal.bioslab.pixsee.pixm01:id/tvPixseeFriendsDetectionSettingsSave"
+		self.Title = "com.compal.bioslab.pixsee.pixm01:id/tv_pixsee_friends_detection_status_text"
+		self.Description = "com.compal.bioslab.pixsee.pixm01:id/tv_pixsee_friends_detection_subtext"
+		self.Switch = "com.compal.bioslab.pixsee.pixm01:id/sw_pixsee_friends_detection_status_switch"
+		self.Back = "com.compal.bioslab.pixsee.pixm01:id/ibPixseeFriendsDetectionBack"
 		self.DetectionType = "com.compal.bioslab.pixsee.pixm01:id/tv_type_pixsee_friends_detection_text"
 		self.TimeSpan = "com.compal.bioslab.pixsee.pixm01:id/tv_pixsee_friends_detection_time_span_text"
 		self.AllDay = "com.compal.bioslab.pixsee.pixm01:id/rb_pixsee_friends_detection_all_day"
@@ -42,7 +42,7 @@ class PixseeFriendsDetPage():
 	def is_in_pixsee_friends_det_page(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
-				EC.presence_of_element_located((AppiumBy.ID, self.PixseeFriendsDetTitle))
+				EC.presence_of_element_located((AppiumBy.ID, self.Header))
 			)
 			return True
 		except:
@@ -81,16 +81,16 @@ class PixseeFriendsDetPage():
 		self.driver.find_element(AppiumBy.ID, self.SetTime).click()
 	def click_save(self):
 		WebDriverWait(self.driver, 10).until(
-			EC.presence_of_element_located((AppiumBy.ID, self.save))
+			EC.presence_of_element_located((AppiumBy.ID, self.Save))
 		)
-		self.driver.find_element(AppiumBy.ID, self.save).click()
+		self.driver.find_element(AppiumBy.ID, self.Save).click()
 	def click_switch(self):
 		WebDriverWait(self.driver, 10).until(
-			EC.presence_of_element_located((AppiumBy.ID, self.PixseeFriendsDetSwitch))
+			EC.presence_of_element_located((AppiumBy.ID, self.Switch))
 		)
-		self.driver.find_element(AppiumBy.ID, self.PixseeFriendsDetSwitch).click()
+		self.driver.find_element(AppiumBy.ID, self.Switch).click()
 	def click_back(self):
-		self.driver.find_element(AppiumBy.ID, self.back).click()
+		self.driver.find_element(AppiumBy.ID, self.Back).click()
 	def click_start_time_block(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.StartTimeBlock))
@@ -124,19 +124,19 @@ class PixseeFriendsDetPage():
 	# text
 	def title(self):
 		WebDriverWait(self.driver, 10).until(
-			EC.presence_of_element_located((AppiumBy.ID, self.PixseeFriendsDetTitle))
+			EC.presence_of_element_located((AppiumBy.ID, self.Header))
 		)
-		return self.driver.find_element(AppiumBy.ID, self.PixseeFriendsDetTitle).text
+		return self.driver.find_element(AppiumBy.ID, self.Header).text
 	def description(self):
 		WebDriverWait(self.driver, 10).until(
-			EC.presence_of_element_located((AppiumBy.ID, self.PixseeFriendsDetDesc))
+			EC.presence_of_element_located((AppiumBy.ID, self.Title))
 		)
-		return self.driver.find_element(AppiumBy.ID, self.PixseeFriendsDetDesc).text
+		return self.driver.find_element(AppiumBy.ID, self.Title).text
 	def description_subtitle(self):
 		WebDriverWait(self.driver, 10).until(
-			EC.presence_of_element_located((AppiumBy.ID, self.PixseeFriendsDetDescSubtitle))
+			EC.presence_of_element_located((AppiumBy.ID, self.Description))
 		)
-		return self.driver.find_element(AppiumBy.ID, self.PixseeFriendsDetDescSubtitle).text
+		return self.driver.find_element(AppiumBy.ID, self.Description).text
 	def dettype_txt(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.DetectionType))

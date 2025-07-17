@@ -5,8 +5,6 @@ from appium.webdriver.common.appiumby import AppiumBy
 import time
 
 from selenium.common import NoSuchElementException
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 import csv
 import subprocess
 from appium.webdriver.extensions.android.nativekey import AndroidKey
@@ -121,6 +119,10 @@ class BaseTestCase(unittest.TestCase):
             print(f"tap on {name} success")
         except AssertionError:
             print(f"tap on {name} failed")
+    def account(self):
+        return "amypixsee03@gmail.com"
+    def password(self):
+        return "@Aa12345"
     def tearDown(self):
             pass
 
