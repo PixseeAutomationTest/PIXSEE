@@ -8,9 +8,12 @@ import time
 class MenuPage():
 	def __init__(self, driver):
 		self.driver = driver
-		self.profileButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsProfile"
+		self.profileButton = "com.compal.bioslab.pixsee.pixm01:id/civProfileWelcomeAct"
+		self.homeButton = "com.compal.bioslab.pixsee.pixm01:id/ibMenuButtonHome"
 		self.notificationsButton = "com.compal.bioslab.pixsee.pixm01:id/btNotificationCenter"
-		self.nameButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsName"
+		self.babyListButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsBabiesList"
+		self.babyEditButton = "com.compal.bioslab.pixsee.pixm01:id/baby_edit_icon"
+		self.babyAddButton = "com.compal.bioslab.pixsee.pixm01:id/baby_list_item"
 		self.membersButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsMembers"
 		self.settingsButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsSettings"
 		self.friendsButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsFriends"
@@ -31,6 +34,13 @@ class MenuPage():
 		self.driver.find_element(AppiumBy.ID, self.profileButton).click()
 		time.sleep(1)  # 等待頁面加載完成，必要時可調整時間
 
+	def click_home(self):
+		WebDriverWait(self.driver, 20).until(
+			EC.presence_of_element_located(("id", self.homeButton))
+		)
+		self.driver.find_element(AppiumBy.ID, self.homeButton).click()
+		time.sleep(1)
+
 	def click_notification(self):
 		WebDriverWait(self.driver, 20).until(
 			EC.presence_of_element_located(("id", self.notificationsButton))
@@ -38,12 +48,28 @@ class MenuPage():
 		self.driver.find_element(AppiumBy.ID, self.notificationsButton).click()
 		time.sleep(1)
 
-	def click_name(self):
+	def click_baby_list(self):
 		WebDriverWait(self.driver, 20).until(
-			EC.presence_of_element_located(("id", self.nameButton))
+			EC.presence_of_element_located(("id", self.babyListButton))
 		)
-		self.driver.find_element(AppiumBy.ID, self.nameButton).click()
+		self.driver.find_element(AppiumBy.ID, self.babyListButton).click()
 		time.sleep(1)  # 等待頁面加載完成，必要時可調整時間
+
+	def click_baby_edit(self):
+		WebDriverWait(self.driver, 20).until(
+			EC.presence_of_element_located(("id", self.babyEditButton))
+		)
+		self.driver.find_element(AppiumBy.ID, self.babyEditButton).click()
+		time.sleep(1)
+
+	def click_baby_add(self):
+		self.click_baby_list()
+		WebDriverWait(self.driver, 20).until(
+			EC.presence_of_element_located(("id", self.babyAddButton))
+		)
+		elements = self.driver.find_elements(AppiumBy.ID, self.babyAddButton)
+		elements[-1].click()
+		time.sleep(1)
 
 	def click_members(self):
 		WebDriverWait(self.driver, 20).until(
@@ -115,6 +141,86 @@ class MenuPage():
 		)
 		self.driver.find_element(AppiumBy.ID, self.logoutButton).click()
 		time.sleep(1)
+
+	def get_members_button_text(self):
+		WebDriverWait(self.driver, 20).until(
+			EC.presence_of_element_located(("id", self.membersButton))
+		)
+		element = self.driver.find_element(AppiumBy.ID, self.membersButton)
+		return element.text
+
+	def get_settings_button_text(self):
+		WebDriverWait(self.driver, 20).until(
+			EC.presence_of_element_located(("id", self.settingsButton))
+		)
+		element = self.driver.find_element(AppiumBy.ID, self.settingsButton)
+		return element.text
+
+	def get_friends_button_text(self):
+		WebDriverWait(self.driver, 20).until(
+			EC.presence_of_element_located(("id", self.friendsButton))
+		)
+		element = self.driver.find_element(AppiumBy.ID, self.friendsButton)
+		return element.text
+
+	def get_album_button_text(self):
+		WebDriverWait(self.driver, 20).until(
+			EC.presence_of_element_located(("id", self.albumButton))
+		)
+		element = self.driver.find_element(AppiumBy.ID, self.albumButton)
+		return element.text
+
+	def get_faces_button_text(self):
+		WebDriverWait(self.driver, 20).until(
+			EC.presence_of_element_located(("id", self.facesButton))
+		)
+		element = self.driver.find_element(AppiumBy.ID, self.facesButton)
+		return element.text
+
+	def get_frames_button_text(self):
+		WebDriverWait(self.driver, 20).until(
+			EC.presence_of_element_located(("id", self.framesButton))
+		)
+		element = self.driver.find_element(AppiumBy.ID, self.framesButton)
+		return element.text
+
+	def get_subscription_button_text(self):
+		WebDriverWait(self.driver, 20).until(
+			EC.presence_of_element_located(("id", self.subscriptionButton))
+		)
+		element = self.driver.find_element(AppiumBy.ID, self.subscriptionButton)
+		return element
+
+	def get_assistant_button_text(self):
+		WebDriverWait(self.driver, 20).until(
+			EC.presence_of_element_located(("id", self.assistantButton))
+		)
+		element = self.driver.find_element(AppiumBy.ID, self.assistantButton)
+		return element.text
+
+	def get_about_button_text(self):
+		WebDriverWait(self.driver, 20).until(
+			EC.presence_of_element_located(("id", self.aboutButton))
+		)
+		element = self.driver.find_element(AppiumBy.ID, self.aboutButton)
+		return element.text
+
+	def get_logout_button_text(self):
+		WebDriverWait(self.driver, 20).until(
+			EC.presence_of_element_located(("id", self.logoutButton))
+		)
+		element = self.driver.find_element(AppiumBy.ID, self.logoutButton)
+		return element.text
+
+	def is_in_menu_page(self):
+		try:
+			WebDriverWait(self.driver, 10).until(
+				EC.presence_of_element_located(("id", self.profileButton))
+			)
+			self.driver.find_element(AppiumBy.ID, self.profileButton)
+			return True
+		except:
+			return False
 
 	
 

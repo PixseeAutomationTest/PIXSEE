@@ -15,10 +15,10 @@ class BabyMonitorPage():
         self.twoWayTalkButton = "com.compal.bioslab.pixsee.pixm01:id/ibPushToTalkHomeAct"
         self.musicButton = "com.compal.bioslab.pixsee.pixm01:id/ibPlayMusic"
         self.recordButton = "com.compal.bioslab.pixsee.pixm01:id/ibRecordVideo"
-        self.captureButton = "com.compal.bioslab.pixsee.pixm01:id/btnSwipeCapture"
+        # self.captureButton = "com.compal.bioslab.pixsee.pixm01:id/btnSwipeCapture"
         self.changeQualityButton = "com.compal.bioslab.pixsee.pixm01:id/ibQualityStream"
         self.muteButton = "com.compal.bioslab.pixsee.pixm01:id/bStreamOptions"
-        self.home = "com.compal.bioslab.pixsee.pixm01:id/ibMenuButtonHome"
+        self.homeButton = "com.compal.bioslab.pixsee.pixm01:id/ibMenuButtonHome"
         self.stream_title = "com.compal.bioslab.pixsee.pixm01:id/tvStreamTitle"
         self.tutor_id = "com.compal.bioslab.pixsee.pixm01:id/tvDescription"
 
@@ -59,6 +59,7 @@ class BabyMonitorPage():
         element = self.driver.find_element("xpath", self.captureButton_xpath)
         element.click()
 
+    #TODO: function uncompleted 2025/07/15
     def change_camera_mode(self):
         # 等待按鈕出現並抓到元素
         element = WebDriverWait(self.driver, 10).until(
@@ -123,9 +124,9 @@ class BabyMonitorPage():
 
     def click_home(self):
         WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((AppiumBy.ID, self.home))
+            EC.presence_of_element_located((AppiumBy.ID, self.homeButton))
         )
-        self.driver.find_element(AppiumBy.ID, self.home).click()
+        self.driver.find_element(AppiumBy.ID, self.homeButton).click()
 
 
 

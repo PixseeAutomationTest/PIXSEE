@@ -12,7 +12,7 @@ class LoginCase(BaseTestCase):
                 login_page = LoginPage(self.driver)
                 baby_monitor_page = BabyMonitorPage(self.driver)
 
-                login_page.login("jackypixsee02@gmail.com", "@Aa12345")
+                login_page.login("amypixsee03@gmail.com", "@Aa12345")
                 try:
                         self.assertTrue(baby_monitor_page.is_in_baby_monitor_page())
                         print("Login test success")
@@ -23,7 +23,7 @@ class LoginCase(BaseTestCase):
         def test_login_wrong_email_failure(self):
                 login_page = LoginPage(self.driver)
 
-                login_page.login("jackypixsee02", "@Aa12345")
+                login_page.login("amypixsee03", "@Aa12345")
                 hint = self.get_string("field_validation_invalid_email")
                 # hint = "Please enter a valid email address"
                 try:
@@ -36,7 +36,7 @@ class LoginCase(BaseTestCase):
         def test_login_wrong_password_failure(self):
                 login_page = LoginPage(self.driver)
 
-                login_page.login("jackypixsee02@gmail.com", "aiwu464")
+                login_page.login("amypixsee03@gmail.com", "aiwu464")
                 hint = self.get_string("e10016")
                 # hint = "Wrong password"
                 try:
@@ -64,7 +64,7 @@ class LoginCase(BaseTestCase):
         def test_login_empty_password_failure(self):
                 login_page = LoginPage(self.driver)
 
-                login_page.login("jackypixsee02@gmail.com", "")
+                login_page.login("amypixsee03@gmail.com", "")
                 hint = self.get_string("e10002")
                 # hint = "Please enter password"
                 try:
