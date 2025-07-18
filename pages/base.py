@@ -1,4 +1,6 @@
 import unittest
+from selenium.webdriver.support import expected_conditions as EC
+
 from appium import webdriver
 from appium.options.android import UiAutomator2Options
 from appium.webdriver.common.appiumby import AppiumBy
@@ -8,13 +10,15 @@ from selenium.common import NoSuchElementException
 import csv
 import subprocess
 from appium.webdriver.extensions.android.nativekey import AndroidKey
+from selenium.webdriver.support.wait import WebDriverWait
+
 
 class BaseTestCase(unittest.TestCase):
     def setUp(self, no_reset=True):
         capabilities = UiAutomator2Options()
         capabilities.platform_name = "Android"
         capabilities.device_name = "38161FDJG00DXJ"
-        capabilities.language = "tw text"  # Chinese (Taiwan): "tw text", English: "en-us text"
+        capabilities.language = "en-us text"  # Chinese (Taiwan): "tw text", English: "en-us text"
         # capabilities.device_name = "emulator-5554"
 
         # adb devices
@@ -28,6 +32,7 @@ class BaseTestCase(unittest.TestCase):
              "com.compal.bioslab.pixsee.pixm01",  # ← 這裡改成你的 app package name
             "android.permission.POST_NOTIFICATIONS"
         ])
+        self.tutor_id = "com.compal.bioslab.pixsee.pixm01:id/tvDescription"
 
         self.driver = webdriver.Remote("http://localhost:4723", options=capabilities)
     def open_app(self):
@@ -81,6 +86,13 @@ class BaseTestCase(unittest.TestCase):
     def go_back(self):
         self.driver.press_keycode(AndroidKey.BACK)
         time.sleep(1)
+    def skip_first_four_tutor(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((AppiumBy.ID, self.tutor_id))
+        )
+        for i in range(4):
+            self.click_middle()
+            time.sleep(1)
 
     def get_string(self, key=""):
         device_language = self.driver.capabilities.get("language")

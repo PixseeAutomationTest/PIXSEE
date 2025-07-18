@@ -82,7 +82,7 @@ class TutorCase(BaseTestCase):
                 login_page = LoginPage(self.driver)
 
                 login_page.login(self.account(), self.password())
-                baby_monitor_page.skip_first_four_tutor()
+                self.skip_first_four_tutor()
                 baby_monitor_page.click_home()
                 try:
                         pixsee_friends_title = baby_monitor_page.get_tutor_title()

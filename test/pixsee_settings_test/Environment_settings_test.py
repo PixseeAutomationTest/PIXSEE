@@ -20,7 +20,7 @@ class EnvironmentSettingsCase(BaseTestCase):
 
 		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
-		baby_monitor_page.skip_first_four_tutor()
+		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
 		self.click_middle()
@@ -53,7 +53,7 @@ class EnvironmentSettingsCase(BaseTestCase):
 		login_page.login(self.account(), self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 
-		baby_monitor_page.skip_first_four_tutor()
+		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
 		self.click_middle()
@@ -79,7 +79,7 @@ class EnvironmentSettingsCase(BaseTestCase):
 		login_page.login(self.account(), self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 
-		baby_monitor_page.skip_first_four_tutor()
+		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
 		self.click_middle()
@@ -102,7 +102,7 @@ class EnvironmentSettingsCase(BaseTestCase):
 
 		login_page.login(self.account(), self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
-		baby_monitor_page.skip_first_four_tutor()
+		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
 		self.click_middle()
@@ -201,7 +201,7 @@ class EnvironmentSettingsCase(BaseTestCase):
 
 		login_page.login(self.account(), self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
-		baby_monitor_page.skip_first_four_tutor()
+		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
 		self.click_middle()
@@ -257,7 +257,7 @@ class EnvironmentSettingsCase(BaseTestCase):
 
 		login_page.login(self.account(), self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
-		baby_monitor_page.skip_first_four_tutor()
+		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
 		self.click_middle()
@@ -312,7 +312,7 @@ class EnvironmentSettingsCase(BaseTestCase):
 
 		login_page.login(self.account(), self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
-		baby_monitor_page.skip_first_four_tutor()
+		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
 		self.click_middle()

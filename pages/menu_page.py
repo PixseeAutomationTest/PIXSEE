@@ -12,10 +12,11 @@ class MenuPage():
 		self.homeButton = "com.compal.bioslab.pixsee.pixm01:id/ibMenuButtonHome"
 		self.notificationsButton = "com.compal.bioslab.pixsee.pixm01:id/btNotificationCenter"
 		self.babyListButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsBabiesList"
+
 		self.babyEditButton = "com.compal.bioslab.pixsee.pixm01:id/baby_edit_icon"
 		self.babyAddButton = "com.compal.bioslab.pixsee.pixm01:id/baby_list_item"
 		self.membersButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsMembers"
-		self.settingsButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsSettings"
+		self.settingsButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsDevice"
 		self.pixseesettingstxt = "com.compal.bioslab.pixsee.pixm01:id/tvPixseeSettings"
 		self.friendsButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsFriends"
 		self.albumButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsGallery"
@@ -89,7 +90,7 @@ class MenuPage():
 
 	def click_settings(self):
 		WebDriverWait(self.driver, 20).until(
-			EC.presence_of_element_located(("id", self.settingsButton))
+			EC.presence_of_element_located((AppiumBy.ID, self.settingsButton))
 		)
 		self.driver.find_element(AppiumBy.ID, self.settingsButton).click()
 		time.sleep(1)
