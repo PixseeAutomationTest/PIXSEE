@@ -282,6 +282,7 @@ class EnvironmentSettingsPage():
 			return element.text
 		except:
 			return None
+
 	def is_in_envir_page(self):
 		try:
 			WebDriverWait(self.driver, 10).until(

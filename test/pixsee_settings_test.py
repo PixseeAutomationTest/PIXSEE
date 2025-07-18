@@ -7,6 +7,11 @@ from pages.menu_pages.pixsee_settings_pages.pixsee_friends_detection_page import
 from pages.menu_pages.pixsee_settings_pages.enviroment_settings_page import EnvironmentSettingsPage
 from pages.menu_pages.pixsee_settings_pages.SD_card_stat_page import SDcardStatusPage
 import time
+from pages.menu_pages.pixsee_settings_pages.cry_detection_page import CryDetectionPage
+from pages.menu_pages.pixsee_settings_pages.covered_face_detection_page import CoveredFaceDetectionPage
+from pages.menu_pages.pixsee_settings_pages.area_detection_page import AreaDetectionPage
+from pages.menu_pages.pixsee_settings_pages.time_lapse_video_page import TimeLapseVideoPage
+
 
 
 class PixseeSettingsTest(BaseTestCase):
@@ -132,70 +137,141 @@ class PixseeSettingsTest(BaseTestCase):
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		login_page = LoginPage(self.driver)
 		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
+		cry_detection_page = CryDetectionPage(self.driver)
 
 		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		baby_monitor_page.skip_first_four_tutor()
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		self.click_middle()
-		menu_page.click_settings()
-		# check cry detection title on settings page
-		try:
-			hint = self.get_string("crying_detection")
-			self.assertEqual(pixsee_settings_page.cry_detection_text(), hint)
-			print("Cry detection title right")
-		except AssertionError:
-			print("Cry detection title wrong")
-			raise AssertionError("Cry detection title mismatch")
-		# enter cry detection page
-		pixsee_settings_page.click_CryDetection()
-		# check if is in cry detection page
+		if baby_monitor_page.is_connected():
+			baby_monitor_page.click_home()
+			# skip menu tutor
+			self.click_middle()
+			menu_page.click_settings()
+			# check cry detection title on settings page
+			try:
+				hint = self.get_string("crying_detection")
+				self.assertEqual(pixsee_settings_page.cry_detection_text(), hint)
+				print("Cry detection title right")
+			except AssertionError:
+				print("Cry detection title wrong")
+				raise AssertionError("Cry detection title mismatch")
+			# enter cry detection page
+			pixsee_settings_page.click_CryDetection()
+			# check if is in cry detection page
+			try:
+				self.assertTrue(cry_detection_page.is_in_cry_detection_page())
+				print("entered Cry Detection page successfully")
+			except AssertionError:
+				print("entered Cry Detection page unsuccessfully")
+				raise AssertionError("Not in Cry Detection page")
+		else:
+			print("Baby monitor is not connected, can't enter Cry Detection page")
+			raise AssertionError("Baby monitor is not connected, can't enter Cry Detection page")
 	def test_06_enter_area_detection(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		login_page = LoginPage(self.driver)
-		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
+		area_detection_page = AreaDetectionPage(self.driver)
 
 		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		baby_monitor_page.skip_first_four_tutor()
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		self.click_middle()
-
-		menu_page.click_settings()
+		if baby_monitor_page.is_connected():
+			baby_monitor_page.click_home()
+			# skip menu tutor
+			self.click_middle()
+			menu_page.click_settings()
+			# check area detection title on settings page
+			try:
+				hint = self.get_string("area_detection")
+				self.assertEqual(pixsee_settings_page.area_detection_text(), hint)
+				print("Area detection title right")
+			except AssertionError:
+				print("Area detection title wrong")
+				raise AssertionError("Area detection title mismatch")
+			# enter area detection page
+			pixsee_settings_page.click_AreaDetection()
+			# check if is in area detection page
+			try:
+				self.assertTrue(area_detection_page.is_in_area_detection_page())
+				print("entered Area Detection page successfully")
+			except AssertionError:
+				print("entered Area Detection page unsuccessfully")
+				raise AssertionError("Not in Area Detection page")
+		else:
+			print("Baby monitor is not connected, can't enter Area Detection page")
+			raise AssertionError("Baby monitor is not connected, can't enter Area Detection page")
 	def test_07_enter_covered_face_detection(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		login_page = LoginPage(self.driver)
-		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
+		covered_face_page = CoveredFaceDetectionPage(self.driver)
 
 		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		baby_monitor_page.skip_first_four_tutor()
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		self.click_middle()
-
-		menu_page.click_settings()
+		if baby_monitor_page.is_connected():
+			baby_monitor_page.click_home()
+			# skip menu tutor
+			self.click_middle()
+			menu_page.click_settings()
+			# check covered face detection title on settings page
+			try:
+				hint = self.get_string("cover_detection_settings_label")
+				self.assertEqual(pixsee_settings_page.area_detection_text(), hint)
+				print("Covered Face detection title right")
+			except AssertionError:
+				print("Covered Face detection title wrong")
+				raise AssertionError("Covered Face detection title mismatch")
+			# enter covered face detection page
+			pixsee_settings_page.click_CoveredFaceDetection()
+			# check if is in covered face detection page
+			try:
+				self.assertTrue(covered_face_page.is_in_covered_face_detection_page())
+				print("entered Covered Face Detection page successfully")
+			except AssertionError:
+				print("entered Covered Face Detection page unsuccessfully")
+				raise AssertionError("Not in Covered Face Detection page")
+		else:
+			print("Baby monitor is not connected, can't enter Covered Face Detection page")
+			raise AssertionError("Baby monitor is not connected, can't enter Covered Face Detection page")
 	def test_08_enter_timelapse_video(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		login_page = LoginPage(self.driver)
-		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
+		timelapse_video_page = TimeLapseVideoPage(self.driver)
 
-		login_page.login(self.account(),self.password())
+		login_page.login(self.account(), self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		baby_monitor_page.skip_first_four_tutor()
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		self.click_middle()
-
-		menu_page.click_settings()
+		if baby_monitor_page.is_connected():
+			baby_monitor_page.click_home()
+			# skip menu tutor
+			self.click_middle()
+			menu_page.click_settings()
+			# check timelapse video title on settings page
+			try:
+				hint = self.get_string("time_lapse")
+				self.assertEqual(pixsee_settings_page.time_lapse_video_text(), hint)
+				print("Timelapse video title right")
+			except AssertionError:
+				print("Timelapse video title wrong")
+				raise AssertionError("Timelapse video title mismatch")
+			# enter timelapse video page
+			pixsee_settings_page.click_TimeLapseVideo()
+			# check if is in timelapse video page
+			try:
+				self.assertTrue(timelapse_video_page.is_in_timelapse_video_page())
+				print("entered Timelapse Video page successfully")
+			except AssertionError:
+				print("entered Timelapse Video page unsuccessfully")
+				raise AssertionError("Not in Timelapse Video page")
+		else:
+			print("Baby monitor is not connected, can't enter Timelapse Video page")
+			raise AssertionError("Baby monitor is not connected, can't enter Timelapse Video page")
 	def test_09_enter_voice_service(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -211,6 +287,7 @@ class PixseeSettingsTest(BaseTestCase):
 		self.click_middle()
 
 		menu_page.click_settings()
+
 	def test_10_pixsee_settings(self):
 		menu_page = MenuPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
