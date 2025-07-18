@@ -27,9 +27,9 @@ class UserProfileTest(BaseTestCase):
 
             '''Verify User Profile Page'''
             self.assertEqual(user_profile_page.get_page_title(), self.get_string("user_profile_title"), "Text \"User Profile\" is not properly displayed")
-            self.assertEqual(user_profile_page.get_change_password_button_text(), re.sub(r'</?[^>]+>', '', self.get_string("user_profile_change_password_button")), "Button \"Change password\" is properly displayed")
+            self.assertEqual(user_profile_page.get_change_password_button_text(), self.get_string("user_profile_change_password_button"), "Button \"Change password\" is properly displayed")
             if user_profile_page.has_backup_email():
-                self.assertEqual(user_profile_page.get_change_backup_email_button_text(), re.sub(r'</?[^>]+>', '', self.get_string("backup_email_change_backup_email")), "Button \"Change backup email\" is properly displayed")
+                self.assertEqual(user_profile_page.get_change_backup_email_button_text(), self.get_string("backup_email_change_backup_email"), "Button \"Change backup email\" is properly displayed")
             else:
                 self.assertEqual(user_profile_page.get_add_backup_email_button_text(), self.get_string("add_backup_email_button_title"), "Button \"Add backup mail\" is properly displayed")
             self.assertEqual(user_profile_page.get_delete_account_button_text(), self.get_string("account_profile_btn_delete"), "Button \"Delete account\" is properly displayed")

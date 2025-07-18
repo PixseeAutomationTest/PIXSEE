@@ -6,9 +6,6 @@ from pages.menu_page import MenuPage
 from pages.menu_pages.add_baby_profile_page import AddBabyProfilePage
 from pages.menu_pages.edit_baby_profile_page import EditBabyProfilePage
 from pages.menu_pages.edit_baby_profile_pages.delete_baby_profile import DeleteBabyProfilePage
-
-import re
-
 class EditBabyTest(BaseTestCase):
     def test_delete_baby_profile(self):
         try:
@@ -60,7 +57,7 @@ class EditBabyTest(BaseTestCase):
             edit_baby_profile_page.click_delete_dialog_yes()
             self.assertTrue(delete_baby_profile_page.is_in_delete_baby_profile_page(), "Can't automatically go to Delete Baby Profile Page from Edit Baby Profile Page")
             self.assertEqual(delete_baby_profile_page.get_page_title(), self.get_string("delete_baby_title"), "Text \"Delete baby’s profile\" is not properly displayed")
-            self.assertEqual(delete_baby_profile_page.get_warning_text(), (re.sub(r'</?[^>]+>', '', self.get_string("delete_baby_warning")) + " " + self.get_string("delete_warning_instruction")).replace("\\n", "\n"), "Warning Hint is not properly displayed")
+            self.assertEqual(delete_baby_profile_page.get_warning_text(), (self.get_string("delete_baby_warning") + " " + self.get_string("delete_warning_instruction")).replace("\\n", "\n"), "Warning Hint is not properly displayed")
             self.assertEqual(delete_baby_profile_page.get_check_info_text(), self.get_string("delete_baby_check"), "Text \"Your baby’s data will be gone forever and cannot be recovered.\" is not properly displayed")
             self.assertEqual(delete_baby_profile_page.get_delete_baby_profile_button_text(), self.get_string("delete_baby_btn_delete"), "\"Delete baby's profile\" Button is not properly displayed")
             self.assertEqual(delete_baby_profile_page.get_cancel_button_text(), self.get_string("cancel"), "\"Cancel\" Button is not properly displayed")

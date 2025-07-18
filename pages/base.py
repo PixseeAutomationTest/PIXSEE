@@ -5,7 +5,8 @@ from appium import webdriver
 from appium.options.android import UiAutomator2Options
 from appium.webdriver.common.appiumby import AppiumBy
 import time
-
+import re
+import os
 from selenium.common import NoSuchElementException
 import csv
 import subprocess
@@ -18,7 +19,7 @@ class BaseTestCase(unittest.TestCase):
         capabilities = UiAutomator2Options()
         capabilities.platform_name = "Android"
         capabilities.device_name = "38161FDJG00DXJ"
-        capabilities.language = "en-us text"  # Chinese (Taiwan): "tw text", English: "en-us text"
+        capabilities.language = "tw text"  # Chinese (Taiwan): "tw text", English: "en-us text"
         # capabilities.device_name = "emulator-5554"
 
         # adb devices
@@ -38,7 +39,7 @@ class BaseTestCase(unittest.TestCase):
         self.driver.activate_app(self.driver.capabilities.get("appPackage"))
         time.sleep(5)
     def shutdown_app(self):
-        self.driver.terminate_app(self.driver.capabilities.get("app_package"))
+        self.driver.terminate_app(self.driver.capabilities.get("appPackage"))
     # from right to left
     def left_wipe(self):
         time.sleep(0.5)
@@ -93,16 +94,18 @@ class BaseTestCase(unittest.TestCase):
             self.click_middle()
             time.sleep(1)
 
-    def get_string(self, key=""):
-        device_language = self.driver.capabilities.get("language")
-        if not device_language:
-            raise ValueError(f"Unsupported language code: {device_language}")
-
-        with open("../Pixsee App translations - master_202403.csv", newline='', encoding='utf-8') as csvfile:
+    def get_string(self, key="", language = None):
+        if language is None:
+            language = self.driver.capabilities.get("language")
+        if not language:
+            raise ValueError(f"Unsupported language code: {language}")
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 取得專案根目錄
+        csv_path = os.path.join(base_dir, "Pixsee App translations - master_202403.csv")
+        with open(csv_path, newline='', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 if row["Identifier Android"] == key:
-                    return row.get(device_language, f"[Missing:{key}]")
+                    return re.sub(r'</?[^>]+>', '', row.get(language, f"[Missing:{key}]"))
         return f"[NotFound:{key}]"
     def check_switch_and_content(self, expected_on: bool, itemid):
         if expected_on:
