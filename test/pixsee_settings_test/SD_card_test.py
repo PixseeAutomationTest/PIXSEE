@@ -23,7 +23,7 @@ class PixseeFriendsSDcardCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 		menu_page.click_settings()
 		pixsee_settings_page.click_SDcard()
 		# check header text
@@ -77,7 +77,7 @@ class PixseeFriendsSDcardCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 		menu_page.click_settings()
 		pixsee_settings_page.click_SDcard()
 		sd_card_page.click_format()
@@ -100,7 +100,7 @@ class PixseeFriendsSDcardCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 		menu_page.click_settings()
 		pixsee_settings_page.click_SDcard()
 		sd_card_page.click_format()
@@ -162,7 +162,7 @@ class PixseeFriendsSDcardCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 		menu_page.click_settings()
 		pixsee_settings_page.click_SDcard()
 		sd_card_page.click_back()

@@ -292,7 +292,7 @@ class EnvironmentSettingsPage():
 		except:
 			return False
 	def is_switch_on(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, 3).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.Sensitivity))
 		)
 		switch = self.driver.find_element(AppiumBy.ID, self.Sensitivity)

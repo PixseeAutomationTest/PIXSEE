@@ -23,7 +23,7 @@ class EnvironmentSettingsCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 
 		menu_page.click_settings()
 
@@ -56,7 +56,7 @@ class EnvironmentSettingsCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 		menu_page.click_settings()
 		origin_status = pixsee_settings_page.environment_settings_status_text()
 		pixsee_settings_page.click_EnvironmentSettings()
@@ -82,7 +82,7 @@ class EnvironmentSettingsCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 		menu_page.click_settings()
 		pixsee_settings_page.click_EnvironmentSettings()
 		# back to settings page
@@ -105,7 +105,7 @@ class EnvironmentSettingsCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 
 		menu_page.click_settings()
 
@@ -204,7 +204,7 @@ class EnvironmentSettingsCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 
 		menu_page.click_settings()
 
@@ -260,7 +260,7 @@ class EnvironmentSettingsCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 		menu_page.click_settings()
 		origin_status = pixsee_settings_page.environment_settings_status_text()
 		pixsee_settings_page.click_EnvironmentSettings()
@@ -315,7 +315,7 @@ class EnvironmentSettingsCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 
 		menu_page.click_settings()
 

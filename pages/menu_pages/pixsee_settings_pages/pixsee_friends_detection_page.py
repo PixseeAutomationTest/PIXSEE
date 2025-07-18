@@ -34,7 +34,7 @@ class PixseeFriendsDetPage():
 		self.DiscardNo = "com.compal.bioslab.pixsee.pixm01:id/btnNegativeAlertDialog"
 	# status
 	def is_switch_on(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, 3).until(
 				EC.presence_of_element_located((AppiumBy.ID, self.DetectionType))
 		)
 		switch = self.driver.find_element(AppiumBy.ID, self.DetectionType)

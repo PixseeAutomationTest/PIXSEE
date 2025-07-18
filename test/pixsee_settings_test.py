@@ -22,7 +22,6 @@ class PixseeSettingsTest(BaseTestCase):
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		login_page = LoginPage(self.driver)
-		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
 
 		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
@@ -46,7 +45,6 @@ class PixseeSettingsTest(BaseTestCase):
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		login_page = LoginPage(self.driver)
-		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
 
 		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
@@ -136,7 +134,6 @@ class PixseeSettingsTest(BaseTestCase):
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		login_page = LoginPage(self.driver)
-		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
 		cry_detection_page = CryDetectionPage(self.driver)
 
 		login_page.login(self.account(),self.password())
@@ -194,7 +191,7 @@ class PixseeSettingsTest(BaseTestCase):
 			pixsee_settings_page.click_AreaDetection()
 			# check if is in area detection page
 			try:
-				self.assertTrue(area_detection_page.is_in_area_detection_page())
+				self.assertTrue(area_detection_page.is_in_area_detection_tutor_page())
 				print("entered Area Detection page successfully")
 			except AssertionError:
 				print("entered Area Detection page unsuccessfully")
@@ -275,9 +272,7 @@ class PixseeSettingsTest(BaseTestCase):
 	def test_09_enter_voice_service(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
-		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		login_page = LoginPage(self.driver)
-		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
 
 		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
@@ -304,7 +299,7 @@ class PixseeSettingsTest(BaseTestCase):
 		hint = self.get_string("device_settings")
 		try:
 			# check pixsee settings title correct
-			self.assertEqual(menu_page.PixseeSettingstxt_text(), hint)
+			self.assertEqual(menu_page.pixsee_settingstxt_text(), hint)
 			print("Settings page title right")
 		except AssertionError:
 			print("Settings page title wrong")

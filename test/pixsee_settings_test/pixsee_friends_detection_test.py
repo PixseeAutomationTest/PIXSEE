@@ -28,10 +28,9 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 		self.skip_first_four_tutor()
 
 		baby_monitor_page.click_home()
-		# skip menu tutor
-		time.sleep(2)
 
-		self.click_middle()
+		# skip menu tutor
+		menu_page.click_logout()
 
 		menu_page.click_settings()
 
@@ -73,9 +72,8 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		time.sleep(2)
+		menu_page.click_logout()
 
-		self.click_middle()
 		menu_page.click_settings()
 		origin_status = pixsee_settings_page.pixsee_friends_detection_status_text()
 		pixsee_settings_page.click_PixseeFriendsDetection()
@@ -101,9 +99,9 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		time.sleep(2)
+		menu_page.click_logout()
 
-		self.click_middle()
+
 		menu_page.click_settings()
 		pixsee_settings_page.click_PixseeFriendsDetection()
 		# back to settings page
@@ -125,10 +123,10 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 		baby_monitor_page.is_in_baby_monitor_page()
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
-		# skip menu tutor
-		time.sleep(2)
 
-		self.click_middle()
+		# skip menu tutor
+		menu_page.click_logout()
+
 
 		menu_page.click_settings()
 
@@ -179,9 +177,7 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		time.sleep(2)
-
-		self.click_middle()
+		menu_page.click_logout()
 
 		menu_page.click_settings()
 
@@ -284,9 +280,8 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		time.sleep(2)
+		menu_page.click_logout()
 
-		self.click_middle()
 		menu_page.click_settings()
 		origin_status = pixsee_settings_page.pixsee_friends_detection_status_text()
 		pixsee_settings_page.click_PixseeFriendsDetection()
@@ -352,5 +347,3 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 
 
 
-
-# def test_03_friends_detection_switch_off(self):

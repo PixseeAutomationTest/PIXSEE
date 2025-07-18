@@ -77,7 +77,6 @@ class TutorCase(BaseTestCase):
                 except AssertionError:
                         print("Fourth tutor description FAIL: text mismatch")
         def test_menu_tutor(self):
-                menu_page = MenuPage(self.driver)
                 baby_monitor_page = BabyMonitorPage(self.driver)
                 login_page = LoginPage(self.driver)
 
