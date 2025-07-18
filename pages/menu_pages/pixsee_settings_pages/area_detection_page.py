@@ -77,6 +77,14 @@ class AreaDetectionPage():
 			return True
 		except:
 			return False
+	def is_in_area_detection_page(self):
+		try:
+			WebDriverWait(self.driver, 10).until(
+				EC.presence_of_element_located(("id", self.Header))
+			)
+			return True
+		except:
+			return False
 	def is_in_tutor_first_page(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("xpath", self.TutorFirstPageIndicator))

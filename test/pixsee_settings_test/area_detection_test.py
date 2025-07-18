@@ -63,6 +63,13 @@ class CryDetectionCase(BaseTestCase):
 			print("skip display wrong")
 			raise AssertionError("skip display mismatch")
 		area_detection_page.click_skip()
+		# check in area area_detection_page
+		try:
+			self.assertTrue(area_detection_page.is_in_area_detection_page())
+			print("skip first tutor successfully")
+		except AssertionError:
+			print("skip first tutor unsuccessfully")
+			raise AssertionError("error")
 
 
 	def test_04_area_detection_switch(self):
