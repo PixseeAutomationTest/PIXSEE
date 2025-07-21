@@ -393,6 +393,3 @@ class AreaDetectionPage():
 			return True
 		except:
 			return False
-
-
-

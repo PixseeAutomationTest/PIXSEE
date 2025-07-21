@@ -223,7 +223,7 @@ class AreaDetectionCase(BaseTestCase):
 			except AssertionError:
 				print("switch on failed")
 			area_detection_page.click_switch()
-			# check in dialog
+			# check in turn off dialog
 			try:
 				self.assertTrue(area_detection_page.is_in_turn_off_dialog())
 				print("switch off successfully")
@@ -252,11 +252,18 @@ class AreaDetectionCase(BaseTestCase):
 		menu_page.click_settings()
 		origin_status = pixsee_settings_page.area_detection_status_text()
 		pixsee_settings_page.click_AreaDetection()
+		area_detection_page.click_skip()
+		# check save enable = false
+		try:
+			self.assertTrue(area_detection_page.is_save_enable())
+			print("Save diable test pass")
+		except AssertionError:
+			print("Save diable test failed")
+			raise AssertionError("Save diable test failed")
 		# change switch status
 		if area_detection_page.is_switch_on():
 			area_detection_page.click_switch()
 			area_detection_page.click_turn_off()
-			area_detection_page.click_back()
 		else:
 			area_detection_page.click_switch()
 			area_detection_page.click_save()
@@ -282,6 +289,7 @@ class AreaDetectionCase(BaseTestCase):
 		menu_page.click_logout()
 		menu_page.click_settings()
 		pixsee_settings_page.click_AreaDetection()
+		area_detection_page.click_skip()
 		# back to settings page
 		area_detection_page.click_back()
 		try:
@@ -309,6 +317,7 @@ class AreaDetectionCase(BaseTestCase):
 		menu_page.click_settings()
 
 		pixsee_settings_page.click_AreaDetection()
+		area_detection_page.click_skip()
 		if area_detection_page.is_switch_on() == "true":
 			pass
 		else:
@@ -390,6 +399,7 @@ class AreaDetectionCase(BaseTestCase):
 		menu_page.click_settings()
 
 		pixsee_settings_page.click_AreaDetection()
+		area_detection_page.click_skip()
 		if area_detection_page.is_switch_on() == "true":
 			pass
 		else:
@@ -446,6 +456,7 @@ class AreaDetectionCase(BaseTestCase):
 		menu_page.click_settings()
 
 		pixsee_settings_page.click_AreaDetection()
+		area_detection_page.click_skip()
 		if area_detection_page.is_switch_on() == "true":
 			pass
 		else:
@@ -469,7 +480,7 @@ class AreaDetectionCase(BaseTestCase):
 			print("turn off 15 is wrong")
 			raise AssertionError("turn off 15 mismatch")
 		try:
-			thirtymin = area_detection_page.turn_off_15_min_text()
+			thirtymin = area_detection_page.turn_off_30_min_text()
 			hint = self.get_string("Snooze for 30 minutes")
 			self.assertEqual(thirtymin, hint)
 			print("turn off 30 is correct")
@@ -477,7 +488,7 @@ class AreaDetectionCase(BaseTestCase):
 			print("turn off 30 is wrong")
 			raise AssertionError("turn off 30 mismatch")
 		try:
-			off = area_detection_page.turn_off_15_min_text()
+			off = area_detection_page.turn_off_text()
 			hint = self.get_string("Turn off detection")
 			self.assertEqual(off, hint)
 			print("turn off text is correct")
@@ -495,10 +506,12 @@ class AreaDetectionCase(BaseTestCase):
 		# check each button
 		try:
 			area_detection_page.click_turn_off_15_min()
-			self.assertTrue(area_detection_page.snooze_shows())
+			self.assertEqual(pixsee_settings_page.area_detection_status_text(), "Off")
 			print("15 min button worked")
 		except:
 			print("15 min button failed")
+		pixsee_settings_page.click_AreaDetection()
+		area_detection_page.click_switch()
 		area_detection_page.click_switch()
 		try:
 			area_detection_page.click_turn_off_cancel()
@@ -509,14 +522,16 @@ class AreaDetectionCase(BaseTestCase):
 		area_detection_page.click_switch()
 		try:
 			area_detection_page.click_turn_off_30_min()
-			self.assertTrue(area_detection_page.snooze_shows())
+			self.assertEqual(pixsee_settings_page.area_detection_status_text(), "Off")
 			print("30 min button worked")
 		except:
 			print("30 min button failed")
+		pixsee_settings_page.click_AreaDetection()
+		area_detection_page.click_switch()
 		area_detection_page.click_switch()
 		try:
-			area_detection_page.click_turn_off_cancel()
-			self.assertFalse(area_detection_page.is_switch_on())
+			area_detection_page.click_turn_off()
+			self.assertEqual(pixsee_settings_page.area_detection_status_text(), "Off")
 			print("turn off detection worked")
 		except:
 			print("turn off detection failed")
@@ -537,10 +552,12 @@ class AreaDetectionCase(BaseTestCase):
 		menu_page.click_logout()
 		menu_page.click_settings()
 		pixsee_settings_page.click_AreaDetection()
+		area_detection_page.click_skip()
 		# check if is in discard dialog
 		if area_detection_page.is_switch_on() == "true":
 			area_detection_page.click_switch()
 			area_detection_page.click_turn_off()
+			pixsee_settings_page.click_AreaDetection()
 			area_detection_page.click_switch()
 		else:
 			area_detection_page.click_switch()
@@ -576,7 +593,7 @@ class AreaDetectionCase(BaseTestCase):
 			# click yes
 			area_detection_page.click_discard_yes()
 			# check status = false
-			self.assertEqual(pixsee_settings_page.area_detection_status_text(),"off")
+			self.assertEqual(pixsee_settings_page.area_detection_status_text(),"Off")
 			print("back button worked")
 		except AssertionError:
 			print("Not in discard dialog")

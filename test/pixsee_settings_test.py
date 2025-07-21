@@ -226,7 +226,7 @@ class PixseeSettingsTest(BaseTestCase):
 			pixsee_settings_page.click_CoveredFaceDetection()
 			# check if is in covered face detection page
 			try:
-				self.assertTrue(covered_face_page.is_in_covered_face_detection_page())
+				self.assertTrue(covered_face_page.is_in_covered_face_detection_tutor_page())
 				print("entered Covered Face Detection page successfully")
 			except AssertionError:
 				print("entered Covered Face Detection page unsuccessfully")
