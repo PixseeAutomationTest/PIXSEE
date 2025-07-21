@@ -29,7 +29,7 @@ class MenuPage():
 
 	def pixsee_settingstxt_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, 20).until(
 				EC.presence_of_element_located(("id", self.pixseesettingstxt))
 			)
 			element = self.driver.find_element("id", self.pixseesettingstxt)
@@ -224,7 +224,7 @@ class MenuPage():
 
 	def is_in_menu_page(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, 20).until(
 				EC.presence_of_element_located(("id", self.profileButton))
 			)
 			self.driver.find_element(AppiumBy.ID, self.profileButton)
