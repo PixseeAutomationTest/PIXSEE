@@ -241,5 +241,13 @@ class PixseeFriendsDetPage():
 		self.driver.swipe(x, start_y, x, end_y, 500)  # 500 毫秒完成滑動
 		time.sleep(1)
 
+	def is_save_enable(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located((AppiumBy.ID, self.Save))
+		)
+		button = self.driver.find_element(AppiumBy.ID, self.Save)
+		is_enable = button.get_attribute("enabled")
+		return is_enable == "true"
+
 
 

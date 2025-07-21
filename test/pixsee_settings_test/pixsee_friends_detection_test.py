@@ -1,5 +1,4 @@
 
-import time
 from pages.menu_page import MenuPage
 from pages.menu_pages.pixsee_settings_pages.pixsee_settings_page import PixseeSettingsPage
 from pages.base import BaseTestCase
@@ -77,6 +76,13 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 		menu_page.click_settings()
 		origin_status = pixsee_settings_page.pixsee_friends_detection_status_text()
 		pixsee_settings_page.click_PixseeFriendsDetection()
+		# check save enable = false
+		try:
+			self.assertTrue(pixsee_friends_page.is_save_enable())
+			print("Save diable test pass")
+		except AssertionError:
+			print("Save diable test failed")
+			raise AssertionError("Save diable test failed")
 		# turn on switch
 		pixsee_friends_page.click_switch()
 		pixsee_friends_page.click_save()

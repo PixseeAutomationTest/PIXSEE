@@ -78,6 +78,13 @@ class CryDetectionCase(BaseTestCase):
 		menu_page.click_settings()
 		origin_status = pixsee_settings_page.cry_detection_status_text()
 		pixsee_settings_page.click_CryDetection()
+		# check save enable = false
+		try:
+			self.assertTrue(cry_detection_page.is_save_enable())
+			print("Save diable test pass")
+		except AssertionError:
+			print("Save diable test failed")
+			raise AssertionError("Save diable test failed")
 		# turn on switch
 		cry_detection_page.click_switch()
 		cry_detection_page.click_save()

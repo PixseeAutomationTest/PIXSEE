@@ -328,6 +328,13 @@ class EnvironmentSettingsPage():
 		button = self.driver.find_element(AppiumBy.ID, self.HighCheckBox)
 		is_clickable = button.get_attribute("clickable")
 		return is_clickable == "true"
+	def is_save_enable(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located((AppiumBy.ID, self.Save))
+		)
+		button = self.driver.find_element(AppiumBy.ID, self.Save)
+		is_enable = button.get_attribute("enabled")
+		return is_enable == "true"
 
 
 

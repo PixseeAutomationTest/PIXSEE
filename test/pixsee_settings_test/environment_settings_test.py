@@ -60,6 +60,14 @@ class EnvironmentSettingsCase(BaseTestCase):
 		menu_page.click_settings()
 		origin_status = pixsee_settings_page.environment_settings_status_text()
 		pixsee_settings_page.click_EnvironmentSettings()
+		# check save enable = false
+		try:
+			self.assertTrue(environment_settings_page.is_save_enable())
+			print("Save diable test pass")
+		except AssertionError:
+			print("Save diable test failed")
+			raise AssertionError("Save diable test failed")
+
 		# turn on switch
 		environment_settings_page.click_switch()
 		environment_settings_page.click_save()
