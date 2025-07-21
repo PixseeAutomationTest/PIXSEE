@@ -17,8 +17,6 @@ class CryDetectionCase(BaseTestCase):
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		if not baby_monitor_page.is_connected():
 			self.skipTest("not online，skip all test")
-
-
 	def test_01_cry_detection_switch(self):
 		cry_detection_page = CryDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)

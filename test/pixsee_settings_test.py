@@ -11,7 +11,7 @@ from pages.menu_pages.pixsee_settings_pages.cry_detection_page import CryDetecti
 from pages.menu_pages.pixsee_settings_pages.covered_face_detection_page import CoveredFaceDetectionPage
 from pages.menu_pages.pixsee_settings_pages.area_detection_page import AreaDetectionPage
 from pages.menu_pages.pixsee_settings_pages.time_lapse_video_page import TimeLapseVideoPage
-
+from pages.menu_pages.pixsee_settings_pages.wifi_settings_page import WifiSettingsPage
 
 
 class PixseeSettingsTest(BaseTestCase):
@@ -28,7 +28,7 @@ class PixseeSettingsTest(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 		menu_page.click_settings()
 		# check pixsee profile title on settings page
 		try:
@@ -45,13 +45,14 @@ class PixseeSettingsTest(BaseTestCase):
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		login_page = LoginPage(self.driver)
+		wifi_settings_page = WifiSettingsPage(self.driver)
 
 		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 		menu_page.click_settings()
 		# check wifi settings title on settings page
 		try:
@@ -64,6 +65,12 @@ class PixseeSettingsTest(BaseTestCase):
 		# enter wifi settings page
 		pixsee_settings_page.click_WifiSettings()
 		# check if is in wifi settings page
+		try:
+			self.assertTrue(wifi_settings_page.is_in_wifi_settings_page())
+			print("In wifi settings page")
+		except AssertionError:
+			print("Not in wifi settings page")
+			raise AssertionError("Not in wifi settings page")
 	def test_03_enter_pixsee_friends_detection(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -76,7 +83,7 @@ class PixseeSettingsTest(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 
 		menu_page.click_settings()
 
@@ -110,7 +117,7 @@ class PixseeSettingsTest(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 		menu_page.click_settings()
 		# check environment settings title on settings page
 		try:
@@ -142,7 +149,7 @@ class PixseeSettingsTest(BaseTestCase):
 		if baby_monitor_page.is_connected():
 			baby_monitor_page.click_home()
 			# skip menu tutor
-			self.click_middle()
+			menu_page.click_logout()
 			menu_page.click_settings()
 			# check cry detection title on settings page
 			try:
@@ -177,7 +184,7 @@ class PixseeSettingsTest(BaseTestCase):
 		if baby_monitor_page.is_connected():
 			baby_monitor_page.click_home()
 			# skip menu tutor
-			self.click_middle()
+			menu_page.click_logout()
 			menu_page.click_settings()
 			# check area detection title on settings page
 			try:
@@ -212,7 +219,7 @@ class PixseeSettingsTest(BaseTestCase):
 		if baby_monitor_page.is_connected():
 			baby_monitor_page.click_home()
 			# skip menu tutor
-			self.click_middle()
+			menu_page.click_logout()
 			menu_page.click_settings()
 			# check covered face detection title on settings page
 			try:
@@ -247,7 +254,7 @@ class PixseeSettingsTest(BaseTestCase):
 		if baby_monitor_page.is_connected():
 			baby_monitor_page.click_home()
 			# skip menu tutor
-			self.click_middle()
+			menu_page.click_logout()
 			menu_page.click_settings()
 			# check timelapse video title on settings page
 			try:
@@ -279,7 +286,7 @@ class PixseeSettingsTest(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 
 		menu_page.click_settings()
 
@@ -294,7 +301,7 @@ class PixseeSettingsTest(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 
 		hint = self.get_string("device_settings")
 		try:
@@ -326,7 +333,7 @@ class PixseeSettingsTest(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 
 		menu_page.click_settings()
 
@@ -366,7 +373,7 @@ class PixseeSettingsTest(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 
 		menu_page.click_settings()
 
@@ -398,7 +405,7 @@ class PixseeSettingsTest(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 
 		menu_page.click_settings()
 
@@ -438,7 +445,7 @@ class PixseeSettingsTest(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 
 		menu_page.click_settings()
 		time.sleep(1)
@@ -482,7 +489,7 @@ class PixseeSettingsTest(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 		menu_page.click_settings()
 		# check SD card status title on settings page
 		try:
