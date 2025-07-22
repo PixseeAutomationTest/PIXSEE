@@ -27,7 +27,7 @@ class EnvironmentSettingsCase(BaseTestCase):
 
 		menu_page.click_settings()
 
-		pixsee_settings_page.click_EnvironmentSettings()
+		pixsee_settings_page.click_environment_settings()
 		# check detection title
 		try:
 			title = environment_settings_page.detection_text()
@@ -58,7 +58,7 @@ class EnvironmentSettingsCase(BaseTestCase):
 		menu_page.click_logout()
 		menu_page.click_settings()
 		origin_status = pixsee_settings_page.environment_settings_status_text()
-		pixsee_settings_page.click_EnvironmentSettings()
+		pixsee_settings_page.click_environment_settings()
 		# check save enable = false
 		try:
 			self.assertFalse(environment_settings_page.is_save_enable())
@@ -91,7 +91,7 @@ class EnvironmentSettingsCase(BaseTestCase):
 		# skip menu tutor
 		menu_page.click_logout()
 		menu_page.click_settings()
-		pixsee_settings_page.click_EnvironmentSettings()
+		pixsee_settings_page.click_environment_settings()
 		# back to settings page
 		environment_settings_page.click_back()
 		try:
@@ -116,7 +116,7 @@ class EnvironmentSettingsCase(BaseTestCase):
 
 		menu_page.click_settings()
 
-		pixsee_settings_page.click_EnvironmentSettings()
+		pixsee_settings_page.click_environment_settings()
 		# ensure switch is on
 		if environment_settings_page.is_switch_on() == "true":
 			pass
@@ -205,7 +205,7 @@ class EnvironmentSettingsCase(BaseTestCase):
 
 		menu_page.click_settings()
 
-		pixsee_settings_page.click_EnvironmentSettings()
+		pixsee_settings_page.click_environment_settings()
 		if environment_settings_page.is_switch_on() == "true":
 			pass
 		else:
@@ -257,7 +257,7 @@ class EnvironmentSettingsCase(BaseTestCase):
 		menu_page.click_logout()
 		menu_page.click_settings()
 		origin_status = pixsee_settings_page.environment_settings_status_text()
-		pixsee_settings_page.click_EnvironmentSettings()
+		pixsee_settings_page.click_environment_settings()
 		environment_settings_page.click_switch()
 		environment_settings_page.click_back()
 		# check if is in discard dialog
@@ -310,7 +310,7 @@ class EnvironmentSettingsCase(BaseTestCase):
 
 		menu_page.click_settings()
 
-		pixsee_settings_page.click_EnvironmentSettings()
+		pixsee_settings_page.click_environment_settings()
 		if environment_settings_page.is_switch_on() == "true":
 			pass
 		else:

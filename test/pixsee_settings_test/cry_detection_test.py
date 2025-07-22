@@ -34,7 +34,7 @@ class CryDetectionCase(BaseTestCase):
 
 		menu_page.click_settings()
 
-		pixsee_settings_page.click_CryDetection()
+		pixsee_settings_page.click_cry_detection()
 		# check Cry detection title
 		try:
 			title = cry_detection_page.title()
@@ -73,7 +73,7 @@ class CryDetectionCase(BaseTestCase):
 		menu_page.click_logout()
 		menu_page.click_settings()
 		origin_status = pixsee_settings_page.cry_detection_status_text()
-		pixsee_settings_page.click_CryDetection()
+		pixsee_settings_page.click_cry_detection()
 		# check save enable = false
 		try:
 			self.assertFalse(cry_detection_page.is_save_enable())
@@ -105,7 +105,7 @@ class CryDetectionCase(BaseTestCase):
 		# skip menu tutor
 		menu_page.click_logout()
 		menu_page.click_settings()
-		pixsee_settings_page.click_CryDetection()
+		pixsee_settings_page.click_cry_detection()
 		# back to settings page
 		cry_detection_page.click_back()
 		try:
@@ -132,7 +132,7 @@ class CryDetectionCase(BaseTestCase):
 
 		menu_page.click_settings()
 
-		pixsee_settings_page.click_CryDetection()
+		pixsee_settings_page.click_cry_detection()
 		if cry_detection_page.is_switch_on() == "true":
 			pass
 		else:
@@ -212,7 +212,7 @@ class CryDetectionCase(BaseTestCase):
 		menu_page.click_logout()
 		menu_page.click_settings()
 
-		pixsee_settings_page.click_CryDetection()
+		pixsee_settings_page.click_cry_detection()
 		if cry_detection_page.is_switch_on() == "true":
 			pass
 		else:
@@ -239,7 +239,7 @@ class CryDetectionCase(BaseTestCase):
 		menu_page.click_logout()
 		menu_page.click_settings()
 
-		pixsee_settings_page.click_CryDetection()
+		pixsee_settings_page.click_cry_detection()
 		if cry_detection_page.is_switch_on() == "true":
 			pass
 		else:
@@ -273,7 +273,7 @@ class CryDetectionCase(BaseTestCase):
 		menu_page.click_logout()
 		menu_page.click_settings()
 		origin_status = pixsee_settings_page.cry_detection_status_text()
-		pixsee_settings_page.click_CryDetection()
+		pixsee_settings_page.click_cry_detection()
 		cry_detection_page.click_switch()
 		cry_detection_page.click_back()
 		# check if is in discard dialog

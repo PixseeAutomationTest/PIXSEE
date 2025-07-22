@@ -75,103 +75,103 @@ class PixseeSettingsPage():
 			WebDriverWait(self.driver, 10).until(
 				EC.presence_of_element_located(("id", self.in_settings))
 			)
-			element = self.driver.find_element("id", self.in_settings)
+			self.driver.find_element("id", self.in_settings)
 			return True
-		except:
+		except AssertionError:
 			return False
 	# click
-	def click_PixseeProfile(self):
+	def click_pixsee_profile(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.PixseeProfile))
 		)
 		element = self.driver.find_element("id", self.PixseeProfile)
 		element.click()
 		time.sleep(1)
-	def click_WifiSettings(self):
+	def click_wifi_settings(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.WifiSettings))
 		)
 		element = self.driver.find_element("id", self.WifiSettings)
 		element.click()
 		time.sleep(1)
-	def click_PixseeFriendsDetection(self):
+	def click_pixsee_friends_detection(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.PixseeFriendsDetection))
 		)
 		element = self.driver.find_element("id", self.PixseeFriendsDetection)
 		element.click()
 		time.sleep(1)
-	def click_EnvironmentSettings(self):
+	def click_environment_settings(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.EnvironmentSettings))
 		)
 		element = self.driver.find_element("id", self.EnvironmentSettings)
 		element.click()
 		time.sleep(1)
-	def click_CryDetection(self):
+	def click_cry_detection(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.CryDetection))
 		)
 		element = self.driver.find_element("id", self.CryDetection)
 		element.click()
 		time.sleep(1)
-	def click_AreaDetection(self):
+	def click_area_detection(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.AreaDetection))
 		)
 		element = self.driver.find_element("id", self.AreaDetection)
 		element.click()
 		time.sleep(1)
-	def click_CoveredFaceDetection(self):
+	def click_covered_face_detection(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.CoveredFaceDetection))
 		)
 		element = self.driver.find_element("id", self.CoveredFaceDetection)
 		element.click()
 		time.sleep(1)
-	def click_TimeLapseVideo(self):
+	def click_time_lapse_video(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.TimeLapseVideo))
 		)
 		element = self.driver.find_element("id", self.TimeLapseVideo)
 		element.click()
 		time.sleep(1)
-	def click_VoiceService(self):
+	def click_voice_service(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.VoiceService))
 		)
 		element = self.driver.find_element("id", self.VoiceService)
 		element.click()
 		time.sleep(1)
-	def click_ShutterSoundSwitch(self):
+	def click_shutter_sound_switch(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.ShutterSoundSwitch))
 		)
 		element = self.driver.find_element("id", self.ShutterSoundSwitch)
 		element.click()
 		time.sleep(1)
-	def click_LEDIndicatorSwitch(self):
+	def click_led_indicator_switch(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.LEDindicatorSwitch))
 		)
 		element = self.driver.find_element("id", self.LEDindicatorSwitch)
 		element.click()
 		time.sleep(1)
-	def click_NightModeSwitch(self):
+	def click_night_mode_switch(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.NightModeSwitch))
 		)
 		element = self.driver.find_element("id", self.NightModeSwitch)
 		element.click()
 		time.sleep(1)
-	def click_PrivacyModeSwitch(self):
+	def click_privacy_mode_switch(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.PrivacySettingsSwitch))
 		)
 		element = self.driver.find_element("id", self.PrivacySettingsSwitch)
 		element.click()
 		time.sleep(1)
-	def click_SDcard(self):
+	def click_s_dcard(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.SDcard))
 		)
@@ -186,7 +186,7 @@ class PixseeSettingsPage():
 			)
 			element = self.driver.find_element("id", self.PixseeProfiletxt)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def wifi_text(self):
 		try:
@@ -195,7 +195,7 @@ class PixseeSettingsPage():
 			)
 			element = self.driver.find_element("id", self.WifiSettingstxt)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def pixsee_friends_detection_text(self):
 		try:
@@ -204,7 +204,7 @@ class PixseeSettingsPage():
 			)
 			element = self.driver.find_element("id", self.PixseeFriendsDetectiontxt)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def pixsee_friends_detection_status_text(self):
 		try:
@@ -213,7 +213,7 @@ class PixseeSettingsPage():
 			)
 			element = self.driver.find_element("id", self.PixseeFriendsDetectionStatus)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def environment_settings_text(self):
 		try:
@@ -222,7 +222,7 @@ class PixseeSettingsPage():
 			)
 			element = self.driver.find_element("id", self.EnvironmentSettingstxt)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def environment_settings_status_text(self):
 		try:
@@ -231,7 +231,7 @@ class PixseeSettingsPage():
 			)
 			element = self.driver.find_element("id", self.EnvironmentSettingsStatus)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def cry_detection_text(self):
 		try:
@@ -240,7 +240,7 @@ class PixseeSettingsPage():
 			)
 			element = self.driver.find_element("id", self.CryDetectiontxt)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def cry_detection_status_text(self):
 		try:
@@ -249,7 +249,7 @@ class PixseeSettingsPage():
 			)
 			element = self.driver.find_element("id", self.CryDetectionStatus)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def area_detection_text(self):
 		try:
@@ -258,7 +258,7 @@ class PixseeSettingsPage():
 			)
 			element = self.driver.find_element("id", self.AreaDetectiontxt)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def area_detection_status_text(self):
 		try:
@@ -267,7 +267,7 @@ class PixseeSettingsPage():
 			)
 			element = self.driver.find_element("id", self.AreaDetectionStatus)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def covered_face_detection_text(self):
 		try:
@@ -276,7 +276,7 @@ class PixseeSettingsPage():
 			)
 			element = self.driver.find_element("id", self.CoveredFaceDetectiontxt)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def covered_face_detection_status_text(self):
 		try:
@@ -285,7 +285,7 @@ class PixseeSettingsPage():
 			)
 			element = self.driver.find_element("id", self.CoveredFaceDetectionStatus)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def time_lapse_video_text(self):
 		try:
@@ -294,7 +294,7 @@ class PixseeSettingsPage():
 			)
 			element = self.driver.find_element("id", self.TimeLapseVideotxt)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def time_lapse_video_status_text(self):
 		try:
@@ -303,7 +303,7 @@ class PixseeSettingsPage():
 			)
 			element = self.driver.find_element("id", self.TimeLapseVideoStatus)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def voice_service_text(self):
 		try:
@@ -312,7 +312,7 @@ class PixseeSettingsPage():
 			)
 			element = self.driver.find_element("id", self.VoiceServicetxt)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def shutter_sound_text(self):
 		try:
@@ -321,7 +321,7 @@ class PixseeSettingsPage():
 			)
 			element = self.driver.find_element("id", self.ShutterSoundtxt)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def led_indicator_text(self):
 		try:
@@ -330,7 +330,7 @@ class PixseeSettingsPage():
 			)
 			element = self.driver.find_element("id", self.LEDindicatortxt)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def night_mode_text(self):
 		try:
@@ -339,7 +339,7 @@ class PixseeSettingsPage():
 			)
 			element = self.driver.find_element("id", self.NightModetxt)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def night_mode_subtext(self):
 		try:
@@ -348,7 +348,7 @@ class PixseeSettingsPage():
 			)
 			element = self.driver.find_element("id", self.NightModeSubtext)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def privacy_mode_text(self):
 		try:
@@ -357,7 +357,7 @@ class PixseeSettingsPage():
 			)
 			element = self.driver.find_element("id", self.PrivacySettingstxt)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def privacy_mode_subtext(self):
 		try:
@@ -366,7 +366,7 @@ class PixseeSettingsPage():
 			)
 			element = self.driver.find_element("id", self.PrivacySettingsSubtext)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def sdcard_status_text(self):
 		try:
@@ -375,7 +375,7 @@ class PixseeSettingsPage():
 			)
 			element = self.driver.find_element("id", self.SDcardStatustxt)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	# switch
 	def shutter_sound_switch_status(self):
@@ -385,7 +385,7 @@ class PixseeSettingsPage():
 			)
 			element = self.driver.find_element("id", self.ShutterSoundSwitch)
 			return element.checked
-		except:
+		except AssertionError:
 			return None
 	def led_indicator_switch_status(self):
 		try:
@@ -394,7 +394,7 @@ class PixseeSettingsPage():
 			)
 			element = self.driver.find_element("id", self.LEDindicatorSwitch)
 			return element.checked
-		except:
+		except AssertionError:
 			return None
 	def night_mode_switch_status(self):
 		try:
@@ -403,7 +403,7 @@ class PixseeSettingsPage():
 			)
 			element = self.driver.find_element("id", self.NightModeSwitch)
 			return element.checked
-		except:
+		except AssertionError:
 			return None
 	def privacy_mode_switch_status(self):
 		try:
@@ -412,7 +412,7 @@ class PixseeSettingsPage():
 			)
 			element = self.driver.find_element("id", self.PrivacySettingsSwitch)
 			return element.checked
-		except:
+		except AssertionError:
 			return None
 
 

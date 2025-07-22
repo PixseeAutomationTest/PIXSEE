@@ -33,7 +33,7 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 
 		menu_page.click_settings()
 
-		pixsee_settings_page.click_PixseeFriendsDetection()
+		pixsee_settings_page.click_pixsee_friends_detection()
 		# check friends detection title
 		try:
 			title = pixsee_friends_page.title()
@@ -73,7 +73,7 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 
 		menu_page.click_settings()
 		origin_status = pixsee_settings_page.pixsee_friends_detection_status_text()
-		pixsee_settings_page.click_PixseeFriendsDetection()
+		pixsee_settings_page.click_pixsee_friends_detection()
 		# check save enable = false
 		try:
 			self.assertFalse(pixsee_friends_page.is_save_enable())
@@ -107,7 +107,7 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 
 
 		menu_page.click_settings()
-		pixsee_settings_page.click_PixseeFriendsDetection()
+		pixsee_settings_page.click_pixsee_friends_detection()
 		# back to settings page
 		pixsee_friends_page.click_back()
 		try:
@@ -134,7 +134,7 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 
 		menu_page.click_settings()
 
-		pixsee_settings_page.click_PixseeFriendsDetection()
+		pixsee_settings_page.click_pixsee_friends_detection()
 		if pixsee_friends_page.is_switch_on() == "true":
 			pass
 		else:
@@ -182,7 +182,7 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 
 		menu_page.click_settings()
 
-		pixsee_settings_page.click_PixseeFriendsDetection()
+		pixsee_settings_page.click_pixsee_friends_detection()
 		if pixsee_friends_page.is_switch_on() == "true":
 			pass
 		else:
@@ -280,7 +280,7 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 
 		menu_page.click_settings()
 		origin_status = pixsee_settings_page.pixsee_friends_detection_status_text()
-		pixsee_settings_page.click_PixseeFriendsDetection()
+		pixsee_settings_page.click_pixsee_friends_detection()
 		pixsee_friends_page.click_switch()
 		pixsee_friends_page.click_back()
 		# check if is in discard dialog

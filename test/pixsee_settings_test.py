@@ -38,7 +38,7 @@ class PixseeSettingsTest(BaseTestCase):
 			print("Pixsee profile title wrong")
 			raise AssertionError("Pixsee profile title mismatch")
 		# enter pixsee profile page
-		pixsee_settings_page.click_PixseeProfile()
+		pixsee_settings_page.click_pixsee_profile()
 		# check if is in pixsee profile page
 	def test_02_enter_wifi_settings(self):
 		menu_page = MenuPage(self.driver)
@@ -62,10 +62,10 @@ class PixseeSettingsTest(BaseTestCase):
 		except :
 			print("Wifi settings title wrong")
 		# enter wifi settings page
-		pixsee_settings_page.click_WifiSettings()
+		pixsee_settings_page.click_wifi_settings()
 		# check if is in wifi settings page
 		try:
-			self.assertTrue(wifi_settings_page.is_in_wifi_settings_page())
+			self.assertTrue(wifi_settings_page.is_in_wifi_popup_page())
 			print("successfully enter wifi settings page")
 		except AssertionError:
 			print("failed to enter wifi settings page")
@@ -94,7 +94,7 @@ class PixseeSettingsTest(BaseTestCase):
 		except :
 			print("Friends detection title wrong")
 		# enter friends detection page
-		pixsee_settings_page.click_PixseeFriendsDetection()
+		pixsee_settings_page.click_pixsee_friends_detection()
 
 		# check if is in friends detection page
 		try:
@@ -125,7 +125,7 @@ class PixseeSettingsTest(BaseTestCase):
 		except :
 			print("Environment settings title wrong")
 		# enter environment settings page
-		pixsee_settings_page.click_EnvironmentSettings()
+		pixsee_settings_page.click_environment_settings()
 		# check if is in environment settings page
 		try:
 			self.assertTrue(environment_settings_page.is_in_envir_page())
@@ -156,7 +156,7 @@ class PixseeSettingsTest(BaseTestCase):
 			except :
 				print("Cry detection title wrong")
 			# enter cry detection page
-			pixsee_settings_page.click_CryDetection()
+			pixsee_settings_page.click_cry_detection()
 			# check if is in cry detection page
 			try:
 				self.assertTrue(cry_detection_page.is_in_cry_detection_page())
@@ -190,7 +190,7 @@ class PixseeSettingsTest(BaseTestCase):
 			except :
 				print("Area detection title wrong")
 			# enter area detection page
-			pixsee_settings_page.click_AreaDetection()
+			pixsee_settings_page.click_area_detection()
 			# check if is in area detection page
 			try:
 				self.assertTrue(area_detection_page.is_in_area_detection_tutor_page())
@@ -224,7 +224,7 @@ class PixseeSettingsTest(BaseTestCase):
 			except :
 				print("Covered Face detection title wrong")
 			# enter covered face detection page
-			pixsee_settings_page.click_CoveredFaceDetection()
+			pixsee_settings_page.click_covered_face_detection()
 			# check if is in covered face detection page
 			try:
 				self.assertTrue(covered_face_page.is_in_covered_face_detection_tutor_page())
@@ -258,7 +258,7 @@ class PixseeSettingsTest(BaseTestCase):
 			except :
 				print("Timelapse video title wrong")
 			# enter timelapse video page
-			pixsee_settings_page.click_TimeLapseVideo()
+			pixsee_settings_page.click_time_lapse_video()
 			# check if is in timelapse video page
 			try:
 				self.assertTrue(timelapse_video_page.is_in_timelapse_video_page())
@@ -338,7 +338,7 @@ class PixseeSettingsTest(BaseTestCase):
 		# check the switch's status
 		current_status = pixsee_settings_page.shutter_sound_switch_status()  # True/False
 
-		pixsee_settings_page.click_ShutterSoundSwitch()
+		pixsee_settings_page.click_shutter_sound_switch()
 		new_status = pixsee_settings_page.shutter_sound_switch_status()
 
 		assert new_status != current_status,"shutter sound switch fail"
@@ -369,7 +369,7 @@ class PixseeSettingsTest(BaseTestCase):
 		# check the LED switch's status
 		current_status = pixsee_settings_page.led_indicator_switch_status()  # True/False
 
-		pixsee_settings_page.click_LEDIndicatorSwitch()
+		pixsee_settings_page.click_led_indicator_switch()
 		new_status = pixsee_settings_page.led_indicator_switch_status()
 
 		assert new_status != current_status, "LED indicator switch fail"
@@ -407,7 +407,7 @@ class PixseeSettingsTest(BaseTestCase):
 
 		# check the night mode switch's status
 		current_status = pixsee_settings_page.night_mode_switch_status()
-		pixsee_settings_page.click_NightModeSwitch()
+		pixsee_settings_page.click_night_mode_switch()
 		new_status = pixsee_settings_page.night_mode_switch_status()
 
 		assert new_status != current_status, "Night mode switch fail"
@@ -447,7 +447,7 @@ class PixseeSettingsTest(BaseTestCase):
 
 		# check the privacy mode switch's status
 		current_status = pixsee_settings_page.privacy_mode_switch_status()
-		pixsee_settings_page.click_PrivacyModeSwitch()
+		pixsee_settings_page.click_privacy_mode_switch()
 		new_status = pixsee_settings_page.privacy_mode_switch_status()
 
 		assert new_status != current_status, "Privacy mode switch fail"
@@ -475,7 +475,7 @@ class PixseeSettingsTest(BaseTestCase):
 		except :
 			print("SD card status title wrong")
 		# enter SD card status page
-		pixsee_settings_page.click_SDcard()
+		pixsee_settings_page.click_s_dcard()
 		# check if is in SD card status page
 		try:
 			self.assertTrue(sd_card_page.is_in_sdcard_page())

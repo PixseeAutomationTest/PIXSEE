@@ -25,7 +25,7 @@ class PixseeFriendsSDcardCase(BaseTestCase):
 		# skip menu tutor
 		menu_page.click_logout()
 		menu_page.click_settings()
-		pixsee_settings_page.click_SDcard()
+		pixsee_settings_page.click_s_dcard()
 		# check header text
 		try:
 			header = sd_card_page.header_text()
@@ -75,7 +75,7 @@ class PixseeFriendsSDcardCase(BaseTestCase):
 		# skip menu tutor
 		menu_page.click_logout()
 		menu_page.click_settings()
-		pixsee_settings_page.click_SDcard()
+		pixsee_settings_page.click_s_dcard()
 		sd_card_page.click_format()
 		# check if is in format dialog
 		try:
@@ -98,7 +98,7 @@ class PixseeFriendsSDcardCase(BaseTestCase):
 		# skip menu tutor
 		menu_page.click_logout()
 		menu_page.click_settings()
-		pixsee_settings_page.click_SDcard()
+		pixsee_settings_page.click_s_dcard()
 		sd_card_page.click_format()
 		# check dialog title
 		try:
@@ -157,7 +157,7 @@ class PixseeFriendsSDcardCase(BaseTestCase):
 		# skip menu tutor
 		menu_page.click_logout()
 		menu_page.click_settings()
-		pixsee_settings_page.click_SDcard()
+		pixsee_settings_page.click_s_dcard()
 		sd_card_page.click_back()
 		# back to settings page
 		try:

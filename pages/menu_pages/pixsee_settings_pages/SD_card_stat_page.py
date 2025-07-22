@@ -1,7 +1,5 @@
-from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
 
 class SDcardStatusPage():
 	def __init__(self, driver):
@@ -52,7 +50,7 @@ class SDcardStatusPage():
 			)
 			element = self.driver.find_element("id", self.Header)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def title_text(self):
 		try:
@@ -61,7 +59,7 @@ class SDcardStatusPage():
 			)
 			element = self.driver.find_element("id", self.Title)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def description_text(self):
 		try:
@@ -70,7 +68,7 @@ class SDcardStatusPage():
 			)
 			element = self.driver.find_element("id", self.Description)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def format_button_text(self):
 		try:
@@ -79,7 +77,7 @@ class SDcardStatusPage():
 			)
 			element = self.driver.find_element("id", self.FormatButton)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def dialog_text(self):
 		try:
@@ -88,7 +86,7 @@ class SDcardStatusPage():
 			)
 			element = self.driver.find_element("id", self.Dialog)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def go_button_text(self):
 		try:
@@ -97,7 +95,7 @@ class SDcardStatusPage():
 			)
 			element = self.driver.find_element("id", self.Go)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def no_button_text(self):
 		try:
@@ -106,7 +104,7 @@ class SDcardStatusPage():
 			)
 			element = self.driver.find_element("id", self.No)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 
 	def is_in_sdcard_page(self):
@@ -115,7 +113,7 @@ class SDcardStatusPage():
 				EC.presence_of_element_located(("id", self.Header))
 			)
 			return True
-		except:
+		except AssertionError:
 			return False
 	def is_in_format_dialog(self):
 		try:
@@ -123,7 +121,7 @@ class SDcardStatusPage():
 				EC.presence_of_element_located(("id", self.Dialog))
 			)
 			return True
-		except:
+		except AssertionError:
 			return False
 	def is_formatting(self):
 		try:
@@ -131,7 +129,7 @@ class SDcardStatusPage():
 				EC.presence_of_element_located(("id", self.Formating))
 			)
 			return True
-		except:
+		except AssertionError:
 			return False
 
 	def format_button_enabled(self):
@@ -139,7 +137,7 @@ class SDcardStatusPage():
 			WebDriverWait(self.driver, 5).until(
 				EC.presence_of_element_located(("id", self.FormatButton))
 			)
-			element = self.driver.find_element("id", self.FormatButton)
+			self.driver.find_element("id", self.FormatButton)
 			return True
-		except:
+		except AssertionError:
 			return False

@@ -69,7 +69,7 @@ class BaseTestCase(unittest.TestCase):
         )
     def click_middle(self):
         size = self.driver.get_window_size()
-        x = size['width'] // 2
+        x = size['width'] // 5
         y = size['height'] // 2
 
         self.driver.execute_script("mobile: clickGesture", {

@@ -138,7 +138,7 @@ class AreaDetectionPage():
 			)
 			element = self.driver.find_element("id", self.DiscardTitle)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def discard_no_text(self):
 		try:
@@ -147,7 +147,7 @@ class AreaDetectionPage():
 			)
 			element = self.driver.find_element("id", self.DiscardNo)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def discard_yes_text(self):
 		try:
@@ -156,7 +156,7 @@ class AreaDetectionPage():
 			)
 			element = self.driver.find_element("id", self.DiscardYes)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def header_text(self):
 		try:
@@ -165,7 +165,7 @@ class AreaDetectionPage():
 			)
 			element = self.driver.find_element("id", self.Header)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def tutor_first_title_text(self):
 		try:
@@ -174,7 +174,7 @@ class AreaDetectionPage():
 			)
 			element = self.driver.find_element("id", self.TutorTitle1)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def tutor_second_title_text(self):
 		try:
@@ -183,7 +183,7 @@ class AreaDetectionPage():
 			)
 			element = self.driver.find_element("id", self.TutorTitle2)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def skip_text(self):
 		try:
@@ -192,7 +192,7 @@ class AreaDetectionPage():
 			)
 			element = self.driver.find_element("id", self.Skip)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def title(self):
 		try:
@@ -201,7 +201,7 @@ class AreaDetectionPage():
 			)
 			element = self.driver.find_element("id", self.Detection)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def detection_description(self):
 		try:
@@ -210,7 +210,7 @@ class AreaDetectionPage():
 			)
 			element = self.driver.find_element("id", self.DetectionSubtitle)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def sensitivity_text(self):
 		try:
@@ -219,7 +219,7 @@ class AreaDetectionPage():
 			)
 			element = self.driver.find_element("id", self.Sensitivity)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def dettype_txt(self):
 		WebDriverWait(self.driver, 10).until(
@@ -263,7 +263,7 @@ class AreaDetectionPage():
 			)
 			element = self.driver.find_element("id", self.Low)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def medium_text(self):
 		try:
@@ -272,7 +272,7 @@ class AreaDetectionPage():
 			)
 			element = self.driver.find_element("id", self.Medium)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def high_text(self):
 		try:
@@ -281,7 +281,7 @@ class AreaDetectionPage():
 			)
 			element = self.driver.find_element("id", self.High)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def baby_in_text(self):
 		try:
@@ -290,7 +290,7 @@ class AreaDetectionPage():
 			)
 			element = self.driver.find_element("id", self.BabyIn)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 	def baby_out_text(self):
 		try:
@@ -299,7 +299,7 @@ class AreaDetectionPage():
 			)
 			element = self.driver.find_element("id", self.BabyOut)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 
 
@@ -309,7 +309,7 @@ class AreaDetectionPage():
 				EC.presence_of_element_located(("id", self.TutorTitle1))
 			)
 			return True
-		except:
+		except AssertionError:
 			return False
 	def is_in_area_detection_page(self):
 		try:
@@ -317,7 +317,7 @@ class AreaDetectionPage():
 				EC.presence_of_element_located(("id", self.Header))
 			)
 			return True
-		except:
+		except AssertionError:
 			return False
 	def is_in_tutor_first_page(self):
 		WebDriverWait(self.driver, 10).until(
@@ -339,7 +339,7 @@ class AreaDetectionPage():
 				EC.presence_of_element_located(("id", self.TurnOffDialog))
 			)
 			return True
-		except:
+		except AssertionError:
 			return False
 	def is_in_discard_dialog(self):
 		try:
@@ -347,7 +347,7 @@ class AreaDetectionPage():
 				EC.presence_of_element_located(("id", self.DiscardTitle))
 			)
 			return True
-		except:
+		except AssertionError:
 			return False
 
 	def is_save_enable(self):
@@ -391,5 +391,5 @@ class AreaDetectionPage():
 				EC.presence_of_element_located(("id", self.Snooze))
 			)
 			return True
-		except:
+		except AssertionError:
 			return False

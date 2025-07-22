@@ -36,7 +36,7 @@ class AreaDetectionCase(BaseTestCase):
 
 		menu_page.click_settings()
 
-		pixsee_settings_page.click_AreaDetection()
+		pixsee_settings_page.click_area_detection()
 		# check first tutor title
 		try:
 			title = area_detection_page.tutor_first_title_text()
@@ -84,7 +84,7 @@ class AreaDetectionCase(BaseTestCase):
 
 		menu_page.click_settings()
 
-		pixsee_settings_page.click_AreaDetection()
+		pixsee_settings_page.click_area_detection()
 		self.right_wipe()
 		# check second tutor title
 		try:
@@ -134,7 +134,7 @@ class AreaDetectionCase(BaseTestCase):
 
 		menu_page.click_settings()
 
-		pixsee_settings_page.click_AreaDetection()
+		pixsee_settings_page.click_area_detection()
 
 		# check first tutor page
 		try:
@@ -186,7 +186,7 @@ class AreaDetectionCase(BaseTestCase):
 
 		menu_page.click_settings()
 
-		pixsee_settings_page.click_AreaDetection()
+		pixsee_settings_page.click_area_detection()
 		area_detection_page.click_skip()
 		# check Area detection title
 		try:
@@ -242,7 +242,7 @@ class AreaDetectionCase(BaseTestCase):
 		menu_page.click_logout()
 		menu_page.click_settings()
 		origin_status = pixsee_settings_page.area_detection_status_text()
-		pixsee_settings_page.click_AreaDetection()
+		pixsee_settings_page.click_area_detection()
 		area_detection_page.click_skip()
 		# check save enable = false
 		try:
@@ -279,7 +279,7 @@ class AreaDetectionCase(BaseTestCase):
 		# skip menu tutor
 		menu_page.click_logout()
 		menu_page.click_settings()
-		pixsee_settings_page.click_AreaDetection()
+		pixsee_settings_page.click_area_detection()
 		area_detection_page.click_skip()
 		# back to settings page
 		area_detection_page.click_back()
@@ -307,7 +307,7 @@ class AreaDetectionCase(BaseTestCase):
 
 		menu_page.click_settings()
 
-		pixsee_settings_page.click_AreaDetection()
+		pixsee_settings_page.click_area_detection()
 		area_detection_page.click_skip()
 		if area_detection_page.is_switch_on() == "true":
 			pass
@@ -381,7 +381,7 @@ class AreaDetectionCase(BaseTestCase):
 		menu_page.click_logout()
 		menu_page.click_settings()
 
-		pixsee_settings_page.click_AreaDetection()
+		pixsee_settings_page.click_area_detection()
 		area_detection_page.click_skip()
 		if area_detection_page.is_switch_on() == "true":
 			pass
@@ -434,7 +434,7 @@ class AreaDetectionCase(BaseTestCase):
 		menu_page.click_logout()
 		menu_page.click_settings()
 
-		pixsee_settings_page.click_AreaDetection()
+		pixsee_settings_page.click_area_detection()
 		area_detection_page.click_skip()
 		if area_detection_page.is_switch_on() == "true":
 			pass
@@ -484,7 +484,7 @@ class AreaDetectionCase(BaseTestCase):
 			print("15 min button worked")
 		except AssertionError:
 			print("15 min button failed")
-		pixsee_settings_page.click_AreaDetection()
+		pixsee_settings_page.click_area_detection()
 		area_detection_page.click_switch()
 		area_detection_page.click_switch()
 		try:
@@ -500,7 +500,7 @@ class AreaDetectionCase(BaseTestCase):
 			print("30 min button worked")
 		except AssertionError:
 			print("30 min button failed")
-		pixsee_settings_page.click_AreaDetection()
+		pixsee_settings_page.click_area_detection()
 		area_detection_page.click_switch()
 		area_detection_page.click_switch()
 		try:
@@ -525,13 +525,13 @@ class AreaDetectionCase(BaseTestCase):
 
 		menu_page.click_logout()
 		menu_page.click_settings()
-		pixsee_settings_page.click_AreaDetection()
+		pixsee_settings_page.click_area_detection()
 		area_detection_page.click_skip()
 		# check if is in discard dialog
 		if area_detection_page.is_switch_on() == "true":
 			area_detection_page.click_switch()
 			area_detection_page.click_turn_off()
-			pixsee_settings_page.click_AreaDetection()
+			pixsee_settings_page.click_area_detection()
 			area_detection_page.click_switch()
 		else:
 			area_detection_page.click_switch()

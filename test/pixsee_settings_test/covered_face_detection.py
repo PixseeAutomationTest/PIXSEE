@@ -37,7 +37,7 @@ class CoveredFaceDetectionCase(BaseTestCase):
 
 		menu_page.click_settings()
 
-		pixsee_settings_page.click_CoveredFaceDetection()
+		pixsee_settings_page.click_covered_face_detection()
 		# check first tutor title
 		try:
 			title = covered_face_detection_page.tutor_title_text()
@@ -79,7 +79,7 @@ class CoveredFaceDetectionCase(BaseTestCase):
 
 		menu_page.click_settings()
 
-		pixsee_settings_page.click_CoveredFaceDetection()
+		pixsee_settings_page.click_covered_face_detection()
 		covered_face_detection_page.click_skip()
 		# check Covered Face Detection title
 		try:
@@ -134,7 +134,7 @@ class CoveredFaceDetectionCase(BaseTestCase):
 		menu_page.click_logout()
 		menu_page.click_settings()
 		origin_status = pixsee_settings_page.covered_face_detection_status_text()
-		pixsee_settings_page.click_CoveredFaceDetection()
+		pixsee_settings_page.click_covered_face_detection()
 		covered_face_detection_page.click_skip()
 		# check save enable = false
 		try:
@@ -171,7 +171,7 @@ class CoveredFaceDetectionCase(BaseTestCase):
 		# skip menu tutor
 		menu_page.click_logout()
 		menu_page.click_settings()
-		pixsee_settings_page.click_CoveredFaceDetection()
+		pixsee_settings_page.click_covered_face_detection()
 		covered_face_detection_page.click_skip()
 		# back to settings page
 		covered_face_detection_page.click_back()
@@ -199,7 +199,7 @@ class CoveredFaceDetectionCase(BaseTestCase):
 
 		menu_page.click_settings()
 
-		pixsee_settings_page.click_CoveredFaceDetection()
+		pixsee_settings_page.click_covered_face_detection()
 		covered_face_detection_page.click_skip()
 		if covered_face_detection_page.is_switch_on() == "true":
 			pass
@@ -273,7 +273,7 @@ class CoveredFaceDetectionCase(BaseTestCase):
 		menu_page.click_logout()
 		menu_page.click_settings()
 
-		pixsee_settings_page.click_CoveredFaceDetection()
+		pixsee_settings_page.click_covered_face_detection()
 		covered_face_detection_page.click_skip()
 		if covered_face_detection_page.is_switch_on() == "true":
 			pass
@@ -323,7 +323,7 @@ class CoveredFaceDetectionCase(BaseTestCase):
 			print("15 min button worked")
 		except AssertionError:
 			print("15 min button failed")
-		pixsee_settings_page.click_CoveredFaceDetection()
+		pixsee_settings_page.click_covered_face_detection()
 		covered_face_detection_page.click_switch()
 		covered_face_detection_page.click_switch()
 		try:
@@ -339,7 +339,7 @@ class CoveredFaceDetectionCase(BaseTestCase):
 			print("30 min button worked")
 		except AssertionError:
 			print("30 min button failed")
-		pixsee_settings_page.click_CoveredFaceDetection()
+		pixsee_settings_page.click_covered_face_detection()
 		covered_face_detection_page.click_switch()
 		covered_face_detection_page.click_switch()
 		try:
@@ -348,7 +348,7 @@ class CoveredFaceDetectionCase(BaseTestCase):
 			print("turn off detection worked")
 		except AssertionError:
 			print("turn off detection failed")
-	def test_10_covered_face_detection_back_discard(self):
+	def test_07_covered_face_detection_back_discard(self):
 		covered_face_detection_page = CoveredFaceDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -364,13 +364,13 @@ class CoveredFaceDetectionCase(BaseTestCase):
 
 		menu_page.click_logout()
 		menu_page.click_settings()
-		pixsee_settings_page.click_CoveredFaceDetection()
+		pixsee_settings_page.click_covered_face_detection()
 		covered_face_detection_page.click_skip()
 		# check if is in discard dialog
 		if covered_face_detection_page.is_switch_on() == "true":
 			covered_face_detection_page.click_switch()
 			covered_face_detection_page.click_turn_off()
-			pixsee_settings_page.click_CoveredFaceDetection()
+			pixsee_settings_page.click_covered_face_detection()
 			covered_face_detection_page.click_switch()
 		else:
 			covered_face_detection_page.click_switch()
