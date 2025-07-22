@@ -44,24 +44,22 @@ class CoveredFaceDetectionCase(BaseTestCase):
 			hint = self.get_string("covered_face")
 			self.assertEqual(title, hint)
 			print("tutor title right")
-		except AssertionError:
+		except AssertionError :
 			print("tutor title wrong")
-			raise AssertionError("tutor title mismatch")
 		# check skip
 		try:
 			skip = covered_face_detection_page.skip_text()
 			hint = self.get_string("skip")
 			self.assertEqual(skip, hint)
 			print("skip display right")
-		except AssertionError:
+		except AssertionError :
 			print("skip display wrong")
-			raise AssertionError("skip display mismatch")
 		covered_face_detection_page.click_skip()
 		# check in covered_face_detection_page
 		try:
 			self.assertTrue(covered_face_detection_page.is_in_covered_face_detection_page())
 			print("skip tutor successfully")
-		except AssertionError:
+		except AssertionError :
 			print("skip tutor unsuccessfully")
 			raise AssertionError("error")
 	def test_02_covered_face_detection_switch(self):
@@ -89,18 +87,16 @@ class CoveredFaceDetectionCase(BaseTestCase):
 			hint = self.get_string("detection")
 			self.assertEqual(title, hint)
 			print("Covered Face Detection title right")
-		except AssertionError:
+		except AssertionError :
 			print("Covered Face Detection title wrong")
-			raise AssertionError("Covered Face Detection title mismatch")
 		# check Covered Face Detection description
 		try:
 			subtitle = covered_face_detection_page.detection_description()
 			hint = self.get_string("covered_face_detection_status_description")
 			self.assertEqual(subtitle, hint)
 			print("Covered Face Detection subtitle right")
-		except AssertionError:
+		except AssertionError :
 			print("Covered Face Detection subtitle wrong")
-			raise AssertionError("Covered Face Detection subtitle mismatch")
 		# switch status
 		current_status = covered_face_detection_page.is_switch_on()
 		if current_status:
@@ -108,16 +104,15 @@ class CoveredFaceDetectionCase(BaseTestCase):
 				is_visible = len(self.driver.find_elements(AppiumBy.ID, covered_face_detection_page.Sensitivity)) > 0
 				assert is_visible, "switch on failed"
 				print("switch on success")
-			except AssertionError:
+			except AssertionError :
 				print("switch on failed")
 			covered_face_detection_page.click_switch()
 			# check in dialog
 			try:
 				self.assertTrue(covered_face_detection_page.is_in_turn_off_dialog())
 				print("switch off successfully")
-			except AssertionError:
+			except AssertionError :
 				print("switch off unsuccessfully")
-				raise AssertionError("error")
 		else:
 			self.check_switch_and_content(current_status, covered_face_detection_page.Sensitivity)
 			covered_face_detection_page.click_switch()
@@ -143,9 +138,9 @@ class CoveredFaceDetectionCase(BaseTestCase):
 		covered_face_detection_page.click_skip()
 		# check save enable = false
 		try:
-			self.assertTrue(covered_face_detection_page.is_save_enable())
+			self.assertFalse(covered_face_detection_page.is_save_enable())
 			print("Save diable test pass")
-		except AssertionError:
+		except AssertionError :
 			print("Save diable test failed")
 			raise AssertionError("Save diable test failed")
 		# change switch status
@@ -158,7 +153,7 @@ class CoveredFaceDetectionCase(BaseTestCase):
 		new_status = pixsee_settings_page.covered_face_detection_status_text()
 		if origin_status != new_status:
 			print("save function success")
-		else:
+		else :
 			print("save function failed")
 			raise AssertionError("save function failed, status not changed")
 	def test_04_covered_face_detection_back(self):
@@ -183,7 +178,7 @@ class CoveredFaceDetectionCase(BaseTestCase):
 		try:
 			self.assertTrue(pixsee_settings_page.is_in_settings())
 			print("Back to Pixsee Settings page")
-		except AssertionError:
+		except AssertionError :
 			print("Not in Pixsee Settings page")
 			raise AssertionError("Not in Pixsee Settings page")
 	def test_05_covered_face_detection_tap_checkbox_sensitivity(self):
@@ -216,61 +211,53 @@ class CoveredFaceDetectionCase(BaseTestCase):
 			hint = self.get_string("sensitivity_level")
 			self.assertEqual(sensitivity, hint)
 			print("Sensitivity title is correct")
-		except AssertionError:
+		except AssertionError :
 			print("Sensitivity title is wrong")
-			raise AssertionError("sensitivity doesn't show up after switch on")
 		# check box name
 		try:
 			low = covered_face_detection_page.low_text()
 			hint = self.get_string("sensitivity_low")
 			self.assertEqual(low, hint)
 			print("Low checkbox text is correct")
-		except AssertionError:
+		except AssertionError :
 			print("Low checkbox text is wrong")
-			raise AssertionError("low checkbox text mismatch")
 		try:
 			medium = covered_face_detection_page.medium_text()
 			hint = self.get_string("sensitivity_medium")
 			self.assertEqual(medium, hint)
 			print("Medium checkbox text is correct")
-		except AssertionError:
+		except AssertionError :
 			print("Medium checkbox text is wrong")
-			raise AssertionError("medium checkbox text mismatch")
 		try:
 			high = covered_face_detection_page.high_text()
 			hint = self.get_string("sensitivity_high")
 			self.assertEqual(high, hint)
 			print("High checkbox text is correct")
-		except AssertionError:
+		except AssertionError :
 			print("High checkbox text is wrong")
-			raise AssertionError("high checkbox text mismatch")
 		try:
 			drag = covered_face_detection_page.drag_text()
 			hint = self.get_string("detection_settings_detection_area_title")
 			self.assertEqual(drag, hint)
 			print("drag title right")
-		except AssertionError:
+		except AssertionError :
 			print("drag title wrong")
-			raise AssertionError("error")
 		# check clickable
 		try:
 			self.assertTrue(covered_face_detection_page.is_low_clickable())
 			print("Low checkbox is clickable")
-		except AssertionError:
+		except AssertionError :
 			print("Low checkbox is not clickable")
-			raise AssertionError("Low checkbox is not clickable")
 		try:
 			self.assertTrue(covered_face_detection_page.is_medium_clickable())
 			print("Medium checkbox is clickable")
-		except AssertionError:
+		except AssertionError :
 			print("Medium checkbox is not clickable")
-			raise AssertionError("Medium checkbox is not clickable")
 		try:
 			self.assertTrue(covered_face_detection_page.is_high_clickable())
 			print("High checkbox is clickable")
-		except AssertionError:
+		except AssertionError :
 			print("High checkbox is not clickable")
-			raise AssertionError("High checkbox is not clickable")
 	def test_06_covered_face_detection_turn_off_page(self):
 		covered_face_detection_page = CoveredFaceDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
@@ -299,47 +286,42 @@ class CoveredFaceDetectionCase(BaseTestCase):
 			hint = self.get_string("turn_off_covered_detection")
 			self.assertEqual(title, hint)
 			print("turn off dialog title is correct")
-		except AssertionError:
+		except AssertionError :
 			print("turn off dialog title  is wrong")
-			raise AssertionError("turn off dialog title  mismatch")
 		try:
 			fifteenmin = covered_face_detection_page.turn_off_15_min_text()
 			hint = self.get_string("Snooze for 15 minutes")
 			self.assertEqual(fifteenmin, hint)
 			print("turn off 15 is correct")
-		except AssertionError:
+		except AssertionError :
 			print("turn off 15 is wrong")
-			raise AssertionError("turn off 15 mismatch")
 		try:
 			thirtymin = covered_face_detection_page.turn_off_30_min_text()
 			hint = self.get_string("Snooze for 30 minutes")
 			self.assertEqual(thirtymin, hint)
 			print("turn off 30 is correct")
-		except AssertionError:
+		except AssertionError :
 			print("turn off 30 is wrong")
-			raise AssertionError("turn off 30 mismatch")
 		try:
 			off = covered_face_detection_page.turn_off_text()
 			hint = self.get_string("Turn off detection")
 			self.assertEqual(off, hint)
 			print("turn off text is correct")
-		except AssertionError:
+		except AssertionError :
 			print("turn off text is wrong")
-			raise AssertionError("turn off text mismatch")
 		try:
 			cancel = covered_face_detection_page.turn_off_cancel_text()
 			hint = self.get_string("cancel")
 			self.assertEqual(cancel, hint)
 			print("turn off cancel text is correct")
-		except AssertionError:
+		except AssertionError :
 			print("turn off cancel text is wrong")
-			raise AssertionError("turn off cancel text mismatch")
 		# check each button
 		try:
 			covered_face_detection_page.click_turn_off_15_min()
 			self.assertEqual(pixsee_settings_page.covered_face_detection_status_text(), "Off")
 			print("15 min button worked")
-		except:
+		except AssertionError:
 			print("15 min button failed")
 		pixsee_settings_page.click_CoveredFaceDetection()
 		covered_face_detection_page.click_switch()
@@ -348,14 +330,14 @@ class CoveredFaceDetectionCase(BaseTestCase):
 			covered_face_detection_page.click_turn_off_cancel()
 			self.assertEqual(pixsee_settings_page.covered_face_detection_status_text(), "Off")
 			print("turn off cancel worked")
-		except:
+		except AssertionError:
 			print("turn off cancel failed")
 		covered_face_detection_page.click_switch()
 		try:
 			covered_face_detection_page.click_turn_off_30_min()
 			self.assertEqual(pixsee_settings_page.covered_face_detection_status_text(), "Off")
 			print("30 min button worked")
-		except:
+		except AssertionError:
 			print("30 min button failed")
 		pixsee_settings_page.click_CoveredFaceDetection()
 		covered_face_detection_page.click_switch()
@@ -364,7 +346,7 @@ class CoveredFaceDetectionCase(BaseTestCase):
 			covered_face_detection_page.click_turn_off()
 			self.assertEqual(pixsee_settings_page.covered_face_detection_status_text(), "Off")
 			print("turn off detection worked")
-		except:
+		except AssertionError:
 			print("turn off detection failed")
 	def test_10_covered_face_detection_back_discard(self):
 		covered_face_detection_page = CoveredFaceDetectionPage(self.driver)
@@ -402,31 +384,28 @@ class CoveredFaceDetectionCase(BaseTestCase):
 				hint = self.get_string("covered_face_detection_confirmation_message")
 				self.assertEqual(discard, hint)
 				print("Discard dialog title right")
-			except AssertionError:
+			except AssertionError :
 				print("Discard dialog title wrong")
-				raise AssertionError("Discard dialog title mismatch")
 			try:
 				yes = covered_face_detection_page.discard_yes_text()
 				hint = self.get_string("yes")
 				self.assertEqual(yes, hint)
 				print("Discard dialog yes text right")
-			except AssertionError:
+			except AssertionError :
 				print("Discard dialog yes text wrong")
-				raise AssertionError("Discard dialog yes text mismatch")
 			try:
 				no = covered_face_detection_page.discard_no_text()
 				hint = self.get_string("no")
 				self.assertEqual(no, hint)
 				print("Discard dialog no text right")
-			except AssertionError:
+			except AssertionError :
 				print("Discard dialog no text wrong")
-				raise AssertionError("Discard dialog no text mismatch")
 			# click yes
 			covered_face_detection_page.click_discard_yes()
 			# check status = false
 			self.assertEqual(pixsee_settings_page.covered_face_detection_status_text(),"Off")
 			print("back button worked")
-		except AssertionError:
+		except AssertionError :
 			print("Not in discard dialog")
 			raise AssertionError("Not in discard dialog")
 

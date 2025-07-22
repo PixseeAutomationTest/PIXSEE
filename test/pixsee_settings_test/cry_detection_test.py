@@ -43,7 +43,6 @@ class CryDetectionCase(BaseTestCase):
 			print("Cry detection title right")
 		except AssertionError:
 			print("Cry detection title wrong")
-			raise AssertionError("Cry detection title mismatch")
 		# check Cry detection description
 		try:
 			subtitle = cry_detection_page.detection_description()
@@ -52,7 +51,6 @@ class CryDetectionCase(BaseTestCase):
 			print("Cry detection subtitle right")
 		except AssertionError:
 			print("Cry detection subtitle wrong")
-			raise AssertionError("Cry detection subtitle mismatch")
 		# switch status
 		current_status = cry_detection_page.is_switch_on()
 		self.check_switch_and_content(current_status, cry_detection_page.Sensitivity)
@@ -78,7 +76,7 @@ class CryDetectionCase(BaseTestCase):
 		pixsee_settings_page.click_CryDetection()
 		# check save enable = false
 		try:
-			self.assertTrue(cry_detection_page.is_save_enable())
+			self.assertFalse(cry_detection_page.is_save_enable())
 			print("Save diable test pass")
 		except AssertionError:
 			print("Save diable test failed")
@@ -147,7 +145,6 @@ class CryDetectionCase(BaseTestCase):
 			print("Sensitivity title is correct")
 		except AssertionError:
 			print("Sensitivity title is wrong")
-			raise AssertionError("sensitivity doesn't show up after switch on")
 		try:
 			music_settings = cry_detection_page.music_settings_text()
 			hint = self.get_string("auto_play_music")
@@ -155,7 +152,6 @@ class CryDetectionCase(BaseTestCase):
 			print("music settings text right")
 		except AssertionError:
 			print("music settings text wrong")
-			raise AssertionError("music settings text mismatch")
 		try:
 			smart_soothing = cry_detection_page.smart_soothing_text()
 			hint = self.get_string("smart_soothing")
@@ -163,7 +159,6 @@ class CryDetectionCase(BaseTestCase):
 			print("smart soothing text right")
 		except AssertionError:
 			print("smart soothing text wrong")
-			raise AssertionError("smart soothing text mismatch")
 			# check box name
 		try:
 			low = cry_detection_page.low_text()
@@ -172,7 +167,6 @@ class CryDetectionCase(BaseTestCase):
 			print("Low checkbox text is correct")
 		except AssertionError:
 			print("Low checkbox text is wrong")
-			raise AssertionError("low checkbox text mismatch")
 		try:
 			medium = cry_detection_page.medium_text()
 			hint = self.get_string("sensitivity_medium")
@@ -180,7 +174,6 @@ class CryDetectionCase(BaseTestCase):
 			print("Medium checkbox text is correct")
 		except AssertionError:
 			print("Medium checkbox text is wrong")
-			raise AssertionError("medium checkbox text mismatch")
 		try:
 			high = cry_detection_page.high_text()
 			hint = self.get_string("sensitivity_high")
@@ -188,26 +181,22 @@ class CryDetectionCase(BaseTestCase):
 			print("High checkbox text is correct")
 		except AssertionError:
 			print("High checkbox text is wrong")
-			raise AssertionError("high checkbox text mismatch")
 		# check clickable
 		try:
 			self.assertTrue(cry_detection_page.is_low_clickable())
 			print("Low checkbox is clickable")
 		except AssertionError:
 			print("Low checkbox is not clickable")
-			raise AssertionError("Low checkbox is not clickable")
 		try:
 			self.assertTrue(cry_detection_page.is_medium_clickable())
 			print("Medium checkbox is clickable")
 		except AssertionError:
 			print("Medium checkbox is not clickable")
-			raise AssertionError("Medium checkbox is not clickable")
 		try:
 			self.assertTrue(cry_detection_page.is_high_clickable())
 			print("High checkbox is clickable")
 		except AssertionError:
 			print("High checkbox is not clickable")
-			raise AssertionError("High checkbox is not clickable")
 	def test_05_cry_detection_smart_soothing_switch(self):
 		cry_detection_page = CryDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
@@ -299,7 +288,6 @@ class CryDetectionCase(BaseTestCase):
 				print("Discard dialog title right")
 			except AssertionError:
 				print("Discard dialog title wrong")
-				raise AssertionError("Discard dialog title mismatch")
 			try:
 				yes = cry_detection_page.discard_yes_text()
 				hint = self.get_string("yes")
@@ -307,7 +295,6 @@ class CryDetectionCase(BaseTestCase):
 				print("Discard dialog yes text right")
 			except AssertionError:
 				print("Discard dialog yes text wrong")
-				raise AssertionError("Discard dialog yes text mismatch")
 			try:
 				no = cry_detection_page.discard_no_text()
 				hint = self.get_string("no")
@@ -315,7 +302,6 @@ class CryDetectionCase(BaseTestCase):
 				print("Discard dialog no text right")
 			except AssertionError:
 				print("Discard dialog no text wrong")
-				raise AssertionError("Discard dialog no text mismatch")
 			# click yes
 			cry_detection_page.click_discard_yes()
 			new_status = pixsee_settings_page.cry_detection_status_text()

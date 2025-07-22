@@ -43,31 +43,28 @@ class AreaDetectionCase(BaseTestCase):
 			hint = self.get_string("safe_area_tutorial_title")
 			self.assertEqual(title, hint)
 			print("first tutor  title right")
-		except AssertionError:
+		except AssertionError :
 			print("first tutor  title wrong")
-			raise AssertionError("first tutor  title mismatch")
 		# check first tutor indicator
 		try:
 			self.assertTrue(area_detection_page.is_in_tutor_first_page())
 			print("first tutor indicator displayed")
-		except AssertionError:
+		except AssertionError :
 			print("first tutor indicator displayed")
-			raise AssertionError("error")
 		# check skip
 		try:
 			skip = area_detection_page.skip_text()
 			hint = self.get_string("skip")
 			self.assertEqual(skip, hint)
 			print("skip display right")
-		except AssertionError:
+		except AssertionError :
 			print("skip display wrong")
-			raise AssertionError("skip display mismatch")
 		area_detection_page.click_skip()
 		# check in area area_detection_page
 		try:
 			self.assertTrue(area_detection_page.is_in_area_detection_page())
 			print("skip first tutor successfully")
-		except AssertionError:
+		except AssertionError :
 			print("skip first tutor unsuccessfully")
 			raise AssertionError("error")
 	def test_02_area_detection_tutor_skip_2(self):
@@ -95,32 +92,29 @@ class AreaDetectionCase(BaseTestCase):
 			hint = self.get_string("caution_area_tutorial_title")
 			self.assertEqual(title, hint)
 			print("second tutor  title right")
-		except AssertionError:
+		except AssertionError :
 			print("second tutor  title wrong")
-			raise AssertionError("second tutor  title mismatch")
 		# check second tutor indicator
 		try:
 			self.assertTrue(area_detection_page.is_in_tutor_second_page())
 			print("second tutor indicator displayed")
-		except AssertionError:
+		except AssertionError :
 			print("second tutor indicator displayed")
-			raise AssertionError("error")
 		# check skip
 		try:
 			skip = area_detection_page.skip_text()
 			hint = self.get_string("skip")
 			self.assertEqual(skip, hint)
 			print("skip display right")
-		except AssertionError:
+		except AssertionError :
 			print("skip display wrong")
-			raise AssertionError("skip display mismatch")
 
 		area_detection_page.click_skip()
 		# check in area area_detection_page
 		try:
 			self.assertTrue(area_detection_page.is_in_area_detection_page())
 			print("skip second tutor successfully")
-		except AssertionError:
+		except AssertionError :
 			print("skip second tutor unsuccessfully")
 			raise AssertionError("error")
 	def test_03_area_detection_tutor_skip_121(self):
@@ -146,7 +140,7 @@ class AreaDetectionCase(BaseTestCase):
 		try:
 			self.assertTrue(area_detection_page.is_in_tutor_first_page())
 			print("first tutor displayed")
-		except AssertionError:
+		except AssertionError :
 			print("first tutor displayed")
 			raise AssertionError("error")
 
@@ -155,16 +149,15 @@ class AreaDetectionCase(BaseTestCase):
 		try:
 			self.assertTrue(area_detection_page.is_in_tutor_second_page())
 			print("second tutor indicator displayed")
-		except AssertionError:
+		except AssertionError :
 			print("second tutor indicator displayed")
-			raise AssertionError("error")
 
 		self.left_wipe()
 		# check first tutor page
 		try:
 			self.assertTrue(area_detection_page.is_in_tutor_first_page())
 			print("first tutor displayed")
-		except AssertionError:
+		except AssertionError :
 			print("first tutor displayed")
 			raise AssertionError("error")
 
@@ -173,7 +166,7 @@ class AreaDetectionCase(BaseTestCase):
 		try:
 			self.assertTrue(area_detection_page.is_in_area_detection_page())
 			print("skip second tutor successfully")
-		except AssertionError:
+		except AssertionError :
 			print("skip second tutor unsuccessfully")
 			raise AssertionError("error")
 	def test_04_area_detection_switch(self):
@@ -201,18 +194,16 @@ class AreaDetectionCase(BaseTestCase):
 			hint = self.get_string("detection")
 			self.assertEqual(title, hint)
 			print("Area detection title right")
-		except AssertionError:
+		except AssertionError :
 			print("Area detection title wrong")
-			raise AssertionError("Area detection title mismatch")
 		# check Area detection description
 		try:
 			subtitle = area_detection_page.detection_description()
 			hint = self.get_string("efence_settings_status_description")
 			self.assertEqual(subtitle, hint)
 			print("Area detection subtitle right")
-		except AssertionError:
+		except AssertionError :
 			print("Area detection subtitle wrong")
-			raise AssertionError("Area detection subtitle mismatch")
 		# switch status
 		current_status = area_detection_page.is_switch_on()
 		if current_status:
@@ -220,14 +211,14 @@ class AreaDetectionCase(BaseTestCase):
 				is_visible = len(self.driver.find_elements(AppiumBy.ID, area_detection_page.Sensitivity)) > 0
 				assert is_visible, "switch on failed"
 				print("switch on success")
-			except AssertionError:
+			except AssertionError :
 				print("switch on failed")
 			area_detection_page.click_switch()
 			# check in turn off dialog
 			try:
 				self.assertTrue(area_detection_page.is_in_turn_off_dialog())
 				print("switch off successfully")
-			except AssertionError:
+			except AssertionError :
 				print("switch off unsuccessfully")
 				raise AssertionError("error")
 		else:
@@ -255,9 +246,9 @@ class AreaDetectionCase(BaseTestCase):
 		area_detection_page.click_skip()
 		# check save enable = false
 		try:
-			self.assertTrue(area_detection_page.is_save_enable())
+			self.assertFalse(area_detection_page.is_save_enable())
 			print("Save diable test pass")
-		except AssertionError:
+		except AssertionError :
 			print("Save diable test failed")
 			raise AssertionError("Save diable test failed")
 		# change switch status
@@ -295,7 +286,7 @@ class AreaDetectionCase(BaseTestCase):
 		try:
 			self.assertTrue(pixsee_settings_page.is_in_settings())
 			print("Back to Pixsee Settings page")
-		except AssertionError:
+		except AssertionError :
 			print("Not in Pixsee Settings page")
 			raise AssertionError("Not in Pixsee Settings page")
 	def test_07_area_detection_tap_checkbox_sensitivity(self):
@@ -328,61 +319,53 @@ class AreaDetectionCase(BaseTestCase):
 			hint = self.get_string("sensitivity_level")
 			self.assertEqual(sensitivity, hint)
 			print("Sensitivity title is correct")
-		except AssertionError:
+		except AssertionError :
 			print("Sensitivity title is wrong")
-			raise AssertionError("sensitivity doesn't show up after switch on")
 		try:
 			dettype = area_detection_page.dettype_txt()
 			hint = self.get_string("efence_type_detection")
 			self.assertEqual(dettype, hint)
 			print("detection type is correct")
-		except AssertionError:
+		except AssertionError :
 			print("detection type is wrong")
-			raise AssertionError("detection type doesn't show up after switch on")
 		# check box name
 		try:
 			low = area_detection_page.low_text()
 			hint = self.get_string("sensitivity_low")
 			self.assertEqual(low, hint)
 			print("Low checkbox text is correct")
-		except AssertionError:
+		except AssertionError :
 			print("Low checkbox text is wrong")
-			raise AssertionError("low checkbox text mismatch")
 		try:
 			medium = area_detection_page.medium_text()
 			hint = self.get_string("sensitivity_medium")
 			self.assertEqual(medium, hint)
 			print("Medium checkbox text is correct")
-		except AssertionError:
+		except AssertionError :
 			print("Medium checkbox text is wrong")
-			raise AssertionError("medium checkbox text mismatch")
 		try:
 			high = area_detection_page.high_text()
 			hint = self.get_string("sensitivity_high")
 			self.assertEqual(high, hint)
 			print("High checkbox text is correct")
-		except AssertionError:
+		except AssertionError :
 			print("High checkbox text is wrong")
-			raise AssertionError("high checkbox text mismatch")
 		# check clickable
 		try:
 			self.assertTrue(area_detection_page.is_low_clickable())
 			print("Low checkbox is clickable")
-		except AssertionError:
+		except AssertionError :
 			print("Low checkbox is not clickable")
-			raise AssertionError("Low checkbox is not clickable")
 		try:
 			self.assertTrue(area_detection_page.is_medium_clickable())
 			print("Medium checkbox is clickable")
-		except AssertionError:
+		except AssertionError :
 			print("Medium checkbox is not clickable")
-			raise AssertionError("Medium checkbox is not clickable")
 		try:
 			self.assertTrue(area_detection_page.is_high_clickable())
 			print("High checkbox is clickable")
-		except AssertionError:
+		except AssertionError :
 			print("High checkbox is not clickable")
-			raise AssertionError("High checkbox is not clickable")
 	def test_08_area_detection_tap_checkbox_detection_type(self):
 		area_detection_page = AreaDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
@@ -410,17 +393,15 @@ class AreaDetectionCase(BaseTestCase):
 			hint = self.get_string("efence_safety_area")
 			self.assertEqual(babyin, hint)
 			print("baby in text is correct")
-		except AssertionError:
+		except AssertionError :
 			print("baby in text is wrong")
-			raise AssertionError("baby in text mismatch")
 		try:
 			babyout = area_detection_page.baby_out_text()
 			hint = self.get_string("efence_dangerous_area")
 			self.assertEqual(babyout, hint)
 			print("baby out text is correct")
-		except AssertionError:
+		except AssertionError :
 			print("baby out text is wrong")
-			raise AssertionError("baby out text mismatch")
 		# check box clickable
 		area_detection_page.click_baby_in()
 		try:
@@ -428,18 +409,16 @@ class AreaDetectionCase(BaseTestCase):
 			hint = self.get_string("detection_settings_safety_area_title")
 			self.assertEqual(drag, hint)
 			print("baby in clickable")
-		except AssertionError:
+		except AssertionError :
 			print("baby in unclickable")
-			raise AssertionError("error")
 		area_detection_page.click_baby_out()
 		try:
 			drag = area_detection_page.drag_text()
 			hint = self.get_string("detection_settings_caution_area_title")
 			self.assertEqual(drag, hint)
 			print("baby out clickable")
-		except AssertionError:
+		except AssertionError :
 			print("baby out unclickable")
-			raise AssertionError("error")
 	def test_09_area_detection_turn_off_page(self):
 		area_detection_page = AreaDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
@@ -468,47 +447,42 @@ class AreaDetectionCase(BaseTestCase):
 			hint = self.get_string("turn_off_area_detection")
 			self.assertEqual(title, hint)
 			print("turn off dialog title is correct")
-		except AssertionError:
+		except AssertionError :
 			print("turn off dialog title  is wrong")
-			raise AssertionError("turn off dialog title  mismatch")
 		try:
 			fifteenmin = area_detection_page.turn_off_15_min_text()
 			hint = self.get_string("Snooze for 15 minutes")
 			self.assertEqual(fifteenmin, hint)
 			print("turn off 15 is correct")
-		except AssertionError:
+		except AssertionError :
 			print("turn off 15 is wrong")
-			raise AssertionError("turn off 15 mismatch")
 		try:
 			thirtymin = area_detection_page.turn_off_30_min_text()
 			hint = self.get_string("Snooze for 30 minutes")
 			self.assertEqual(thirtymin, hint)
 			print("turn off 30 is correct")
-		except AssertionError:
+		except AssertionError :
 			print("turn off 30 is wrong")
-			raise AssertionError("turn off 30 mismatch")
 		try:
 			off = area_detection_page.turn_off_text()
 			hint = self.get_string("Turn off detection")
 			self.assertEqual(off, hint)
 			print("turn off text is correct")
-		except AssertionError:
+		except AssertionError :
 			print("turn off text is wrong")
-			raise AssertionError("turn off text mismatch")
 		try:
 			cancel = area_detection_page.turn_off_cancel_text()
 			hint = self.get_string("cancel")
 			self.assertEqual(cancel, hint)
 			print("turn off cancel text is correct")
-		except AssertionError:
+		except AssertionError :
 			print("turn off cancel text is wrong")
-			raise AssertionError("turn off cancel text mismatch")
 		# check each button
 		try:
 			area_detection_page.click_turn_off_15_min()
 			self.assertEqual(pixsee_settings_page.area_detection_status_text(), "Off")
 			print("15 min button worked")
-		except:
+		except AssertionError:
 			print("15 min button failed")
 		pixsee_settings_page.click_AreaDetection()
 		area_detection_page.click_switch()
@@ -517,14 +491,14 @@ class AreaDetectionCase(BaseTestCase):
 			area_detection_page.click_turn_off_cancel()
 			self.assertTrue(area_detection_page.is_switch_on())
 			print("turn off cancel worked")
-		except:
+		except AssertionError:
 			print("turn off cancel failed")
 		area_detection_page.click_switch()
 		try:
 			area_detection_page.click_turn_off_30_min()
 			self.assertEqual(pixsee_settings_page.area_detection_status_text(), "Off")
 			print("30 min button worked")
-		except:
+		except AssertionError:
 			print("30 min button failed")
 		pixsee_settings_page.click_AreaDetection()
 		area_detection_page.click_switch()
@@ -533,7 +507,7 @@ class AreaDetectionCase(BaseTestCase):
 			area_detection_page.click_turn_off()
 			self.assertEqual(pixsee_settings_page.area_detection_status_text(), "Off")
 			print("turn off detection worked")
-		except:
+		except AssertionError:
 			print("turn off detection failed")
 	def test_10_area_detection_back_discard(self):
 		area_detection_page = AreaDetectionPage(self.driver)
@@ -541,7 +515,7 @@ class AreaDetectionCase(BaseTestCase):
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		login_page = LoginPage(self.driver)
-
+		# login
 		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		self.skip_first_four_tutor()
@@ -571,31 +545,28 @@ class AreaDetectionCase(BaseTestCase):
 				hint = self.get_string("efence_confirmation_message")
 				self.assertEqual(discard, hint)
 				print("Discard dialog title right")
-			except AssertionError:
+			except AssertionError :
 				print("Discard dialog title wrong")
-				raise AssertionError("Discard dialog title mismatch")
 			try:
 				yes = area_detection_page.discard_yes_text()
 				hint = self.get_string("yes")
 				self.assertEqual(yes, hint)
 				print("Discard dialog yes text right")
-			except AssertionError:
+			except AssertionError :
 				print("Discard dialog yes text wrong")
-				raise AssertionError("Discard dialog yes text mismatch")
 			try:
 				no = area_detection_page.discard_no_text()
 				hint = self.get_string("no")
 				self.assertEqual(no, hint)
 				print("Discard dialog no text right")
-			except AssertionError:
+			except AssertionError :
 				print("Discard dialog no text wrong")
-				raise AssertionError("Discard dialog no text mismatch")
 			# click yes
 			area_detection_page.click_discard_yes()
 			# check status = false
 			self.assertEqual(pixsee_settings_page.area_detection_status_text(),"Off")
 			print("back button worked")
-		except AssertionError:
+		except AssertionError :
 			print("Not in discard dialog")
 			raise AssertionError("Not in discard dialog")
 

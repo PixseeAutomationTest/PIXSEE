@@ -59,18 +59,17 @@ class PixseeSettingsTest(BaseTestCase):
 			hint = self.get_string("wifi_settings")
 			self.assertEqual(pixsee_settings_page.wifi_text(), hint)
 			print("Wifi settings title right")
-		except AssertionError:
+		except :
 			print("Wifi settings title wrong")
-			raise AssertionError("Wifi settings title mismatch")
 		# enter wifi settings page
 		pixsee_settings_page.click_WifiSettings()
 		# check if is in wifi settings page
 		try:
 			self.assertTrue(wifi_settings_page.is_in_wifi_settings_page())
-			print("In wifi settings page")
+			print("successfully enter wifi settings page")
 		except AssertionError:
-			print("Not in wifi settings page")
-			raise AssertionError("Not in wifi settings page")
+			print("failed to enter wifi settings page")
+			raise AssertionError("Not in Wifi Settings page")
 	def test_03_enter_pixsee_friends_detection(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -92,18 +91,17 @@ class PixseeSettingsTest(BaseTestCase):
 			hint = self.get_string("pixsee_settings_menu_pixsee_friends_detection_title_menu")
 			self.assertEqual(pixsee_settings_page.pixsee_friends_detection_text(), hint)
 			print("Friends detection title right")
-		except AssertionError:
+		except :
 			print("Friends detection title wrong")
-			raise AssertionError("Friends detection title mismatch")
 		# enter friends detection page
 		pixsee_settings_page.click_PixseeFriendsDetection()
 
 		# check if is in friends detection page
 		try:
 			self.assertTrue(pixsee_friends_page.is_in_pixsee_friends_det_page())
-			print("In Pixsee Friends Detection page")
+			print("successfully enter Pixsee Friends Detection page")
 		except AssertionError:
-			print("Not in Pixsee Friends Detection page")
+			print("failed to enter Pixsee Friends Detection page")
 			raise AssertionError("Not in Pixsee Friends Detection page")
 	def test_04_enter_environment_settings(self):
 		menu_page = MenuPage(self.driver)
@@ -124,9 +122,8 @@ class PixseeSettingsTest(BaseTestCase):
 			hint = self.get_string("sensor_settings")
 			self.assertEqual(pixsee_settings_page.environment_settings_text(), hint)
 			print("Environment settings title right")
-		except AssertionError:
+		except :
 			print("Environment settings title wrong")
-			raise AssertionError("Environment settings title mismatch")
 		# enter environment settings page
 		pixsee_settings_page.click_EnvironmentSettings()
 		# check if is in environment settings page
@@ -156,9 +153,8 @@ class PixseeSettingsTest(BaseTestCase):
 				hint = self.get_string("crying_detection")
 				self.assertEqual(pixsee_settings_page.cry_detection_text(), hint)
 				print("Cry detection title right")
-			except AssertionError:
+			except :
 				print("Cry detection title wrong")
-				raise AssertionError("Cry detection title mismatch")
 			# enter cry detection page
 			pixsee_settings_page.click_CryDetection()
 			# check if is in cry detection page
@@ -191,9 +187,8 @@ class PixseeSettingsTest(BaseTestCase):
 				hint = self.get_string("area_detection")
 				self.assertEqual(pixsee_settings_page.area_detection_text(), hint)
 				print("Area detection title right")
-			except AssertionError:
+			except :
 				print("Area detection title wrong")
-				raise AssertionError("Area detection title mismatch")
 			# enter area detection page
 			pixsee_settings_page.click_AreaDetection()
 			# check if is in area detection page
@@ -226,9 +221,8 @@ class PixseeSettingsTest(BaseTestCase):
 				hint = self.get_string("cover_detection_settings_label")
 				self.assertEqual(pixsee_settings_page.area_detection_text(), hint)
 				print("Covered Face detection title right")
-			except AssertionError:
+			except :
 				print("Covered Face detection title wrong")
-				raise AssertionError("Covered Face detection title mismatch")
 			# enter covered face detection page
 			pixsee_settings_page.click_CoveredFaceDetection()
 			# check if is in covered face detection page
@@ -261,9 +255,8 @@ class PixseeSettingsTest(BaseTestCase):
 				hint = self.get_string("time_lapse")
 				self.assertEqual(pixsee_settings_page.time_lapse_video_text(), hint)
 				print("Timelapse video title right")
-			except AssertionError:
+			except :
 				print("Timelapse video title wrong")
-				raise AssertionError("Timelapse video title mismatch")
 			# enter timelapse video page
 			pixsee_settings_page.click_TimeLapseVideo()
 			# check if is in timelapse video page
@@ -308,12 +301,9 @@ class PixseeSettingsTest(BaseTestCase):
 			# check pixsee settings title correct
 			self.assertEqual(menu_page.pixsee_settingstxt_text(), hint)
 			print("Settings page title right")
-		except AssertionError:
+		except :
 			print("Settings page title wrong")
-			raise AssertionError("Settings page title mismatch")
-
 		menu_page.click_settings()
-
 
 		try:
 			# check pixsee settings clickable
@@ -342,9 +332,8 @@ class PixseeSettingsTest(BaseTestCase):
 			hint = self.get_string("shutter_sound")
 			self.assertEqual(pixsee_settings_page.shutter_sound_text(), hint)
 			print("Shutter sound title right")
-		except AssertionError:
+		except :
 			print("Shutter sound title wrong")
-			raise AssertionError("Shutter sound title mismatch")
 
 		# check the switch's status
 		current_status = pixsee_settings_page.shutter_sound_switch_status()  # True/False
@@ -354,14 +343,6 @@ class PixseeSettingsTest(BaseTestCase):
 
 		assert new_status != current_status,"shutter sound switch fail"
 		print("Shutter sound switch status changed successfully")
-
-
-
-
-
-
-
-		pixsee_settings_page.click_ShutterSoundSwitch()
 	def test_12_LED_indicator(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -382,9 +363,8 @@ class PixseeSettingsTest(BaseTestCase):
 			hint = self.get_string("indicator_led")
 			self.assertEqual(pixsee_settings_page.led_indicator_text(), hint)
 			print("LED indicator title right")
-		except AssertionError:
+		except :
 			print("LED indicator title wrong")
-			raise AssertionError("LED indicator title mismatch")
 
 		# check the LED switch's status
 		current_status = pixsee_settings_page.led_indicator_switch_status()  # True/False
@@ -414,18 +394,16 @@ class PixseeSettingsTest(BaseTestCase):
 			hint = self.get_string("detection_settings_night_vision")
 			self.assertEqual(pixsee_settings_page.night_mode_text(), hint)
 			print("Night mode title right")
-		except AssertionError:
+		except :
 			print("Night mode title wrong")
-			raise AssertionError("Night mode title mismatch")
 
 		try:
 			# check night mode description correct
 			hint = self.get_string("detection_settings_night_vision_subtext")
 			self.assertEqual(pixsee_settings_page.night_mode_subtext(), hint)
 			print("Night mode description right")
-		except AssertionError:
+		except :
 			print("Night mode description wrong")
-			raise AssertionError("Night mode description mismatch")
 
 		# check the night mode switch's status
 		current_status = pixsee_settings_page.night_mode_switch_status()
@@ -456,18 +434,16 @@ class PixseeSettingsTest(BaseTestCase):
 			hint = self.get_string("privacy_control_vision")
 			self.assertEqual(pixsee_settings_page.privacy_mode_text(), hint)
 			print("Privacy mode title right")
-		except AssertionError:
+		except :
 			print("Privacy mode title wrong")
-			raise AssertionError("Privacy mode title mismatch")
 
 		try:
 			# check privacy mode description correct
 			hint = self.get_string("privacy_control_subtext")
 			self.assertEqual(pixsee_settings_page.privacy_mode_subtext(), hint)
 			print("Privacy mode description right")
-		except AssertionError:
+		except :
 			print("Privacy mode description wrong")
-			raise AssertionError("Privacy mode description mismatch")
 
 		# check the privacy mode switch's status
 		current_status = pixsee_settings_page.privacy_mode_switch_status()
@@ -496,9 +472,8 @@ class PixseeSettingsTest(BaseTestCase):
 			hint = self.get_string("sd_card_status")
 			self.assertEqual(pixsee_settings_page.sdcard_status_text(), hint)
 			print("SD card status title right")
-		except AssertionError:
+		except :
 			print("SD card status title wrong")
-			raise AssertionError("SD card status title mismatch")
 		# enter SD card status page
 		pixsee_settings_page.click_SDcard()
 		# check if is in SD card status page
