@@ -1,7 +1,7 @@
 
 
 import time
-from pages.menu_page import MenuPage
+from pages.menu_pages.menu_page import MenuPage
 from pages.menu_pages.pixsee_settings_pages.pixsee_settings_page import PixseeSettingsPage
 from pages.base import BaseTestCase
 from pages.baby_monitor_page import BabyMonitorPage
@@ -81,6 +81,14 @@ class CoveredFaceDetectionCase(BaseTestCase):
 
 		pixsee_settings_page.click_covered_face_detection()
 		covered_face_detection_page.click_skip()
+		# check header text
+		try:
+			header = covered_face_detection_page.header_text()
+			hint = self.get_string("covered_face")
+			self.assertEqual(header, hint)
+			print("Covered Face Detection header right")
+		except AssertionError :
+			print("Covered Face Detection header wrong")
 		# check Covered Face Detection title
 		try:
 			title = covered_face_detection_page.title()

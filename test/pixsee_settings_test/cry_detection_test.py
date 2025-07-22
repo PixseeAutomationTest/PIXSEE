@@ -1,6 +1,6 @@
 
 import time
-from pages.menu_page import MenuPage
+from pages.menu_pages.menu_page import MenuPage
 from pages.menu_pages.pixsee_settings_pages.pixsee_settings_page import PixseeSettingsPage
 from pages.base import BaseTestCase
 from pages.baby_monitor_page import BabyMonitorPage
@@ -35,6 +35,14 @@ class CryDetectionCase(BaseTestCase):
 		menu_page.click_settings()
 
 		pixsee_settings_page.click_cry_detection()
+		# check header text
+		try:
+			header = cry_detection_page.header_text()
+			hint = self.get_string("crying_detection")
+			self.assertEqual(header, hint)
+			print("Cry detection header text right")
+		except AssertionError:
+			print("Cry detection header text wrong")
 		# check Cry detection title
 		try:
 			title = cry_detection_page.title()

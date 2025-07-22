@@ -1,6 +1,6 @@
 
 import time
-from pages.menu_page import MenuPage
+from pages.menu_pages.menu_page import MenuPage
 from pages.menu_pages.pixsee_settings_pages.pixsee_settings_page import PixseeSettingsPage
 from pages.base import BaseTestCase
 from pages.baby_monitor_page import BabyMonitorPage
@@ -188,6 +188,14 @@ class AreaDetectionCase(BaseTestCase):
 
 		pixsee_settings_page.click_area_detection()
 		area_detection_page.click_skip()
+		# check header text
+		try:
+			header = area_detection_page.header_text()
+			hint = self.get_string("area_detection")
+			self.assertEqual(header, hint)
+			print("Area detection title right")
+		except AssertionError :
+			print("Area detection title wrong")
 		# check Area detection title
 		try:
 			title = area_detection_page.title()

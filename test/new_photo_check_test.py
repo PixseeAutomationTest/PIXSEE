@@ -4,9 +4,9 @@ from pages.base import BaseTestCase
 from pages.login_page import LoginPage
 from pages.baby_monitor_page import BabyMonitorPage
 from pages.photo_page import PhotoPage
-from pages.menu_page import MenuPage
+from pages.menu_pages.menu_page import MenuPage
 import time
-import datetime
+
 
 class NewPhotoCheckCase(BaseTestCase):
 	def setUp(self):

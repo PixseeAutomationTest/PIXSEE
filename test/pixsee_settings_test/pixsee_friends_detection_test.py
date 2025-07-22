@@ -1,5 +1,5 @@
 
-from pages.menu_page import MenuPage
+from pages.menu_pages.menu_page import MenuPage
 from pages.menu_pages.pixsee_settings_pages.pixsee_settings_page import PixseeSettingsPage
 from pages.base import BaseTestCase
 from pages.baby_monitor_page import BabyMonitorPage
@@ -34,7 +34,7 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 		menu_page.click_settings()
 
 		pixsee_settings_page.click_pixsee_friends_detection()
-		# check friends detection title
+		# check friends detection header
 		try:
 			title = pixsee_friends_page.title()
 			hint = self.get_string("pixsee_friends_detection_title")

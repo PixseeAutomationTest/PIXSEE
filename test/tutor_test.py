@@ -2,8 +2,6 @@ from pages.base import BaseTestCase
 import unittest
 from pages.login_page import LoginPage
 from pages.baby_monitor_page import BabyMonitorPage
-import time
-from pages.menu_page import MenuPage
 
 
 class TutorCase(BaseTestCase):

@@ -1,6 +1,6 @@
 from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.actions.pointer_input import PointerInput
-from pages.menu_page import MenuPage
+from pages.menu_pages.menu_page import MenuPage
 from pages.menu_pages.pixsee_settings_pages.pixsee_settings_page import PixseeSettingsPage
 from pages.base import BaseTestCase
 from pages.baby_monitor_page import BabyMonitorPage
@@ -28,6 +28,14 @@ class EnvironmentSettingsCase(BaseTestCase):
 		menu_page.click_settings()
 
 		pixsee_settings_page.click_environment_settings()
+		# check header text
+		try:
+			header = environment_settings_page.header_text()
+			hint = self.get_string("sensor_settings_toolbar_title")
+			self.assertEqual(header, hint)
+			print("Environment detection header text right")
+		except AssertionError:
+			print("Environment detection header text wrong")
 		# check detection title
 		try:
 			title = environment_settings_page.detection_text()
