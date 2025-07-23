@@ -5,8 +5,8 @@ from pages.base import BaseTestCase
 from pages.baby_monitor_page import BabyMonitorPage
 from pages.baby_timeline_page import BabyTimelinePage
 from pages.menu_page import MenuPage
-from pages.pixsee_settings.pixsee_settings_page import PixseeSettingsPage
-from pages.pixsee_settings.pixsee_profile_page import PixseeProfilePage
+from pages.menu_pages.pixsee_settings_pages.pixsee_settings_page import PixseeSettingsPage
+from pages.menu_pages.pixsee_settings_pages.pixsee_profile_page import PixseeProfilePage
 from pages.device_unbind_page import DeviceUnbindPage
 
 import random
@@ -32,7 +32,7 @@ class PixseeProfileTest(BaseTestCase):
             self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
 
             '''Go to Pixsee Profile Page'''
-            pixsee_settings_page.click_PixseeProfile()
+            pixsee_settings_page.click_pixsee_profile()
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
 
             '''Verify Pixsee Profile Page'''
@@ -91,7 +91,7 @@ class PixseeProfileTest(BaseTestCase):
             self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
 
             '''Go to Pixsee Profile Page'''
-            pixsee_settings_page.click_PixseeProfile()
+            pixsee_settings_page.click_pixsee_profile()
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
 
             '''Verify Pixsee Profile Page'''
@@ -135,7 +135,7 @@ class PixseeProfileTest(BaseTestCase):
             self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
 
             '''Go to Pixsee Profile Page'''
-            pixsee_settings_page.click_PixseeProfile()
+            pixsee_settings_page.click_pixsee_profile()
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
 
             '''Verify Pixsee Profile Page'''
@@ -193,7 +193,7 @@ class PixseeProfileTest(BaseTestCase):
             self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
 
             '''Go to Pixsee Profile Page'''
-            pixsee_settings_page.click_PixseeProfile()
+            pixsee_settings_page.click_pixsee_profile()
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
 
             '''Verify Pixsee Profile Page'''
@@ -239,7 +239,7 @@ class PixseeProfileTest(BaseTestCase):
             self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
 
             '''Go to Pixsee Profile Page'''
-            pixsee_settings_page.click_PixseeProfile()
+            pixsee_settings_page.click_pixsee_profile()
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
 
             '''Verify Pixsee Profile Page'''
@@ -285,7 +285,7 @@ class PixseeProfileTest(BaseTestCase):
             self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
 
             '''Go to Pixsee Profile Page'''
-            pixsee_settings_page.click_PixseeProfile()
+            pixsee_settings_page.click_pixsee_profile()
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
 
             '''Verify Pixsee Profile Page'''
@@ -332,7 +332,7 @@ class PixseeProfileTest(BaseTestCase):
             self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
 
             '''Go to Pixsee Profile Page'''
-            pixsee_settings_page.click_PixseeProfile()
+            pixsee_settings_page.click_pixsee_profile()
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
 
             '''Verify Pixsee Profile Page'''
@@ -382,7 +382,7 @@ class PixseeProfileTest(BaseTestCase):
             self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
 
             '''Go to Pixsee Profile Page'''
-            pixsee_settings_page.click_PixseeProfile()
+            pixsee_settings_page.click_pixsee_profile()
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
 
             '''Verify Pixsee Profile Page'''
@@ -427,7 +427,7 @@ class PixseeProfileTest(BaseTestCase):
             self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
 
             '''Go to Pixsee Profile Page'''
-            pixsee_settings_page.click_PixseeProfile()
+            pixsee_settings_page.click_pixsee_profile()
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
 
             '''Verify Pixsee Profile Page'''
@@ -480,7 +480,7 @@ class PixseeProfileTest(BaseTestCase):
             self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
 
             '''Go to Pixsee Profile Page'''
-            pixsee_settings_page.click_PixseeProfile()
+            pixsee_settings_page.click_pixsee_profile()
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
 
             '''Verify Pixsee Profile Page'''
@@ -543,7 +543,7 @@ class PixseeProfileTest(BaseTestCase):
             self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
 
             '''Go to Pixsee Profile Page'''
-            pixsee_settings_page.click_PixseeProfile()
+            pixsee_settings_page.click_pixsee_profile()
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
 
             '''Verify Pixsee Profile Page'''
@@ -608,7 +608,7 @@ class PixseeProfileTest(BaseTestCase):
             self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
 
             '''Go to Pixsee Profile Page'''
-            pixsee_settings_page.click_PixseeProfile()
+            pixsee_settings_page.click_pixsee_profile()
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
 
             '''Verify Pixsee Profile Page'''

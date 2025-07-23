@@ -2,9 +2,9 @@ from pages.base import BaseTestCase
 
 from pages.baby_monitor_page import BabyMonitorPage
 from pages.menu_page import MenuPage
-from pages.pixsee_settings.pixsee_settings_page import PixseeSettingsPage
-from pages.pixsee_settings.voice_service_page import VoiceServicePage
-from pages.pixsee_settings.voice_service_pages.voice_command_page import VoiceCommandPage
+from pages.menu_pages.pixsee_settings_pages.pixsee_settings_page import PixseeSettingsPage
+from pages.menu_pages.pixsee_settings_pages.voice_service_page import VoiceServicePage
+from pages.menu_pages.pixsee_settings_pages.voice_service_pages.voice_command_page import VoiceCommandPage
 
 class VoiceServiceTest(BaseTestCase):
     def test_changing_status_discard_with_yes(self):
@@ -25,7 +25,7 @@ class VoiceServiceTest(BaseTestCase):
             self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
 
             '''Go to Voice Service Page'''
-            pixsee_settings_page.click_VoiceService()
+            pixsee_settings_page.click_voice_service()
             self.assertTrue(voice_service_page.is_in_voice_service_page(), "Can't go to Voice Service Page")
 
             '''Verify Voice Service Page'''
@@ -55,7 +55,7 @@ class VoiceServiceTest(BaseTestCase):
             '''Click yes button and go back to Voice Service Page to check if settings are discarded'''
             voice_service_page.click_discard_dialog_yes()
             self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't automatically go to Pixsee Settings Page after discarding changes")
-            pixsee_settings_page.click_VoiceService()
+            pixsee_settings_page.click_voice_service()
             self.assertTrue(voice_service_page.is_in_voice_service_page(), "Can't go to Voice Service Page")
             self.assertEqual(before_detection_switch_status, voice_service_page.get_detection_switch_status(), "Changing detection switch is not discarded")
 
@@ -86,7 +86,7 @@ class VoiceServiceTest(BaseTestCase):
             self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
 
             '''Go to Voice Service Page'''
-            pixsee_settings_page.click_VoiceService()
+            pixsee_settings_page.click_voice_service()
             self.assertTrue(voice_service_page.is_in_voice_service_page(), "Can't go to Voice Service Page")
 
             '''Verify Voice Service Page'''
@@ -145,7 +145,7 @@ class VoiceServiceTest(BaseTestCase):
             self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
 
             '''Go to Voice Service Page'''
-            pixsee_settings_page.click_VoiceService()
+            pixsee_settings_page.click_voice_service()
             self.assertTrue(voice_service_page.is_in_voice_service_page(), "Can't go to Voice Service Page")
 
             '''Verify Voice Service Page'''
@@ -166,7 +166,7 @@ class VoiceServiceTest(BaseTestCase):
             '''Click save button and go back to Voice Service Page to check if settings are saved'''
             voice_service_page.click_save()
             self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't automatically go to Pixsee Settings Page after changing voice settings")
-            pixsee_settings_page.click_VoiceService()
+            pixsee_settings_page.click_voice_service()
             self.assertTrue(voice_service_page.is_in_voice_service_page(), "Can't go to Voice Service Page")
             self.assertNotEqual(before_detection_switch_status, voice_service_page.get_detection_switch_status(), "Changing detection switch is not saved")
 
@@ -197,7 +197,7 @@ class VoiceServiceTest(BaseTestCase):
             self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
 
             '''Go to Voice Service Page'''
-            pixsee_settings_page.click_VoiceService()
+            pixsee_settings_page.click_voice_service()
             self.assertTrue(voice_service_page.is_in_voice_service_page(), "Can't go to Voice Service Page")
 
             '''Verify Voice Service Page'''
@@ -220,7 +220,7 @@ class VoiceServiceTest(BaseTestCase):
                 voice_service_page.click_detection_switch()
             voice_service_page.click_back()
             self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page after clicking back button without changing settings")
-            pixsee_settings_page.click_VoiceService()
+            pixsee_settings_page.click_voice_service()
             self.assertTrue(voice_service_page.is_in_voice_service_page(), "Can't go to Voice Service Page")
             self.assertEqual(before_detection_switch_status, voice_service_page.get_detection_switch_status(), "Detection switch is changed")
 
@@ -252,7 +252,7 @@ class VoiceServiceTest(BaseTestCase):
             self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
 
             '''Go to Voice Service Page'''
-            pixsee_settings_page.click_VoiceService()
+            pixsee_settings_page.click_voice_service()
             self.assertTrue(voice_service_page.is_in_voice_service_page(), "Can't go to Voice Service Page")
 
             '''Go to Voice Command Page'''
@@ -332,7 +332,7 @@ class VoiceServiceTest(BaseTestCase):
             self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
 
             '''Go to Voice Service Page'''
-            pixsee_settings_page.click_VoiceService()
+            pixsee_settings_page.click_voice_service()
             self.assertTrue(voice_service_page.is_in_voice_service_page(), "Can't go to Voice Service Page")
 
             '''Go to Voice Command Page'''
@@ -409,7 +409,7 @@ class VoiceServiceTest(BaseTestCase):
             self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
 
             '''Go to Voice Service Page'''
-            pixsee_settings_page.click_VoiceService()
+            pixsee_settings_page.click_voice_service()
             self.assertTrue(voice_service_page.is_in_voice_service_page(), "Can't go to Voice Service Page")
 
             '''Go to Voice Command Page'''
@@ -481,7 +481,7 @@ class VoiceServiceTest(BaseTestCase):
             self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
 
             '''Go to Voice Service Page'''
-            pixsee_settings_page.click_VoiceService()
+            pixsee_settings_page.click_voice_service()
             self.assertTrue(voice_service_page.is_in_voice_service_page(), "Can't go to Voice Service Page")
 
             '''Go to Voice Command Page'''

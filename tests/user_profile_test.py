@@ -1,8 +1,8 @@
 from pages.base import BaseTestCase
 
 from pages.baby_monitor_page import BabyMonitorPage
-from pages.menu_page import MenuPage
-from pages.menu_pages.user_profile_page import UserProfilePage
+from pages.menu_pages.menu_page import MenuPage
+from pages.menu_pages.user_profile_pages.user_profile_page import UserProfilePage
 from pages.menu_pages.user_profile_pages.change_password_page import ChangePasswordPage
 
 import re

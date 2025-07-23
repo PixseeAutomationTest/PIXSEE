@@ -1,4 +1,4 @@
-from pages.menu_page import MenuPage
+from pages.menu_pages.menu_page import MenuPage
 from pages.menu_pages.pixsee_settings_pages.pixsee_settings_page import PixseeSettingsPage
 from pages.base import BaseTestCase
 from pages.baby_monitor_page import BabyMonitorPage
@@ -475,7 +475,7 @@ class PixseeSettingsTest(BaseTestCase):
 		except :
 			print("SD card status title wrong")
 		# enter SD card status page
-		pixsee_settings_page.click_s_dcard()
+		pixsee_settings_page.click_sd_card()
 		# check if is in SD card status page
 		try:
 			self.assertTrue(sd_card_page.is_in_sdcard_page())

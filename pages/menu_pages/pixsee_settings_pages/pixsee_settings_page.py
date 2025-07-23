@@ -82,14 +82,17 @@ class PixseeSettingsPage():
 			return True
 		except AssertionError:
 			return False
-    # click
-    def click_back(self):
-        WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located(("id", self.backButton))
-        )
-        element = self.driver.find_element("id", self.backButton)
-        element.click()
-        time.sleep(1)
+
+	# click
+
+	def click_back(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located(("id", self.backButton))
+		)
+		element = self.driver.find_element("id", self.backButton)
+		element.click()
+		time.sleep(1)
+
 	def click_pixsee_profile(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.PixseeProfile))
@@ -97,6 +100,7 @@ class PixseeSettingsPage():
 		element = self.driver.find_element("id", self.PixseeProfile)
 		element.click()
 		time.sleep(1)
+
 	def click_wifi_settings(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.WifiSettings))
@@ -104,6 +108,7 @@ class PixseeSettingsPage():
 		element = self.driver.find_element("id", self.WifiSettings)
 		element.click()
 		time.sleep(1)
+
 	def click_pixsee_friends_detection(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.PixseeFriendsDetection))
@@ -111,6 +116,7 @@ class PixseeSettingsPage():
 		element = self.driver.find_element("id", self.PixseeFriendsDetection)
 		element.click()
 		time.sleep(1)
+
 	def click_environment_settings(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.EnvironmentSettings))
@@ -118,6 +124,7 @@ class PixseeSettingsPage():
 		element = self.driver.find_element("id", self.EnvironmentSettings)
 		element.click()
 		time.sleep(1)
+
 	def click_cry_detection(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.CryDetection))
@@ -125,6 +132,7 @@ class PixseeSettingsPage():
 		element = self.driver.find_element("id", self.CryDetection)
 		element.click()
 		time.sleep(1)
+
 	def click_area_detection(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.AreaDetection))
@@ -132,6 +140,7 @@ class PixseeSettingsPage():
 		element = self.driver.find_element("id", self.AreaDetection)
 		element.click()
 		time.sleep(1)
+
 	def click_covered_face_detection(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.CoveredFaceDetection))
@@ -139,6 +148,7 @@ class PixseeSettingsPage():
 		element = self.driver.find_element("id", self.CoveredFaceDetection)
 		element.click()
 		time.sleep(1)
+
 	def click_time_lapse_video(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.TimeLapseVideo))
@@ -146,6 +156,7 @@ class PixseeSettingsPage():
 		element = self.driver.find_element("id", self.TimeLapseVideo)
 		element.click()
 		time.sleep(1)
+
 	def click_voice_service(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.VoiceService))
@@ -153,6 +164,7 @@ class PixseeSettingsPage():
 		element = self.driver.find_element("id", self.VoiceService)
 		element.click()
 		time.sleep(1)
+
 	def click_shutter_sound_switch(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.ShutterSoundSwitch))
@@ -160,6 +172,7 @@ class PixseeSettingsPage():
 		element = self.driver.find_element("id", self.ShutterSoundSwitch)
 		element.click()
 		time.sleep(1)
+
 	def click_led_indicator_switch(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.LEDindicatorSwitch))
@@ -167,6 +180,7 @@ class PixseeSettingsPage():
 		element = self.driver.find_element("id", self.LEDindicatorSwitch)
 		element.click()
 		time.sleep(1)
+
 	def click_night_mode_switch(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.NightModeSwitch))
@@ -174,6 +188,7 @@ class PixseeSettingsPage():
 		element = self.driver.find_element("id", self.NightModeSwitch)
 		element.click()
 		time.sleep(1)
+
 	def click_privacy_mode_switch(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.PrivacySettingsSwitch))
@@ -181,6 +196,7 @@ class PixseeSettingsPage():
 		element = self.driver.find_element("id", self.PrivacySettingsSwitch)
 		element.click()
 		time.sleep(1)
+
 	def click_sd_card(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.SDcard))
@@ -188,6 +204,7 @@ class PixseeSettingsPage():
 		element = self.driver.find_element("id", self.SDcard)
 		element.click()
 		time.sleep(1)
+
 	# text
 	def location_name_text(self):
 		try:
@@ -198,6 +215,7 @@ class PixseeSettingsPage():
 			return element.text
 		except:
 			return None
+
 	def profile_text(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
@@ -207,6 +225,7 @@ class PixseeSettingsPage():
 			return element.text
 		except AssertionError:
 			return None
+
 	def wifi_text(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
@@ -216,6 +235,7 @@ class PixseeSettingsPage():
 			return element.text
 		except AssertionError:
 			return None
+
 	def pixsee_friends_detection_text(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
@@ -225,6 +245,7 @@ class PixseeSettingsPage():
 			return element.text
 		except AssertionError:
 			return None
+
 	def pixsee_friends_detection_status_text(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
@@ -234,6 +255,7 @@ class PixseeSettingsPage():
 			return element.text
 		except AssertionError:
 			return None
+
 	def environment_settings_text(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
@@ -243,6 +265,7 @@ class PixseeSettingsPage():
 			return element.text
 		except AssertionError:
 			return None
+
 	def environment_settings_status_text(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
@@ -252,6 +275,7 @@ class PixseeSettingsPage():
 			return element.text
 		except AssertionError:
 			return None
+
 	def cry_detection_text(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
@@ -261,6 +285,7 @@ class PixseeSettingsPage():
 			return element.text
 		except AssertionError:
 			return None
+
 	def cry_detection_status_text(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
@@ -270,6 +295,7 @@ class PixseeSettingsPage():
 			return element.text
 		except AssertionError:
 			return None
+
 	def area_detection_text(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
@@ -279,6 +305,7 @@ class PixseeSettingsPage():
 			return element.text
 		except AssertionError:
 			return None
+
 	def area_detection_status_text(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
@@ -288,6 +315,7 @@ class PixseeSettingsPage():
 			return element.text
 		except AssertionError:
 			return None
+
 	def covered_face_detection_text(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
@@ -297,6 +325,7 @@ class PixseeSettingsPage():
 			return element.text
 		except AssertionError:
 			return None
+
 	def covered_face_detection_status_text(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
@@ -306,6 +335,7 @@ class PixseeSettingsPage():
 			return element.text
 		except AssertionError:
 			return None
+
 	def time_lapse_video_text(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
@@ -315,6 +345,7 @@ class PixseeSettingsPage():
 			return element.text
 		except AssertionError:
 			return None
+
 	def time_lapse_video_status_text(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
@@ -324,6 +355,7 @@ class PixseeSettingsPage():
 			return element.text
 		except AssertionError:
 			return None
+
 	def voice_service_text(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
@@ -333,6 +365,7 @@ class PixseeSettingsPage():
 			return element.text
 		except AssertionError:
 			return None
+
 	def shutter_sound_text(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
@@ -342,6 +375,7 @@ class PixseeSettingsPage():
 			return element.text
 		except AssertionError:
 			return None
+
 	def led_indicator_text(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
@@ -351,6 +385,7 @@ class PixseeSettingsPage():
 			return element.text
 		except AssertionError:
 			return None
+
 	def night_mode_text(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
@@ -360,6 +395,7 @@ class PixseeSettingsPage():
 			return element.text
 		except AssertionError:
 			return None
+
 	def night_mode_subtext(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
@@ -369,6 +405,7 @@ class PixseeSettingsPage():
 			return element.text
 		except AssertionError:
 			return None
+
 	def privacy_mode_text(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
@@ -378,6 +415,7 @@ class PixseeSettingsPage():
 			return element.text
 		except AssertionError:
 			return None
+
 	def privacy_mode_subtext(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
@@ -387,6 +425,7 @@ class PixseeSettingsPage():
 			return element.text
 		except AssertionError:
 			return None
+
 	def sdcard_status_text(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
@@ -396,6 +435,7 @@ class PixseeSettingsPage():
 			return element.text
 		except AssertionError:
 			return None
+
 	# switch
 	def shutter_sound_switch_status(self):
 		try:
@@ -406,6 +446,7 @@ class PixseeSettingsPage():
 			return element.checked
 		except AssertionError:
 			return None
+
 	def led_indicator_switch_status(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
@@ -415,6 +456,7 @@ class PixseeSettingsPage():
 			return element.checked
 		except AssertionError:
 			return None
+
 	def night_mode_switch_status(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
@@ -424,6 +466,7 @@ class PixseeSettingsPage():
 			return element.checked
 		except AssertionError:
 			return None
+
 	def privacy_mode_switch_status(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
