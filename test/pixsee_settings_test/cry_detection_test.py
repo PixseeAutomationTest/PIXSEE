@@ -63,6 +63,7 @@ class CryDetectionCase(BaseTestCase):
 		current_status = cry_detection_page.is_switch_on()
 		self.check_switch_and_content(current_status, cry_detection_page.Sensitivity)
 		cry_detection_page.click_switch()
+		time.sleep(1)
 		after_status = cry_detection_page.is_switch_on()
 		self.check_switch_and_content(after_status, cry_detection_page.Sensitivity)
 	def test_02_cry_detection_save(self):
@@ -230,6 +231,7 @@ class CryDetectionCase(BaseTestCase):
 		current_status = cry_detection_page.is_switch_on()
 		self.check_switch_and_content(current_status, cry_detection_page.Music)
 		cry_detection_page.click_smart_soothing_switch()
+		time.sleep(1)
 		after_status = cry_detection_page.is_switch_on()
 		self.check_switch_and_content(after_status, cry_detection_page.Music)
 	def test_06_cry_detection_music_page(self):

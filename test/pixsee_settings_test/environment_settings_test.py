@@ -6,6 +6,7 @@ from pages.base import BaseTestCase
 from pages.baby_monitor_page import BabyMonitorPage
 from pages.login_page import LoginPage
 from pages.menu_pages.pixsee_settings_pages.enviroment_settings_page import EnvironmentSettingsPage
+import time
 
 
 class EnvironmentSettingsCase(BaseTestCase):
@@ -48,6 +49,7 @@ class EnvironmentSettingsCase(BaseTestCase):
 		current_status = environment_settings_page.is_switch_on()
 		self.check_switch_and_content(current_status, environment_settings_page.Sensitivity)
 		environment_settings_page.click_switch()
+		time.sleep(1)
 		after_status = environment_settings_page.is_switch_on()
 		self.check_switch_and_content(after_status, environment_settings_page.Sensitivity)
 	def test_02_environment_set_save(self):

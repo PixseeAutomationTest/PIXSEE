@@ -1,7 +1,7 @@
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+import time
 
 
 class TimeLapseVideoPage():
@@ -27,9 +27,16 @@ class TimeLapseVideoPage():
         self.TwelveHoursCheckbox = "com.compal.bioslab.pixsee.pixm01:id/rb_12_hours_radio"
         self.TwentyFourHoursCheckbox = "com.compal.bioslab.pixsee.pixm01:id/rb_24_hours_radio"
         self.StartingTime = "com.compal.bioslab.pixsee.pixm01:id/tvStartingTime"
-        self.TimeSelecter ="com.compal.bioslab.pixsee.pixm01:id/tvStartingTimeHour"
-        
-        
+        self.Timer = "com.compal.bioslab.pixsee.pixm01:id/tvStartingTimeHour"
+        self.HumanWarning = "com.compal.bioslab.pixsee.pixm01:id/tv_human_warning"
+        self.Hours = "com.compal.bioslab.pixsee.pixm01:id/rvHours"
+        self.AmPm = "com.compal.bioslab.pixsee.pixm01:id/rvAmPm"
+        self.Cancel = "com.compal.bioslab.pixsee.pixm01:id/cancel"
+        self.Confirm = "com.compal.bioslab.pixsee.pixm01:id/confirm"
+        self.DiscardMessage = "com.compal.bioslab.pixsee.pixm01:id/tvtitleAlertDialog"
+        self.DiscardYes = "com.compal.bioslab.pixsee.pixm01:id/btnPositiveAlertDialog"
+        self.DiscardNo = "com.compal.bioslab.pixsee.pixm01:id/btnNegativeAlertDialog"
+
     def is_in_timelapse_video_page(self):
         try:
             WebDriverWait(self.driver, 10).until(
@@ -52,6 +59,26 @@ class TimeLapseVideoPage():
                 EC.presence_of_element_located(("id", self.UpgradeTitle))
             )
             return True
+        except AssertionError:
+            return False
+    def is_in_discard_dialog(self):
+        try:
+            WebDriverWait(self.driver, 20).until(
+                EC.presence_of_element_located((AppiumBy.ID, self.DiscardMessage))
+            )
+            self.driver.find_element(AppiumBy.ID, self.DiscardMessage)
+            return True
+
+        except AssertionError:
+            return False
+    def is_in_timer(self):
+        try:
+            WebDriverWait(self.driver, 20).until(
+                EC.presence_of_element_located((AppiumBy.ID, self.Cancel))
+            )
+            self.driver.find_element(AppiumBy.ID, self.Cancel)
+            return True
+
         except AssertionError:
             return False
 
@@ -182,9 +209,57 @@ class TimeLapseVideoPage():
             return element.text
         except AssertionError:
             return None
+    def timer_text(self):
+        try:
+            WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located(("id", self.Timer))
+            )
+            element = self.driver.find_element("id", self.Timer)
+            return element.text
+        except AssertionError:
+            return None
+    def cancel_txt(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((AppiumBy.ID, self.Cancel))
+        )
+        return self.driver.find_element(AppiumBy.ID, self.Cancel).text
+    def confirm_txt(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((AppiumBy.ID, self.Confirm))
+        )
+        return self.driver.find_element(AppiumBy.ID, self.Confirm).text
+    def discard_message_txt(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((AppiumBy.ID, self.DiscardMessage))
+        )
+        return self.driver.find_element(AppiumBy.ID, self.DiscardMessage).text
+    def discard_yes_txt(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((AppiumBy.ID, self.DiscardYes))
+        )
+        return self.driver.find_element(AppiumBy.ID, self.DiscardYes).text
+    def discard_no_txt(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((AppiumBy.ID, self.DiscardNo))
+        )
+        return self.driver.find_element(AppiumBy.ID, self.DiscardNo).text
 
+    def change_hour_by_scroll(self):
+        window = self.driver.get_window_size()
+        x = window["width"] // 2.5  # number should be changed when on ios
+        start_y = int(window["height"] * 0.6)  # number should be changed when on ios
+        end_y = int(window["height"] * 0.5)  # number should be changed when on ios
 
+        self.driver.swipe(x, start_y, x, end_y, 500)  # 500 毫秒完成滑動
+        time.sleep(1)
+    def change_am_to_pm_by_scroll(self):
+        window = self.driver.get_window_size()
+        x = window["width"] // 6 * 5  # number should be changed when on ios
+        start_y = int(window["height"] * 0.6)  # number should be changed when on ios
+        end_y = int(window["height"] * 0.5)  # number should be changed when on ios
 
+        self.driver.swipe(x, start_y, x, end_y, 500)  # 500 毫秒完成滑動
+        time.sleep(1)
 
     def click_back(self):
         WebDriverWait(self.driver, 10).until(
@@ -240,9 +315,53 @@ class TimeLapseVideoPage():
         )
         element = self.driver.find_element("id", self.TwentyFourHoursCheckbox)
         element.click()
-    def click_time_selecter(self):
+    def click_timer(self):
         WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located(("id", self.TimeSelecter))
+            EC.presence_of_element_located(("id", self.Timer))
         )
-        element = self.driver.find_element("id", self.TimeSelecter)
+        element = self.driver.find_element("id", self.Timer)
         element.click()
+    def click_cancel(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((AppiumBy.ID, self.Cancel))
+        )
+        self.driver.find_element(AppiumBy.ID, self.Cancel).click()
+    def click_confirm(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((AppiumBy.ID, self.Confirm))
+        )
+        self.driver.find_element(AppiumBy.ID, self.Confirm).click()
+    def click_discard_yes(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((AppiumBy.ID, self.DiscardYes))
+        )
+        self.driver.find_element(AppiumBy.ID, self.DiscardYes).click()
+    def click_discard_no(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((AppiumBy.ID, self.DiscardNo))
+        )
+        self.driver.find_element(AppiumBy.ID, self.DiscardNo).click()
+
+    def is_save_enable(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((AppiumBy.ID, self.Save))
+        )
+        button = self.driver.find_element(AppiumBy.ID, self.Save)
+        is_enable = button.get_attribute("enabled")
+        return is_enable == "true"
+
+    # check if the checkbox is clicked
+    def is_twelve_hours_clicked(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((AppiumBy.ID, self.TwelveHoursCheckbox))
+        )
+        button = self.driver.find_element(AppiumBy.ID, self.TwelveHoursCheckbox)
+        is_clickable = button.get_attribute("checked")
+        return is_clickable == "true"
+    def is_twenty_four_hours_clicked(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((AppiumBy.ID, self.TwentyFourHoursCheckbox))
+        )
+        button = self.driver.find_element(AppiumBy.ID, self.TwentyFourHoursCheckbox)
+        is_clickable = button.get_attribute("checked")
+        return is_clickable == "true"

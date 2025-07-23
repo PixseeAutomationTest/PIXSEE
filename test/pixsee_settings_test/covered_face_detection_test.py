@@ -124,6 +124,7 @@ class CoveredFaceDetectionCase(BaseTestCase):
 		else:
 			self.check_switch_and_content(current_status, covered_face_detection_page.Sensitivity)
 			covered_face_detection_page.click_switch()
+			time.sleep(1)
 			after_status = covered_face_detection_page.is_switch_on()
 			self.check_switch_and_content(after_status, covered_face_detection_page.Sensitivity)
 	def test_03_covered_face_detection_save(self):

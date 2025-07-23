@@ -232,6 +232,7 @@ class AreaDetectionCase(BaseTestCase):
 		else:
 			self.check_switch_and_content(current_status, area_detection_page.Sensitivity)
 			area_detection_page.click_switch()
+			time.sleep(1)
 			after_status = area_detection_page.is_switch_on()
 			self.check_switch_and_content(after_status, area_detection_page.Sensitivity)
 	def test_05_area_detection_save(self):

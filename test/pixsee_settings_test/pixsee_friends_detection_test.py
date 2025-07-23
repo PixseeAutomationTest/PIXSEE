@@ -1,3 +1,4 @@
+import time
 
 from pages.menu_pages.menu_page import MenuPage
 from pages.menu_pages.pixsee_settings_pages.pixsee_settings_page import PixseeSettingsPage
@@ -54,6 +55,7 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 		current_status = pixsee_friends_page.is_switch_on()
 		self.check_switch_and_content(current_status, pixsee_friends_page.DetectionType)
 		pixsee_friends_page.click_switch()
+		time.sleep(1)
 		after_status = pixsee_friends_page.is_switch_on()
 		self.check_switch_and_content(after_status, pixsee_friends_page.DetectionType)
 	def test_02_friends_detection_save(self):
@@ -163,8 +165,10 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 			print("Friends detection set time text wrong")
 		# check clickable
 		pixsee_friends_page.click_set_time()
+		time.sleep(1)
 		self.tap_on_visibility(pixsee_friends_page.TimeSpan, "Set Time",True)
 		pixsee_friends_page.click_all_day()
+		time.sleep(1)
 		self.tap_on_visibility(pixsee_friends_page.TimeSpan, "All Day", False)
 	def test_05_friends_detection_time_span(self):
 		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
