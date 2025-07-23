@@ -9,6 +9,9 @@ class PixseeSettingsPage():
 		self.driver = driver
 
 		# pixsee settings page elements
+		self.backButton = "com.compal.bioslab.pixsee.pixm01:id/toolbar_back_img"
+
+		self.locationNametxt = "com.compal.bioslab.pixsee.pixm01:id/tvRoomName"
 		self.PixseeProfile = "com.compal.bioslab.pixsee.pixm01:id/clProfileSettings"
 		self.PixseeProfiletxt = "com.compal.bioslab.pixsee.pixm01:id/tvProfileSettings"
 
@@ -79,7 +82,14 @@ class PixseeSettingsPage():
 			return True
 		except AssertionError:
 			return False
-	# click
+    # click
+    def click_back(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(("id", self.backButton))
+        )
+        element = self.driver.find_element("id", self.backButton)
+        element.click()
+        time.sleep(1)
 	def click_pixsee_profile(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.PixseeProfile))
@@ -171,7 +181,7 @@ class PixseeSettingsPage():
 		element = self.driver.find_element("id", self.PrivacySettingsSwitch)
 		element.click()
 		time.sleep(1)
-	def click_s_dcard(self):
+	def click_sd_card(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.SDcard))
 		)
@@ -179,6 +189,15 @@ class PixseeSettingsPage():
 		element.click()
 		time.sleep(1)
 	# text
+	def location_name_text(self):
+		try:
+			WebDriverWait(self.driver, 10).until(
+				EC.presence_of_element_located(("id", self.locationNametxt))
+			)
+			element = self.driver.find_element("id", self.locationNametxt)
+			return element.text
+		except:
+			return None
 	def profile_text(self):
 		try:
 			WebDriverWait(self.driver, 10).until(

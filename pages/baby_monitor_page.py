@@ -24,6 +24,7 @@ class BabyMonitorPage():
         self.stream_title = "com.compal.bioslab.pixsee.pixm01:id/tvStreamTitle"
         self.tutor_id = "com.compal.bioslab.pixsee.pixm01:id/tvDescription"
         self.tutor_title = "com.compal.bioslab.pixsee.pixm01:id/tvTitle"
+        self.connectingStatusText = "com.compal.bioslab.pixsee.pixm01:id/tvConnectingStatus"
 
         self.captureButton_xpath = '//android.widget.RelativeLayout[@resource-id="com.compal.bioslab.pixsee.pixm01:id/btnSwipeCapture"]/android.widget.ImageView[2]'
 
@@ -126,6 +127,19 @@ class BabyMonitorPage():
             EC.presence_of_element_located((AppiumBy.ID, self.homeButton))
         )
         self.driver.find_element(AppiumBy.ID, self.homeButton).click()
+    def get_stream_title(self):
+        WebDriverWait(self.driver, 20).until(
+            EC.presence_of_element_located((AppiumBy.ID, self.stream_title))
+        )
+        element = self.driver.find_element("id", self.stream_title)
+        return element.text
+
+    def get_connecting_status_text(self):
+        WebDriverWait(self.driver, 20).until(
+            EC.presence_of_element_located((AppiumBy.ID, self.connectingStatusText))
+        )
+        element = self.driver.find_element("id", self.connectingStatusText)
+        return element.text
     def is_connected(self):
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((AppiumBy.ID, self.sleepButton))

@@ -8,6 +8,7 @@ import time
 class MenuPage():
 	def __init__(self, driver):
 		self.driver = driver
+		self.buttonText_class_name = "android.widget.TextView"
 		self.profileButton = "com.compal.bioslab.pixsee.pixm01:id/civProfileWelcomeAct"
 		self.homeButton = "com.compal.bioslab.pixsee.pixm01:id/ibMenuButtonHome"
 		self.notificationsButton = "com.compal.bioslab.pixsee.pixm01:id/btNotificationCenter"
@@ -156,70 +157,80 @@ class MenuPage():
 		WebDriverWait(self.driver, 20).until(
 			EC.presence_of_element_located(("id", self.membersButton))
 		)
-		element = self.driver.find_element(AppiumBy.ID, self.membersButton)
+		parent_element = self.driver.find_element(AppiumBy.ID, self.membersButton)
+		element = parent_element.find_element(AppiumBy.CLASS_NAME, self.buttonText_class_name)
 		return element.text
 
 	def get_settings_button_text(self):
 		WebDriverWait(self.driver, 20).until(
 			EC.presence_of_element_located(("id", self.settingsButton))
 		)
-		element = self.driver.find_element(AppiumBy.ID, self.settingsButton)
+		parent_element = self.driver.find_element(AppiumBy.ID, self.settingsButton)
+		element = parent_element.find_element(AppiumBy.CLASS_NAME, self.buttonText_class_name)
 		return element.text
 
 	def get_friends_button_text(self):
 		WebDriverWait(self.driver, 20).until(
 			EC.presence_of_element_located(("id", self.friendsButton))
 		)
-		element = self.driver.find_element(AppiumBy.ID, self.friendsButton)
+		parent_element = self.driver.find_element(AppiumBy.ID, self.friendsButton)
+		element = parent_element.find_element(AppiumBy.CLASS_NAME, self.buttonText_class_name)
 		return element.text
 
 	def get_album_button_text(self):
 		WebDriverWait(self.driver, 20).until(
 			EC.presence_of_element_located(("id", self.albumButton))
 		)
-		element = self.driver.find_element(AppiumBy.ID, self.albumButton)
+		parent_element = self.driver.find_element(AppiumBy.ID, self.albumButton)
+		element = parent_element.find_element(AppiumBy.CLASS_NAME, self.buttonText_class_name)
 		return element.text
 
 	def get_faces_button_text(self):
 		WebDriverWait(self.driver, 20).until(
 			EC.presence_of_element_located(("id", self.facesButton))
 		)
-		element = self.driver.find_element(AppiumBy.ID, self.facesButton)
+		parent_element = self.driver.find_element(AppiumBy.ID, self.facesButton)
+		element = parent_element.find_element(AppiumBy.CLASS_NAME, self.buttonText_class_name)
 		return element.text
 
 	def get_frames_button_text(self):
 		WebDriverWait(self.driver, 20).until(
 			EC.presence_of_element_located(("id", self.framesButton))
 		)
-		element = self.driver.find_element(AppiumBy.ID, self.framesButton)
+		parent_element = self.driver.find_element(AppiumBy.ID, self.framesButton)
+		element = parent_element.find_element(AppiumBy.CLASS_NAME, self.buttonText_class_name)
 		return element.text
 
 	def get_subscription_button_text(self):
 		WebDriverWait(self.driver, 20).until(
 			EC.presence_of_element_located(("id", self.subscriptionButton))
 		)
-		element = self.driver.find_element(AppiumBy.ID, self.subscriptionButton)
+		parent_element = self.driver.find_element(AppiumBy.ID, self.subscriptionButton)
+		element = parent_element.find_element(AppiumBy.CLASS_NAME, self.buttonText_class_name)
 		return element
 
 	def get_assistant_button_text(self):
 		WebDriverWait(self.driver, 20).until(
 			EC.presence_of_element_located(("id", self.assistantButton))
 		)
-		element = self.driver.find_element(AppiumBy.ID, self.assistantButton)
+		parent_element = self.driver.find_element(AppiumBy.ID, self.assistantButton)
+		element = parent_element.find_element(AppiumBy.CLASS_NAME, self.buttonText_class_name)
 		return element.text
 
 	def get_about_button_text(self):
 		WebDriverWait(self.driver, 20).until(
 			EC.presence_of_element_located(("id", self.aboutButton))
 		)
-		element = self.driver.find_element(AppiumBy.ID, self.aboutButton)
+		parent_element = self.driver.find_element(AppiumBy.ID, self.aboutButton)
+		element = parent_element.find_element(AppiumBy.CLASS_NAME, self.buttonText_class_name)
 		return element.text
 
 	def get_logout_button_text(self):
 		WebDriverWait(self.driver, 20).until(
 			EC.presence_of_element_located(("id", self.logoutButton))
 		)
-		element = self.driver.find_element(AppiumBy.ID, self.logoutButton)
+		parent_element = self.driver.find_element(AppiumBy.ID, self.logoutButton)
+		element = parent_element.find_element(AppiumBy.CLASS_NAME, self.buttonText_class_name)
 		return element.text
 
 	def is_in_menu_page(self):
