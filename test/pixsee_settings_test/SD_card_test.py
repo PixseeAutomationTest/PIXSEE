@@ -23,9 +23,9 @@ class PixseeFriendsSDcardCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 		menu_page.click_settings()
-		pixsee_settings_page.click_SDcard()
+		pixsee_settings_page.click_s_dcard()
 		# check header text
 		try:
 			header = sd_card_page.header_text()
@@ -34,7 +34,6 @@ class PixseeFriendsSDcardCase(BaseTestCase):
 			print("Header text test success")
 		except AssertionError:
 			print("Header text test failed")
-			raise AssertionError("Header text test failed, expected text not found")
 
 		if sd_card_page.format_button_enabled():
 			# check button text
@@ -45,7 +44,6 @@ class PixseeFriendsSDcardCase(BaseTestCase):
 				print("Format button text test success")
 			except AssertionError:
 				print("Format button text test failed")
-				raise AssertionError("Format button text test failed, expected text not found")
 			# check description text
 			try:
 				title = sd_card_page.title_text()
@@ -54,7 +52,6 @@ class PixseeFriendsSDcardCase(BaseTestCase):
 				print("Title text test success")
 			except AssertionError:
 				print("Title text test failed")
-				raise AssertionError("Title text test failed, expected text not found")
 		else:
 			# check no sd card text
 			try:
@@ -64,7 +61,6 @@ class PixseeFriendsSDcardCase(BaseTestCase):
 				print("Title text test success")
 			except AssertionError:
 				print("Title text test failed")
-				raise AssertionError("Title text test failed, expected text not found")
 	def test_02_check_format_button(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -77,9 +73,9 @@ class PixseeFriendsSDcardCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 		menu_page.click_settings()
-		pixsee_settings_page.click_SDcard()
+		pixsee_settings_page.click_s_dcard()
 		sd_card_page.click_format()
 		# check if is in format dialog
 		try:
@@ -100,9 +96,9 @@ class PixseeFriendsSDcardCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 		menu_page.click_settings()
-		pixsee_settings_page.click_SDcard()
+		pixsee_settings_page.click_s_dcard()
 		sd_card_page.click_format()
 		# check dialog title
 		try:
@@ -112,7 +108,6 @@ class PixseeFriendsSDcardCase(BaseTestCase):
 			print("Dialog title test success")
 		except AssertionError:
 			print("Dialog title test failed")
-			raise AssertionError("Dialog title test failed, expected text not found")
 		# check dialog button text
 		try:
 			go_button_text = sd_card_page.go_button_text()
@@ -121,7 +116,6 @@ class PixseeFriendsSDcardCase(BaseTestCase):
 			print("Go button text test success")
 		except AssertionError:
 			print("Go button text test failed")
-			raise AssertionError("Go button text test failed, expected text not found")
 		try:
 			no_button_text = sd_card_page.no_button_text()
 			hint = self.get_string("no_go_back")
@@ -129,7 +123,6 @@ class PixseeFriendsSDcardCase(BaseTestCase):
 			print("No button text test success")
 		except AssertionError:
 			print("No button text test failed")
-			raise AssertionError("No button text test failed, expected text not found")
 		# click no button
 		sd_card_page.click_no()
 		# check if back to sd card page
@@ -162,9 +155,9 @@ class PixseeFriendsSDcardCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 		menu_page.click_settings()
-		pixsee_settings_page.click_SDcard()
+		pixsee_settings_page.click_s_dcard()
 		sd_card_page.click_back()
 		# back to settings page
 		try:

@@ -46,7 +46,7 @@ class LoginPage():
             )
             element = self.driver.find_element("id", self.emailErrorText)
             return element.text
-        except:
+        except AssertionError :
             return None
 
     def get_password_error_text(self):
@@ -56,5 +56,5 @@ class LoginPage():
             )
             element = self.driver.find_element("id", self.passwordErrorText)
             return element.text
-        except:
+        except AssertionError:
             return None

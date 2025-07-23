@@ -34,7 +34,7 @@ class PixseeFriendsDetPage():
 		self.DiscardNo = "com.compal.bioslab.pixsee.pixm01:id/btnNegativeAlertDialog"
 	# status
 	def is_switch_on(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, 3).until(
 				EC.presence_of_element_located((AppiumBy.ID, self.DetectionType))
 		)
 		switch = self.driver.find_element(AppiumBy.ID, self.DetectionType)
@@ -45,7 +45,7 @@ class PixseeFriendsDetPage():
 				EC.presence_of_element_located((AppiumBy.ID, self.Header))
 			)
 			return True
-		except:
+		except AssertionError:
 			return False
 	def is_in_timer(self):
 		try:
@@ -55,7 +55,7 @@ class PixseeFriendsDetPage():
 			self.driver.find_element(AppiumBy.ID, self.Cancel)
 			return True
 
-		except:
+		except AssertionError:
 			return False
 	def is_in_discard_dialog(self):
 		try:
@@ -65,7 +65,7 @@ class PixseeFriendsDetPage():
 			self.driver.find_element(AppiumBy.ID, self.DiscardMessage)
 			return True
 
-		except:
+		except AssertionError:
 			return False
 
 	# click
@@ -240,6 +240,14 @@ class PixseeFriendsDetPage():
 
 		self.driver.swipe(x, start_y, x, end_y, 500)  # 500 毫秒完成滑動
 		time.sleep(1)
+
+	def is_save_enable(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located((AppiumBy.ID, self.Save))
+		)
+		button = self.driver.find_element(AppiumBy.ID, self.Save)
+		is_enable = button.get_attribute("enabled")
+		return is_enable == "true"
 
 
 

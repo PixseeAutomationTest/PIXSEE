@@ -27,7 +27,7 @@ class MenuPage():
 		self.aboutButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsAbout"
 		self.logoutButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsLogout"
 
-	def PixseeSettingstxt_text(self):
+	def pixsee_settingstxt_text(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
 				EC.presence_of_element_located(("id", self.pixseesettingstxt))

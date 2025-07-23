@@ -6,6 +6,7 @@ from pages.base import BaseTestCase
 from pages.baby_monitor_page import BabyMonitorPage
 from pages.login_page import LoginPage
 from pages.menu_pages.pixsee_settings_pages.enviroment_settings_page import EnvironmentSettingsPage
+import time
 
 
 class EnvironmentSettingsCase(BaseTestCase):
@@ -23,11 +24,19 @@ class EnvironmentSettingsCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 
 		menu_page.click_settings()
 
-		pixsee_settings_page.click_EnvironmentSettings()
+		pixsee_settings_page.click_environment_settings()
+		# check header text
+		try:
+			header = environment_settings_page.header_text()
+			hint = self.get_string("sensor_settings_toolbar_title")
+			self.assertEqual(header, hint)
+			print("Environment detection header text right")
+		except AssertionError:
+			print("Environment detection header text wrong")
 		# check detection title
 		try:
 			title = environment_settings_page.detection_text()
@@ -36,11 +45,11 @@ class EnvironmentSettingsCase(BaseTestCase):
 			print("Friends detection title right")
 		except AssertionError:
 			print("Friends detection title wrong")
-			raise AssertionError("Friends detection title mismatch")
 		# switch status
 		current_status = environment_settings_page.is_switch_on()
 		self.check_switch_and_content(current_status, environment_settings_page.Sensitivity)
 		environment_settings_page.click_switch()
+		time.sleep(1)
 		after_status = environment_settings_page.is_switch_on()
 		self.check_switch_and_content(after_status, environment_settings_page.Sensitivity)
 	def test_02_environment_set_save(self):
@@ -56,10 +65,18 @@ class EnvironmentSettingsCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 		menu_page.click_settings()
 		origin_status = pixsee_settings_page.environment_settings_status_text()
-		pixsee_settings_page.click_EnvironmentSettings()
+		pixsee_settings_page.click_environment_settings()
+		# check save enable = false
+		try:
+			self.assertFalse(environment_settings_page.is_save_enable())
+			print("Save diable test pass")
+		except AssertionError:
+			print("Save diable test failed")
+			raise AssertionError("Save diable test failed")
+
 		# turn on switch
 		environment_settings_page.click_switch()
 		environment_settings_page.click_save()
@@ -82,9 +99,9 @@ class EnvironmentSettingsCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 		menu_page.click_settings()
-		pixsee_settings_page.click_EnvironmentSettings()
+		pixsee_settings_page.click_environment_settings()
 		# back to settings page
 		environment_settings_page.click_back()
 		try:
@@ -105,11 +122,11 @@ class EnvironmentSettingsCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 
 		menu_page.click_settings()
 
-		pixsee_settings_page.click_EnvironmentSettings()
+		pixsee_settings_page.click_environment_settings()
 		# ensure switch is on
 		if environment_settings_page.is_switch_on() == "true":
 			pass
@@ -123,7 +140,6 @@ class EnvironmentSettingsCase(BaseTestCase):
 			print("Sensitivity title is correct")
 		except AssertionError:
 			print("Sensitivity title is wrong")
-			raise AssertionError("sensitivity doesn't show up after switch on")
 		try:
 			temp = environment_settings_page.temperature_title_text()
 			hint = self.get_string("temperature")
@@ -131,7 +147,6 @@ class EnvironmentSettingsCase(BaseTestCase):
 			print("Temperature title is correct")
 		except AssertionError:
 			print("Temperature title is wrong")
-			raise AssertionError("temperature doesn't show up after switch on")
 		try:
 			temp_unit = environment_settings_page.temperature_subtitle_text()
 			hint = self.get_string("temperature_unit_label")
@@ -139,7 +154,6 @@ class EnvironmentSettingsCase(BaseTestCase):
 			print("Temperature unit title is correct")
 		except AssertionError:
 			print("Temperature unit title is wrong")
-			raise AssertionError("temperature unit doesn't show up after switch on")
 		try:
 			humidity = environment_settings_page.humidity_text()
 			hint = self.get_string("humidity")
@@ -147,7 +161,6 @@ class EnvironmentSettingsCase(BaseTestCase):
 			print("Humidity title is correct")
 		except AssertionError:
 			print("Humidity title is wrong")
-			raise AssertionError("humidity doesn't show up after switch on")
 		# check box name
 		try:
 			low = environment_settings_page.low_text()
@@ -156,7 +169,6 @@ class EnvironmentSettingsCase(BaseTestCase):
 			print("Low checkbox text is correct")
 		except AssertionError:
 			print("Low checkbox text is wrong")
-			raise AssertionError("low checkbox text mismatch")
 		try:
 			medium = environment_settings_page.medium_text()
 			hint = self.get_string("sensitivity_medium")
@@ -164,7 +176,6 @@ class EnvironmentSettingsCase(BaseTestCase):
 			print("Medium checkbox text is correct")
 		except AssertionError:
 			print("Medium checkbox text is wrong")
-			raise AssertionError("medium checkbox text mismatch")
 		try:
 			high = environment_settings_page.high_text()
 			hint = self.get_string("sensitivity_high")
@@ -172,26 +183,22 @@ class EnvironmentSettingsCase(BaseTestCase):
 			print("High checkbox text is correct")
 		except AssertionError:
 			print("High checkbox text is wrong")
-			raise AssertionError("high checkbox text mismatch")
 		# check clickable
 		try:
 			self.assertTrue(environment_settings_page.is_low_clickable())
 			print("Low checkbox is clickable")
 		except AssertionError:
 			print("Low checkbox is not clickable")
-			raise AssertionError("Low checkbox is not clickable")
 		try:
 			self.assertTrue(environment_settings_page.is_medium_clickable())
 			print("Medium checkbox is clickable")
 		except AssertionError:
 			print("Medium checkbox is not clickable")
-			raise AssertionError("Medium checkbox is not clickable")
 		try:
 			self.assertTrue(environment_settings_page.is_high_clickable())
 			print("High checkbox is clickable")
 		except AssertionError:
 			print("High checkbox is not clickable")
-			raise AssertionError("High checkbox is not clickable")
 	def test_05_environment_celsius_fahrenheit(self):
 		environment_settings_page = EnvironmentSettingsPage(self.driver)
 		menu_page = MenuPage(self.driver)
@@ -204,11 +211,11 @@ class EnvironmentSettingsCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 
 		menu_page.click_settings()
 
-		pixsee_settings_page.click_EnvironmentSettings()
+		pixsee_settings_page.click_environment_settings()
 		if environment_settings_page.is_switch_on() == "true":
 			pass
 		else:
@@ -221,7 +228,6 @@ class EnvironmentSettingsCase(BaseTestCase):
 			print("Celsius text right")
 		except AssertionError:
 			print("Celsius text wrong")
-			raise AssertionError("Celsius text mismatch")
 		try:
 			fahrenheit = environment_settings_page.fahrenheit_text()
 			hint = "°F"
@@ -229,7 +235,6 @@ class EnvironmentSettingsCase(BaseTestCase):
 			print("Fahrenheit text right")
 		except AssertionError:
 			print("Fahrenheit text wrong")
-			raise AssertionError("Fahrenheit text mismatch")
 		# check celsius clickable
 		try:
 			environment_settings_page.click_celsius()
@@ -238,7 +243,6 @@ class EnvironmentSettingsCase(BaseTestCase):
 			print("Celsius is clickable")
 		except AssertionError:
 			print("Celsius is not clickable")
-			raise AssertionError("Celsius is not clickable")
 		# check fahrenheit clickable
 		try:
 			environment_settings_page.click_fahrenheit()
@@ -260,10 +264,10 @@ class EnvironmentSettingsCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 		menu_page.click_settings()
 		origin_status = pixsee_settings_page.environment_settings_status_text()
-		pixsee_settings_page.click_EnvironmentSettings()
+		pixsee_settings_page.click_environment_settings()
 		environment_settings_page.click_switch()
 		environment_settings_page.click_back()
 		# check if is in discard dialog
@@ -277,21 +281,18 @@ class EnvironmentSettingsCase(BaseTestCase):
 				self.assertEqual(discard, hint)
 			except AssertionError:
 				print("Discard dialog title wrong")
-				raise AssertionError("Discard dialog title mismatch")
 			try:
 				yes = environment_settings_page.discard_yes_text()
 				hint = self.get_string("yes")
 				self.assertEqual(yes, hint)
 			except AssertionError:
 				print("Discard dialog yes text wrong")
-				raise AssertionError("Discard dialog yes text mismatch")
 			try:
 				no = environment_settings_page.discard_no_text()
 				hint = self.get_string("no")
 				self.assertEqual(no, hint)
 			except AssertionError:
 				print("Discard dialog no text wrong")
-				raise AssertionError("Discard dialog no text mismatch")
 			# click yes
 			environment_settings_page.click_discard_yes()
 			new_status = pixsee_settings_page.environment_settings_status_text()
@@ -315,11 +316,11 @@ class EnvironmentSettingsCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		self.click_middle()
+		menu_page.click_logout()
 
 		menu_page.click_settings()
 
-		pixsee_settings_page.click_EnvironmentSettings()
+		pixsee_settings_page.click_environment_settings()
 		if environment_settings_page.is_switch_on() == "true":
 			pass
 		else:

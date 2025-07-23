@@ -28,9 +28,8 @@ class BaseTestCase(unittest.TestCase):
         capabilities.auto_grant_permissions = True
         capabilities.new_command_timeout = 300
         subprocess.run([
-            "adb", "shell", "pm", "revoke",
-             "com.compal.bioslab.pixsee.pixm01",  # ← 這裡改成你的 app package name
-            "android.permission.POST_NOTIFICATIONS"
+            "adb", "shell", "cmd", "notification", "suspend_package",
+            "com.compal.bioslab.pixsee.pixm01"
         ])
         self.tutor_id = "com.compal.bioslab.pixsee.pixm01:id/tvDescription"
 
@@ -70,7 +69,7 @@ class BaseTestCase(unittest.TestCase):
         )
     def click_middle(self):
         size = self.driver.get_window_size()
-        x = size['width'] // 2
+        x = size['width'] // 5
         y = size['height'] // 2
 
         self.driver.execute_script("mobile: clickGesture", {

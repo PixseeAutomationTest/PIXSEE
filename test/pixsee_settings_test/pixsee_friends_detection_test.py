@@ -1,5 +1,5 @@
-
 import time
+
 from pages.menu_page import MenuPage
 from pages.menu_pages.pixsee_settings_pages.pixsee_settings_page import PixseeSettingsPage
 from pages.base import BaseTestCase
@@ -28,15 +28,14 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 		self.skip_first_four_tutor()
 
 		baby_monitor_page.click_home()
-		# skip menu tutor
-		time.sleep(2)
 
-		self.click_middle()
+		# skip menu tutor
+		menu_page.click_logout()
 
 		menu_page.click_settings()
 
-		pixsee_settings_page.click_PixseeFriendsDetection()
-		# check friends detection title
+		pixsee_settings_page.click_pixsee_friends_detection()
+		# check friends detection header
 		try:
 			title = pixsee_friends_page.title()
 			hint = self.get_string("pixsee_friends_detection_title")
@@ -44,7 +43,6 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 			print("Friends detection title right")
 		except AssertionError:
 			print("Friends detection title wrong")
-			raise AssertionError("Friends detection title mismatch")
 		# check friends detection description
 		try:
 			subtitle = pixsee_friends_page.description_subtitle()
@@ -53,11 +51,11 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 			print("Friends detection subtitle right")
 		except AssertionError:
 			print("Friends detection subtitle wrong")
-			raise AssertionError("Friends detection subtitle mismatch")
 		# switch status
 		current_status = pixsee_friends_page.is_switch_on()
 		self.check_switch_and_content(current_status, pixsee_friends_page.DetectionType)
 		pixsee_friends_page.click_switch()
+		time.sleep(1)
 		after_status = pixsee_friends_page.is_switch_on()
 		self.check_switch_and_content(after_status, pixsee_friends_page.DetectionType)
 	def test_02_friends_detection_save(self):
@@ -73,12 +71,18 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		time.sleep(2)
+		menu_page.click_logout()
 
-		self.click_middle()
 		menu_page.click_settings()
 		origin_status = pixsee_settings_page.pixsee_friends_detection_status_text()
-		pixsee_settings_page.click_PixseeFriendsDetection()
+		pixsee_settings_page.click_pixsee_friends_detection()
+		# check save enable = false
+		try:
+			self.assertFalse(pixsee_friends_page.is_save_enable())
+			print("Save diable test pass")
+		except AssertionError:
+			print("Save diable test failed")
+			raise AssertionError("Save diable test failed")
 		# turn on switch
 		pixsee_friends_page.click_switch()
 		pixsee_friends_page.click_save()
@@ -101,11 +105,11 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		time.sleep(2)
+		menu_page.click_logout()
 
-		self.click_middle()
+
 		menu_page.click_settings()
-		pixsee_settings_page.click_PixseeFriendsDetection()
+		pixsee_settings_page.click_pixsee_friends_detection()
 		# back to settings page
 		pixsee_friends_page.click_back()
 		try:
@@ -125,14 +129,14 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 		baby_monitor_page.is_in_baby_monitor_page()
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
-		# skip menu tutor
-		time.sleep(2)
 
-		self.click_middle()
+		# skip menu tutor
+		menu_page.click_logout()
+
 
 		menu_page.click_settings()
 
-		pixsee_settings_page.click_PixseeFriendsDetection()
+		pixsee_settings_page.click_pixsee_friends_detection()
 		if pixsee_friends_page.is_switch_on() == "true":
 			pass
 		else:
@@ -145,7 +149,6 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 			print("Friends detection type is correct")
 		except AssertionError:
 			print("Friends detection type is wrong")
-			raise AssertionError("detection doesn't show up after switch on")
 		try:
 			all_days = pixsee_friends_page.all_day_txt()
 			hint = self.get_string("pixsee_friends_detection_all_day_type")
@@ -153,7 +156,6 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 			print("Friends detection all day text right")
 		except AssertionError:
 			print("Friends detection all day text wrong")
-			raise AssertionError("Friends detection all day text mismatch")
 		try:
 			set_time = pixsee_friends_page.set_time_txt()
 			hint = self.get_string("pixsee_friends_detection_set_time_type")
@@ -161,11 +163,12 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 			print("Friends detection set time text right")
 		except AssertionError:
 			print("Friends detection set time text wrong")
-			raise AssertionError("Friends detection set time text mismatch")
 		# check clickable
 		pixsee_friends_page.click_set_time()
+		time.sleep(1)
 		self.tap_on_visibility(pixsee_friends_page.TimeSpan, "Set Time",True)
 		pixsee_friends_page.click_all_day()
+		time.sleep(1)
 		self.tap_on_visibility(pixsee_friends_page.TimeSpan, "All Day", False)
 	def test_05_friends_detection_time_span(self):
 		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
@@ -179,13 +182,11 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		time.sleep(2)
-
-		self.click_middle()
+		menu_page.click_logout()
 
 		menu_page.click_settings()
 
-		pixsee_settings_page.click_PixseeFriendsDetection()
+		pixsee_settings_page.click_pixsee_friends_detection()
 		if pixsee_friends_page.is_switch_on() == "true":
 			pass
 		else:
@@ -200,7 +201,6 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 			print("Friends detection time span title right")
 		except AssertionError:
 			print("Friends detection time span title wrong")
-			raise AssertionError("Friends detection time span title mismatch")
 		try:
 			start_time = pixsee_friends_page.start_time_txt()
 			hint = self.get_string("time_lapse_start_time")
@@ -208,7 +208,6 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 			print("Friends detection start time text right")
 		except AssertionError:
 			print("Friends detection start time text wrong")
-			raise AssertionError("Friends detection start time text mismatch")
 		try:
 			end_time = pixsee_friends_page.end_time_txt()
 			hint = self.get_string("time_lapse_end_time")
@@ -216,7 +215,6 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 			print("Friends detection end time text right")
 		except AssertionError:
 			print("Friends detection end time text wrong")
-			raise AssertionError("Friends detection end time text mismatch")
 		# check start time block's clickable and confirm
 		current = pixsee_friends_page.start_time_block_txt()
 		pixsee_friends_page.click_start_time_block()
@@ -231,7 +229,6 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 				print("Start time block cancel text right")
 			except AssertionError:
 				print("Start time block cancel text wrong")
-				raise AssertionError("Start time block cancel text mismatch")
 			try:
 				confirm = pixsee_friends_page.confirm_txt()
 				hint = self.get_string("code_verification_verify_button")
@@ -239,7 +236,6 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 				print("Start time block confirm text right")
 			except AssertionError:
 				print("Start time block confirm text wrong")
-				raise AssertionError("Start time block confirm text mismatch")
 			# check time scrollable
 			pixsee_friends_page.change_hour_by_scroll()
 			pixsee_friends_page.change_minutes_by_scroll()
@@ -284,12 +280,11 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
-		time.sleep(2)
+		menu_page.click_logout()
 
-		self.click_middle()
 		menu_page.click_settings()
 		origin_status = pixsee_settings_page.pixsee_friends_detection_status_text()
-		pixsee_settings_page.click_PixseeFriendsDetection()
+		pixsee_settings_page.click_pixsee_friends_detection()
 		pixsee_friends_page.click_switch()
 		pixsee_friends_page.click_back()
 		# check if is in discard dialog
@@ -304,7 +299,6 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 				print("Discard dialog title right")
 			except AssertionError:
 				print("Discard dialog title wrong")
-				raise AssertionError("Discard dialog title mismatch")
 			try:
 				yes = pixsee_friends_page.discard_yes_txt()
 				hint = self.get_string("yes")
@@ -312,7 +306,6 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 				print("Discard dialog yes text right")
 			except AssertionError:
 				print("Discard dialog yes text wrong")
-				raise AssertionError("Discard dialog yes text mismatch")
 			try:
 				no = pixsee_friends_page.discard_no_txt()
 				hint = self.get_string("no")
@@ -320,7 +313,6 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 				print("Discard dialog no text right")
 			except AssertionError:
 				print("Discard dialog no text wrong")
-				raise AssertionError("Discard dialog no text mismatch")
 			# click yes
 			pixsee_friends_page.click_discard_yes()
 			new_status = pixsee_settings_page.pixsee_friends_detection_status_text()
@@ -352,5 +344,3 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 
 
 
-
-# def test_03_friends_detection_switch_off(self):

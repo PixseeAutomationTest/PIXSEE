@@ -6,7 +6,7 @@ from pages.baby_monitor_page import BabyMonitorPage
 from pages.photo_page import PhotoPage
 from pages.menu_page import MenuPage
 import time
-import datetime
+
 
 class NewPhotoCheckCase(BaseTestCase):
 	def setUp(self):

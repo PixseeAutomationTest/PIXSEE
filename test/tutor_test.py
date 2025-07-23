@@ -2,8 +2,6 @@ from pages.base import BaseTestCase
 import unittest
 from pages.login_page import LoginPage
 from pages.baby_monitor_page import BabyMonitorPage
-import time
-from pages.menu_page import MenuPage
 
 
 class TutorCase(BaseTestCase):
@@ -77,7 +75,6 @@ class TutorCase(BaseTestCase):
                 except AssertionError:
                         print("Fourth tutor description FAIL: text mismatch")
         def test_menu_tutor(self):
-                menu_page = MenuPage(self.driver)
                 baby_monitor_page = BabyMonitorPage(self.driver)
                 login_page = LoginPage(self.driver)
 
