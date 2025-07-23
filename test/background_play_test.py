@@ -1,8 +1,8 @@
 from pages.base import BaseTestCase
 
 from pages.baby_monitor_page import BabyMonitorPage
-from pages.menu_pages.menu_page import MenuPage
-from pages.menu_pages.assistant_pages.assistant_page import AssistantPage
+from pages.menu_page import MenuPage
+from pages.menu_pages.assistant_page import AssistantPage
 from pages.menu_pages.assistant_pages.background_play_page import BackgroundPlayPage
 
 class BackgroundPlayTest(BaseTestCase):
