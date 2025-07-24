@@ -428,6 +428,27 @@ class AreaDetectionCase(BaseTestCase):
 			print("baby out clickable")
 		except AssertionError :
 			print("baby out unclickable")
+		# check by color
+		light_blue_range = ((0, 0, 0), (150, 255, 255))
+		light_orange_range = ((151, 0, 0), (255, 255, 255))
+		area_detection_page.click_baby_in()
+		time.sleep(1)
+		x, y = area_detection_page.find_stream_left_top()
+		result = area_detection_page.is_color_in_range( x, y, light_blue_range)
+		# check baby in color
+		if result:
+			print("baby in color is correct")
+		else:
+			print("baby in color is wrong")
+		area_detection_page.click_baby_out()
+		time.sleep(1)
+		x, y = area_detection_page.find_stream_left_top()
+		result = area_detection_page.is_color_in_range(x, y, light_orange_range)
+		# check baby out color
+		if result:
+			print("baby out color is correct")
+		else:
+			print("baby out color is wrong")
 	def test_09_area_detection_turn_off_page(self):
 		area_detection_page = AreaDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
