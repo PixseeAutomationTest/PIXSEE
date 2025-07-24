@@ -306,7 +306,6 @@ class EnvironmentSettingsPage():
 		except AssertionError:
 			return False
 
-
 	def is_low_clickable(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.LowCheckBox))
@@ -336,7 +335,30 @@ class EnvironmentSettingsPage():
 		is_enable = button.get_attribute("enabled")
 		return is_enable == "true"
 
-
+	def temperature_bar_location(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located((AppiumBy.ID, self.TemperatureBar))
+		)
+		bar = self.driver.find_element(AppiumBy.ID, self.TemperatureBar)
+		return bar.location
+	def temperature_bar_size(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located((AppiumBy.ID, self.TemperatureBar))
+		)
+		bar = self.driver.find_element(AppiumBy.ID, self.TemperatureBar)
+		return bar.size
+	def humidity_bar_location(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located((AppiumBy.ID, self.HumidityBar))
+		)
+		bar = self.driver.find_element(AppiumBy.ID, self.HumidityBar)
+		return bar.location
+	def humidity_bar_size(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located((AppiumBy.ID, self.HumidityBar))
+		)
+		bar = self.driver.find_element(AppiumBy.ID, self.HumidityBar)
+		return bar.size
 
 
 

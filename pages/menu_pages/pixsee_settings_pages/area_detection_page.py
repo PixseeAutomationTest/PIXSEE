@@ -1,6 +1,7 @@
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from PIL import Image
 
 class AreaDetectionPage():
 	def __init__(self, driver):
@@ -40,6 +41,7 @@ class AreaDetectionPage():
 		self.DiscardNo = "com.compal.bioslab.pixsee.pixm01:id/btnNegativeAlertDialog"
 		self.DiscardYes = "com.compal.bioslab.pixsee.pixm01:id/btnPositiveAlertDialog"
 
+		self.Stream = "com.compal.bioslab.pixsee.pixm01:id/area_stream"
 	def click_skip(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.Skip))
@@ -302,7 +304,6 @@ class AreaDetectionPage():
 		except AssertionError:
 			return None
 
-
 	def is_in_area_detection_tutor_page(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
@@ -393,3 +394,38 @@ class AreaDetectionPage():
 			return True
 		except AssertionError:
 			return False
+
+	def find_stream_left_top(self):
+		element_color = self.driver.find_element(AppiumBy.ID, self.Stream)
+		x = element_color.location['x']
+		y = element_color.location['y']
+		'''
+		w = element_color.size['width']
+		h = element_color.size['height']
+		center_x = x + w // 2
+		center_y = y + h // 2
+		'''
+		return x, y
+
+	def is_color_in_range(self, x, y, color_range):
+		"""
+		Take a screenshot and check if the pixel at coordinates (x, y) is within the given RGB color range.。
+
+		:param y: vertical coordinate of the pixel to check
+		:param x: horizontal coordinate of the pixel to check
+		:param color_range: color range, ((R_min, G_min, B_min), (R_max, G_max, B_max))
+		:return: True or False
+		"""
+		screenshot_path = "screen.png"
+		self.driver.save_screenshot(screenshot_path)
+
+		img = Image.open(screenshot_path)
+		pixel = img.getpixel((x, y))  # send back (R, G, B)
+
+		(r_min, g_min, b_min), (r_max, g_max, b_max) = color_range
+		r, g, b = pixel[:3]
+
+		in_range = (r_min <= r <= r_max) and (g_min <= g <= g_max) and (b_min <= b <= b_max)
+		print(f"Pixel at ({x},{y}) = {pixel}, in range: {in_range}")
+		return in_range
+
