@@ -188,7 +188,6 @@ class TimeLapseVideoCase(BaseTestCase):
             print("subscribe failed")
             raise AssertionError("Not in time lapse video page after subscribe")
 
-
     # already subscribed
     def test_05_time_lapse_video_switch(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)

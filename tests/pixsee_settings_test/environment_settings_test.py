@@ -7,6 +7,7 @@ from pages.baby_monitor_page import BabyMonitorPage
 from pages.login_page import LoginPage
 from pages.menu_pages.pixsee_settings_pages.enviroment_settings_page import EnvironmentSettingsPage
 import time
+import re
 
 
 class EnvironmentSettingsCase(BaseTestCase):
@@ -325,22 +326,26 @@ class EnvironmentSettingsCase(BaseTestCase):
 			pass
 		else:
 			environment_settings_page.click_switch()
-		# scroll
-		import re
-		text_before = environment_settings_page.temperature_range_text()  # 假設抓取的文字是 "Temperature range: ?-?℃"
-		# 用正則表達式抓出所有整數
+		# number before scrolling
+		text_before = environment_settings_page.temperature_range_text()
+		# find numbers in the text
 		numbers_before = re.findall(r'\d+', text_before)
-		# 轉成整數型別
+		# convert the found numbers str list to integers list
 		numbers_before = list(map(int, numbers_before))
-		highnum_before = numbers_before[1]  # 滑動前最高溫度
-		lownum_before = numbers_before[0]  # 滑動前最低溫度
+		highnum_before = numbers_before[1]
+		lownum_before = numbers_before[0]
 
-		# 滑動操作
+		# scroll
 		finger = PointerInput(kind="touch", name="finger")
 		action_builder = ActionBuilder(self.driver, mouse=finger)
-		x_start = 117
+		xy = environment_settings_page.temperature_bar_location()
+		size = environment_settings_page.temperature_bar_size()
+		size_height = size["height"] / 2
+		y = xy["y"] + size_height  # Adjust y to the middle of the element
+		x_start = xy["x"] + 10
 		x_end = 300
-		y = (1197 + 1344) // 2  # = 1270
+		print(xy["x"], xy["y"])
+		print(size)
 		action_builder.pointer_action.move_to_location(x_start, y)
 		action_builder.pointer_action.pointer_down()
 		action_builder.pointer_action.pause(0.2)
@@ -348,14 +353,74 @@ class EnvironmentSettingsCase(BaseTestCase):
 		action_builder.pointer_action.pointer_up()
 		action_builder.perform()
 
-		# 抓取滑動後的溫度範圍
+		# number after scrolling
 		text_after = environment_settings_page.temperature_range_text()  # 假設抓取的文字是 "Temperature range: ?-?℃"
 		numbers_after = re.findall(r'\d+', text_after)
 		numbers_after = list(map(int, numbers_after))
-		highnum_after = numbers_after[1]  # 滑動後最高溫度
-		lownum_after = numbers_after[0]  # 滑動後最低溫度
+		highnum_after = numbers_after[1]
+		lownum_after = numbers_after[0]
 
-		# 比較滑動前後的數值
+		# compare before and after values
+		if highnum_after > highnum_before and lownum_after < lownum_before:
+			print("Scrolling bar works")
+		else:
+			print("Scrolling bar doesn't work")
+			raise AssertionError("Scrolling bar doesn't work, values not changed")
+	def test_08_environment_set_humidity_scrolling_bar(self):
+		environment_settings_page = EnvironmentSettingsPage(self.driver)
+		menu_page = MenuPage(self.driver)
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+		login_page = LoginPage(self.driver)
+
+		login_page.login(self.account(), self.password())
+		baby_monitor_page.is_in_baby_monitor_page()
+		self.skip_first_four_tutor()
+		baby_monitor_page.click_home()
+		# skip menu tutor
+		menu_page.click_logout()
+		menu_page.click_settings()
+		pixsee_settings_page.click_environment_settings()
+		# ensure switch is on
+		if environment_settings_page.is_switch_on() == "true":
+			pass
+		else:
+			environment_settings_page.click_switch()
+		# number before scrolling
+		text_before = environment_settings_page.humidity_range_text()
+		# find numbers in the text
+		numbers_before = re.findall(r'\d+', text_before)
+		# convert the found numbers str list to integers list
+		numbers_before = list(map(int, numbers_before))
+		highnum_before = numbers_before[1]
+		lownum_before = numbers_before[0]
+
+		# scroll
+		finger = PointerInput(kind="touch", name="finger")
+		action_builder = ActionBuilder(self.driver, mouse=finger)
+		xy = environment_settings_page.humidity_bar_location()
+		size = environment_settings_page.humidity_bar_size()
+		size_height = size["height"] / 2
+		y = xy["y"] + size_height  # Adjust y to the middle of the element
+		x_start = xy["x"] + 10
+		x_end = 300
+		print(xy["x"], xy["y"])
+		print(size)
+		action_builder.pointer_action.move_to_location(x_start, y)
+		action_builder.pointer_action.pointer_down()
+		action_builder.pointer_action.pause(0.2)
+		action_builder.pointer_action.move_to_location(x_end, y)
+		action_builder.pointer_action.pointer_up()
+		action_builder.perform()
+
+		# number after scrolling
+		text_after = environment_settings_page.humidity_range_text()
+		numbers_after = re.findall(r'\d+', text_after)
+		numbers_after = list(map(int, numbers_after))
+		highnum_after = numbers_after[1]
+		lownum_after = numbers_after[0]
+
+		# compare before and after values
 		if highnum_after > highnum_before and lownum_after < lownum_before:
 			print("Scrolling bar works")
 		else:
