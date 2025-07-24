@@ -1,23 +1,26 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from appium.webdriver.common.appiumby import AppiumBy
 import time
+import random
 
 class AddBabyProfilePage():
     def __init__(self, driver):
         self.driver = driver
 
         self.pageTitleText = "com.compal.bioslab.pixsee.pixm01:id/toolbar_title"
-        self.cancelButton = "com.compal.bioslab.pixsee.pixm01:id/toolbar_back_img"
+        self.messageText = "com.compal.bioslab.pixsee.pixm01:id/baby_profile_message_label"
+
         self.babyPhoto = "com.compal.bioslab.pixsee.pixm01:id/baby_profile_picture_img"
-        self.babyGenderBoyButton = "com.compal.bioslab.pixsee.pixm01:id/baby_profile_gender_boy_radio"
-        self.babyGenderGirlButton = "com.compal.bioslab.pixsee.pixm01:id/baby_profile_gender_girl_radio"
         self.nameEditText = "com.compal.bioslab.pixsee.pixm01:id/baby_profile_name_edx"
         self.birthdayEditText = "com.compal.bioslab.pixsee.pixm01:id/baby_profile_birthday_edx"
+
+        self.cancelButton = "com.compal.bioslab.pixsee.pixm01:id/toolbar_back_img"
+        self.babyGenderBoyButton = "com.compal.bioslab.pixsee.pixm01:id/baby_profile_gender_boy_radio"
+        self.babyGenderGirlButton = "com.compal.bioslab.pixsee.pixm01:id/baby_profile_gender_girl_radio"
         self.nationButton = "com.compal.bioslab.pixsee.pixm01:id/baby_profile_nation_spn"
         self.relativeButton = "com.compal.bioslab.pixsee.pixm01:id/baby_profile_relative_spn"
-        self.nationOrRelativeText = "android:id/text1"
         self.finishButton = "com.compal.bioslab.pixsee.pixm01:id/baby_profile_finish_btn"
-        self.messageText = "com.compal.bioslab.pixsee.pixm01:id/baby_profile_message_label"
 
         '''Discard dialog'''
         self.cancelMessage = "com.compal.bioslab.pixsee.pixm01:id/tvTitleDialog"
@@ -29,9 +32,9 @@ class AddBabyProfilePage():
         self.calendarDoneButton = "com.compal.bioslab.pixsee.pixm01:id/done_button"
         self.calendarCancelButton = "com.compal.bioslab.pixsee.pixm01:id/cancel_button"
 
-        '''Nation and Relative Spinner'''
-        self.list_class_name = "android.widget.ListView"
-        self.decisionText = "android:id/text1"
+        '''Nation and Relative list'''
+        self.list_classname = "android.widget.ListView"
+        self.listOption = "android:id/text1"
 
     def click_cancel(self):
         WebDriverWait(self.driver, 20).until(
@@ -156,6 +159,13 @@ class AddBabyProfilePage():
         element = self.driver.find_element("id", self.nameEditText)
         return element.get_attribute("hint")
 
+    def get_name_text(self):
+        WebDriverWait(self.driver, 20).until(
+            EC.presence_of_element_located(("id", self.nameEditText))
+        )
+        element = self.driver.find_element("id", self.nameEditText)
+        return element.text
+
     def get_birthday_hint(self):
         WebDriverWait(self.driver, 20).until(
             EC.presence_of_element_located(("id", self.birthdayEditText))
@@ -163,19 +173,28 @@ class AddBabyProfilePage():
         element = self.driver.find_element("id", self.birthdayEditText)
         return element.get_attribute("hint")
 
-    def get_nation_selected_text(self):
+    def get_birthday_text(self):
         WebDriverWait(self.driver, 20).until(
-            EC.presence_of_element_located(("id", self.nationOrRelativeText))
+            EC.presence_of_element_located(("id", self.birthdayEditText))
         )
-        elements = self.driver.find_elements("id", self.nationOrRelativeText)
-        return elements[0].text
+        element = self.driver.find_element("id", self.birthdayEditText)
+        return element.text
 
-    def get_relative_selected_text(self):
+    def get_nation_text(self):
         WebDriverWait(self.driver, 20).until(
-            EC.presence_of_element_located(("id", self.nationOrRelativeText))
+            EC.presence_of_element_located(("id", self.nationButton))
         )
-        elements = self.driver.find_elements("id", self.nationOrRelativeText)
-        return elements[1].text
+        parent_element = self.driver.find_elements("id", self.nationButton)
+        element = parent_element.find_element("id", self.listOption)
+        return element.text
+
+    def get_relative_text(self):
+        WebDriverWait(self.driver, 20).until(
+            EC.presence_of_element_located(("id", self.relativeButton))
+        )
+        parent_element = self.driver.find_elements("id", self.relativeButton)
+        element = parent_element.find_element("id", self.listOption)
+        return element.text
 
     def get_finish_button_text(self):
         WebDriverWait(self.driver, 20).until(
@@ -212,25 +231,55 @@ class AddBabyProfilePage():
         element = self.driver.find_element("id", self.cancelNoButton)
         return element.text
 
-    def get_list_text(self, number = -1):
-        if self.has_list():
-            WebDriverWait(self.driver, 20).until(
-                EC.presence_of_element_located(("id", self.decisionText))
-            )
-            elements = self.driver.find_elements("id", self.decisionText)
-            return elements[number].text
-        else:
-            return None
+    def select_nation(self, number = 51): # Default: Taiwan = 51
+        self.click_nation()
+        time.sleep(1)
+        if not self.has_selection_list():
+            raise AssertionError("Can't find selection list for nation")
+        # Slide to the top of the list
+        self.driver.find_element(
+            AppiumBy.ANDROID_UIAUTOMATOR,
+            f'new UiScrollable(new UiSelector().className("{self.list_classname}")).setAsVerticalList().scrollToBeginning(10)'
+        )
+        time.sleep(1)
 
-    def is_in_add_baby_profile_page(self):
-        try:
-            WebDriverWait(self.driver, 20).until(
-                EC.presence_of_element_located(("id", self.babyPhoto))
+        last_count = 0
+        all_items = []
+        seen_texts = set()
+
+        while True:
+            visible_items = self.driver.find_elements("id", self.listOption)
+            new_items = [element for element in visible_items if element.text not in seen_texts]
+
+            for element in new_items:
+                text = element.text
+                all_items.append(element)
+                seen_texts.add(text)
+
+            if len(all_items) > number:
+                all_items[number].click()
+                return
+
+            if len(all_items) == last_count:
+                raise IndexError("IndexError: Nation index out of range")
+            last_count = len(all_items)
+
+            self.driver.find_element(
+                AppiumBy.ANDROID_UIAUTOMATOR,
+                f'new UiScrollable(new UiSelector().className("{self.list_classname}")).setAsVerticalList().scrollForward();'
             )
-            self.driver.find_element("id", self.babyPhoto)
-            return True
-        except:
-            return False
+            time.sleep(1)
+
+    def select_relative(self, number = 2): # Default: Mommy = 2
+        self.click_relative()
+        time.sleep(1)
+        if not self.has_selection_list():
+            raise AssertionError("Can't find selection list for relative")
+        elements = self.driver.find_elements("id", self.listOption)
+        if number < len(elements):
+            elements[number].click()
+        else:
+            raise IndexError("IndexError: Relative index out of range")
 
     def has_calendar(self):
         try:
@@ -242,19 +291,31 @@ class AddBabyProfilePage():
         except:
             return False
 
-    def has_list(self):
+    def has_selection_list(self):
         try:
             WebDriverWait(self.driver, 20).until(
-                EC.presence_of_element_located(("class name", self.list_class_name))
+                EC.presence_of_element_located(("class name", self.list_classname))
             )
-            self.driver.find_element("class name", self.list_class_name)
+            self.driver.find_element("class name", self.list_classname)
             return True
         except:
             return False
 
-    def add_new_baby(self, baby_name = "Test Baby01"):
+    def is_in_add_baby_profile_page(self):
+        try:
+            WebDriverWait(self.driver, 20).until(
+                EC.presence_of_element_located(("id", self.babyPhoto))
+            )
+            self.driver.find_element("id", self.babyPhoto)
+            return True
+        except:
+            return False
+
+    def add_new_baby(self, baby_name = "Test_Baby 01"):
         self.input_name(baby_name)
         self.click_birthday()
         self.click_calendar_done()
         time.sleep(3)
+        self.select_nation(random.randint(1, 58))
+        self.select_relative(random.randint(1, 10))
         self.click_finish()

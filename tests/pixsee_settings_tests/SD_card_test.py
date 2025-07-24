@@ -8,7 +8,7 @@ from pages.menu_pages.pixsee_settings_pages.SD_card_stat_page import SDcardStatu
 
 
 
-class PixseeFriendsSDcardCase(BaseTestCase):
+class SDcardCase(BaseTestCase):
 	def setUp(self):
 		super().setUp(no_reset=False)
 	def test_01_check_word(self):

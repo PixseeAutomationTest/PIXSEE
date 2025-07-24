@@ -1,8 +1,11 @@
 from pages.base import BaseTestCase
 
 from pages.baby_monitor_page import BabyMonitorPage
+from pages.baby_timeline_page import BabyTimelinePage
 from pages.menu_pages.menu_page import MenuPage
 from pages.menu_pages.add_baby_profile_page import AddBabyProfilePage
+from pages.menu_pages.edit_baby_profile_pages.edit_baby_profile_page import EditBabyProfilePage
+import random
 
 class AddBabyTest(BaseTestCase):
 
@@ -11,8 +14,10 @@ class AddBabyTest(BaseTestCase):
             self.open_app()
 
             baby_monitor_page = BabyMonitorPage(self.driver)
+            baby_timeline_page = BabyTimelinePage(self.driver)
             menu_page = MenuPage(self.driver)
             add_baby_profile_page = AddBabyProfilePage(self.driver)
+            edit_baby_profile_page = EditBabyProfilePage(self.driver)
 
             '''Go to Menu Page'''
             baby_monitor_page.click_home()
@@ -33,34 +38,44 @@ class AddBabyTest(BaseTestCase):
 
             '''Select one gender and verify their status'''
             add_baby_profile_page.click_gender_boy()
-            self.assertTrue(add_baby_profile_page.get_gender_boy_status(), "Gender boy should be selected")
-            self.assertFalse(add_baby_profile_page.get_gender_girl_status(), "Gender girl should not be selected")
+            self.assertTrue(add_baby_profile_page.get_gender_boy_status(), "Gender boy should be selected after clicking gender boy")
+            self.assertFalse(add_baby_profile_page.get_gender_girl_status(), "Gender girl should not be selected after clicking gender boy")
             add_baby_profile_page.click_gender_girl()
-            self.assertFalse(add_baby_profile_page.get_gender_boy_status(), "Gender boy should not be selected")
-            self.assertTrue(add_baby_profile_page.get_gender_girl_status(), "Gender girl should be selected")
+            self.assertFalse(add_baby_profile_page.get_gender_boy_status(), "Gender boy should not be selected after clicking gender girl")
+            self.assertTrue(add_baby_profile_page.get_gender_girl_status(), "Gender girl should be selected after clicking gender girl")
 
             '''Input name'''
-            add_baby_profile_page.input_name("Test Baby01")
+            add_baby_profile_page.input_name("Test_Baby 01")
+            new_baby_name = add_baby_profile_page.get_name_text()
 
             #TODO: Only click confirm button, not change date
-            '''Edit birthday and check it'''
+            '''Edit birthday'''
             add_baby_profile_page.click_birthday()
             self.assertTrue(add_baby_profile_page.has_calendar(), "Calendar is not displayed")
             add_baby_profile_page.click_calendar_done()
+            new_baby_birthday = add_baby_profile_page.get_birthday_text()
 
-            #TODO: No change nation
-            '''Select nation and check it'''
-            # add_baby_profile_page.click_nation()
-            # self.assertTrue(add_baby_profile_page.has_list(), "Nation list is not displayed")
-            # print(add_baby_profile_page.get_list_text(10))
+            '''Select nation'''
+            add_baby_profile_page.select_nation(random.randint(1, 58))
+            new_baby_nation = add_baby_profile_page.get_nation_text()
 
-            # TODO: No change relative
-            '''Select relative and check it'''
+            '''Select relative'''
+            add_baby_profile_page.select_relative(random.randint(1, 10))
+            new_baby_relative = add_baby_profile_page.get_relative_text()
 
-            #TODO: Incomplete Verifying
-            '''Save profile and verify it'''
+            '''Save profile and go to Edit Baby Profile Page'''
             add_baby_profile_page.click_finish()
+            self.assertTrue(baby_timeline_page.is_in_baby_timeline_page(), "Can't automatically go to Baby Timeline Page after adding a baby profile")
+            baby_timeline_page.click_menu()
+            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page from Baby Timeline Page")
+            menu_page.click_baby_edit()
+            self.assertTrue(edit_baby_profile_page.is_in_edit_baby_profile_page(), "Can't go to Edit Baby Profile Page")
 
+            '''Check the contents about the new baby profile'''
+            self.assertEqual(edit_baby_profile_page.get_baby_name_text(), new_baby_name, "Baby's name is not properly displayed in Edit Baby Profile Page")
+            self.assertEqual(edit_baby_profile_page.get_baby_birthday_text(), new_baby_birthday, "Baby's birthday is not properly displayed in Edit Baby Profile Page")
+            self.assertEqual(edit_baby_profile_page.get_nation_text(), new_baby_nation, "Baby's nation is not properly displayed in Edit Baby Profile Page")
+            self.assertEqual(edit_baby_profile_page.get_relative_text(), new_baby_relative, "Baby's relative is not properly displayed in Edit Baby Profile Page")
 
         except AssertionError as ae:
             print(f"Test failed with assertion error: {ae}")

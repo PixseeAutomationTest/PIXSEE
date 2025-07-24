@@ -7,7 +7,7 @@ from pages.menu_pages.add_baby_profile_page import AddBabyProfilePage
 from pages.menu_pages.edit_baby_profile_pages.edit_baby_profile_page import EditBabyProfilePage
 from pages.menu_pages.edit_baby_profile_pages.delete_baby_profile import DeleteBabyProfilePage
 class EditBabyTest(BaseTestCase):
-    def test_delete_baby_profile(self):
+    def test_delete_baby_profile_success(self):
         try:
             self.open_app()
 
