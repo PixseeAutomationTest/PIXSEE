@@ -3,6 +3,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from appium.webdriver.common.appiumby import AppiumBy
 import time
 import random
+import datetime
 
 class AddBabyProfilePage():
     def __init__(self, driver):
@@ -29,6 +30,10 @@ class AddBabyProfilePage():
 
         '''Calendar'''
         self.calendar = "android:id/content"
+        self.calendarScrollableList_classname = "android.widget.ListView"
+        self.calendarYearPicker = "com.compal.bioslab.pixsee.pixm01:id/date_picker_year"
+        self.calendarOneMonth_xpath = "//android.widget.ListView/android.view.View"
+        self.calendarOneDay_classname = "android.view.View"
         self.calendarDoneButton = "com.compal.bioslab.pixsee.pixm01:id/done_button"
         self.calendarCancelButton = "com.compal.bioslab.pixsee.pixm01:id/cancel_button"
 
@@ -230,6 +235,80 @@ class AddBabyProfilePage():
         )
         element = self.driver.find_element("id", self.cancelNoButton)
         return element.text
+
+    def select_birthday(self, year = datetime.date.today().year, month = datetime.date.today().month, day = datetime.date.today().day):
+        # Validate the input date
+        try:
+            target_date = datetime.date(year, month, day)
+            if year < 1900 or target_date > datetime.date.today():
+                raise ValueError("Year must be between 1900 and the current year, and the date must not be in the future.")
+        except ValueError as e:
+            raise ValueError(f"Invalid date: {e}")
+
+        self.click_birthday()
+        time.sleep(1)
+        # Check if the date is today, just click "done" button
+        if target_date == datetime.date.today():
+            self.click_calendar_done()
+            return
+        # Jump to the selected year
+        if year != datetime.date.today().year:
+            self.driver.find_element("id", self.calendarYearPicker).click()
+            while True:
+                try:
+                    element = self.driver.find_element("accessibility id", f"{year}")
+                    element.click()
+                    break
+                except:
+                    self.driver.find_element(
+                        AppiumBy.ANDROID_UIAUTOMATOR,
+                        f'new UiScrollable(new UiSelector().className({self.calendarScrollableList_classname})).setAsVerticalList().scrollBackward()'
+                    )
+                    time.sleep(0.2)  # 小停頓以確保畫面更新
+        # Find the date and click it. Need to swipe up if the date is not visible
+        target_date_str = target_date.strftime("%d %B %Y")
+        first_days = set()
+        while True:
+            try:
+                if month == datetime.date.today().month and day == datetime.date.today().day:
+                    element = self.driver.find_element("accessibility id", target_date_str + " selected")
+                    element.click()
+                else:
+                    element = self.driver.find_element("accessibility id", target_date_str)
+                    element.click()
+                element = self.driver.find_element("id", self.calendarDoneButton)
+                element.click()
+                return
+            except:
+                calendar_current_month = self.driver.find_element("xpath", self.calendarOneMonth_xpath)
+                element = calendar_current_month.find_element("class name", self.calendarOneDay_classname)
+                first_date_str = element.get_attribute("content-desc").split("selected")[0].strip()
+                first_date = datetime.datetime.strptime(first_date_str, "%d %B %Y").date()
+                if first_date_str in first_days:
+                    raise ValueError(f"{year}-{month}-{day} is not found in the calendar. Please check the date and try again.")
+                first_days.add(first_date_str)
+                if month < first_date.month:
+                    self.driver.find_element(
+                        AppiumBy.ANDROID_UIAUTOMATOR,
+                        f'new UiScrollable(new UiSelector().className({self.calendarScrollableList_classname})).setAsVerticalList().scrollBackward()'
+                    )
+                elif month > first_date.month:
+                    self.driver.find_element(
+                        AppiumBy.ANDROID_UIAUTOMATOR,
+                        f'new UiScrollable(new UiSelector().className({self.calendarScrollableList_classname})).setAsVerticalList().scrollForward()'
+                    )
+                elif day > first_date.day:
+                    window = self.driver.get_window_size()
+                    x = window["width"] // 2.5
+                    start_y = int(window["height"] * 0.6)
+                    end_y = int(window["height"] * 0.5)
+
+                    self.driver.swipe(x, start_y, x, end_y, 3000)
+
+
+                time.sleep(0.2)
+        # self.click_calendar_done()
+
 
     def select_nation(self, number = 51): # Default: Taiwan = 51
         self.click_nation()

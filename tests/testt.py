@@ -1,5 +1,8 @@
 from pages.base import BaseTestCase
 from pages.baby_monitor_page import BabyMonitorPage
+from pages.menu_pages import add_baby_profile_page
+from pages.menu_pages.menu_page import MenuPage
+from pages.menu_pages.add_baby_profile_page import AddBabyProfilePage
 
 
 class reset(BaseTestCase):
@@ -8,15 +11,10 @@ class reset(BaseTestCase):
 
 
         def test_wipe(self):
-                # pixsee_friends_page = PixseeFriendsDetPage(self.driver)
-                # try:
-                #         title = pixsee_friends_page.title()
-                #         hint = self.get_string("pixsee_friends_detection_title")
-                #         self.assertEqual(title, hint)
-                #         print("Friends detection title right")
-                # except AssertionError:
-                #         print("Friends detection title wrong")
-                #         raise AssertionError("Friends detection title mismatch")
-                baby = BabyMonitorPage(self.driver)
-                baby.click_home()
+
+                self.open_app()
+
+                add_baby_profile_page = AddBabyProfilePage(self.driver)
+                # add_baby_profile_page.select_birthday(2023, 7, 25)
+                add_baby_profile_page.select_birthday(2018, 9, 30)
 
