@@ -417,6 +417,32 @@ class CoveredFaceDetectionCase(BaseTestCase):
 		except AssertionError :
 			print("Not in discard dialog")
 			raise AssertionError("Not in discard dialog")
+	def test_08_covered_face_detection_information(self):
+		covered_face_detection_page = CoveredFaceDetectionPage(self.driver)
+		menu_page = MenuPage(self.driver)
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+		login_page = LoginPage(self.driver)
+
+		login_page.login(self.account(),self.password())
+		baby_monitor_page.is_in_baby_monitor_page()
+		self.skip_first_four_tutor()
+		baby_monitor_page.click_home()
+		# skip menu tutor
+		menu_page.click_logout()
+
+		menu_page.click_settings()
+
+		pixsee_settings_page.click_covered_face_detection()
+		covered_face_detection_page.click_skip()
+		covered_face_detection_page.click_information()
+		# check if is in information page
+		try:
+			self.assertTrue(covered_face_detection_page.is_in_covered_face_detection_tutor_page())
+			print("information button worked")
+		except AssertionError :
+			print("information button failed")
+			raise AssertionError("Not in information page")
 
 
 

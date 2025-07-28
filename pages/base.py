@@ -19,7 +19,7 @@ class BaseTestCase(unittest.TestCase):
         capabilities = UiAutomator2Options()
         capabilities.platform_name = "Android"
         capabilities.device_name = "38161FDJG00DXJ"
-        capabilities.language = "en-us text"  # Chinese (Taiwan): "tw text", English: "en-us text"
+        capabilities.language = "tw text"  # Chinese (Taiwan): "tw text", English: "en-us text"
         # capabilities.device_name = "emulator-5554"
 
         # adb devices

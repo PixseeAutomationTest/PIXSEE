@@ -40,7 +40,7 @@ class AreaDetectionPage():
 		self.DiscardTitle = "com.compal.bioslab.pixsee.pixm01:id/tvtitleAlertDialog"
 		self.DiscardNo = "com.compal.bioslab.pixsee.pixm01:id/btnNegativeAlertDialog"
 		self.DiscardYes = "com.compal.bioslab.pixsee.pixm01:id/btnPositiveAlertDialog"
-
+		self.information = "com.compal.bioslab.pixsee.pixm01:id/btEffenceInformation"
 		self.Stream = "com.compal.bioslab.pixsee.pixm01:id/area_stream"
 	def click_skip(self):
 		WebDriverWait(self.driver, 10).until(
@@ -131,6 +131,12 @@ class AreaDetectionPage():
 			EC.presence_of_element_located(("id", self.DiscardYes))
 		)
 		element = self.driver.find_element("id", self.DiscardYes)
+		element.click()
+	def click_information(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located(("id", self.information))
+		)
+		element = self.driver.find_element("id", self.information)
 		element.click()
 
 	def discard_message_text(self):
