@@ -30,6 +30,10 @@ class EditBabyProfilePage():
         self.dialogYesButton = "com.compal.bioslab.pixsee.pixm01:id/btnPositiveAlertDialog"
         self.dialogCancelButton = "com.compal.bioslab.pixsee.pixm01:id/btnNegativeAlertDialog"
 
+        '''Nation and Relative list'''
+        self.list_classname = "android.widget.ListView"
+        self.listOption = "android:id/text1"
+
     def click_return(self):
         WebDriverWait(self.driver, 20).until(
             EC.presence_of_element_located(("id", self.returnButton))
@@ -137,6 +141,20 @@ class EditBabyProfilePage():
         element = self.driver.find_element("id", self.doneButton)
         return element.text
 
+    def get_gender_boy_status(self):
+        WebDriverWait(self.driver, 20).until(
+            EC.presence_of_element_located(("id", self.genderBoyButton))
+        )
+        element = self.driver.find_element("id", self.genderBoyButton)
+        return element.get_attribute("checked") == "true"
+
+    def get_gender_girl_status(self):
+        WebDriverWait(self.driver, 20).until(
+            EC.presence_of_element_located(("id", self.genderGirlButton))
+        )
+        element = self.driver.find_element("id", self.genderGirlButton)
+        return element.get_attribute("checked") == "true"
+
     def get_baby_name_text(self):
         WebDriverWait(self.driver, 20).until(
             EC.presence_of_element_located(("id", self.babyNameEditText))
@@ -155,14 +173,16 @@ class EditBabyProfilePage():
         WebDriverWait(self.driver, 20).until(
             EC.presence_of_element_located(("id", self.nationButton))
         )
-        element = self.driver.find_element("id", self.nationButton)
+        parent_element = self.driver.find_element("id", self.nationButton)
+        element = parent_element.find_element("id", self.listOption)
         return element.text
 
     def get_relative_text(self):
         WebDriverWait(self.driver, 20).until(
             EC.presence_of_element_located(("id", self.relativeButton))
         )
-        element = self.driver.find_element("id", self.relativeButton)
+        parent_element = self.driver.find_element("id", self.relativeButton)
+        element = parent_element.find_element("id", self.listOption)
         return element.text
 
     def get_baby_profile_button_text(self):
