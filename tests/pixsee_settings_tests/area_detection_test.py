@@ -9,15 +9,9 @@ from pages.menu_pages.pixsee_settings_pages.area_detection_page import AreaDetec
 from appium.webdriver.common.appiumby import AppiumBy
 
 
-
-
 class AreaDetectionCase(BaseTestCase):
 	def setUp(self):
 		super().setUp(no_reset=False)
-		# ensure is connected to machine
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		if not baby_monitor_page.is_connected():
-			self.skipTest("not online，skip all test")
 
 	def test_01_area_detection_tutor_skip_1(self):
 		area_detection_page = AreaDetectionPage(self.driver)
@@ -29,6 +23,10 @@ class AreaDetectionCase(BaseTestCase):
 		login_page.login(self.account(), self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		self.skip_first_four_tutor()
+		# ensure is connected to machine
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		if not baby_monitor_page.is_connected():
+			self.skipTest("not online，skip all test")
 
 		baby_monitor_page.click_home()
 		# skip menu tutor
@@ -318,7 +316,7 @@ class AreaDetectionCase(BaseTestCase):
 
 		pixsee_settings_page.click_area_detection()
 		area_detection_page.click_skip()
-		if area_detection_page.is_switch_on() == "true":
+		if area_detection_page.is_switch_on():
 			pass
 		else:
 			area_detection_page.click_switch()
@@ -392,7 +390,7 @@ class AreaDetectionCase(BaseTestCase):
 
 		pixsee_settings_page.click_area_detection()
 		area_detection_page.click_skip()
-		if area_detection_page.is_switch_on() == "true":
+		if area_detection_page.is_switch_on():
 			pass
 		else:
 			area_detection_page.click_switch()
@@ -466,7 +464,7 @@ class AreaDetectionCase(BaseTestCase):
 
 		pixsee_settings_page.click_area_detection()
 		area_detection_page.click_skip()
-		if area_detection_page.is_switch_on() == "true":
+		if area_detection_page.is_switch_on():
 			pass
 		else:
 			area_detection_page.click_switch()
@@ -477,40 +475,40 @@ class AreaDetectionCase(BaseTestCase):
 			hint = self.get_string("turn_off_area_detection")
 			self.assertEqual(title, hint)
 			print("turn off dialog title is correct")
-		except AssertionError :
+		except AssertionError:
 			print("turn off dialog title  is wrong")
 		try:
 			fifteenmin = area_detection_page.turn_off_15_min_text()
-			hint = self.get_string("Snooze for 15 minutes")
+			hint = self.get_string("snooze_detection_fifteen_minutes")
 			self.assertEqual(fifteenmin, hint)
 			print("turn off 15 is correct")
-		except AssertionError :
+		except AssertionError:
 			print("turn off 15 is wrong")
 		try:
 			thirtymin = area_detection_page.turn_off_30_min_text()
-			hint = self.get_string("Snooze for 30 minutes")
+			hint = self.get_string("snooze_detection_thirty_minutes")
 			self.assertEqual(thirtymin, hint)
 			print("turn off 30 is correct")
-		except AssertionError :
+		except AssertionError:
 			print("turn off 30 is wrong")
 		try:
 			off = area_detection_page.turn_off_text()
-			hint = self.get_string("Turn off detection")
+			hint = self.get_string("turn_off_detection")
 			self.assertEqual(off, hint)
 			print("turn off text is correct")
-		except AssertionError :
+		except AssertionError:
 			print("turn off text is wrong")
 		try:
 			cancel = area_detection_page.turn_off_cancel_text()
 			hint = self.get_string("cancel")
 			self.assertEqual(cancel, hint)
 			print("turn off cancel text is correct")
-		except AssertionError :
+		except AssertionError:
 			print("turn off cancel text is wrong")
 		# check each button
 		try:
 			area_detection_page.click_turn_off_15_min()
-			self.assertEqual(pixsee_settings_page.area_detection_status_text(), "Off")
+			self.assertEqual(pixsee_settings_page.area_detection_status_text(), self.get_string("off_selection"))
 			print("15 min button worked")
 		except AssertionError:
 			print("15 min button failed")
@@ -526,7 +524,7 @@ class AreaDetectionCase(BaseTestCase):
 		area_detection_page.click_switch()
 		try:
 			area_detection_page.click_turn_off_30_min()
-			self.assertEqual(pixsee_settings_page.area_detection_status_text(), "Off")
+			self.assertEqual(pixsee_settings_page.area_detection_status_text(), self.get_string("off_selection"))
 			print("30 min button worked")
 		except AssertionError:
 			print("30 min button failed")
@@ -535,7 +533,7 @@ class AreaDetectionCase(BaseTestCase):
 		area_detection_page.click_switch()
 		try:
 			area_detection_page.click_turn_off()
-			self.assertEqual(pixsee_settings_page.area_detection_status_text(), "Off")
+			self.assertEqual(pixsee_settings_page.area_detection_status_text(), self.get_string("off_selection"))
 			print("turn off detection worked")
 		except AssertionError:
 			print("turn off detection failed")
@@ -558,7 +556,7 @@ class AreaDetectionCase(BaseTestCase):
 		pixsee_settings_page.click_area_detection()
 		area_detection_page.click_skip()
 		# check if is in discard dialog
-		if area_detection_page.is_switch_on() == "true":
+		if area_detection_page.is_switch_on():
 			area_detection_page.click_switch()
 			area_detection_page.click_turn_off()
 			pixsee_settings_page.click_area_detection()

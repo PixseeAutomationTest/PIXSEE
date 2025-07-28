@@ -137,7 +137,7 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 		menu_page.click_settings()
 
 		pixsee_settings_page.click_pixsee_friends_detection()
-		if pixsee_friends_page.is_switch_on() == "true":
+		if pixsee_friends_page.is_switch_on() :
 			pass
 		else:
 			pixsee_friends_page.click_switch()
@@ -187,7 +187,7 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 		menu_page.click_settings()
 
 		pixsee_settings_page.click_pixsee_friends_detection()
-		if pixsee_friends_page.is_switch_on() == "true":
+		if pixsee_friends_page.is_switch_on() :
 			pass
 		else:
 			pixsee_friends_page.click_switch()

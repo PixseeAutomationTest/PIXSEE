@@ -3,6 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from PIL import Image
 
+
 class AreaDetectionPage():
 	def __init__(self, driver):
 		self.driver = driver
@@ -61,11 +62,12 @@ class AreaDetectionPage():
 		element = self.driver.find_element("id", self.Save)
 		element.click()
 	def click_switch(self):
-		WebDriverWait(self.driver, 10).until(
-			EC.presence_of_element_located(("id", self.Switch))
-		)
-		element = self.driver.find_element("id", self.Switch)
-		element.click()
+		# WebDriverWait(self.driver, 1).until(
+		# 	EC.presence_of_element_located((AppiumBy.ID, self.Switch))
+		# ).click()
+		# element = self.driver.find_element(AppiumBy.ID, self.Switch)
+		# element.click()
+
 	def click_low(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.LowCheckBox))
@@ -330,14 +332,14 @@ class AreaDetectionPage():
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("xpath", self.TutorFirstPageIndicator))
 		)
-		light = self.driver.find_element(AppiumBy.ID, self.TutorFirstPageIndicator)
+		light = self.driver.find_element("xpath", self.TutorFirstPageIndicator)
 		is_in_right = light.get_attribute("selected")
 		return is_in_right == "true"
 	def is_in_tutor_second_page(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("xpath", self.TutorSecondPageIndicator))
 		)
-		light = self.driver.find_element(AppiumBy.ID, self.TutorSecondPageIndicator)
+		light = self.driver.find_element("xpath", self.TutorSecondPageIndicator)
 		is_in_left = light.get_attribute("selected")
 		return is_in_left == "true"
 	def is_in_turn_off_dialog(self):
@@ -366,9 +368,9 @@ class AreaDetectionPage():
 		return is_enable == "true"
 	def is_switch_on(self):
 		WebDriverWait(self.driver, 3).until(
-			EC.presence_of_element_located((AppiumBy.ID, self.Sensitivity))
+			EC.presence_of_element_located((AppiumBy.ID, self.Switch))
 		)
-		switch = self.driver.find_element(AppiumBy.ID, self.Sensitivity)
+		switch = self.driver.find_element(AppiumBy.ID, self.Switch)
 		return switch.get_attribute("checked") == "true"
 	def is_low_clickable(self):
 		WebDriverWait(self.driver, 10).until(

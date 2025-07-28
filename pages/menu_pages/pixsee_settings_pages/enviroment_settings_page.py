@@ -25,15 +25,15 @@ class EnvironmentSettingsPage():
 		self.TempaeratureMax = "com.compal.bioslab.pixsee.pixm01:id/tvMaxTemperatureValue"
 		self.TemperatureBar = "com.compal.bioslab.pixsee.pixm01:id/sbTemperatureRange"
 		self.Humidity = "com.compal.bioslab.pixsee.pixm01:id/tvHumidityRangeLabel"
-		self.HumidityRange = "com.compal.bioslab.pixsee.pixm01:id/tvHumidityBestRange"
+		self.HumidityRange = "com.compal.bioslab.pixsee.pixm01:id/tvHumidityRangeLabel"
 		self.HumidityMin = "com.compal.bioslab.pixsee.pixm01:id/tvMinHumidityValue"
 		self.HumidityMax = "com.compal.bioslab.pixsee.pixm01:id/tvMaxHumidityValue"
 		self.HumidityBar = "com.compal.bioslab.pixsee.pixm01:id/sbHumidityRange"
 		self.Celsius = "com.compal.bioslab.pixsee.pixm01:id/tvCelsiusTemperature"
 		self.Fahrenheit = "com.compal.bioslab.pixsee.pixm01:id/tvFahrenheitTemperature"
 		self.DiscardTitle = "com.compal.bioslab.pixsee.pixm01:id/tvtitleAlertDialog"
-		self.DiscardNo = "com.compal.bioslab.pixsee.pixm01:id/tvNegativeButton"
-		self.DiscardYes = "com.compal.bioslab.pixsee.pixm01:id/tvPositiveButton"
+		self.DiscardNo = "com.compal.bioslab.pixsee.pixm01:id/btnPositiveAlertDialog"
+		self.DiscardYes = "com.compal.bioslab.pixsee.pixm01:id/btnPositiveAlertDialog"
 
 	def click_back(self):
 		WebDriverWait(self.driver, 10).until(
@@ -293,9 +293,9 @@ class EnvironmentSettingsPage():
 			return False
 	def is_switch_on(self):
 		WebDriverWait(self.driver, 3).until(
-			EC.presence_of_element_located((AppiumBy.ID, self.Sensitivity))
+			EC.presence_of_element_located((AppiumBy.ID, self.Switch))
 		)
-		switch = self.driver.find_element(AppiumBy.ID, self.Sensitivity)
+		switch = self.driver.find_element(AppiumBy.ID, self.Switch)
 		return switch.get_attribute("checked") == "true"
 	def is_in_discard_dialog(self):
 		try:

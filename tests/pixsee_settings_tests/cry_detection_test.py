@@ -14,9 +14,7 @@ from pages.menu_pages.pixsee_settings_pages.cry_detection_page import CryDetecti
 class CryDetectionCase(BaseTestCase):
 	def setUp(self):
 		super().setUp(no_reset=False)
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		if not baby_monitor_page.is_connected():
-			self.skipTest("not online，skip all test")
+
 	def test_01_cry_detection_switch(self):
 		cry_detection_page = CryDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
@@ -27,7 +25,9 @@ class CryDetectionCase(BaseTestCase):
 		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		self.skip_first_four_tutor()
-
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		if not baby_monitor_page.is_connected():
+			self.skipTest("not online，skip all test")
 		baby_monitor_page.click_home()
 		# skip menu tutor
 		menu_page.click_logout()
@@ -75,8 +75,10 @@ class CryDetectionCase(BaseTestCase):
 
 		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
-
 		self.skip_first_four_tutor()
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		if not baby_monitor_page.is_connected():
+			self.skipTest("not online，skip all test")
 		baby_monitor_page.click_home()
 		# skip menu tutor
 		menu_page.click_logout()
@@ -110,6 +112,9 @@ class CryDetectionCase(BaseTestCase):
 		baby_monitor_page.is_in_baby_monitor_page()
 
 		self.skip_first_four_tutor()
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		if not baby_monitor_page.is_connected():
+			self.skipTest("not online，skip all test")
 		baby_monitor_page.click_home()
 		# skip menu tutor
 		menu_page.click_logout()
@@ -133,6 +138,9 @@ class CryDetectionCase(BaseTestCase):
 		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		self.skip_first_four_tutor()
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		if not baby_monitor_page.is_connected():
+			self.skipTest("not online，skip all test")
 		baby_monitor_page.click_home()
 		# skip menu tutor
 		time.sleep(2)
@@ -142,7 +150,7 @@ class CryDetectionCase(BaseTestCase):
 		menu_page.click_settings()
 
 		pixsee_settings_page.click_cry_detection()
-		if cry_detection_page.is_switch_on() == "true":
+		if cry_detection_page.is_switch_on():
 			pass
 		else:
 			cry_detection_page.click_switch()
@@ -216,23 +224,26 @@ class CryDetectionCase(BaseTestCase):
 		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		self.skip_first_four_tutor()
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		if not baby_monitor_page.is_connected():
+			self.skipTest("not online，skip all test")
 		baby_monitor_page.click_home()
 		# skip menu tutor
 		menu_page.click_logout()
 		menu_page.click_settings()
 
 		pixsee_settings_page.click_cry_detection()
-		if cry_detection_page.is_switch_on() == "true":
+		if cry_detection_page.is_switch_on() :
 			pass
 		else:
 			cry_detection_page.click_switch()
-
 		# switch status
-		current_status = cry_detection_page.is_switch_on()
+		current_status = cry_detection_page.is_smart_soothing_switch_on()
 		self.check_switch_and_content(current_status, cry_detection_page.Music)
+		time.sleep(1)
 		cry_detection_page.click_smart_soothing_switch()
 		time.sleep(1)
-		after_status = cry_detection_page.is_switch_on()
+		after_status = cry_detection_page.is_smart_soothing_switch_on()
 		self.check_switch_and_content(after_status, cry_detection_page.Music)
 	def test_06_cry_detection_music_page(self):
 		cry_detection_page = CryDetectionPage(self.driver)
@@ -244,24 +255,27 @@ class CryDetectionCase(BaseTestCase):
 		login_page.login(self.account(), self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		self.skip_first_four_tutor()
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		if not baby_monitor_page.is_connected():
+			self.skipTest("not online，skip all test")
 		baby_monitor_page.click_home()
 		# skip menu tutor
 		menu_page.click_logout()
 		menu_page.click_settings()
 
 		pixsee_settings_page.click_cry_detection()
-		if cry_detection_page.is_switch_on() == "true":
+		if cry_detection_page.is_switch_on():
 			pass
 		else:
 			cry_detection_page.click_switch()
-		if cry_detection_page.is_smart_soothing_switch_on() == "true":
+		if cry_detection_page.is_smart_soothing_switch_on():
 			pass
 		else:
 			cry_detection_page.click_smart_soothing_switch()
 		cry_detection_page.click_music()
 		# check enter music room
 		try:
-			self.assertTrue(cry_detection_page.is_in_cry_detection_page())
+			self.assertTrue(cry_detection_page.is_in_music_page())
 			print("entered music room successfully")
 		except AssertionError:
 			print("entered music room unsuccessfully")
@@ -276,6 +290,9 @@ class CryDetectionCase(BaseTestCase):
 		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		self.skip_first_four_tutor()
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		if not baby_monitor_page.is_connected():
+			self.skipTest("not online，skip all test")
 		baby_monitor_page.click_home()
 		# skip menu tutor
 		time.sleep(2)

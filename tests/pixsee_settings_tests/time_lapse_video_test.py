@@ -229,7 +229,7 @@ class TimeLapseVideoCase(BaseTestCase):
         menu_page.click_settings()
         pixsee_settings_page.click_time_lapse_video()
         # ensure time lapse video switch is on
-        if time_lapse_video.is_switch_on() == "true":
+        if time_lapse_video.is_switch_on() :
             pass
         else:
             time_lapse_video.click_switch()
@@ -301,7 +301,7 @@ class TimeLapseVideoCase(BaseTestCase):
         menu_page.click_settings()
         pixsee_settings_page.click_time_lapse_video()
         # ensure time lapse video switch is on
-        if time_lapse_video.is_switch_on() == "true":
+        if time_lapse_video.is_switch_on():
             pass
         else:
             time_lapse_video.click_switch()
@@ -344,7 +344,7 @@ class TimeLapseVideoCase(BaseTestCase):
         menu_page.click_settings()
         pixsee_settings_page.click_time_lapse_video()
         # ensure time lapse video switch is on
-        if time_lapse_video.is_switch_on() == "true":
+        if time_lapse_video.is_switch_on() :
             pass
         else:
             time_lapse_video.click_switch()

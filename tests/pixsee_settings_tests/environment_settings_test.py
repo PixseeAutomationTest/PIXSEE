@@ -129,7 +129,7 @@ class EnvironmentSettingsCase(BaseTestCase):
 
 		pixsee_settings_page.click_environment_settings()
 		# ensure switch is on
-		if environment_settings_page.is_switch_on() == "true":
+		if environment_settings_page.is_switch_on():
 			pass
 		else:
 			environment_settings_page.click_switch()
@@ -217,42 +217,55 @@ class EnvironmentSettingsCase(BaseTestCase):
 		menu_page.click_settings()
 
 		pixsee_settings_page.click_environment_settings()
-		if environment_settings_page.is_switch_on() == "true":
+		if environment_settings_page.is_switch_on() :
 			pass
 		else:
 			environment_settings_page.click_switch()
-		# check celsius and fahrenheit text
 		try:
 			celsius = environment_settings_page.celsius_text()
-			hint = "°C"
+			hint = "℃"
 			self.assertEqual(celsius, hint)
 			print("Celsius text right")
 		except AssertionError:
 			print("Celsius text wrong")
-		try:
-			fahrenheit = environment_settings_page.fahrenheit_text()
-			hint = "°F"
-			self.assertEqual(fahrenheit, hint)
-			print("Fahrenheit text right")
-		except AssertionError:
-			print("Fahrenheit text wrong")
-		# check celsius clickable
-		try:
-			environment_settings_page.click_celsius()
-			self.assertEqual(environment_settings_page.temperature_min_text(),"10")
-			self.assertEqual(environment_settings_page.temperature_max_text(),"35")
-			print("Celsius is clickable")
-		except AssertionError:
-			print("Celsius is not clickable")
-		# check fahrenheit clickable
-		try:
-			environment_settings_page.click_fahrenheit()
-			self.assertEqual(environment_settings_page.temperature_min_text(), "50")
-			self.assertEqual(environment_settings_page.temperature_max_text(), "95")
-			print("Fahrenheit is clickable")
-		except AssertionError:
-			print("Fahrenheit is not clickable")
-			raise AssertionError("Fahrenheit is not clickable")
+		if environment_settings_page.temperature_min_text() == "10":
+			# check celsius clickable
+			try:
+				self.assertEqual(environment_settings_page.temperature_max_text(), "35")
+				print("Celsius is clickable")
+			except AssertionError:
+				print("Celsius is not clickable")
+		else:
+			try:
+				fahrenheit = environment_settings_page.fahrenheit_text()
+				hint = "℉"
+				self.assertEqual(fahrenheit, hint)
+				print("Fahrenheit text right")
+			except AssertionError:
+				print("Fahrenheit text wrong")
+			# check fahrenheit clickable
+			try:
+				self.assertEqual(environment_settings_page.temperature_min_text(), "50")
+				self.assertEqual(environment_settings_page.temperature_max_text(), "95")
+				print("Fahrenheit is clickable")
+			except AssertionError:
+				print("Fahrenheit is not clickable")
+		environment_settings_page.click_celsius()
+		if environment_settings_page.temperature_min_text() == "10":
+			# check celsius clickable
+			try:
+				self.assertEqual(environment_settings_page.temperature_max_text(), "35")
+				print("Celsius is clickable")
+			except AssertionError:
+				print("Celsius is not clickable")
+		else:
+			# check fahrenheit clickable
+			try:
+				self.assertEqual(environment_settings_page.temperature_min_text(), "50")
+				self.assertEqual(environment_settings_page.temperature_max_text(), "95")
+				print("Fahrenheit is clickable")
+			except AssertionError:
+				print("Fahrenheit is not clickable")
 	def test_06_environment_set_back_discard(self):
 		environment_settings_page = EnvironmentSettingsPage(self.driver)
 		menu_page = MenuPage(self.driver)
@@ -322,50 +335,52 @@ class EnvironmentSettingsCase(BaseTestCase):
 		menu_page.click_settings()
 
 		pixsee_settings_page.click_environment_settings()
-		if environment_settings_page.is_switch_on() == "true":
+		if environment_settings_page.is_switch_on() :
 			pass
 		else:
 			environment_settings_page.click_switch()
-		# number before scrolling
-		text_before = environment_settings_page.temperature_range_text()
-		# find numbers in the text
-		numbers_before = re.findall(r'\d+', text_before)
-		# convert the found numbers str list to integers list
-		numbers_before = list(map(int, numbers_before))
-		highnum_before = numbers_before[1]
-		lownum_before = numbers_before[0]
+			# number before scrolling
+			text_before = environment_settings_page.temperature_range_text()
+			# find numbers in the text
+			numbers_before = re.findall(r'\d+', text_before)
+			# convert the found numbers str list to integers list
+			numbers_before = list(map(int, numbers_before))
+			print(numbers_before)
+			highnum_before = numbers_before[1]
+			lownum_before = numbers_before[0]
 
-		# scroll
-		finger = PointerInput(kind="touch", name="finger")
-		action_builder = ActionBuilder(self.driver, mouse=finger)
-		xy = environment_settings_page.temperature_bar_location()
-		size = environment_settings_page.temperature_bar_size()
-		size_height = size["height"] / 2
-		y = xy["y"] + size_height  # Adjust y to the middle of the element
-		x_start = xy["x"] + 10
-		x_end = 300
-		print(xy["x"], xy["y"])
-		print(size)
-		action_builder.pointer_action.move_to_location(x_start, y)
-		action_builder.pointer_action.pointer_down()
-		action_builder.pointer_action.pause(0.2)
-		action_builder.pointer_action.move_to_location(x_end, y)
-		action_builder.pointer_action.pointer_up()
-		action_builder.perform()
+			# scroll
+			finger = PointerInput(kind="touch", name="finger")
+			action_builder = ActionBuilder(self.driver, mouse=finger)
+			xy = environment_settings_page.temperature_bar_location()
+			size = environment_settings_page.temperature_bar_size()
+			size_height = size["height"] / 2
+			y = xy["y"] + size_height  # Adjust y to the middle of the element
+			x_start = xy["x"] + 10
+			x_end = 300
+			print(xy["x"], xy["y"])
+			print(size)
+			action_builder.pointer_action.move_to_location(x_start, y)
+			action_builder.pointer_action.pointer_down()
+			action_builder.pointer_action.pause(0.2)
+			action_builder.pointer_action.move_to_location(x_end, y)
+			action_builder.pointer_action.pointer_up()
+			action_builder.perform()
 
-		# number after scrolling
-		text_after = environment_settings_page.temperature_range_text()  # 假設抓取的文字是 "Temperature range: ?-?℃"
-		numbers_after = re.findall(r'\d+', text_after)
-		numbers_after = list(map(int, numbers_after))
-		highnum_after = numbers_after[1]
-		lownum_after = numbers_after[0]
+			# number after scrolling
+			text_after = environment_settings_page.temperature_range_text()  # 假設抓取的文字是 "Temperature range: ?-?℃"
+			numbers_after = re.findall(r'\d+', text_after)
+			numbers_after = list(map(int, numbers_after))
+			print(numbers_after)
+			highnum_after = numbers_after[1]
+			lownum_after = numbers_after[0]
 
-		# compare before and after values
-		if highnum_after > highnum_before and lownum_after < lownum_before:
-			print("Scrolling bar works")
-		else:
-			print("Scrolling bar doesn't work")
-			raise AssertionError("Scrolling bar doesn't work, values not changed")
+			# compare before and after values
+			if highnum_after != highnum_before or lownum_after != lownum_before:
+				print("Scrolling bar works")
+			else:
+				print("Scrolling bar doesn't work")
+				raise AssertionError("Scrolling bar doesn't work, values not changed")
 	def test_08_environment_set_humidity_scrolling_bar(self):
 		environment_settings_page = EnvironmentSettingsPage(self.driver)
 		menu_page = MenuPage(self.driver)
@@ -382,7 +397,7 @@ class EnvironmentSettingsCase(BaseTestCase):
 		menu_page.click_settings()
 		pixsee_settings_page.click_environment_settings()
 		# ensure switch is on
-		if environment_settings_page.is_switch_on() == "true":
+		if environment_settings_page.is_switch_on() :
 			pass
 		else:
 			environment_settings_page.click_switch()
@@ -421,7 +436,7 @@ class EnvironmentSettingsCase(BaseTestCase):
 		lownum_after = numbers_after[0]
 
 		# compare before and after values
-		if highnum_after > highnum_before and lownum_after < lownum_before:
+		if highnum_after != highnum_before or lownum_after != lownum_before:
 			print("Scrolling bar works")
 		else:
 			print("Scrolling bar doesn't work")

@@ -15,10 +15,7 @@ from appium.webdriver.common.appiumby import AppiumBy
 class CoveredFaceDetectionCase(BaseTestCase):
 	def setUp(self):
 		super().setUp(no_reset=False)
-		# ensure is connected to machine
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		if not baby_monitor_page.is_connected():
-			self.skipTest("not online，skip all test")
+
 
 	def test_01_covered_face_detection_tutor_skip(self):
 		covered_face_detection_page = CoveredFaceDetectionPage(self.driver)
@@ -30,6 +27,10 @@ class CoveredFaceDetectionCase(BaseTestCase):
 		login_page.login(self.account(), self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		self.skip_first_four_tutor()
+		# ensure is connected to machine
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		if not baby_monitor_page.is_connected():
+			self.skipTest("not online，skip all test")
 
 		baby_monitor_page.click_home()
 		# skip menu tutor
@@ -72,7 +73,10 @@ class CoveredFaceDetectionCase(BaseTestCase):
 		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		self.skip_first_four_tutor()
-
+		# ensure is connected to machine
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		if not baby_monitor_page.is_connected():
+			self.skipTest("not online，skip all test")
 		baby_monitor_page.click_home()
 		# skip menu tutor
 		menu_page.click_logout()
@@ -138,6 +142,10 @@ class CoveredFaceDetectionCase(BaseTestCase):
 		baby_monitor_page.is_in_baby_monitor_page()
 
 		self.skip_first_four_tutor()
+		# ensure is connected to machine
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		if not baby_monitor_page.is_connected():
+			self.skipTest("not online，skip all test")
 		baby_monitor_page.click_home()
 		# skip menu tutor
 		menu_page.click_logout()
@@ -176,6 +184,10 @@ class CoveredFaceDetectionCase(BaseTestCase):
 		baby_monitor_page.is_in_baby_monitor_page()
 
 		self.skip_first_four_tutor()
+		# ensure is connected to machine
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		if not baby_monitor_page.is_connected():
+			self.skipTest("not online，skip all test")
 		baby_monitor_page.click_home()
 		# skip menu tutor
 		menu_page.click_logout()
@@ -200,6 +212,10 @@ class CoveredFaceDetectionCase(BaseTestCase):
 		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		self.skip_first_four_tutor()
+		# ensure is connected to machine
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		if not baby_monitor_page.is_connected():
+			self.skipTest("not online，skip all test")
 		baby_monitor_page.click_home()
 		# skip menu tutor
 		time.sleep(2)
@@ -277,6 +293,10 @@ class CoveredFaceDetectionCase(BaseTestCase):
 		login_page.login(self.account(), self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		self.skip_first_four_tutor()
+		# ensure is connected to machine
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		if not baby_monitor_page.is_connected():
+			self.skipTest("not online，skip all test")
 		baby_monitor_page.click_home()
 		# skip menu tutor
 		menu_page.click_logout()
@@ -367,6 +387,10 @@ class CoveredFaceDetectionCase(BaseTestCase):
 		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		self.skip_first_four_tutor()
+		# ensure is connected to machine
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		if not baby_monitor_page.is_connected():
+			self.skipTest("not online，skip all test")
 		baby_monitor_page.click_home()
 		# skip menu tutor
 		time.sleep(2)
@@ -427,6 +451,10 @@ class CoveredFaceDetectionCase(BaseTestCase):
 		login_page.login(self.account(),self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		self.skip_first_four_tutor()
+		# ensure is connected to machine
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		if not baby_monitor_page.is_connected():
+			self.skipTest("not online，skip all test")
 		baby_monitor_page.click_home()
 		# skip menu tutor
 		menu_page.click_logout()

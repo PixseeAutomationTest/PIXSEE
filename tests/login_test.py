@@ -67,7 +67,7 @@ class LoginCase(BaseTestCase):
                 login_page = LoginPage(self.driver)
                 baby_monitor_page = BabyMonitorPage(self.driver)
 
-                login_page.login("jackypixsee02@gmail.com", "@Aa12345")
+                login_page.login("amypixsee03@gmail.com", "@Aa12345")
                 try:
                         self.assertTrue(baby_monitor_page.is_in_baby_monitor_page())
                         print("Login test success")

@@ -70,8 +70,8 @@ class BaseTestCase(unittest.TestCase):
         )
     def click_middle(self):
         size = self.driver.get_window_size()
-        x = size['width'] // 5
-        y = size['height'] // 2
+        x = size['width'] // 2
+        y = size['height'] // 7
 
         self.driver.execute_script("mobile: clickGesture", {
             "x": x,
@@ -111,7 +111,7 @@ class BaseTestCase(unittest.TestCase):
         if expected_on:
             try:
                 is_visible = len(self.driver.find_elements(AppiumBy.ID, itemid)) > 0
-                assert is_visible, "switch on failed"
+                assert is_visible
                 print("switch on success")
             except AssertionError:
                 print("switch on failed")
@@ -119,17 +119,17 @@ class BaseTestCase(unittest.TestCase):
             try:
                 # check findable
                 is_visible =  len(self.driver.find_elements(AppiumBy.ID, itemid)) > 0
-                assert not is_visible, "switch off failed"
+                assert not is_visible
                 print("switch off success")
-            except NoSuchElementException:
-                print("switch off success")
+            except AssertionError:
+                print("switch off failed")
     def tap_on_visibility(self, itemid, name, should_be_visible=True):
         try:
             is_visible = len(self.driver.find_elements(AppiumBy.ID, itemid)) > 0
             if should_be_visible:
-                assert is_visible, f"tap on {name} failed"
+                assert is_visible
             else:
-                assert not is_visible, f"tap on {name} failed"
+                assert not is_visible
             print(f"tap on {name} success")
         except AssertionError:
             print(f"tap on {name} failed")
