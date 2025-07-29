@@ -62,12 +62,11 @@ class AreaDetectionPage():
 		element = self.driver.find_element("id", self.Save)
 		element.click()
 	def click_switch(self):
-		# WebDriverWait(self.driver, 1).until(
-		# 	EC.presence_of_element_located((AppiumBy.ID, self.Switch))
-		# ).click()
-		# element = self.driver.find_element(AppiumBy.ID, self.Switch)
-		# element.click()
-
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located((AppiumBy.ID, self.Switch))
+		)
+		element = self.driver.find_element(AppiumBy.ID, self.Switch)
+		element.click()
 	def click_low(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("id", self.LowCheckBox))

@@ -35,6 +35,7 @@ class BaseTestCase(unittest.TestCase):
         self.tutor_id = "com.compal.bioslab.pixsee.pixm01:id/tvDescription"
 
         self.driver = webdriver.Remote("http://localhost:4723", options=capabilities)
+        self.driver.update_settings({"waitForIdleTimeout": 10})
     def open_app(self):
         self.driver.activate_app(self.driver.capabilities.get("appPackage"))
         time.sleep(5)
@@ -71,7 +72,7 @@ class BaseTestCase(unittest.TestCase):
     def click_middle(self):
         size = self.driver.get_window_size()
         x = size['width'] // 2
-        y = size['height'] // 7
+        y = size['height'] // 7 * 6
 
         self.driver.execute_script("mobile: clickGesture", {
             "x": x,
@@ -134,7 +135,7 @@ class BaseTestCase(unittest.TestCase):
         except AssertionError:
             print(f"tap on {name} failed")
     def account(self):
-        return "amypixsee03@gmail.com"
+        return "amypixsee02@gmail.com"
     def password(self):
         return "@Aa12345"
     def tearDown(self):

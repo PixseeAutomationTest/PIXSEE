@@ -12,10 +12,6 @@ from pages.menu_pages.subscription_pages.subscription_page import SubscriptionPa
 class TimeLapseVideoCase(BaseTestCase):
     def setUp(self):
         super().setUp(no_reset=False)
-        baby_monitor_page = BabyMonitorPage(self.driver)
-        if not baby_monitor_page.is_connected():
-            self.skipTest("not online，skip all test")
-
     def test_01_time_lapse_video_subscription_click_no(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
         menu_page = MenuPage(self.driver)
@@ -26,6 +22,10 @@ class TimeLapseVideoCase(BaseTestCase):
         login_page.login(self.account(),self.password())
         baby_monitor_page.is_in_baby_monitor_page()
         self.skip_first_four_tutor()
+        # ensure is connected to machine
+        baby_monitor_page = BabyMonitorPage(self.driver)
+        if not baby_monitor_page.is_connected():
+            self.skipTest("not online，skip all test")
 
         baby_monitor_page.click_home()
 
@@ -42,7 +42,7 @@ class TimeLapseVideoCase(BaseTestCase):
             self.assertEqual(header, hint)
             print("time-lapse header text right")
         except AssertionError:
-            print("time-lapse header text wrong")
+            raise AssertionError("time-lapse header text wrong")
         # check time-lapse recording title
         try:
             title = time_lapse_video.title()
@@ -50,7 +50,7 @@ class TimeLapseVideoCase(BaseTestCase):
             self.assertEqual(title, hint)
             print("time_lapse_video title right")
         except AssertionError:
-            print("time_lapse_video title wrong")
+            raise AssertionError("time_lapse_video title wrong")
         # check time_lapse_video description
         try:
             subtitle = time_lapse_video.description()
@@ -58,7 +58,7 @@ class TimeLapseVideoCase(BaseTestCase):
             self.assertEqual(subtitle, hint)
             print("time_lapse_video subtitle right")
         except AssertionError:
-            print("time_lapse_video subtitle wrong")
+            raise AssertionError("time_lapse_video subtitle wrong")
         # switch on
         time_lapse_video.click_switch()
         # check if in upgrade dialog
@@ -72,7 +72,7 @@ class TimeLapseVideoCase(BaseTestCase):
                 self.assertEqual(upgrade_title, hint)
                 print("Upgrade dialog title right")
             except AssertionError:
-                print("Upgrade dialog title wrong")
+                raise AssertionError("Upgrade dialog title wrong")
             # check upgrade dialog button text
             try:
                 upgrade_description = time_lapse_video.upgrade_subscription_txt()
@@ -80,14 +80,14 @@ class TimeLapseVideoCase(BaseTestCase):
                 self.assertEqual(upgrade_description, hint)
                 print("Upgrade dialog subscription right")
             except AssertionError:
-                print("Upgrade dialog subscription wrong")
+                raise AssertionError("Upgrade dialog subscription wrong")
             try:
                 upgrade_no = time_lapse_video.upgrade_no_txt()
                 hint = self.get_string("no_thanks_action")
                 self.assertEqual(upgrade_no, hint)
                 print("Upgrade dialog no text right")
             except AssertionError:
-                print("Upgrade dialog no text wrong")
+                raise AssertionError("Upgrade dialog no text wrong")
             # click no
             time_lapse_video.click_upgrade_no()
             # back to time lapse video page
@@ -95,10 +95,10 @@ class TimeLapseVideoCase(BaseTestCase):
                 self.assertTrue(time_lapse_video.is_in_timelapse_video_page())
                 print("Back to time lapse video page")
             except AssertionError:
-                print("Not in time lapse video page")
+                raise AssertionError("Not in time lapse video page")
                 raise AssertionError("Not in time lapse video page")
         except AssertionError:
-            print("Not in time lapse video upgrade dialog")
+            raise AssertionError("Not in time lapse video upgrade dialog")
             raise AssertionError("Not in time lapse video upgrade dialog")
     def test_02_time_lapse_video_subscription_click_yes(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
@@ -111,6 +111,10 @@ class TimeLapseVideoCase(BaseTestCase):
         login_page.login(self.account(),self.password())
         baby_monitor_page.is_in_baby_monitor_page()
         self.skip_first_four_tutor()
+        # ensure is connected to machine
+        baby_monitor_page = BabyMonitorPage(self.driver)
+        if not baby_monitor_page.is_connected():
+            self.skipTest("not online，skip all test")
 
         baby_monitor_page.click_home()
 
@@ -127,7 +131,7 @@ class TimeLapseVideoCase(BaseTestCase):
             self.assertTrue(subscriptionion_page.is_in_subscription_page())
             print("In subscription page")
         except AssertionError:
-            print("Not in subscription page")
+            raise AssertionError("Not in subscription page")
             raise AssertionError("Not in subscription page")
     def test_03_time_lapse_video_subscription_x(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
@@ -141,6 +145,11 @@ class TimeLapseVideoCase(BaseTestCase):
         baby_monitor_page.is_in_baby_monitor_page()
 
         self.skip_first_four_tutor()
+        # ensure is connected to machine
+        baby_monitor_page = BabyMonitorPage(self.driver)
+        if not baby_monitor_page.is_connected():
+            self.skipTest("not online，skip all test")
+
         baby_monitor_page.click_home()
         # skip menu tutor
         menu_page.click_logout()
@@ -155,7 +164,7 @@ class TimeLapseVideoCase(BaseTestCase):
             self.assertTrue(time_lapse_video.is_in_timelapse_video_page())
             print("x works, back to time lapse video page")
         except AssertionError:
-            print("x not works, not in time lapse video page")
+            raise AssertionError("Not in time lapse video page")
             raise AssertionError("Not in time lapse video page")
     def test_04_time_lapse_subscribe(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
@@ -169,6 +178,11 @@ class TimeLapseVideoCase(BaseTestCase):
         baby_monitor_page.is_in_baby_monitor_page()
 
         self.skip_first_four_tutor()
+        # ensure is connected to machine
+        baby_monitor_page = BabyMonitorPage(self.driver)
+        if not baby_monitor_page.is_connected():
+            self.skipTest("not online，skip all test")
+
         baby_monitor_page.click_home()
         # skip menu tutor
         menu_page.click_logout()
@@ -185,7 +199,7 @@ class TimeLapseVideoCase(BaseTestCase):
             self.assertTrue(time_lapse_video.is_in_timelapse_video_page())
             print("subscribe successfully")
         except AssertionError:
-            print("subscribe failed")
+            raise AssertionError("Not in time lapse video page after subscribe")
             raise AssertionError("Not in time lapse video page after subscribe")
 
     # already subscribed
@@ -200,6 +214,11 @@ class TimeLapseVideoCase(BaseTestCase):
         login_page.login(self.account(),self.password())
         baby_monitor_page.is_in_baby_monitor_page()
         self.skip_first_four_tutor()
+        # ensure is connected to machine
+        baby_monitor_page = BabyMonitorPage(self.driver)
+        if not baby_monitor_page.is_connected():
+            self.skipTest("not online，skip all test")
+
         baby_monitor_page.click_home()
 
         # skip menu tutor
@@ -212,7 +231,7 @@ class TimeLapseVideoCase(BaseTestCase):
         time.sleep(1)  # wait for the switch to toggle
         after_status = time_lapse_video.is_switch_on()
         self.check_switch_and_content(after_status, time_lapse_video.RecordingMode)
-    def test_05_time_lapse_video_check_text(self):
+    def test_06_time_lapse_video_check_text(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
@@ -222,6 +241,11 @@ class TimeLapseVideoCase(BaseTestCase):
         login_page.login(self.account(),self.password())
         baby_monitor_page.is_in_baby_monitor_page()
         self.skip_first_four_tutor()
+        # ensure is connected to machine
+        baby_monitor_page = BabyMonitorPage(self.driver)
+        if not baby_monitor_page.is_connected():
+            self.skipTest("not online，skip all test")
+
         baby_monitor_page.click_home()
         # skip menu tutor
         menu_page.click_logout()
@@ -284,7 +308,7 @@ class TimeLapseVideoCase(BaseTestCase):
             print("time_lapse_video twenty four hour text right")
         except AssertionError:
             print("time_lapse_video twenty four hour text wrong")
-    def test_06_time_lapse_video_checkbox(self):
+    def test_07_time_lapse_video_checkbox(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
@@ -294,6 +318,11 @@ class TimeLapseVideoCase(BaseTestCase):
         login_page.login(self.account(),self.password())
         baby_monitor_page.is_in_baby_monitor_page()
         self.skip_first_four_tutor()
+        # ensure is connected to machine
+        baby_monitor_page = BabyMonitorPage(self.driver)
+        if not baby_monitor_page.is_connected():
+            self.skipTest("not online，skip all test")
+
         baby_monitor_page.click_home()
         # skip menu tutor
         menu_page.click_logout()
@@ -318,16 +347,16 @@ class TimeLapseVideoCase(BaseTestCase):
             self.assertTrue(time_lapse_video.is_twelve_hours_clicked())
             print("Twelve hours checkbox is checked")
         except AssertionError:
-            print("Twelve hours checkbox is not checked")
+            raise AssertionError("Twelve hours checkbox is not checked")
             raise AssertionError("Twelve hours checkbox is not checked")
         time_lapse_video.click_twenty_four_hours_checkbox()
         try:
             self.assertTrue(time_lapse_video.is_twenty_four_hours_clicked())
             print("Twenty four hours checkbox is checked")
         except AssertionError:
-            print("Twenty four hours checkbox is not checked")
             raise AssertionError("Twenty four hours checkbox is not checked")
-    def test_07_time_lapse_video_select_time(self):
+            raise AssertionError("Twenty four hours checkbox is not checked")
+    def test_08_time_lapse_video_select_time(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
@@ -337,6 +366,11 @@ class TimeLapseVideoCase(BaseTestCase):
         login_page.login(self.account(),self.password())
         baby_monitor_page.is_in_baby_monitor_page()
         self.skip_first_four_tutor()
+        # ensure is connected to machine
+        baby_monitor_page = BabyMonitorPage(self.driver)
+        if not baby_monitor_page.is_connected():
+            self.skipTest("not online，skip all test")
+
         baby_monitor_page.click_home()
         # skip menu tutor
         menu_page.click_logout()
@@ -386,12 +420,12 @@ class TimeLapseVideoCase(BaseTestCase):
                 self.assertNotEqual(current, after)
                 print("timer confirm function success")
             except AssertionError:
-                print("timer confirm function failed")
+                raise AssertionError("timer confirm function failed, start time not changed")
                 raise AssertionError("timer confirm function failed, start time not changed")
         except AssertionError:
-            print("Not in time selecter")
             raise AssertionError("Not in time selecter")
-    def test_08_time_lapse_video_save(self):
+            raise AssertionError("Not in time selecter")
+    def test_09_time_lapse_video_save(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
@@ -401,6 +435,11 @@ class TimeLapseVideoCase(BaseTestCase):
         login_page.login(self.account(),self.password())
         baby_monitor_page.is_in_baby_monitor_page()
         self.skip_first_four_tutor()
+        # ensure is connected to machine
+        baby_monitor_page = BabyMonitorPage(self.driver)
+        if not baby_monitor_page.is_connected():
+            self.skipTest("not online，skip all test")
+
         baby_monitor_page.click_home()
         # skip menu tutor
         menu_page.click_logout()
@@ -413,7 +452,7 @@ class TimeLapseVideoCase(BaseTestCase):
             self.assertFalse(time_lapse_video.is_save_enable())
             print("Save diable test pass")
         except AssertionError:
-            print("Save diable test failed")
+            raise AssertionError("Save diable test failed")
             raise AssertionError("Save diable test failed")
 
         time_lapse_video.click_switch()
@@ -425,7 +464,7 @@ class TimeLapseVideoCase(BaseTestCase):
         else:
             print("save function failed")
             raise AssertionError("save function failed, status not changed")
-    def test_09_time_lapse_video_back(self):
+    def test_10_time_lapse_video_back(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
@@ -435,6 +474,11 @@ class TimeLapseVideoCase(BaseTestCase):
         login_page.login(self.account(),self.password())
         baby_monitor_page.is_in_baby_monitor_page()
         self.skip_first_four_tutor()
+        # ensure is connected to machine
+        baby_monitor_page = BabyMonitorPage(self.driver)
+        if not baby_monitor_page.is_connected():
+            self.skipTest("not online，skip all test")
+
         baby_monitor_page.click_home()
         # skip menu tutor
         menu_page.click_logout()
@@ -447,9 +491,9 @@ class TimeLapseVideoCase(BaseTestCase):
             self.assertTrue(pixsee_settings_page.is_in_settings())
             print("Back to pixsee settings page")
         except AssertionError:
-            print("Not in pixsee settings page")
             raise AssertionError("Not in pixsee settings page")
-    def test_10_time_lapse_video_discard_dialog(self):
+            raise AssertionError("Not in pixsee settings page")
+    def test_11_time_lapse_video_discard_dialog(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
@@ -459,6 +503,11 @@ class TimeLapseVideoCase(BaseTestCase):
         login_page.login(self.account(),self.password())
         baby_monitor_page.is_in_baby_monitor_page()
         self.skip_first_four_tutor()
+        # ensure is connected to machine
+        baby_monitor_page = BabyMonitorPage(self.driver)
+        if not baby_monitor_page.is_connected():
+            self.skipTest("not online，skip all test")
+
         baby_monitor_page.click_home()
         # skip menu tutor
         menu_page.click_logout()
@@ -501,7 +550,7 @@ class TimeLapseVideoCase(BaseTestCase):
                 self.assertTrue(pixsee_settings_page.is_in_settings())
                 print("Back to pixsee settings page after discard")
             except AssertionError:
-                print("Not in pixsee settings page after discard")
+                raise AssertionError("Not in pixsee settings page after discard")
                 raise AssertionError("Not in pixsee settings page after discard")
         except AssertionError:
             print("Not in discard dialog")

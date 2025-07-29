@@ -37,21 +37,21 @@ class WifiSettingsCase(BaseTestCase):
 			self.assertEqual(title, hint)
 			print("popup title correct")
 		except AssertionError:
-			print("popup title wrong")
+			raise AssertionError("popup title wrong")
 		try:
 			ok = wifi_settings_page.pop_up_title_text()
 			hint = self.get_string("ok")
 			self.assertEqual(ok, hint)
 			print("ok button correct")
 		except AssertionError:
-			print("ok button wrong")
+			raise AssertionError("ok button wrong")
 		try:
 			cancel = wifi_settings_page.pop_up_cancel_text()
 			hint = self.get_string("cancel")
 			self.assertEqual(cancel, hint)
 			print("cancel button correct")
 		except AssertionError:
-			print("cancel button wrong")
+			raise AssertionError("cancel button wrong")
 		# click cancel
 		wifi_settings_page.click_pop_up_cancel()
 		# check if back to settings page
@@ -59,7 +59,7 @@ class WifiSettingsCase(BaseTestCase):
 			self.assertTrue(pixsee_settings_page.is_in_settings())
 			print("back to settings page")
 		except AssertionError:
-			print("not back to settings page")
+			raise AssertionError("not back to settings page")
 	def test_wifi_reset_ok(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -82,7 +82,7 @@ class WifiSettingsCase(BaseTestCase):
 			self.assertTrue(wifi_settings_page.is_in_wifi_settings_page())
 			print("ok function success")
 		except AssertionError:
-			print("ok function failed")
+			raise AssertionError("ok function failed")
 	def test_wifi_settings_x(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -107,20 +107,20 @@ class WifiSettingsCase(BaseTestCase):
 			self.assertEqual(header_text, hint)
 			print("header text correct")
 		except AssertionError:
-			print("header text wrong")
+			raise AssertionError("header text wrong")
 		try:
 			description_text = wifi_settings_page.description()
 			hint = self.get_string("choose_wifi_network")
 			self.assertEqual(description_text, hint)
 			print("description text correct")
 		except AssertionError:
-			print("description text wrong")
+			raise AssertionError("description text wrong")
 		wifi_settings_page.click_x()
 		try:
 			self.assertTrue(wifi_settings_page.is_in_wifi_quit_dialog())
 			print("x function success")
 		except AssertionError:
-			print("x function failed")
+			raise AssertionError("x function failed")
 	def test_wifi_quit_dialog_no_yes(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -146,21 +146,21 @@ class WifiSettingsCase(BaseTestCase):
 			self.assertEqual(dialog_text, hint)
 			print("quit dialog text correct")
 		except AssertionError:
-			print("quit dialog text wrong")
+			raise AssertionError("quit dialog text wrong")
 		try:
 			yes_text = wifi_settings_page.quit_dialog_yes_text()
 			hint = self.get_string("yes")
 			self.assertEqual(yes_text, hint)
 			print("quit dialog yes text correct")
 		except AssertionError:
-			print("quit dialog yes text wrong")
+			raise AssertionError("quit dialog yes text wrong")
 		try:
 			no_text = wifi_settings_page.quit_dialog_no_text()
 			hint = self.get_string("no")
 			self.assertEqual(no_text, hint)
 			print("quit dialog no text correct")
 		except AssertionError:
-			print("quit dialog no text wrong")
+			raise AssertionError("quit dialog no text wrong")
 		# click no
 		wifi_settings_page.click_quit_no()
 		# check if back to wifi settings page
@@ -168,7 +168,7 @@ class WifiSettingsCase(BaseTestCase):
 			self.assertTrue(wifi_settings_page.is_in_wifi_settings_page())
 			print("quit dialog no function success")
 		except AssertionError:
-			print("quit dialog no function failed")
+			raise AssertionError("quit dialog no function failed, not in wifi settings page")
 			raise AssertionError("quit dialog no function failed, not in wifi settings page")
 		# check yes
 		wifi_settings_page.click_x()
@@ -177,7 +177,7 @@ class WifiSettingsCase(BaseTestCase):
 			self.assertTrue(pixsee_settings_page.is_in_settings())
 			print("quit dialog yes function success")
 		except AssertionError:
-			print("quit dialog yes function failed")
+			raise AssertionError("quit dialog yes function failed")
 	def test_wifi_settings_next_empty_password(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -201,7 +201,7 @@ class WifiSettingsCase(BaseTestCase):
 			self.assertTrue(wifi_settings_page.is_in_wifi_password_empty_dialog())
 			print("empty password  alert success")
 		except AssertionError:
-			print("empty password alert failed")
+			raise AssertionError("empty password alert failed, not in wifi empty password dialog")
 			raise AssertionError("empty password alert failed, not in wifi empty password dialog")
 		# check dialog text
 		try:
@@ -210,20 +210,20 @@ class WifiSettingsCase(BaseTestCase):
 			self.assertEqual(dialog_text, hint)
 			print("password empty dialog text correct")
 		except AssertionError:
-			print("password empty dialog text wrong")
+			raise AssertionError("password empty dialog text wrong")
 		try:
 			yes_text = wifi_settings_page.empty_dialog_yes_text()
 			hint = self.get_string("yes")
 			self.assertEqual(yes_text, hint)
 			print("password empty dialog yes text correct")
 		except AssertionError:
-			print("password empty dialog yes text wrong")
+			raise AssertionError("password empty dialog yes text wrong")
 		wifi_settings_page.click_empty_dialog_yes()
 		try:
 			self.assertTrue(wifi_settings_page.is_in_wifi_settings_page())
 			print("empty password dialog yes function success")
 		except AssertionError:
-			print("empty password dialog yes function failed")
+			raise AssertionError("empty password dialog yes function failed, not in wifi settings page")
 			raise AssertionError("empty password dialog yes function failed, not in wifi settings page")
 	def test_wifi_settings_next(self):
 		menu_page = MenuPage(self.driver)
@@ -248,7 +248,7 @@ class WifiSettingsCase(BaseTestCase):
 			self.assertTrue(wifi_settings_page.is_in_wifi_searching_device())
 			print("next function success")
 		except AssertionError:
-			print("next function failed")
+			raise AssertionError("next function failed")
 
 
 
