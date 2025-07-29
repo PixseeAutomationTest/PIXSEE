@@ -91,7 +91,7 @@ class AddBabyTest(BaseTestCase):
         finally:
             self.shutdown_app()
 
-    def  test_add_baby_profile_cancel_with_yes(self):
+    def test_add_baby_profile_cancel_with_yes(self):
         try:
             self.open_app()
 

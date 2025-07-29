@@ -412,9 +412,12 @@ class AddBabyProfilePage():
             return False
 
     def add_new_baby(self, baby_name = "Test_Baby 01"):
+        if random.choice([True, False]):
+            self.click_gender_boy()
+        else:
+            self.click_gender_girl()
         self.input_baby_name(baby_name)
-        self.click_baby_birthday()
-        self.click_calendar_done()
+        self.select_baby_birthday()
         time.sleep(3)
         self.select_nation(random.randint(1, 58))
         self.select_relative(random.randint(1, 10))
