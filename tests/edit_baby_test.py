@@ -1,5 +1,3 @@
-import time
-
 from pages.base import BaseTestCase
 
 from pages.baby_monitor_page import BabyMonitorPage
@@ -9,7 +7,6 @@ from pages.menu_pages.add_baby_profile_page import AddBabyProfilePage
 from pages.menu_pages.edit_baby_profile_pages.edit_baby_profile_page import EditBabyProfilePage
 from pages.menu_pages.edit_baby_profile_pages.delete_baby_profile import DeleteBabyProfilePage
 from pages.download_account_data_page import DownloadAccountDataPage
-import unittest
 
 import random
 
@@ -142,7 +139,7 @@ class EditBabyTest(BaseTestCase):
                 edit_baby_profile_page.click_gender_boy()
             else:
                 edit_baby_profile_page.click_gender_girl()
-            edit_baby_profile_page.edit_baby_name("")
+            edit_baby_profile_page.input_baby_name()
             edit_baby_profile_page.select_baby_birthday(2024, 6, 30)
             edit_baby_profile_page.select_nation(random.randint(1, 58))
             edit_baby_profile_page.select_relative(random.randint(1, 10))
@@ -216,7 +213,7 @@ class EditBabyTest(BaseTestCase):
                 edit_baby_profile_page.click_gender_boy()
             else:
                 edit_baby_profile_page.click_gender_girl()
-            edit_baby_profile_page.edit_baby_name("")
+            edit_baby_profile_page.input_baby_name()
             edit_baby_profile_page.select_baby_birthday(2024, 6, 30)
             edit_baby_profile_page.select_nation(random.randint(1, 58))
             edit_baby_profile_page.select_relative(random.randint(1, 10))
