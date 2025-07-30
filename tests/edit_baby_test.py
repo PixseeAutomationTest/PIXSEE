@@ -142,7 +142,7 @@ class EditBabyTest(BaseTestCase):
                 edit_baby_profile_page.click_gender_boy()
             else:
                 edit_baby_profile_page.click_gender_girl()
-            edit_baby_profile_page.edit_baby_name("10_Baby Test")
+            edit_baby_profile_page.edit_baby_name("")
             edit_baby_profile_page.select_baby_birthday(2024, 6, 30)
             edit_baby_profile_page.select_nation(random.randint(1, 58))
             edit_baby_profile_page.select_relative(random.randint(1, 10))
@@ -216,7 +216,7 @@ class EditBabyTest(BaseTestCase):
                 edit_baby_profile_page.click_gender_boy()
             else:
                 edit_baby_profile_page.click_gender_girl()
-            edit_baby_profile_page.edit_baby_name("10_Baby Test")
+            edit_baby_profile_page.edit_baby_name("")
             edit_baby_profile_page.select_baby_birthday(2024, 6, 30)
             edit_baby_profile_page.select_nation(random.randint(1, 58))
             edit_baby_profile_page.select_relative(random.randint(1, 10))

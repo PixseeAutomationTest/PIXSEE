@@ -72,7 +72,7 @@ class AddBabyProfilePage():
         element = self.driver.find_element("id", self.babyGenderGirlButton)
         element.click()
 
-    def input_baby_name(self, name):
+    def input_baby_name(self, name = "Test_Baby 01"):
         WebDriverWait(self.driver, 20).until(
             EC.presence_of_element_located(("id", self.nameEditText))
         )

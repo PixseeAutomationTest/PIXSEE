@@ -83,11 +83,13 @@ class EditBabyProfilePage():
         element = self.driver.find_element("id", self.genderGirlButton)
         element.click()
 
-    def edit_baby_name(self, new_name):
+    def input_baby_name(self, new_name = "Test_Baby 01"):
         WebDriverWait(self.driver, 20).until(
             EC.presence_of_element_located(("id", self.babyNameEditText))
         )
         element = self.driver.find_element("id", self.babyNameEditText)
+        if element.text == new_name:
+            new_name = new_name + "(1)"
         element.clear()
         element.send_keys(new_name)
 
