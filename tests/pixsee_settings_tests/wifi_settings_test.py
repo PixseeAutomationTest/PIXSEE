@@ -39,7 +39,7 @@ class WifiSettingsCase(BaseTestCase):
 		except AssertionError:
 			raise AssertionError("popup title wrong")
 		try:
-			ok = wifi_settings_page.pop_up_title_text()
+			ok = wifi_settings_page.pop_up_ok_text()
 			hint = self.get_string("ok")
 			self.assertEqual(ok, hint)
 			print("ok button correct")
@@ -169,7 +169,6 @@ class WifiSettingsCase(BaseTestCase):
 			print("quit dialog no function success")
 		except AssertionError:
 			raise AssertionError("quit dialog no function failed, not in wifi settings page")
-			raise AssertionError("quit dialog no function failed, not in wifi settings page")
 		# check yes
 		wifi_settings_page.click_x()
 		wifi_settings_page.click_quit_yes()
@@ -202,7 +201,6 @@ class WifiSettingsCase(BaseTestCase):
 			print("empty password  alert success")
 		except AssertionError:
 			raise AssertionError("empty password alert failed, not in wifi empty password dialog")
-			raise AssertionError("empty password alert failed, not in wifi empty password dialog")
 		# check dialog text
 		try:
 			dialog_text = wifi_settings_page.empty_dialog_text()
@@ -213,9 +211,9 @@ class WifiSettingsCase(BaseTestCase):
 			raise AssertionError("password empty dialog text wrong")
 		try:
 			yes_text = wifi_settings_page.empty_dialog_yes_text()
-			hint = self.get_string("yes")
+			hint = self.get_string("ok")
 			self.assertEqual(yes_text, hint)
-			print("password empty dialog yes text correct")
+			print("password empty dialog ok text correct")
 		except AssertionError:
 			raise AssertionError("password empty dialog yes text wrong")
 		wifi_settings_page.click_empty_dialog_yes()
@@ -223,7 +221,6 @@ class WifiSettingsCase(BaseTestCase):
 			self.assertTrue(wifi_settings_page.is_in_wifi_settings_page())
 			print("empty password dialog yes function success")
 		except AssertionError:
-			raise AssertionError("empty password dialog yes function failed, not in wifi settings page")
 			raise AssertionError("empty password dialog yes function failed, not in wifi settings page")
 	def test_wifi_settings_next(self):
 		menu_page = MenuPage(self.driver)
