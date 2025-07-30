@@ -18,8 +18,8 @@ class BaseTestCase(unittest.TestCase):
     def setUp(self, no_reset=True):
         capabilities = UiAutomator2Options()
         capabilities.platform_name = "Android"
-        capabilities.device_name = "38161FDJG00DXJ"
-        capabilities.language = "tw text"  # Chinese (Taiwan): "tw text", English: "en-us text"
+        capabilities.device_name = "2A141FDH2009E8"
+        capabilities.language = "en-us text"  # Chinese (Taiwan): "tw text", English: "en-us text"
         # capabilities.device_name = "emulator-5554"
 
         # adb devices
@@ -35,7 +35,7 @@ class BaseTestCase(unittest.TestCase):
         self.tutor_id = "com.compal.bioslab.pixsee.pixm01:id/tvDescription"
 
         self.driver = webdriver.Remote("http://localhost:4723", options=capabilities)
-        self.driver.update_settings({"waitForIdleTimeout": 10})
+        self.driver.update_settings({"waitForIdleTimeout": 100})
     def open_app(self):
         self.driver.activate_app(self.driver.capabilities.get("appPackage"))
         time.sleep(5)
@@ -135,7 +135,7 @@ class BaseTestCase(unittest.TestCase):
         except AssertionError:
             print(f"tap on {name} failed")
     def account(self):
-        return "amypixsee02@gmail.com"
+        return "amypixsee03@gmail.com"
     def password(self):
         return "@Aa12345"
     def tearDown(self):

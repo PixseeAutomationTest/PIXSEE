@@ -46,7 +46,8 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 		# check friends detection description
 		try:
 			subtitle = pixsee_friends_page.description_subtitle()
-			hint = self.get_string("pixsee_friends_detection_subtitle")
+			print(pixsee_friends_page.description_subtitle())
+			hint = self.get_string("pixsee_friends_detection_subtext")
 			self.assertEqual(subtitle, hint)
 			print("Friends detection subtitle right")
 		except AssertionError:
@@ -200,14 +201,14 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 			raise AssertionError("Friends detection time span title wrong")
 		try:
 			start_time = pixsee_friends_page.start_time_txt()
-			hint = self.get_string("time_lapse_start_time")
+			hint = self.get_string("pixsee_friends_detection_starting_time")
 			self.assertEqual(start_time, hint)
 			print("Friends detection start time text right")
 		except AssertionError:
 			raise AssertionError("Friends detection start time text wrong")
 		try:
 			end_time = pixsee_friends_page.end_time_txt()
-			hint = self.get_string("time_lapse_end_time")
+			hint = self.get_string("pixsee_friends_detection_ending_time")
 			self.assertEqual(end_time, hint)
 			print("Friends detection end time text right")
 		except AssertionError:
