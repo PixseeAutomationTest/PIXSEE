@@ -41,7 +41,7 @@ class EnvironmentSettingsCase(BaseTestCase):
 		# check detection title
 		try:
 			title = environment_settings_page.detection_text()
-			hint = self.get_string("pixsee_environment_set_title")
+			hint = self.get_string("detection")
 			self.assertEqual(title, hint)
 			print("Friends detection title right")
 		except AssertionError:

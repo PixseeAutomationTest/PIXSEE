@@ -24,7 +24,7 @@ class EnvironmentSettingsPage():
 		self.TemperatureMin = "com.compal.bioslab.pixsee.pixm01:id/tvMinTemperatureValue"
 		self.TempaeratureMax = "com.compal.bioslab.pixsee.pixm01:id/tvMaxTemperatureValue"
 		self.TemperatureBar = "com.compal.bioslab.pixsee.pixm01:id/sbTemperatureRange"
-		self.Humidity = "com.compal.bioslab.pixsee.pixm01:id/tvHumidityRangeLabel"
+		self.Humidity = "com.compal.bioslab.pixsee.pixm01:id/tvHumidityLabelSection"
 		self.HumidityRange = "com.compal.bioslab.pixsee.pixm01:id/tvHumidityRangeLabel"
 		self.HumidityMin = "com.compal.bioslab.pixsee.pixm01:id/tvMinHumidityValue"
 		self.HumidityMax = "com.compal.bioslab.pixsee.pixm01:id/tvMaxHumidityValue"
@@ -32,7 +32,7 @@ class EnvironmentSettingsPage():
 		self.Celsius = "com.compal.bioslab.pixsee.pixm01:id/tvCelsiusTemperature"
 		self.Fahrenheit = "com.compal.bioslab.pixsee.pixm01:id/tvFahrenheitTemperature"
 		self.DiscardTitle = "com.compal.bioslab.pixsee.pixm01:id/tvtitleAlertDialog"
-		self.DiscardNo = "com.compal.bioslab.pixsee.pixm01:id/btnPositiveAlertDialog"
+		self.DiscardNo = "com.compal.bioslab.pixsee.pixm01:id/btnNegativeAlertDialog"
 		self.DiscardYes = "com.compal.bioslab.pixsee.pixm01:id/btnPositiveAlertDialog"
 
 	def click_back(self):
