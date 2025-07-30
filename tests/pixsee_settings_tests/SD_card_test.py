@@ -1,3 +1,5 @@
+import time
+
 from pages.menu_pages.menu_page import MenuPage
 from pages.menu_pages.pixsee_settings_pages.pixsee_settings_page import PixseeSettingsPage
 from pages.base import BaseTestCase
@@ -18,13 +20,16 @@ class SDcardCase(BaseTestCase):
 		login_page = LoginPage(self.driver)
 		sd_card_page = SDcardStatusPage(self.driver)
 
-		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		login_page.login(self.account(), self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
 		menu_page.click_logout()
 		menu_page.click_settings()
+		time.sleep(1)  # wait for settings page to load
+		self.up_scroll()
+		time.sleep(2)
 		pixsee_settings_page.click_sd_card()
 		# check header text
 		try:
@@ -61,20 +66,49 @@ class SDcardCase(BaseTestCase):
 				print("Title text test success")
 			except AssertionError:
 				raise AssertionError("Title text test failed")
-	def test_02_check_format_button(self):
+	def test_02_check_back_button(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		login_page = LoginPage(self.driver)
 		sd_card_page = SDcardStatusPage(self.driver)
 
-		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		login_page.login(self.account(), self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
 		menu_page.click_logout()
 		menu_page.click_settings()
+		time.sleep(1)
+		# wait for settings page to load
+		self.up_scroll()
+		time.sleep(2)
+		pixsee_settings_page.click_sd_card()
+		sd_card_page.click_back()
+		# back to settings page
+		try:
+			self.assertTrue(pixsee_settings_page.is_in_settings())
+			print("Back to Pixsee Settings page")
+		except AssertionError:
+			raise AssertionError("Not in Pixsee Settings page")
+	def test_03_check_format_button(self):
+		menu_page = MenuPage(self.driver)
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+		login_page = LoginPage(self.driver)
+		sd_card_page = SDcardStatusPage(self.driver)
+
+		login_page.login(self.account(), self.password())
+		baby_monitor_page.is_in_baby_monitor_page()
+		self.skip_first_four_tutor()
+		baby_monitor_page.click_home()
+		# skip menu tutor
+		menu_page.click_logout()
+		menu_page.click_settings()
+		time.sleep(1)  # wait for settings page to load
+		self.up_scroll()
+		time.sleep(2)
 		pixsee_settings_page.click_sd_card()
 		sd_card_page.click_format()
 		# check if is in format dialog
@@ -83,20 +117,23 @@ class SDcardCase(BaseTestCase):
 			print("Format dialog test success")
 		except AssertionError:
 			raise AssertionError("Format dialog test failed")
-	def test_03_check_format_go_and_no(self):
+	def test_04_check_format_go_and_no(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		login_page = LoginPage(self.driver)
 		sd_card_page = SDcardStatusPage(self.driver)
 
-		login_page.login("amypixsee03@gmail.com", "@Aa12345")
+		login_page.login(self.account(), self.password())
 		baby_monitor_page.is_in_baby_monitor_page()
 		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
 		# skip menu tutor
 		menu_page.click_logout()
 		menu_page.click_settings()
+		time.sleep(1)  # wait for settings page to load
+		self.up_scroll()
+		time.sleep(2)
 		pixsee_settings_page.click_sd_card()
 		sd_card_page.click_format()
 		# check dialog title
@@ -140,28 +177,6 @@ class SDcardCase(BaseTestCase):
 			print("Formatting test success")
 		except AssertionError:
 			raise AssertionError("Formatting test failed")
-	def test_04_check_back_button(self):
-		menu_page = MenuPage(self.driver)
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		login_page = LoginPage(self.driver)
-		sd_card_page = SDcardStatusPage(self.driver)
-
-		login_page.login("amypixsee03@gmail.com", "@Aa12345")
-		baby_monitor_page.is_in_baby_monitor_page()
-		self.skip_first_four_tutor()
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		menu_page.click_logout()
-		menu_page.click_settings()
-		pixsee_settings_page.click_sd_card()
-		sd_card_page.click_back()
-		# back to settings page
-		try:
-			self.assertTrue(pixsee_settings_page.is_in_settings())
-			print("Back to Pixsee Settings page")
-		except AssertionError:
-			raise AssertionError("Not in Pixsee Settings page")
 
 
 

@@ -453,6 +453,7 @@ class PixseeSettingsTest(BaseTestCase):
         menu_page.click_settings()
         time.sleep(1)
         self.down_scroll()
+        time.sleep(2)
 
         try:
             # check privacy mode title correct
@@ -492,6 +493,9 @@ class PixseeSettingsTest(BaseTestCase):
         # skip menu tutor
         menu_page.click_logout()
         menu_page.click_settings()
+        time.sleep(1)
+        self.up_scroll()
+        time.sleep(2)
         # check SD card status title on settings page
         try:
             hint = self.get_string("sd_card_status")

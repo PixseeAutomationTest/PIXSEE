@@ -66,7 +66,6 @@ class PixseeSettingsPage():
 		self.SDcard = "com.compal.bioslab.pixsee.pixm01:id/clSDCardStatus"
 		self.SDcardStatustxt = "com.compal.bioslab.pixsee.pixm01:id/tvSDCardStatus"
 
-		self.in_settings = "com.compal.bioslab.pixsee.pixm01:id/tvRoomName"
 
 
 
@@ -76,9 +75,9 @@ class PixseeSettingsPage():
 	def is_in_settings(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
-				EC.presence_of_element_located(("id", self.in_settings))
+				EC.presence_of_element_located(("id", self.AreaDetection))
 			)
-			self.driver.find_element("id", self.in_settings)
+			self.driver.find_element("id", self.AreaDetection)
 			return True
 		except AssertionError:
 			return False

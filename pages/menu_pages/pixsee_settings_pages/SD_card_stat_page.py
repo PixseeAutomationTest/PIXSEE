@@ -126,7 +126,7 @@ class SDcardStatusPage():
 	def is_formatting(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
-				EC.presence_of_element_located(("id", self.Formating))
+				EC.presence_of_element_located(("id", self.Formatting))
 			)
 			return True
 		except AssertionError:
