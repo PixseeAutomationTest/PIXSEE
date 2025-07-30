@@ -18,7 +18,7 @@ class BaseTestCase(unittest.TestCase):
     def setUp(self, no_reset=True):
         capabilities = UiAutomator2Options()
         capabilities.platform_name = "Android"
-        capabilities.device_name = "38161FDJG00DXJ"
+        capabilities.device_name = "2A141FDH2009E8"
         capabilities.language = "en-us text"  # Chinese (Taiwan): "tw text", English: "en-us text"
         # capabilities.device_name = "emulator-5554"
 
@@ -35,6 +35,7 @@ class BaseTestCase(unittest.TestCase):
         self.tutor_id = "com.compal.bioslab.pixsee.pixm01:id/tvDescription"
 
         self.driver = webdriver.Remote("http://localhost:4723", options=capabilities)
+        self.driver.update_settings({"waitForIdleTimeout": 100})
     def open_app(self):
         self.driver.activate_app(self.driver.capabilities.get("appPackage"))
         time.sleep(5)
@@ -70,8 +71,8 @@ class BaseTestCase(unittest.TestCase):
         )
     def click_middle(self):
         size = self.driver.get_window_size()
-        x = size['width'] // 5
-        y = size['height'] // 2
+        x = size['width'] // 2
+        y = size['height'] // 7 * 6
 
         self.driver.execute_script("mobile: clickGesture", {
             "x": x,
@@ -111,28 +112,28 @@ class BaseTestCase(unittest.TestCase):
         if expected_on:
             try:
                 is_visible = len(self.driver.find_elements(AppiumBy.ID, itemid)) > 0
-                assert is_visible, "switch on failed"
+                assert is_visible
                 print("switch on success")
             except AssertionError:
-                print("switch on failed")
+                raise AssertionError("switch on failed")
         else:
             try:
                 # check findable
                 is_visible =  len(self.driver.find_elements(AppiumBy.ID, itemid)) > 0
-                assert not is_visible, "switch off failed"
+                assert not is_visible
                 print("switch off success")
-            except NoSuchElementException:
-                print("switch off success")
+            except AssertionError:
+                raise AssertionError("switch off failed")
     def tap_on_visibility(self, itemid, name, should_be_visible=True):
         try:
             is_visible = len(self.driver.find_elements(AppiumBy.ID, itemid)) > 0
             if should_be_visible:
-                assert is_visible, f"tap on {name} failed"
+                assert is_visible
             else:
-                assert not is_visible, f"tap on {name} failed"
+                assert not is_visible
             print(f"tap on {name} success")
         except AssertionError:
-            print(f"tap on {name} failed")
+            raise AssertionError(f"tap on {name} failed")
     def account(self):
         return "amypixsee03@gmail.com"
     def password(self):

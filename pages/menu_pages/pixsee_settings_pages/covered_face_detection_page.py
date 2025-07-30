@@ -30,6 +30,7 @@ class CoveredFaceDetectionPage():
 		self.DiscardTitle = "com.compal.bioslab.pixsee.pixm01:id/tvtitleAlertDialog"
 		self.DiscardNo = "com.compal.bioslab.pixsee.pixm01:id/btnNegativeAlertDialog"
 		self.DiscardYes = "com.compal.bioslab.pixsee.pixm01:id/btnPositiveAlertDialog"
+		self.information = "com.compal.bioslab.pixsee.pixm01:id/btInformation"
 
 	def header_text(self):
 		try:
@@ -248,6 +249,12 @@ class CoveredFaceDetectionPage():
 		)
 		element = self.driver.find_element("id", self.DiscardYes)
 		element.click()
+	def click_information(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located(("id", self.information))
+		)
+		element = self.driver.find_element("id", self.information)
+		element.click()
 
 	def is_in_covered_face_detection_tutor_page(self):
 		try:
@@ -284,9 +291,9 @@ class CoveredFaceDetectionPage():
 
 	def is_switch_on(self):
 		WebDriverWait(self.driver, 3).until(
-			EC.presence_of_element_located((AppiumBy.ID, self.Sensitivity))
+			EC.presence_of_element_located((AppiumBy.ID, self.Switch))
 		)
-		switch = self.driver.find_element(AppiumBy.ID, self.Sensitivity)
+		switch = self.driver.find_element(AppiumBy.ID, self.Switch)
 		return switch.get_attribute("checked") == "true"
 	def is_save_enable(self):
 		WebDriverWait(self.driver, 10).until(

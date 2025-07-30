@@ -11,12 +11,58 @@ from pages.menu_pages.subscription_pages.subscription_page import SubscriptionPa
 class SubscriptionCase(BaseTestCase):
     def setUp(self):
         super().setUp(no_reset=False)
-
-    def skip_first_four_tuto(self):
-    def test_01_subscription_video_subscription_x(self):
+    def test_01_subscription_check_text(self):
+        subscription_page = SubscriptionPage(self.driver)
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
-        pixsee_settings_page = PixseeSettingsPage(self.driver)
+        login_page = LoginPage(self.driver)
+
+        login_page.login(self.account(),self.password())
+        baby_monitor_page.is_in_baby_monitor_page()
+
+        self.skip_first_four_tutor()
+        baby_monitor_page.click_home()
+        # skip menu tutor
+        menu_page.click_logout()
+        menu_page.click_subscription()
+        # check if in subscription page
+        try:
+            self.assertTrue(subscription_page.is_in_subscription_page())
+            print("In subscription page")
+        except AssertionError:
+            print("Not in subscription page")
+            raise AssertionError("Not in subscription page")
+        # check header text
+        try:
+            header = subscription_page.header_text()
+            hint = self.get_string("new_subscription_gold_star_plan")
+            self.assertEqual(header, hint)
+            print("Subscription header text right")
+        except AssertionError:
+            print("Subscription header text wrong")
+        # check title text
+        # check by color
+        light_blue_range = ((0, 0, 0), (150, 255, 255))
+        light_orange_range = ((151, 0, 0), (255, 255, 255))
+        x, y = subscription_page.find_stream_left_top()
+        result = subscription_page.is_color_in_range(x, y, light_orange_range)
+        # check gold star color
+        if result:
+            print("gold star color is correct")
+        else:
+            print("gold star color is wrong")
+        self.right_wipe()
+        time.sleep(1)
+        x, y = subscription_page.find_stream_left_top()
+        result = subscription_page.is_color_in_range(x, y, light_blue_range)
+        # check standard color
+        if result:
+            print("standard color is correct")
+        else:
+            print("standard color is wrong")
+    def test_02_subscription_click_x(self):
+        menu_page = MenuPage(self.driver)
+        baby_monitor_page = BabyMonitorPage(self.driver)
         login_page = LoginPage(self.driver)
         subscription_page = SubscriptionPage(self.driver)
 
@@ -36,8 +82,8 @@ class SubscriptionCase(BaseTestCase):
         except AssertionError:
             print("x not works, not in baby monitor page")
             raise AssertionError("Not in baby monitor page after click x")
-    def test_04_subscription_subscribe(self):
-        subscription_video = TimeLapseVideoPage(self.driver)
+    def test_04_subscription_information(self):
+        subscription_video = SubscriptionPage(self.driver)
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
@@ -51,26 +97,16 @@ class SubscriptionCase(BaseTestCase):
         baby_monitor_page.click_home()
         # skip menu tutor
         menu_page.click_logout()
-        menu_page.click_settings()
-        pixsee_settings_page.click_subscription_video()
-        subscription_video.click_switch()
-        # subscribe
-        subscription_video.click_upgrade_subscription()
-        subscription_page.click_gold_star()
-        subscription_page.click_plan1()
-        subscription_page.click_pay()
-        # check if back to time lapse video page
+        menu_page.click_subscription()
+        subscription_page.click_info()
+        # check if in subscription information page
         try:
-            self.assertTrue(subscription_video.is_in_timelapse_video_page())
-            print("subscribe successfully")
+            self.assertTrue(subscription_video.is_in_chrome())
+            print("In subscription information page")
         except AssertionError:
-            print("subscribe failed")
-            raise AssertionError("Not in time lapse video page after subscribe")
-
-
-    # already subscribed
-    def test_05_subscription_video_switch(self):
-        subscription_video = TimeLapseVideoPage(self.driver)
+            print("Not in subscription information page")
+    def test_05_subscription_coupon(self):
+        subscription_video = SubscriptionPage(self.driver)
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
@@ -84,16 +120,12 @@ class SubscriptionCase(BaseTestCase):
 
         # skip menu tutor
         menu_page.click_logout()
-        menu_page.click_settings()
-        pixsee_settings_page.click_subscription_video()
-        current_status = subscription_video.is_switch_on()
-        self.check_switch_and_content(current_status, subscription_video.RecordingMode)
-        subscription_video.click_switch()
-        time.sleep(1)  # wait for the switch to toggle
-        after_status = subscription_video.is_switch_on()
-        self.check_switch_and_content(after_status, subscription_video.RecordingMode)
+        menu_page.click_subscription()
+        subscription_video.click_coupon()
+        # check if in coupon dialog
+
     def test_05_subscription_video_check_text(self):
-        subscription_video = TimeLapseVideoPage(self.driver)
+        subscription_video = SubscriptionPage(self.driver)
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
@@ -165,7 +197,7 @@ class SubscriptionCase(BaseTestCase):
         except AssertionError:
             print("subscription_video twenty four hour text wrong")
     def test_06_subscription_video_checkbox(self):
-        subscription_video = TimeLapseVideoPage(self.driver)
+        subscription_video = SubscriptionPage(self.driver)
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
@@ -208,7 +240,7 @@ class SubscriptionCase(BaseTestCase):
             print("Twenty four hours checkbox is not checked")
             raise AssertionError("Twenty four hours checkbox is not checked")
     def test_07_subscription_video_select_time(self):
-        subscription_video = TimeLapseVideoPage(self.driver)
+        subscription_video = SubscriptionPage(self.driver)
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
@@ -272,7 +304,7 @@ class SubscriptionCase(BaseTestCase):
             print("Not in time selecter")
             raise AssertionError("Not in time selecter")
     def test_08_subscription_video_save(self):
-        subscription_video = TimeLapseVideoPage(self.driver)
+        subscription_video = SubscriptionPage(self.driver)
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
@@ -306,7 +338,7 @@ class SubscriptionCase(BaseTestCase):
             print("save function failed")
             raise AssertionError("save function failed, status not changed")
     def test_09_subscription_video_back(self):
-        subscription_video = TimeLapseVideoPage(self.driver)
+        subscription_video = SubscriptionPage(self.driver)
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
@@ -330,7 +362,7 @@ class SubscriptionCase(BaseTestCase):
             print("Not in pixsee settings page")
             raise AssertionError("Not in pixsee settings page")
     def test_10_subscription_video_discard_dialog(self):
-        subscription_video = TimeLapseVideoPage(self.driver)
+        subscription_video = SubscriptionPage(self.driver)
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)

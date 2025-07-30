@@ -35,9 +35,9 @@ class PixseeFriendsDetPage():
 	# status
 	def is_switch_on(self):
 		WebDriverWait(self.driver, 3).until(
-				EC.presence_of_element_located((AppiumBy.ID, self.DetectionType))
+				EC.presence_of_element_located((AppiumBy.ID, self.Switch))
 		)
-		switch = self.driver.find_element(AppiumBy.ID, self.DetectionType)
+		switch = self.driver.find_element(AppiumBy.ID, self.Switch)
 		return switch.get_attribute("checked") == "true"
 	def is_in_pixsee_friends_det_page(self):
 		try:

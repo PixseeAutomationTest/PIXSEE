@@ -3,6 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from PIL import Image
 
+
 class AreaDetectionPage():
 	def __init__(self, driver):
 		self.driver = driver
@@ -25,7 +26,7 @@ class AreaDetectionPage():
 		self.MediumCheckBox = "com.compal.bioslab.pixsee.pixm01:id/rb_medium_radio"
 		self.High = "com.compal.bioslab.pixsee.pixm01:id/rb_high_radio_txt"
 		self.HighCheckBox = "com.compal.bioslab.pixsee.pixm01:id/rb_high_radio"
-		self.DetectionType = "com.compal.bioslab.pixsee.pixm01:id/tv_type_pixsee_friends_detection_text"
+		self.DetectionType = "com.compal.bioslab.pixsee.pixm01:id/efence_type_detection_section"
 		self.BabyIn = "com.compal.bioslab.pixsee.pixm01:id/efence_type_safety_txt"
 		self.BabyInCheckBox = "com.compal.bioslab.pixsee.pixm01:id/efence_type_safety_radio"
 		self.BabyOut = "com.compal.bioslab.pixsee.pixm01:id/efence_type_dangerous_txt"
@@ -40,7 +41,7 @@ class AreaDetectionPage():
 		self.DiscardTitle = "com.compal.bioslab.pixsee.pixm01:id/tvtitleAlertDialog"
 		self.DiscardNo = "com.compal.bioslab.pixsee.pixm01:id/btnNegativeAlertDialog"
 		self.DiscardYes = "com.compal.bioslab.pixsee.pixm01:id/btnPositiveAlertDialog"
-
+		self.information = "com.compal.bioslab.pixsee.pixm01:id/btEffenceInformation"
 		self.Stream = "com.compal.bioslab.pixsee.pixm01:id/area_stream"
 	def click_skip(self):
 		WebDriverWait(self.driver, 10).until(
@@ -62,9 +63,9 @@ class AreaDetectionPage():
 		element.click()
 	def click_switch(self):
 		WebDriverWait(self.driver, 10).until(
-			EC.presence_of_element_located(("id", self.Switch))
+			EC.presence_of_element_located((AppiumBy.ID, self.Switch))
 		)
-		element = self.driver.find_element("id", self.Switch)
+		element = self.driver.find_element(AppiumBy.ID, self.Switch)
 		element.click()
 	def click_low(self):
 		WebDriverWait(self.driver, 10).until(
@@ -131,6 +132,12 @@ class AreaDetectionPage():
 			EC.presence_of_element_located(("id", self.DiscardYes))
 		)
 		element = self.driver.find_element("id", self.DiscardYes)
+		element.click()
+	def click_information(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located(("id", self.information))
+		)
+		element = self.driver.find_element("id", self.information)
 		element.click()
 
 	def discard_message_text(self):
@@ -324,14 +331,14 @@ class AreaDetectionPage():
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("xpath", self.TutorFirstPageIndicator))
 		)
-		light = self.driver.find_element(AppiumBy.ID, self.TutorFirstPageIndicator)
+		light = self.driver.find_element("xpath", self.TutorFirstPageIndicator)
 		is_in_right = light.get_attribute("selected")
 		return is_in_right == "true"
 	def is_in_tutor_second_page(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located(("xpath", self.TutorSecondPageIndicator))
 		)
-		light = self.driver.find_element(AppiumBy.ID, self.TutorSecondPageIndicator)
+		light = self.driver.find_element("xpath", self.TutorSecondPageIndicator)
 		is_in_left = light.get_attribute("selected")
 		return is_in_left == "true"
 	def is_in_turn_off_dialog(self):
@@ -360,9 +367,9 @@ class AreaDetectionPage():
 		return is_enable == "true"
 	def is_switch_on(self):
 		WebDriverWait(self.driver, 3).until(
-			EC.presence_of_element_located((AppiumBy.ID, self.Sensitivity))
+			EC.presence_of_element_located((AppiumBy.ID, self.Switch))
 		)
-		switch = self.driver.find_element(AppiumBy.ID, self.Sensitivity)
+		switch = self.driver.find_element(AppiumBy.ID, self.Switch)
 		return switch.get_attribute("checked") == "true"
 	def is_low_clickable(self):
 		WebDriverWait(self.driver, 10).until(

@@ -1,21 +1,18 @@
-# import time
+import time
 
+from pages.menu_pages.pixsee_settings_pages.pixsee_settings_page import PixseeSettingsPage
 from pages.base import BaseTestCase
-# from pages.login_page import LoginPage
-from pages.baby_monitor_page import BabyMonitorPage
-# from pages.menu_page import MenuPage
-# from appium.options.android import UiAutomator2Options
-# from appium import webdriver
-# from pages.menu_page import MenuPage
-# from pages.menu_pages.pixsee_settings_pages.pixsee_friends_detection_page import  PixseeFriendsDetPage
+from pages.menu_pages.pixsee_settings_pages.area_detection_page import AreaDetectionPage
 
 
-class reset(BaseTestCase):
+
+class Reset(BaseTestCase):
         def setUp(self):
                 super().setUp(no_reset=True)
 
 
         def test_wipe(self):
-                baby = BabyMonitorPage(self.driver)
-                baby.click_home()
+                area_detection_page = AreaDetectionPage(self.driver)
+                pixsee_settings_page = PixseeSettingsPage(self.driver)
 
+                print("⚠️ Medium checkbox is not clickable")

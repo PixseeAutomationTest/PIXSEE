@@ -25,8 +25,8 @@ class CryDetectionPage():
 		self.MusicButton = "com.compal.bioslab.pixsee.pixm01:id/crying_settings_music_container"
 		self.MusicRoom = "com.compal.bioslab.pixsee.pixm01:id/tvContentPlayRoom"
 		self.DiscardTitle = "com.compal.bioslab.pixsee.pixm01:id/tvtitleAlertDialog"
-		self.DiscardNo = "com.compal.bioslab.pixsee.pixm01:id/tvNegativeButton"
-		self.DiscardYes = "com.compal.bioslab.pixsee.pixm01:id/tvPositiveButton"
+		self.DiscardNo = "com.compal.bioslab.pixsee.pixm01:id/btnNegativeAlertDialog"
+		self.DiscardYes = "com.compal.bioslab.pixsee.pixm01:id/btnPositiveAlertDialog"
 
 	def header_text(self):
 		try:
@@ -185,9 +185,9 @@ class CryDetectionPage():
 		element.click()
 	def click_smart_soothing_switch(self):
 		WebDriverWait(self.driver, 10).until(
-			EC.presence_of_element_located(("id", self.SmartSoothing))
+			EC.presence_of_element_located(("id", self.SmartSoothingSwitch))
 		)
-		element = self.driver.find_element("id", self.SmartSoothing)
+		element = self.driver.find_element("id", self.SmartSoothingSwitch)
 		element.click()
 	def click_music(self):
 		WebDriverWait(self.driver, 10).until(
@@ -235,15 +235,15 @@ class CryDetectionPage():
 
 	def is_switch_on(self):
 		WebDriverWait(self.driver, 3).until(
-			EC.presence_of_element_located((AppiumBy.ID, self.Sensitivity))
+			EC.presence_of_element_located((AppiumBy.ID, self.Switch))
 		)
-		switch = self.driver.find_element(AppiumBy.ID, self.Sensitivity)
+		switch = self.driver.find_element(AppiumBy.ID, self.Switch)
 		return switch.get_attribute("checked") == "true"
 	def is_smart_soothing_switch_on(self):
 		WebDriverWait(self.driver, 3).until(
-			EC.presence_of_element_located((AppiumBy.ID, self.Music))
+			EC.presence_of_element_located((AppiumBy.ID, self.SmartSoothingSwitch))
 		)
-		switch = self.driver.find_element(AppiumBy.ID, self.Music)
+		switch = self.driver.find_element(AppiumBy.ID, self.SmartSoothingSwitch)
 		return switch.get_attribute("checked") == "true"
 
 	def is_low_clickable(self):

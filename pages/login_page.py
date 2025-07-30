@@ -10,6 +10,11 @@ class LoginPage():
         self.signInButton = "com.compal.bioslab.pixsee.pixm01:id/btSignIn"
         self.emailErrorText = "com.compal.bioslab.pixsee.pixm01:id/tvSignInEmailError"
         self.passwordErrorText = "com.compal.bioslab.pixsee.pixm01:id/tvSignInPasswordError"
+        self.forgoetPasswordButton = ""
+        self.signupButton = ""
+        self.signupwithbackupButton = ""
+
+
 
     def _input_email(self, email):
         WebDriverWait(self.driver, 10).until(
@@ -33,6 +38,8 @@ class LoginPage():
         )
         element = self.driver.find_element("id", self.signInButton)
         element.click()
+
+
 
     def login(self, email, password):
         self._input_email(email)

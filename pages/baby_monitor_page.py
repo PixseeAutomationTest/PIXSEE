@@ -142,9 +142,9 @@ class BabyMonitorPage():
         return element.text
     def is_connected(self):
         WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((AppiumBy.ID, self.sleepButton))
+            EC.presence_of_element_located((AppiumBy.ID, self.twoWayTalkButton))
         )
-        button = self.driver.find_element(AppiumBy.ID, self.sleepButton)
+        button = self.driver.find_element(AppiumBy.ID, self.twoWayTalkButton)
         is_connected = button.get_attribute("enabled")
         return is_connected == "true"
 

@@ -24,12 +24,12 @@ class TutorCase(BaseTestCase):
                         print("First tutor FAIL: text mismatch")
                 try:
                         timer_description = baby_monitor_page.get_tutor_description()
-                        hint = self.get_string("capture_timer_mode_description")
+                        hint = self.get_string("capture_timer_mode_description").replace("\\n","\n")
                         self.assertEqual(timer_description, hint)
                         print("First tutor description success")
-                        self.click_middle()
                 except AssertionError:
-                        print("First tutor description FAIL: text mismatch")
+                        raise AssertionError("First tutor description FAIL: text mismatch")
+                self.click_middle()
                 try:
                         baby_bubble_title = baby_monitor_page.get_tutor_title()
                         hint = self.get_string("baby_timeline_description_title")
@@ -42,9 +42,9 @@ class TutorCase(BaseTestCase):
                         hint = self.get_string("baby_timeline_description")
                         self.assertEqual(baby_bubble_description, hint)
                         print("Second tutor description success")
-                        self.click_middle()
                 except AssertionError:
                         print("Second tutor description FAIL: text mismatch")
+                self.click_middle()
                 try:
                         sleep_mode_title = baby_monitor_page.get_tutor_title()
                         hint = self.get_string("sleep_mode_title")
@@ -57,9 +57,9 @@ class TutorCase(BaseTestCase):
                         hint = self.get_string("sleep_mode_description")
                         self.assertEqual(sleep_mode_description, hint)
                         print("Third tutor description success")
-                        self.click_middle()
                 except AssertionError:
                         print("Third tutor description FAIL: text mismatch")
+                self.click_middle()
                 try:
                         two_way_talk_title = baby_monitor_page.get_tutor_title()
                         hint = self.get_string("two_way_talk_title")

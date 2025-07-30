@@ -13,9 +13,9 @@ class TimeLapseVideoPage():
         self.TimeLapseRecording = "com.compal.bioslab.pixsee.pixm01:id/timeLapse_settings_status_text"
         self.Subtitle = "com.compal.bioslab.pixsee.pixm01:id/timeLapse_settings_subtext"
         self.Switch = "com.compal.bioslab.pixsee.pixm01:id/timeLapse_settings_status_switch"
-        self.UpgradeTitle = "com.compal.bioslab.pixsee.pixm01:id/tvTitleUpgradeTimeLapseAct"
-        self.UpgradeSubscription = "com.compal.bioslab.pixsee.pixm01:id/btnUpgradeTimeLapseOk"
-        self.UpgradeNo = "com.compal.bioslab.pixsee.pixm01:id/btnUpgradeTimeLapseCancel"
+        self.UpgradeTitle = "com.compal.bioslab.pixsee.pixm01:id/tvtitleAlertDialog"
+        self.UpgradeSubscription = "com.compal.bioslab.pixsee.pixm01:id/btnPositiveAlertDialog"
+        self.UpgradeNo = "com.compal.bioslab.pixsee.pixm01:id/btnNegativeAlertDialog"
         self.RecordingMode = "com.compal.bioslab.pixsee.pixm01:id/type_detection_section"
         self.TimeSpan = "com.compal.bioslab.pixsee.pixm01:id/tvTimeSpanLabelSection"
         self.EntireTime = "com.compal.bioslab.pixsee.pixm01:id/rb_full_time_txt"
@@ -83,14 +83,12 @@ class TimeLapseVideoPage():
             return False
 
     def is_switch_on(self):
-        try:
-            WebDriverWait(self.driver, 10).until(
-                EC.presence_of_element_located(("id", self.Switch))
-            )
-            element = self.driver.find_element("id", self.Switch)
-            return element.is_selected()
-        except AssertionError:
-            return False
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(("id", self.Switch))
+        )
+        element = self.driver.find_element("id", self.Switch)
+        return element.get_attribute("checked") == "true"
+
 
     def header_text(self):
         try:
@@ -258,7 +256,8 @@ class TimeLapseVideoPage():
         start_y = int(window["height"] * 0.6)  # number should be changed when on ios
         end_y = int(window["height"] * 0.5)  # number should be changed when on ios
 
-        self.driver.swipe(x, start_y, x, end_y, 500)  # 500 毫秒完成滑動
+        self.driver.swipe(x, start_y, x, end_y, 500)
+        # 500 毫秒完成滑動
         time.sleep(1)
 
     def click_back(self):
