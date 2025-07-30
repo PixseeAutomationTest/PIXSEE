@@ -18,7 +18,7 @@ class BaseTestCase(unittest.TestCase):
     def setUp(self, no_reset=True):
         capabilities = UiAutomator2Options()
         capabilities.platform_name = "Android"
-        capabilities.device_name = "2A141FDH2009E8"
+        capabilities.device_name = "38161FDJG00DXJ"
         capabilities.language = "en-us text"  # Chinese (Taiwan): "tw text", English: "en-us text"
         # capabilities.device_name = "emulator-5554"
 

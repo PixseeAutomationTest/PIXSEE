@@ -11,12 +11,11 @@ from tests.pixsee_settings_tests.time_lapse_video_test import TimeLapseVideoCase
 from tests.pixsee_settings_tests.voice_service_test import VoiceServiceTest
 from tests.pixsee_settings_tests.SD_card_test import SDcardCase
 
-
 if __name__ == '__main__':
     loader = unittest.TestLoader()
     suite = unittest.TestSuite()
 
-    # 新增測試項目
+    # Include all test cases in the suite
     suite.addTests(loader.loadTestsFromTestCase(PixseeSettingsTest))
     suite.addTests(loader.loadTestsFromTestCase(PixseeProfileTest))
     suite.addTests(loader.loadTestsFromTestCase(WifiSettingsCase))
@@ -28,5 +27,5 @@ if __name__ == '__main__':
     suite.addTests(loader.loadTestsFromTestCase(TimeLapseVideoCase))
     suite.addTests(loader.loadTestsFromTestCase(VoiceServiceTest))
     suite.addTests(loader.loadTestsFromTestCase(SDcardCase))
-    # 執行測試項目
+    # Run the test suite
     unittest.TextTestRunner(verbosity=2).run(suite)

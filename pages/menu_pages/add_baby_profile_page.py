@@ -3,6 +3,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from appium.webdriver.common.appiumby import AppiumBy
 import time
 import random
+import datetime
 
 class AddBabyProfilePage():
     def __init__(self, driver):
@@ -23,12 +24,19 @@ class AddBabyProfilePage():
         self.finishButton = "com.compal.bioslab.pixsee.pixm01:id/baby_profile_finish_btn"
 
         '''Discard dialog'''
+        self.cancelDialog = "com.compal.bioslab.pixsee.pixm01:id/llLayoutDialog"
         self.cancelMessage = "com.compal.bioslab.pixsee.pixm01:id/tvTitleDialog"
         self.cancelYesButton = "com.compal.bioslab.pixsee.pixm01:id/btnPositiveDialog"
         self.cancelNoButton = "com.compal.bioslab.pixsee.pixm01:id/btnNegativeDialog"
 
         '''Calendar'''
         self.calendar = "android:id/content"
+        self.calendarScrollableList_classname = "android.widget.ListView"
+        self.calendarYearPicker = "com.compal.bioslab.pixsee.pixm01:id/date_picker_year"
+        self.calendarMonthPicker = "com.compal.bioslab.pixsee.pixm01:id/date_picker_month"
+        self.calendarDayPicker = "com.compal.bioslab.pixsee.pixm01:id/date_picker_day"
+        self.calendarOneMonth_xpath = "//android.widget.ListView/android.view.View"
+        self.calendarOneDay_classname = "android.view.View"
         self.calendarDoneButton = "com.compal.bioslab.pixsee.pixm01:id/done_button"
         self.calendarCancelButton = "com.compal.bioslab.pixsee.pixm01:id/cancel_button"
 
@@ -64,7 +72,7 @@ class AddBabyProfilePage():
         element = self.driver.find_element("id", self.babyGenderGirlButton)
         element.click()
 
-    def input_name(self, name):
+    def input_baby_name(self, name = "Test_Baby 01"):
         WebDriverWait(self.driver, 20).until(
             EC.presence_of_element_located(("id", self.nameEditText))
         )
@@ -72,7 +80,7 @@ class AddBabyProfilePage():
         element.clear()
         element.send_keys(name)
 
-    def click_birthday(self):
+    def click_baby_birthday(self):
         WebDriverWait(self.driver, 20).until(
             EC.presence_of_element_located(("id", self.birthdayEditText))
         )
@@ -152,28 +160,28 @@ class AddBabyProfilePage():
         element = self.driver.find_element("id", self.babyGenderGirlButton)
         return element.get_attribute("checked") == "true"
 
-    def get_name_hint(self):
+    def get_baby_name_hint(self):
         WebDriverWait(self.driver, 20).until(
             EC.presence_of_element_located(("id", self.nameEditText))
         )
         element = self.driver.find_element("id", self.nameEditText)
         return element.get_attribute("hint")
 
-    def get_name_text(self):
+    def get_baby_name_text(self):
         WebDriverWait(self.driver, 20).until(
             EC.presence_of_element_located(("id", self.nameEditText))
         )
         element = self.driver.find_element("id", self.nameEditText)
         return element.text
 
-    def get_birthday_hint(self):
+    def get_baby_birthday_hint(self):
         WebDriverWait(self.driver, 20).until(
             EC.presence_of_element_located(("id", self.birthdayEditText))
         )
         element = self.driver.find_element("id", self.birthdayEditText)
         return element.get_attribute("hint")
 
-    def get_birthday_text(self):
+    def get_baby_birthday_text(self):
         WebDriverWait(self.driver, 20).until(
             EC.presence_of_element_located(("id", self.birthdayEditText))
         )
@@ -184,7 +192,7 @@ class AddBabyProfilePage():
         WebDriverWait(self.driver, 20).until(
             EC.presence_of_element_located(("id", self.nationButton))
         )
-        parent_element = self.driver.find_elements("id", self.nationButton)
+        parent_element = self.driver.find_element("id", self.nationButton)
         element = parent_element.find_element("id", self.listOption)
         return element.text
 
@@ -192,7 +200,7 @@ class AddBabyProfilePage():
         WebDriverWait(self.driver, 20).until(
             EC.presence_of_element_located(("id", self.relativeButton))
         )
-        parent_element = self.driver.find_elements("id", self.relativeButton)
+        parent_element = self.driver.find_element("id", self.relativeButton)
         element = parent_element.find_element("id", self.listOption)
         return element.text
 
@@ -230,6 +238,88 @@ class AddBabyProfilePage():
         )
         element = self.driver.find_element("id", self.cancelNoButton)
         return element.text
+
+    def select_baby_birthday(self, year = datetime.date.today().year, month = datetime.date.today().month, day = datetime.date.today().day):
+        # Validate the input date
+        try:
+            target_date = datetime.date(year, month, day)
+            if year < 1900 or target_date > datetime.date.today():
+                raise ValueError("Year must be between 1900 and the current year, and the date must not be in the future.")
+        except ValueError as e:
+            raise ValueError(f"Invalid date: {e}")
+
+        self.click_baby_birthday()
+        time.sleep(1)
+        if not self.has_calendar():
+            raise AssertionError("Can't find calendar for birthday selection")
+        # Jump to the selected year
+        year_picker = self.driver.find_element("id", self.calendarYearPicker)
+        month_picker = self.driver.find_element("id", self.calendarMonthPicker)
+        day_picker = self.driver.find_element("id", self.calendarDayPicker)
+        if year != int(year_picker.text):
+            year_picker.click()
+            while True:
+                try:
+                    element = self.driver.find_element("accessibility id", f"{year}")
+                    element.click()
+                    break
+                except:
+                    if year < int(year_picker.text):
+                        self.driver.find_element(
+                            AppiumBy.ANDROID_UIAUTOMATOR,
+                            f'new UiScrollable(new UiSelector().className({self.calendarScrollableList_classname})).setAsVerticalList().scrollBackward()'
+                        )
+                    elif year > int(year_picker.text):
+                        self.driver.find_element(
+                            AppiumBy.ANDROID_UIAUTOMATOR,
+                            f'new UiScrollable(new UiSelector().className({self.calendarScrollableList_classname})).setAsVerticalList().scrollForward()'
+                        )
+                    time.sleep(0.2)
+        # Find the date and click it. Need to swipe up if the date is not visible
+        target_date_str = target_date.strftime("%d %B %Y")
+        first_days = set()
+        while True:
+            try:
+                if month == datetime.datetime.strptime(month_picker.text, "%b").month and day == int(day_picker.text):
+                    element = self.driver.find_element("accessibility id", target_date_str + " selected")
+                    element.click()
+                else:
+                    element = self.driver.find_element("accessibility id", target_date_str)
+                    element.click()
+                element = self.driver.find_element("id", self.calendarDoneButton)
+                element.click()
+                return
+            except:
+                calendar_current_month = self.driver.find_element("xpath", self.calendarOneMonth_xpath)
+                element = calendar_current_month.find_element("class name", self.calendarOneDay_classname)
+                first_date_str = element.get_attribute("content-desc").split("selected")[0].strip()
+                first_date = datetime.datetime.strptime(first_date_str, "%d %B %Y").date()
+                if first_date_str in first_days:
+                    raise ValueError(f"{year}-{month}-{day} is not found in the calendar. Please check the date and try again.")
+                first_days.add(first_date_str)
+                if month < first_date.month:
+                    self.driver.find_element(
+                        AppiumBy.ANDROID_UIAUTOMATOR,
+                        f'new UiScrollable(new UiSelector().className({self.calendarScrollableList_classname})).setAsVerticalList().scrollBackward()'
+                    )
+                elif month > first_date.month:
+                    self.driver.find_element(
+                        AppiumBy.ANDROID_UIAUTOMATOR,
+                        f'new UiScrollable(new UiSelector().className({self.calendarScrollableList_classname})).setAsVerticalList().scrollForward()'
+                    )
+                elif day > first_date.day:
+                    window = self.driver.get_window_size()
+                    x = window["width"] // 2.5
+                    start_y = int(window["height"] * 0.6)
+                    end_y = int(window["height"] * 0.5)
+                    self.driver.swipe(x, start_y, x, end_y, 3000)
+                elif day < first_date.day:
+                    window = self.driver.get_window_size()
+                    x = window["width"] // 2.5
+                    start_y = int(window["height"] * 0.5)
+                    end_y = int(window["height"] * 0.6)
+                    self.driver.swipe(x, start_y, x, end_y, 3000)
+                time.sleep(0.2)
 
     def select_nation(self, number = 51): # Default: Taiwan = 51
         self.click_nation()
@@ -281,6 +371,16 @@ class AddBabyProfilePage():
         else:
             raise IndexError("IndexError: Relative index out of range")
 
+    def has_cancel_dialog(self):
+        try:
+            WebDriverWait(self.driver, 20).until(
+                EC.presence_of_element_located(("id", self.cancelDialog))
+            )
+            self.driver.find_element("id", self.cancelDialog)
+            return True
+        except:
+            return False
+
     def has_calendar(self):
         try:
             WebDriverWait(self.driver, 20).until(
@@ -312,9 +412,12 @@ class AddBabyProfilePage():
             return False
 
     def add_new_baby(self, baby_name = "Test_Baby 01"):
-        self.input_name(baby_name)
-        self.click_birthday()
-        self.click_calendar_done()
+        if random.choice([True, False]):
+            self.click_gender_boy()
+        else:
+            self.click_gender_girl()
+        self.input_baby_name(baby_name)
+        self.select_baby_birthday()
         time.sleep(3)
         self.select_nation(random.randint(1, 58))
         self.select_relative(random.randint(1, 10))
