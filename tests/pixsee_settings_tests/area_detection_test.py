@@ -86,7 +86,7 @@ class AreaDetectionCase(BaseTestCase):
 		menu_page.click_settings()
 
 		pixsee_settings_page.click_area_detection()
-		self.right_wipe()
+		self.left_wipe()
 		# check second tutor title
 		try:
 			title = area_detection_page.tutor_second_title_text()
@@ -147,7 +147,7 @@ class AreaDetectionCase(BaseTestCase):
 		except AssertionError :
 			raise AssertionError("first tutor doesn't displayed")
 
-		self.right_wipe()
+		self.left_wipe()
 		# check second tutor page
 		try:
 			self.assertTrue(area_detection_page.is_in_tutor_second_page())
@@ -551,6 +551,7 @@ class AreaDetectionCase(BaseTestCase):
 		area_detection_page.click_switch()
 		try:
 			area_detection_page.click_turn_off_30_min()
+			time.sleep(1)
 			self.assertEqual(pixsee_settings_page.area_detection_status_text(), self.get_string("off_selection"))
 			print("30 min button worked")
 		except AssertionError:
@@ -560,6 +561,7 @@ class AreaDetectionCase(BaseTestCase):
 		area_detection_page.click_switch()
 		try:
 			area_detection_page.click_turn_off()
+			time.sleep(1)
 			self.assertEqual(pixsee_settings_page.area_detection_status_text(), self.get_string("off_selection"))
 			print("turn off detection worked")
 		except AssertionError:

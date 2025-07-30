@@ -26,7 +26,7 @@ class AreaDetectionPage():
 		self.MediumCheckBox = "com.compal.bioslab.pixsee.pixm01:id/rb_medium_radio"
 		self.High = "com.compal.bioslab.pixsee.pixm01:id/rb_high_radio_txt"
 		self.HighCheckBox = "com.compal.bioslab.pixsee.pixm01:id/rb_high_radio"
-		self.DetectionType = "com.compal.bioslab.pixsee.pixm01:id/tv_type_pixsee_friends_detection_text"
+		self.DetectionType = "com.compal.bioslab.pixsee.pixm01:id/efence_type_detection_section"
 		self.BabyIn = "com.compal.bioslab.pixsee.pixm01:id/efence_type_safety_txt"
 		self.BabyInCheckBox = "com.compal.bioslab.pixsee.pixm01:id/efence_type_safety_radio"
 		self.BabyOut = "com.compal.bioslab.pixsee.pixm01:id/efence_type_dangerous_txt"
