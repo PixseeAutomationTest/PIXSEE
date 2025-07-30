@@ -315,21 +315,21 @@ class CoveredFaceDetectionCase(BaseTestCase):
 			raise AssertionError("turn off dialog title  is wrong")
 		try:
 			fifteenmin = covered_face_detection_page.turn_off_15_min_text()
-			hint = self.get_string("Snooze for 15 minutes")
+			hint = self.get_string("snooze_detection_fifteen_minutes")
 			self.assertEqual(fifteenmin, hint)
 			print("turn off 15 is correct")
 		except AssertionError :
 			raise AssertionError("turn off 15 is wrong")
 		try:
 			thirtymin = covered_face_detection_page.turn_off_30_min_text()
-			hint = self.get_string("Snooze for 30 minutes")
+			hint = self.get_string("snooze_detection_thirty_minutes")
 			self.assertEqual(thirtymin, hint)
 			print("turn off 30 is correct")
 		except AssertionError :
 			raise AssertionError("turn off 30 is wrong")
 		try:
 			off = covered_face_detection_page.turn_off_text()
-			hint = self.get_string("Turn off detection")
+			hint = self.get_string("turn_off_detection")
 			self.assertEqual(off, hint)
 			print("turn off text is correct")
 		except AssertionError :
@@ -344,7 +344,8 @@ class CoveredFaceDetectionCase(BaseTestCase):
 		# check each button
 		try:
 			covered_face_detection_page.click_turn_off_15_min()
-			self.assertEqual(pixsee_settings_page.covered_face_detection_status_text(), "Off")
+			time.sleep(1)
+			self.assertEqual(pixsee_settings_page.covered_face_detection_status_text(), self.get_string("off_selection"))
 			print("15 min button worked")
 		except AssertionError:
 			raise AssertionError("15 min button failed")
@@ -353,14 +354,16 @@ class CoveredFaceDetectionCase(BaseTestCase):
 		covered_face_detection_page.click_switch()
 		try:
 			covered_face_detection_page.click_turn_off_cancel()
-			self.assertEqual(pixsee_settings_page.covered_face_detection_status_text(), "Off")
+			self.assertTrue(covered_face_detection_page.is_switch_on())
+			time.sleep(1)
 			print("turn off cancel worked")
 		except AssertionError:
 			raise AssertionError("turn off cancel failed")
 		covered_face_detection_page.click_switch()
 		try:
 			covered_face_detection_page.click_turn_off_30_min()
-			self.assertEqual(pixsee_settings_page.covered_face_detection_status_text(), "Off")
+			time.sleep(1)
+			self.assertEqual(pixsee_settings_page.covered_face_detection_status_text(), self.get_string("off_selection"))
 			print("30 min button worked")
 		except AssertionError:
 			raise AssertionError("30 min button failed")
@@ -369,7 +372,7 @@ class CoveredFaceDetectionCase(BaseTestCase):
 		covered_face_detection_page.click_switch()
 		try:
 			covered_face_detection_page.click_turn_off()
-			self.assertEqual(pixsee_settings_page.covered_face_detection_status_text(), "Off")
+			self.assertEqual(pixsee_settings_page.covered_face_detection_status_text(), self.get_string("off_selection"))
 			print("turn off detection worked")
 		except AssertionError:
 			raise AssertionError("turn off detection failed")
