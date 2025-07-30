@@ -115,7 +115,7 @@ class BaseTestCase(unittest.TestCase):
                 assert is_visible
                 print("switch on success")
             except AssertionError:
-                print("switch on failed")
+                raise AssertionError("switch on failed")
         else:
             try:
                 # check findable
@@ -123,7 +123,7 @@ class BaseTestCase(unittest.TestCase):
                 assert not is_visible
                 print("switch off success")
             except AssertionError:
-                print("switch off failed")
+                raise AssertionError("switch off failed")
     def tap_on_visibility(self, itemid, name, should_be_visible=True):
         try:
             is_visible = len(self.driver.find_elements(AppiumBy.ID, itemid)) > 0
@@ -133,7 +133,7 @@ class BaseTestCase(unittest.TestCase):
                 assert not is_visible
             print(f"tap on {name} success")
         except AssertionError:
-            print(f"tap on {name} failed")
+            raise AssertionError(f"tap on {name} failed")
     def account(self):
         return "amypixsee03@gmail.com"
     def password(self):

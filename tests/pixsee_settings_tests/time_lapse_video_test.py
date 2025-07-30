@@ -96,9 +96,7 @@ class TimeLapseVideoCase(BaseTestCase):
                 print("Back to time lapse video page")
             except AssertionError:
                 raise AssertionError("Not in time lapse video page")
-                raise AssertionError("Not in time lapse video page")
         except AssertionError:
-            raise AssertionError("Not in time lapse video upgrade dialog")
             raise AssertionError("Not in time lapse video upgrade dialog")
     def test_02_time_lapse_video_subscription_click_yes(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
@@ -132,7 +130,6 @@ class TimeLapseVideoCase(BaseTestCase):
             print("In subscription page")
         except AssertionError:
             raise AssertionError("Not in subscription page")
-            raise AssertionError("Not in subscription page")
     def test_03_time_lapse_video_subscription_x(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
         menu_page = MenuPage(self.driver)
@@ -158,13 +155,13 @@ class TimeLapseVideoCase(BaseTestCase):
         pixsee_settings_page.click_time_lapse_video()
         time_lapse_video.click_switch()
         time_lapse_video.click_upgrade_subscription()
+        time.sleep(1)
         subscription_page.click_x()
         # check if back to time lapse video page
         try:
             self.assertTrue(time_lapse_video.is_in_timelapse_video_page())
             print("x works, back to time lapse video page")
         except AssertionError:
-            raise AssertionError("Not in time lapse video page")
             raise AssertionError("Not in time lapse video page")
     def test_04_time_lapse_subscribe(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
@@ -199,7 +196,6 @@ class TimeLapseVideoCase(BaseTestCase):
             self.assertTrue(time_lapse_video.is_in_timelapse_video_page())
             print("subscribe successfully")
         except AssertionError:
-            raise AssertionError("Not in time lapse video page after subscribe")
             raise AssertionError("Not in time lapse video page after subscribe")
 
     # already subscribed
@@ -348,13 +344,11 @@ class TimeLapseVideoCase(BaseTestCase):
             print("Twelve hours checkbox is checked")
         except AssertionError:
             raise AssertionError("Twelve hours checkbox is not checked")
-            raise AssertionError("Twelve hours checkbox is not checked")
         time_lapse_video.click_twenty_four_hours_checkbox()
         try:
             self.assertTrue(time_lapse_video.is_twenty_four_hours_clicked())
             print("Twenty four hours checkbox is checked")
         except AssertionError:
-            raise AssertionError("Twenty four hours checkbox is not checked")
             raise AssertionError("Twenty four hours checkbox is not checked")
     def test_08_time_lapse_video_select_time(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
@@ -382,6 +376,7 @@ class TimeLapseVideoCase(BaseTestCase):
             pass
         else:
             time_lapse_video.click_switch()
+        current = time_lapse_video.timer_text()
         # check enter timer
         time_lapse_video.click_timer()
         try:
@@ -391,8 +386,6 @@ class TimeLapseVideoCase(BaseTestCase):
             print("Not in time selecter")
             raise AssertionError("Not in time selecter")
         # check start time block's clickable and confirm
-        current = time_lapse_video.timer_text()
-        time_lapse_video.click_timer()
         try:
             self.assertTrue(time_lapse_video.is_in_timer())
             print("In time selecter")
@@ -421,9 +414,7 @@ class TimeLapseVideoCase(BaseTestCase):
                 print("timer confirm function success")
             except AssertionError:
                 raise AssertionError("timer confirm function failed, start time not changed")
-                raise AssertionError("timer confirm function failed, start time not changed")
         except AssertionError:
-            raise AssertionError("Not in time selecter")
             raise AssertionError("Not in time selecter")
     def test_09_time_lapse_video_save(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
@@ -452,7 +443,6 @@ class TimeLapseVideoCase(BaseTestCase):
             self.assertFalse(time_lapse_video.is_save_enable())
             print("Save diable test pass")
         except AssertionError:
-            raise AssertionError("Save diable test failed")
             raise AssertionError("Save diable test failed")
 
         time_lapse_video.click_switch()
@@ -492,7 +482,6 @@ class TimeLapseVideoCase(BaseTestCase):
             print("Back to pixsee settings page")
         except AssertionError:
             raise AssertionError("Not in pixsee settings page")
-            raise AssertionError("Not in pixsee settings page")
     def test_11_time_lapse_video_discard_dialog(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
         menu_page = MenuPage(self.driver)
@@ -515,6 +504,7 @@ class TimeLapseVideoCase(BaseTestCase):
         menu_page.click_settings()
         pixsee_settings_page.click_time_lapse_video()
         time_lapse_video.click_switch()
+        time_lapse_video.click_back()
         # check discard dialog
         try:
             self.assertTrue(time_lapse_video.is_in_discard_dialog())
@@ -550,7 +540,6 @@ class TimeLapseVideoCase(BaseTestCase):
                 self.assertTrue(pixsee_settings_page.is_in_settings())
                 print("Back to pixsee settings page after discard")
             except AssertionError:
-                raise AssertionError("Not in pixsee settings page after discard")
                 raise AssertionError("Not in pixsee settings page after discard")
         except AssertionError:
             print("Not in discard dialog")

@@ -227,7 +227,7 @@ class PixseeSettingsTest(BaseTestCase):
             # check covered face detection title on settings page
             try:
                 hint = self.get_string("cover_detection_settings_label")
-                self.assertEqual(pixsee_settings_page.area_detection_text(), hint)
+                self.assertEqual(pixsee_settings_page.covered_face_detection_text(), hint)
                 print("Covered Face detection title right")
             except AssertionError:
                 raise AssertionError("Covered Face detection title wrong")
@@ -310,16 +310,18 @@ class PixseeSettingsTest(BaseTestCase):
     
     def test_10_pixsee_settings(self):
         menu_page = MenuPage(self.driver)
-        pixsee_settings_page = PixseeSettingsPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
+        pixsee_settings_page = PixseeSettingsPage(self.driver)
         login_page = LoginPage(self.driver)
+        sd_card_page = SDcardStatusPage(self.driver)
 
-        login_page.login(self.account(),self.password())
-
+        login_page.login(self.account(), self.password())
+        baby_monitor_page.is_in_baby_monitor_page()
         self.skip_first_four_tutor()
         baby_monitor_page.click_home()
         # skip menu tutor
         menu_page.click_logout()
+        menu_page.click_settings()
 
         hint = self.get_string("device_settings")
         try:
@@ -342,14 +344,14 @@ class PixseeSettingsTest(BaseTestCase):
         baby_monitor_page = BabyMonitorPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
         login_page = LoginPage(self.driver)
+        sd_card_page = SDcardStatusPage(self.driver)
 
-        login_page.login(self.account(),self.password())
-
+        login_page.login(self.account(), self.password())
+        baby_monitor_page.is_in_baby_monitor_page()
         self.skip_first_four_tutor()
         baby_monitor_page.click_home()
         # skip menu tutor
         menu_page.click_logout()
-
         menu_page.click_settings()
 
         try:
@@ -373,14 +375,14 @@ class PixseeSettingsTest(BaseTestCase):
         baby_monitor_page = BabyMonitorPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
         login_page = LoginPage(self.driver)
+        sd_card_page = SDcardStatusPage(self.driver)
 
-        login_page.login(self.account(),self.password())
-
+        login_page.login(self.account(), self.password())
+        baby_monitor_page.is_in_baby_monitor_page()
         self.skip_first_four_tutor()
         baby_monitor_page.click_home()
         # skip menu tutor
         menu_page.click_logout()
-
         menu_page.click_settings()
 
         try:
@@ -404,15 +406,16 @@ class PixseeSettingsTest(BaseTestCase):
         baby_monitor_page = BabyMonitorPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
         login_page = LoginPage(self.driver)
+        sd_card_page = SDcardStatusPage(self.driver)
 
-        login_page.login(self.account(),self.password())
-
+        login_page.login(self.account(), self.password())
+        baby_monitor_page.is_in_baby_monitor_page()
         self.skip_first_four_tutor()
         baby_monitor_page.click_home()
         # skip menu tutor
         menu_page.click_logout()
-
         menu_page.click_settings()
+
 
         try:
             # check night mode title correct
@@ -442,19 +445,18 @@ class PixseeSettingsTest(BaseTestCase):
         baby_monitor_page = BabyMonitorPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
         login_page = LoginPage(self.driver)
+        sd_card_page = SDcardStatusPage(self.driver)
 
-        login_page.login(self.account(),self.password())
-
+        login_page.login(self.account(), self.password())
+        baby_monitor_page.is_in_baby_monitor_page()
         self.skip_first_four_tutor()
         baby_monitor_page.click_home()
         # skip menu tutor
         menu_page.click_logout()
-
         menu_page.click_settings()
         time.sleep(1)
-        self.down_scroll()
+        self.up_scroll()
         time.sleep(2)
-
         try:
             # check privacy mode title correct
             hint = self.get_string("privacy_control_vision")

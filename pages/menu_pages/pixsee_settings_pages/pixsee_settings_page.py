@@ -1,4 +1,3 @@
-from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
@@ -38,8 +37,8 @@ class PixseeSettingsPage():
 		self.CoveredFaceDetectiontxt = "com.compal.bioslab.pixsee.pixm01:id/cover_detection_settings_label"
 		self.CoveredFaceDetectionStatus = "com.compal.bioslab.pixsee.pixm01:id/cover_detection_settings_on_off_text"
 
-		self.TimeLapseVideo = "com.compal.bioslab.pixsee.pixm01:id/cover_detection_settings_container"
-		self.TimeLapseVideotxt = "com.compal.bioslab.pixsee.pixm01:id/cover_detection_settings_label"
+		self.TimeLapseVideo = "com.compal.bioslab.pixsee.pixm01:id/time_lapse_settings_container"
+		self.TimeLapseVideotxt = "com.compal.bioslab.pixsee.pixm01:id/time_lapse_settings_label"
 		self.TimeLapseVideoStatus = "com.compal.bioslab.pixsee.pixm01:id/time_lapse_settings_on_off_text"
 
 		self.VoiceService = "com.compal.bioslab.pixsee.pixm01:id/clVoiceCommand"
@@ -56,12 +55,12 @@ class PixseeSettingsPage():
 		self.NightModeSwitch = "com.compal.bioslab.pixsee.pixm01:id/night_vision_switch"
 		# self.NightModeTitle = "com.compal.bioslab.pixsee.pixm01:id/detection_settings_night_vision_label"
 		self.NightModetxt = "com.compal.bioslab.pixsee.pixm01:id/detection_settings_night_vision_text"
-		self.NightModeSubtext = "com.compal.bioslab.pixsee.pixm01:id/detection_settings_night_vision_subtitle"
+		self.NightModeSubtext = "com.compal.bioslab.pixsee.pixm01:id/detection_settings_night_vision_subtext"
 
 		self.PrivacySettingsSwitch = "com.compal.bioslab.pixsee.pixm01:id/privacy_control_switch"
 		# self.PrivacySettingsTitle = "com.compal.bioslab.pixsee.pixm01:id/privacy_control_label"
 		self.PrivacySettingstxt = "com.compal.bioslab.pixsee.pixm01:id/privacy_control_text"
-		self.PrivacySettingsSubtext = "com.compal.bioslab.pixsee.pixm01:id/privacy_control_subtitle"
+		self.PrivacySettingsSubtext = "com.compal.bioslab.pixsee.pixm01:id/privacy_control_subtext"
 
 		self.SDcard = "com.compal.bioslab.pixsee.pixm01:id/clSDCardStatus"
 		self.SDcardStatustxt = "com.compal.bioslab.pixsee.pixm01:id/tvSDCardStatus"
@@ -212,7 +211,7 @@ class PixseeSettingsPage():
 			)
 			element = self.driver.find_element("id", self.locationNametxt)
 			return element.text
-		except:
+		except AssertionError:
 			return None
 
 	def profile_text(self):
@@ -442,7 +441,7 @@ class PixseeSettingsPage():
 				EC.presence_of_element_located(("id", self.ShutterSoundSwitch))
 			)
 			element = self.driver.find_element("id", self.ShutterSoundSwitch)
-			return element.checked
+			return element.get_attribute("checked") == "true"
 		except AssertionError:
 			return None
 
@@ -452,7 +451,7 @@ class PixseeSettingsPage():
 				EC.presence_of_element_located(("id", self.LEDindicatorSwitch))
 			)
 			element = self.driver.find_element("id", self.LEDindicatorSwitch)
-			return element.checked
+			return element.get_attribute("checked") == "true"
 		except AssertionError:
 			return None
 
@@ -462,7 +461,7 @@ class PixseeSettingsPage():
 				EC.presence_of_element_located(("id", self.NightModeSwitch))
 			)
 			element = self.driver.find_element("id", self.NightModeSwitch)
-			return element.checked
+			return element.get_attribute("checked") == "true"
 		except AssertionError:
 			return None
 
@@ -472,7 +471,7 @@ class PixseeSettingsPage():
 				EC.presence_of_element_located(("id", self.PrivacySettingsSwitch))
 			)
 			element = self.driver.find_element("id", self.PrivacySettingsSwitch)
-			return element.checked
+			return element.get_attribute("checked") == "true"
 		except AssertionError:
 			return None
 

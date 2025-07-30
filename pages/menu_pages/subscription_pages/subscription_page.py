@@ -18,7 +18,7 @@ class SubscriptionPage():
         self.MoreDetails = "com.compal.bioslab.pixsee.pixm01:id/tvMoreDetail"
         self.Plan1Button= '(//android.widget.RadioButton[@resource-id="com.compal.bioslab.pixsee.pixm01:id/rb"])[1]'
         self.Plan2Button= '(//android.widget.RadioButton[@resource-id="com.compal.bioslab.pixsee.pixm01:id/rb"])[2]'
-        self.PayButton = "android.widget.Button"
+        self.PayButton = '//android.widget.Button[@resource-id="com.android.vending:id/0_resource_name_obfuscated"]'
         self.Chrome = "com.android.chrome:id/compositor_view_holder"
 
     def is_in_subscription_page(self):

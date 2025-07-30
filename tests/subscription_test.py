@@ -105,7 +105,7 @@ class SubscriptionCase(BaseTestCase):
             print("In subscription information page")
         except AssertionError:
             print("Not in subscription information page")
-    def test_05_subscription_couponself(self):
+    def test_05_subscription_coupon(self):
         subscription_video = SubscriptionPage(self.driver)
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
@@ -123,6 +123,7 @@ class SubscriptionCase(BaseTestCase):
         menu_page.click_subscription()
         subscription_video.click_coupon()
         # check if in coupon dialog
+
     def test_05_subscription_video_check_text(self):
         subscription_video = SubscriptionPage(self.driver)
         menu_page = MenuPage(self.driver)
