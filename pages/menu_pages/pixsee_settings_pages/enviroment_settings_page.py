@@ -109,7 +109,7 @@ class EnvironmentSettingsPage():
 			)
 			element = self.driver.find_element("id", self.Header)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def detection_text(self):
 		try:
@@ -118,7 +118,7 @@ class EnvironmentSettingsPage():
 			)
 			element = self.driver.find_element("id", self.Detection)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def sensitivity_text(self):
 		try:
@@ -127,7 +127,7 @@ class EnvironmentSettingsPage():
 			)
 			element = self.driver.find_element("id", self.Sensitivity)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def temperature_title_text(self):
 		try:
@@ -136,7 +136,7 @@ class EnvironmentSettingsPage():
 			)
 			element = self.driver.find_element("id", self.TemperatureTitle)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def temperature_subtitle_text(self):
 		try:
@@ -145,7 +145,7 @@ class EnvironmentSettingsPage():
 			)
 			element = self.driver.find_element("id", self.TemperatureSubTitle)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def temperature_range_text(self):
 		try:
@@ -154,7 +154,7 @@ class EnvironmentSettingsPage():
 			)
 			element = self.driver.find_element("id", self.TemperatureRange)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def humidity_text(self):
 		try:
@@ -163,7 +163,7 @@ class EnvironmentSettingsPage():
 			)
 			element = self.driver.find_element("id", self.Humidity)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def humidity_range_text(self):
 		try:
@@ -172,7 +172,7 @@ class EnvironmentSettingsPage():
 			)
 			element = self.driver.find_element("id", self.HumidityRange)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def temperature_min_text(self):
 		try:
@@ -181,7 +181,7 @@ class EnvironmentSettingsPage():
 			)
 			element = self.driver.find_element("id", self.TemperatureMin)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def temperature_max_text(self):
 		try:
@@ -190,7 +190,7 @@ class EnvironmentSettingsPage():
 			)
 			element = self.driver.find_element("id", self.TempaeratureMax)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def humidity_min_text(self):
 		try:
@@ -199,7 +199,7 @@ class EnvironmentSettingsPage():
 			)
 			element = self.driver.find_element("id", self.HumidityMin)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def humidity_max_text(self):
 		try:
@@ -208,7 +208,7 @@ class EnvironmentSettingsPage():
 			)
 			element = self.driver.find_element("id", self.HumidityMax)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def low_text(self):
 		try:
@@ -217,7 +217,7 @@ class EnvironmentSettingsPage():
 			)
 			element = self.driver.find_element("id", self.Low)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def medium_text(self):
 		try:
@@ -226,7 +226,7 @@ class EnvironmentSettingsPage():
 			)
 			element = self.driver.find_element("id", self.Medium)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def high_text(self):
 		try:
@@ -235,7 +235,7 @@ class EnvironmentSettingsPage():
 			)
 			element = self.driver.find_element("id", self.High)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def celsius_text(self):
 		try:
@@ -244,7 +244,7 @@ class EnvironmentSettingsPage():
 			)
 			element = self.driver.find_element("id", self.Celsius)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def fahrenheit_text(self):
 		try:
@@ -253,7 +253,7 @@ class EnvironmentSettingsPage():
 			)
 			element = self.driver.find_element("id", self.Fahrenheit)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def discard_message_text(self):
 		try:
@@ -262,7 +262,7 @@ class EnvironmentSettingsPage():
 			)
 			element = self.driver.find_element("id", self.DiscardTitle)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def discard_no_text(self):
 		try:
@@ -271,7 +271,7 @@ class EnvironmentSettingsPage():
 			)
 			element = self.driver.find_element("id", self.DiscardNo)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def discard_yes_text(self):
 		try:
@@ -280,7 +280,7 @@ class EnvironmentSettingsPage():
 			)
 			element = self.driver.find_element("id", self.DiscardYes)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 
 	def is_in_envir_page(self):
@@ -289,7 +289,7 @@ class EnvironmentSettingsPage():
 				EC.presence_of_element_located(("id", self.Header))
 			)
 			return True
-		except AssertionError:
+		except :
 			return False
 	def is_switch_on(self):
 		WebDriverWait(self.driver, 3).until(
@@ -303,7 +303,7 @@ class EnvironmentSettingsPage():
 				EC.presence_of_element_located(("id", self.DiscardTitle))
 			)
 			return True
-		except AssertionError:
+		except :
 			return False
 
 	def is_low_clickable(self):

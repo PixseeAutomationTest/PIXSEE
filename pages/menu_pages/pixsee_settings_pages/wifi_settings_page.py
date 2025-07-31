@@ -28,7 +28,7 @@ class WifiSettingsPage():
                 EC.presence_of_element_located(("id", self.PopUpTitle))
             )
             return True
-        except AssertionError:
+        except :
             return False
     def is_in_wifi_settings_page(self):
         try:
@@ -36,7 +36,7 @@ class WifiSettingsPage():
                 EC.presence_of_element_located(("id", self.Header))
             )
             return True
-        except AssertionError :
+        except  :
             return False
     def is_in_wifi_quit_dialog(self):
         try:
@@ -44,7 +44,7 @@ class WifiSettingsPage():
                 EC.presence_of_element_located(("id", self.QuitDialog))
             )
             return True
-        except AssertionError:
+        except :
             return False
     def is_in_wifi_password_empty_dialog(self):
         try:
@@ -52,7 +52,7 @@ class WifiSettingsPage():
                 EC.presence_of_element_located(("id", self.EmptyDialog))
             )
             return True
-        except AssertionError:
+        except :
             return False
     def is_in_wifi_searching_device(self):
         try:
@@ -60,7 +60,7 @@ class WifiSettingsPage():
                 EC.presence_of_element_located(("id", self.SearchingDevice))
             )
             return True
-        except AssertionError:
+        except :
             return False
 
     def header_text(self):
@@ -70,7 +70,7 @@ class WifiSettingsPage():
             )
             element = self.driver.find_element("id", self.Header)
             return element.text
-        except AssertionError:
+        except :
             return None
     def description(self):
         try:
@@ -79,7 +79,7 @@ class WifiSettingsPage():
             )
             element = self.driver.find_element("id", self.Description)
             return element.text
-        except AssertionError:
+        except :
             return None
     def pop_up_title_text(self):
         try:
@@ -88,7 +88,7 @@ class WifiSettingsPage():
             )
             element = self.driver.find_element("id", self.PopUpTitle)
             return element.text
-        except AssertionError:
+        except :
             return None
     def pop_up_ok_text(self):
         try:
@@ -97,7 +97,7 @@ class WifiSettingsPage():
             )
             element = self.driver.find_element("id", self.PopUpOk)
             return element.text
-        except AssertionError:
+        except :
             return None
     def pop_up_cancel_text(self):
         try:
@@ -106,7 +106,7 @@ class WifiSettingsPage():
             )
             element = self.driver.find_element("id", self.PopUpCancel)
             return element.text
-        except AssertionError:
+        except :
             return None
     def quit_dialog_text(self):
         try:
@@ -115,7 +115,7 @@ class WifiSettingsPage():
             )
             element = self.driver.find_element("id", self.QuitDialog)
             return element.text
-        except AssertionError:
+        except :
             return None
     def quit_dialog_yes_text(self):
         try:
@@ -124,7 +124,7 @@ class WifiSettingsPage():
             )
             element = self.driver.find_element("id", self.Yes)
             return element.text
-        except AssertionError:
+        except :
             return None
     def quit_dialog_no_text(self):
         try:
@@ -133,7 +133,7 @@ class WifiSettingsPage():
             )
             element = self.driver.find_element("id", self.No)
             return element.text
-        except AssertionError:
+        except :
             return None
     def empty_dialog_text(self):
         try:
@@ -142,7 +142,7 @@ class WifiSettingsPage():
             )
             element = self.driver.find_element("id", self.EmptyDialog)
             return element.text
-        except AssertionError:
+        except :
             return None
     def empty_dialog_yes_text(self):
         try:
@@ -151,7 +151,7 @@ class WifiSettingsPage():
             )
             element = self.driver.find_element("id", self.EmptyDialogYes)
             return element.text
-        except AssertionError:
+        except :
             return None
 
     def click_x(self):

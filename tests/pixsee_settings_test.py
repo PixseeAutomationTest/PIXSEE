@@ -294,7 +294,7 @@ class PixseeSettingsTest(BaseTestCase):
         menu_page.click_settings()
         # check voice service title on settings page
         try:
-            hint = self.get_string("voiceService.settings.label")
+            hint = self.get_string("voice_service_settings_title")
             self.assertEqual(pixsee_settings_page.voice_service_text(), hint)
             print("Voice service title right")
         except AssertionError:
@@ -321,7 +321,7 @@ class PixseeSettingsTest(BaseTestCase):
         baby_monitor_page.click_home()
         # skip menu tutor
         menu_page.click_logout()
-        menu_page.click_settings()
+
 
         hint = self.get_string("device_settings")
         try:
@@ -330,10 +330,11 @@ class PixseeSettingsTest(BaseTestCase):
             print("Settings page title right")
         except AssertionError:
             raise AssertionError("Settings page title wrong")
+
         menu_page.click_settings()
 
         try:
-            # check pixsee settings clickable
+            # check if is in pixsee settings
             self.assertTrue(pixsee_settings_page.is_in_settings())
             print("In Pixsee Settings page")
         except AssertionError:

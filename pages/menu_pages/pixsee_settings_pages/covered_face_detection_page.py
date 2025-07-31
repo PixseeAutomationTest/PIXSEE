@@ -39,7 +39,7 @@ class CoveredFaceDetectionPage():
 			)
 			element = self.driver.find_element("id", self.Header)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def tutor_title_text(self):
 		try:
@@ -48,7 +48,7 @@ class CoveredFaceDetectionPage():
 			)
 			element = self.driver.find_element("id", self.TutorTitle)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def skip_text(self):
 		try:
@@ -57,7 +57,7 @@ class CoveredFaceDetectionPage():
 			)
 			element = self.driver.find_element("id", self.Skip)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def title(self):
 		try:
@@ -66,7 +66,7 @@ class CoveredFaceDetectionPage():
 			)
 			element = self.driver.find_element("id", self.Detection)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def detection_description(self):
 		try:
@@ -75,7 +75,7 @@ class CoveredFaceDetectionPage():
 			)
 			element = self.driver.find_element("id", self.DetectionSubtitle)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def sensitivity_text(self):
 		try:
@@ -84,7 +84,7 @@ class CoveredFaceDetectionPage():
 			)
 			element = self.driver.find_element("id", self.Sensitivity)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def turn_off_dialog_title(self):
 		WebDriverWait(self.driver, 10).until(
@@ -123,7 +123,7 @@ class CoveredFaceDetectionPage():
 			)
 			element = self.driver.find_element("id", self.Low)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def medium_text(self):
 		try:
@@ -132,7 +132,7 @@ class CoveredFaceDetectionPage():
 			)
 			element = self.driver.find_element("id", self.Medium)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def high_text(self):
 		try:
@@ -141,7 +141,7 @@ class CoveredFaceDetectionPage():
 			)
 			element = self.driver.find_element("id", self.High)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def discard_message_text(self):
 		try:
@@ -150,7 +150,7 @@ class CoveredFaceDetectionPage():
 			)
 			element = self.driver.find_element("id", self.DiscardTitle)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def discard_no_text(self):
 		try:
@@ -159,7 +159,7 @@ class CoveredFaceDetectionPage():
 			)
 			element = self.driver.find_element("id", self.DiscardNo)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def discard_yes_text(self):
 		try:
@@ -168,7 +168,7 @@ class CoveredFaceDetectionPage():
 			)
 			element = self.driver.find_element("id", self.DiscardYes)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 
 	def click_skip(self):
@@ -262,7 +262,7 @@ class CoveredFaceDetectionPage():
 				EC.presence_of_element_located(("id", self.TutorTitle))
 			)
 			return True
-		except AssertionError:
+		except :
 			return False
 	def is_in_covered_face_detection_page(self):
 		try:
@@ -270,7 +270,7 @@ class CoveredFaceDetectionPage():
 				EC.presence_of_element_located(("id", self.Header))
 			)
 			return True
-		except AssertionError:
+		except :
 			return False
 	def is_in_turn_off_dialog(self):
 		try:
@@ -278,7 +278,7 @@ class CoveredFaceDetectionPage():
 				EC.presence_of_element_located(("id", self.TurnOffDialog))
 			)
 			return True
-		except AssertionError:
+		except :
 			return False
 	def is_in_discard_dialog(self):
 		try:
@@ -286,7 +286,7 @@ class CoveredFaceDetectionPage():
 				EC.presence_of_element_located(("id", self.DiscardTitle))
 			)
 			return True
-		except AssertionError:
+		except :
 			return False
 
 	def is_switch_on(self):
@@ -330,6 +330,6 @@ class CoveredFaceDetectionPage():
 				EC.presence_of_element_located(("id", self.Snooze))
 			)
 			return True
-		except AssertionError:
+		except :
 			return False
 

@@ -13,23 +13,19 @@ class NewPhotoCheckCase(BaseTestCase):
 		super().setUp(no_reset=False)
 
 	def test_new_photo_storaged(self):
-		login_page = LoginPage(self.driver)
+
+		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		photo_page = PhotoPage(self.driver)
-		menu_page = MenuPage(self.driver)
+		login_page = LoginPage(self.driver)
 
-		login_page.login("amypixsee02@gmail.com", "@Aa12345")
-
-
-
-		for i in range(4):
-			baby_monitor_page.get_tutor_description()
-			self.click_middle()
-			time.sleep(1)
-
-		time.sleep(5)
+		login_page.login(self.account(), self.password())
+		baby_monitor_page.is_in_baby_monitor_page()
+		self.skip_first_four_tutor()
 		baby_monitor_page.click_home()
-		self.click_middle()
+		# skip menu tutor
+		menu_page.click_logout()
+
 		menu_page.click_album()
 		photo_page.click_iknow_button()
 		self.click_middle()
@@ -39,15 +35,16 @@ class NewPhotoCheckCase(BaseTestCase):
 		origin = photo_page.count_photos_today()
 		print(f"原本共有{origin}張照片")
 
-		# photo_page.click_back_button()
 		time.sleep(3)
-		self.right_wipe()
-		baby_monitor_page.click_home()
+		photo_page.click_back_button()
+		menu_page.click_home()
 		# 拍攝新照片
 		baby_monitor_page.click_capture()
 		print("正在拍照")
 
 		# 等待一段時間，確保有新照片被拍攝
+		time.sleep(5)
+		self.assertTrue(baby_monitor_page.has_photo_upload_dialog(), "沒有出現照片上傳對話框")
 		time.sleep(5)
 		baby_monitor_page.click_home()
 		menu_page.click_album()
