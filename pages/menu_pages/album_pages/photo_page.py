@@ -47,6 +47,7 @@ class PhotoPage():
 		target_date = datetime.strptime(target_date_str, "%Y/%m/%d")
 		collected_thumbnails = []
 		seen_blocks = set()
+		seen_thumb_ids = set()  # 用來記錄已經收集過的縮圖 ID
 
 		try:  # 先檢查有沒有今天的資料，如果沒有代表沒照片
 			top_date_el = self.driver.find_element(AppiumBy.ID,
@@ -72,11 +73,13 @@ class PhotoPage():
 				if block.id in seen_blocks:
 					continue
 				seen_blocks.add(block.id)
+				# print(block.id)
 
 				try:
 					date_txt = block.find_element(AppiumBy.ID,
 												  "com.compal.bioslab.pixsee.pixm01:id/gallery_item_date_txt").text
-					date_clean = date_txt.strip().replace(" ", "").replace("／", "/").replace(" / ", "/")
+					date_clean = date_txt.strip().replace(" ", "").replace("／", "/").replace(" / ",
+																							 "/")
 					current_date = datetime.strptime(date_clean, "%Y/%m/%d")
 
 					if current_date == target_date:
@@ -89,20 +92,23 @@ class PhotoPage():
 
 				except:
 					if collecting:
+						# thumbs = block.find_element(AppiumBy.ID,"com.compal.bioslab.pixsee.pixm01:id/clContainer")
 						thumbs = block.find_elements(AppiumBy.ID,
 													 "com.compal.bioslab.pixsee.pixm01:id/gallery_thumbnail")
-						collected_thumbnails.extend(thumbs)
+						for thumb in thumbs:
+							if thumb.id not in seen_thumb_ids:
+								seen_thumb_ids.add(thumb.id)
+								collected_thumbnails.append(thumb)
 
 			if not found_new_date:
 				self.scroll_down_photo()
 
-		# print(f"共找到 {len(collected_thumbnails)} 張圖片")
 		return collected_thumbnails
 
 
 	def count_photos_today(self):
 		today_str = datetime.today().strftime("%Y/%m/%d")
-		print("今天是" + today_str)
+		# print("今天是" + today_str)
 		thumbnails = self.find_thumbnails_between_dates(today_str)
-		return int(len(thumbnails) / 2)
+		return int(len(thumbnails))
 
