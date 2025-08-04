@@ -136,7 +136,8 @@ class UserProfileTest(BaseTestCase):
                 self.assertEqual(user_profile_page.get_add_backup_email_button_text(), self.get_string("add_backup_email_button_title"), "Button \"Add backup mail\" is properly displayed")
             self.assertEqual(user_profile_page.get_delete_account_button_text(), self.get_string("account_profile_btn_delete"), "Button \"Delete account\" is properly displayed")
 
-            '''Change user name and birthday'''
+            '''Change user avatar, name and birthday'''
+            user_profile_page.select_avatar()
             user_profile_page.input_user_name()
             user_profile_page.select_birthday()
             new_user_name = user_profile_page.get_user_name_text()
@@ -191,7 +192,8 @@ class UserProfileTest(BaseTestCase):
             old_user_name = user_profile_page.get_user_name_text()
             old_user_birthday = user_profile_page.get_user_birthday_text()
 
-            '''Change user name and birthday'''
+            '''Change user avatar, name and birthday'''
+            user_profile_page.select_avatar()
             user_profile_page.input_user_name()
             user_profile_page.select_birthday()
 
@@ -244,7 +246,12 @@ class UserProfileTest(BaseTestCase):
             self.assertTrue(user_profile_page.has_add_backup_email_dialog(), "\"Help us protect your account\" window isn't displayed")
             self.assertEqual(user_profile_page.get_add_backup_email_dialog_title_text(), self.get_string("backup_email_title_dialog"), "Text \"Help us protect your account\" is properly displayed")
             self.assertEqual(user_profile_page.get_add_backup_email_dialog_info_text(), self.get_string("backup_email_description_dialog"), "Text \"Add backup information to enhance your account security.\" is not properly displayed")
+            self.assertEqual(user_profile_page.get_add_backup_email_dialog_ok_button_text(), self.get_string("add_backup_email_button_title"), "Button \"Add a backup email\" is not properly displayed")
+            self.assertEqual(user_profile_page.get_add_backup_email_dialog_cancel_button_text(), self.get_string("cancel"), "Button \"Cancel\" is not properly displayed")
 
+            '''Click Cancel Button and verify that dialog is closed'''
+            user_profile_page.click_add_backup_email_dialog_cancel()
+            self.assertTrue(user_profile_page.is_in_user_profile_page(), "Can't return to User Profile Page after clicking \"Cancel\" button in Add Backup Email Dialog")
 
         except AssertionError as ae:
             print(f"Test failed with assertion error: {ae}")
@@ -255,3 +262,51 @@ class UserProfileTest(BaseTestCase):
         finally:
             self.shutdown_app()
 
+    def test_add_backup_email_dialog_with_cancel(self):
+        try:
+            self.open_app()
+
+            baby_monitor_page = BabyMonitorPage(self.driver)
+            menu_page = MenuPage(self.driver)
+            user_profile_page = UserProfilePage(self.driver)
+            change_password_page = ChangePasswordPage(self.driver)
+
+            '''Go to Menu Page'''
+            baby_monitor_page.click_home()
+            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page")
+
+            '''Go to User Profile Page'''
+            menu_page.click_profile()
+            self.assertTrue(user_profile_page.is_in_user_profile_page(), "Can't go to User Profile Page")
+
+            '''Verify User Profile Page'''
+            self.assertEqual(user_profile_page.get_page_title(), self.get_string("user_profile_title"), "Text \"User Profile\" is not properly displayed")
+            self.assertEqual(user_profile_page.get_done_button_text(), self.get_string("done"), "Button \"Done\" is not properly displayed")
+            self.assertEqual(user_profile_page.get_change_password_button_text(), self.get_string("user_profile_change_password_button"), "Button \"Change password\" is properly displayed")
+            if user_profile_page.has_backup_email():
+                self.assertEqual(user_profile_page.get_change_backup_email_button_text(), self.get_string("backup_email_change_backup_email"), "Button \"Change backup email\" is properly displayed")
+            else:
+                self.assertEqual(user_profile_page.get_add_backup_email_button_text(), self.get_string("add_backup_email_button_title"), "Button \"Add backup mail\" is properly displayed")
+            self.assertEqual(user_profile_page.get_delete_account_button_text(), self.get_string("account_profile_btn_delete"), "Button \"Delete account\" is properly displayed")
+
+            '''Click Add Backup Email Button and verify the dialog'''
+            user_profile_page.click_add_backup_email()
+            self.assertTrue(user_profile_page.has_add_backup_email_dialog(), "\"Help us protect your account\" window isn't displayed")
+            self.assertEqual(user_profile_page.get_add_backup_email_dialog_title_text(), self.get_string("backup_email_title_dialog"), "Text \"Help us protect your account\" is properly displayed")
+            self.assertEqual(user_profile_page.get_add_backup_email_dialog_info_text(), self.get_string("backup_email_description_dialog"), "Text \"Add backup information to enhance your account security.\" is not properly displayed")
+            self.assertEqual(user_profile_page.get_add_backup_email_dialog_ok_button_text(), self.get_string("add_backup_email_button_title"), "Button \"Add a backup email\" is not properly displayed")
+            self.assertEqual(user_profile_page.get_add_backup_email_dialog_cancel_button_text(), self.get_string("cancel"), "Button \"Cancel\" is not properly displayed")
+
+            '''Click ok Button and verify add backup email page contents'''
+            user_profile_page.click_add_backup_email_dialog_ok()
+            self.assertTrue(user_profile_page.is_in_user_profile_page(), "Can't return to User Profile Page after clicking \"Cancel\" button in Add Backup Email Dialog")
+
+
+        except AssertionError as ae:
+            print(f"Test failed with assertion error: {ae}")
+            raise ae
+        except Exception as e:
+            print(f"Test failed with exception: {e}")
+            raise e
+        finally:
+            self.shutdown_app()

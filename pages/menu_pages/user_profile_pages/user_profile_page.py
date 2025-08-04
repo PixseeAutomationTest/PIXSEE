@@ -46,6 +46,12 @@ class UserProfilePage():
         self.addBackupEmailDialogText_classname = "android.widget.TextView"
         self.addBackupEmailDialogButton_classname = "android.view.View"
 
+        '''Photos (edit page & outside)'''
+        self.photosCategory_xpath = "//android.support.v7.widget.RecyclerView/android.widget.RelativeLayout[1]"
+        self.photos_classname = "android.widget.ImageView"
+        self.editPhotoDoneButton = "com.compal.bioslab.pixsee.pixm01:id/tvImageEditorDone"
+        self.editPhotoReturnButton = "com.compal.bioslab.pixsee.pixm01:id/image_editor_toolbar_back_img"
+
     def click_user_photo(self):
         WebDriverWait(self.driver, 20).until(
             EC.presence_of_element_located(("id", self.userPhoto))
@@ -128,6 +134,27 @@ class UserProfilePage():
         dialog = self.driver.find_element("xpath", self.addBackupEmailDialog_xpath)
         buttons = dialog.find_elements("class name", self.addBackupEmailDialogButton_classname)
         buttons[1].click()
+
+    def click_photos_category(self):
+        WebDriverWait(self.driver, 20).until(
+            EC.presence_of_element_located(("xpath", self.photosCategory_xpath))
+        )
+        element = self.driver.find_element("xpath", self.photosCategory_xpath)
+        element.click()
+
+    def click_first_photo(self):
+        WebDriverWait(self.driver, 20).until(
+            EC.presence_of_element_located(("class name", self.photos_classname))
+        )
+        elements = self.driver.find_elements("class name", self.photos_classname)
+        elements[0].click()
+
+    def click_edit_photo_done(self):
+        WebDriverWait(self.driver, 20).until(
+            EC.presence_of_element_located(("id", self.editPhotoDoneButton))
+        )
+        element = self.driver.find_element("id", self.editPhotoDoneButton)
+        element.click()
 
     def get_page_title(self):
         WebDriverWait(self.driver, 20).until(
@@ -218,6 +245,13 @@ class UserProfilePage():
         buttons = dialog.find_elements("class name", self.addBackupEmailDialogButton_classname)
         element = buttons[1].find_element("class name", self.addBackupEmailDialogText_classname)
         return element.text
+
+    def select_avatar(self):
+        self.click_user_photo()
+        self.click_photos_category()
+        self.click_first_photo()
+        time.sleep(1)
+        self.click_edit_photo_done()
 
     def select_birthday(self, year = datetime.date.today().year, month = datetime.date.today().month, day = datetime.date.today().day):
         # Validate the input date
