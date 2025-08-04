@@ -37,18 +37,18 @@ class NewPhotoCheckCase(BaseTestCase):
 		print("finish login photo")
 		time.sleep(5)
 
-		# 獲取原本的照片數量
+		# Get origin photo amount
 		origin = photo_page.count_photos_today()
 
 
 		photo_page.click_back_button()
 		# self.right_wipe()
 		baby_monitor_page.click_home()
-		# 拍攝新照片
+		# get new photo
 		baby_monitor_page.click_capture()
 		print("filming new photo")
 
-		# 等待一段時間，確保有新照片被拍攝
+		# get new amount of photo
 		time.sleep(5)
 		baby_monitor_page.click_home()
 		menu_page.click_album()
