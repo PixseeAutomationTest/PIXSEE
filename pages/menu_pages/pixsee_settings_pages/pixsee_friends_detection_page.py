@@ -45,7 +45,7 @@ class PixseeFriendsDetPage():
 				EC.presence_of_element_located((AppiumBy.ID, self.Header))
 			)
 			return True
-		except AssertionError:
+		except :
 			return False
 	def is_in_timer(self):
 		try:
@@ -55,7 +55,7 @@ class PixseeFriendsDetPage():
 			self.driver.find_element(AppiumBy.ID, self.Cancel)
 			return True
 
-		except AssertionError:
+		except :
 			return False
 	def is_in_discard_dialog(self):
 		try:
@@ -65,7 +65,7 @@ class PixseeFriendsDetPage():
 			self.driver.find_element(AppiumBy.ID, self.DiscardMessage)
 			return True
 
-		except AssertionError:
+		except :
 			return False
 
 	# click

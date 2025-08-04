@@ -25,6 +25,7 @@ class BabyMonitorPage():
         self.tutor_id = "com.compal.bioslab.pixsee.pixm01:id/tvDescription"
         self.tutor_title = "com.compal.bioslab.pixsee.pixm01:id/tvTitle"
         self.connectingStatusText = "com.compal.bioslab.pixsee.pixm01:id/tvConnectingStatus"
+        self.photoUploadDialog = "com.compal.bioslab.pixsee.pixm01:id/tvSnackbarToastLabel"
 
         self.captureButton_xpath = '//android.widget.RelativeLayout[@resource-id="com.compal.bioslab.pixsee.pixm01:id/btnSwipeCapture"]/android.widget.ImageView[2]'
 
@@ -140,6 +141,15 @@ class BabyMonitorPage():
         )
         element = self.driver.find_element("id", self.connectingStatusText)
         return element.text
+    def has_photo_upload_dialog(self):
+        try:
+            WebDriverWait(self.driver, 20).until(
+                EC.presence_of_element_located((AppiumBy.ID, self.photoUploadDialog))
+            )
+            self.driver.find_element(AppiumBy.ID, self.photoUploadDialog)
+            return True
+        except:
+            return False
     def is_connected(self):
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((AppiumBy.ID, self.twoWayTalkButton))

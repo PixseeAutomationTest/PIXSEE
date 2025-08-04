@@ -35,7 +35,7 @@ class CryDetectionPage():
 			)
 			element = self.driver.find_element("id", self.Header)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def title(self):
 		try:
@@ -44,7 +44,7 @@ class CryDetectionPage():
 			)
 			element = self.driver.find_element("id", self.Detection)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def detection_description(self):
 		try:
@@ -53,7 +53,7 @@ class CryDetectionPage():
 			)
 			element = self.driver.find_element("id", self.DetectionSubtitle)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def sensitivity_text(self):
 		try:
@@ -62,7 +62,7 @@ class CryDetectionPage():
 			)
 			element = self.driver.find_element("id", self.Sensitivity)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def music_settings_text(self):
 		try:
@@ -71,7 +71,7 @@ class CryDetectionPage():
 			)
 			element = self.driver.find_element("id", self.MusicSettings)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def smart_soothing_text(self):
 		try:
@@ -80,7 +80,7 @@ class CryDetectionPage():
 			)
 			element = self.driver.find_element("id", self.SmartSoothing)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def low_text(self):
 		try:
@@ -89,7 +89,7 @@ class CryDetectionPage():
 			)
 			element = self.driver.find_element("id", self.Low)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def medium_text(self):
 		try:
@@ -98,7 +98,7 @@ class CryDetectionPage():
 			)
 			element = self.driver.find_element("id", self.Medium)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def high_text(self):
 		try:
@@ -107,7 +107,7 @@ class CryDetectionPage():
 			)
 			element = self.driver.find_element("id", self.High)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def music_title(self):
 		try:
@@ -116,7 +116,7 @@ class CryDetectionPage():
 			)
 			element = self.driver.find_element("id", self.Music)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def discard_message_text(self):
 		try:
@@ -125,7 +125,7 @@ class CryDetectionPage():
 			)
 			element = self.driver.find_element("id", self.DiscardTitle)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def discard_no_text(self):
 		try:
@@ -134,7 +134,7 @@ class CryDetectionPage():
 			)
 			element = self.driver.find_element("id", self.DiscardNo)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 	def discard_yes_text(self):
 		try:
@@ -143,7 +143,7 @@ class CryDetectionPage():
 			)
 			element = self.driver.find_element("id", self.DiscardYes)
 			return element.text
-		except AssertionError:
+		except :
 			return None
 
 
@@ -214,7 +214,7 @@ class CryDetectionPage():
 				EC.presence_of_element_located((AppiumBy.ID, self.MusicRoom))
 			)
 			return True
-		except AssertionError:
+		except :
 			return False
 	def is_in_cry_detection_page(self):
 		try:
@@ -222,7 +222,7 @@ class CryDetectionPage():
 				EC.presence_of_element_located(("id", self.Header))
 			)
 			return True
-		except AssertionError:
+		except :
 			return False
 	def is_in_discard_dialog(self):
 		try:
@@ -230,7 +230,7 @@ class CryDetectionPage():
 				EC.presence_of_element_located(("id", self.DiscardTitle))
 			)
 			return True
-		except AssertionError:
+		except :
 			return False
 
 	def is_switch_on(self):

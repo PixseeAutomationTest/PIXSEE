@@ -163,6 +163,7 @@ class TimeLapseVideoCase(BaseTestCase):
             print("x works, back to time lapse video page")
         except AssertionError:
             raise AssertionError("Not in time lapse video page")
+    # TODO: Some problems
     def test_04_time_lapse_subscribe(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
         menu_page = MenuPage(self.driver)
@@ -186,11 +187,18 @@ class TimeLapseVideoCase(BaseTestCase):
         menu_page.click_settings()
         pixsee_settings_page.click_time_lapse_video()
         time_lapse_video.click_switch()
+        # check if in upgrade dialog
+        try:
+            self.assertTrue(time_lapse_video.is_in_timelapse_upgrade_dialog())
+
+        except AssertionError:
+            raise AssertionError("already subscribed")
         # subscribe
         time_lapse_video.click_upgrade_subscription()
         subscription_page.click_gold_star()
         subscription_page.click_plan1()
         subscription_page.click_pay()
+        time.sleep(5)
         # check if back to time lapse video page
         try:
             self.assertTrue(time_lapse_video.is_in_timelapse_video_page())

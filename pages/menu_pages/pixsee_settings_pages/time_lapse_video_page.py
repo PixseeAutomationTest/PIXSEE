@@ -43,7 +43,7 @@ class TimeLapseVideoPage():
                 EC.presence_of_element_located(("id", self.Header))
             )
             return True
-        except AssertionError:
+        except :
             return False
     def is_in_timelapse_upgrade_dialog(self):
         try:
@@ -51,7 +51,7 @@ class TimeLapseVideoPage():
                 EC.presence_of_element_located(("id", self.UpgradeTitle))
             )
             return True
-        except AssertionError:
+        except :
             return False
     def is_in_upgrade_dialog(self):
         try:
@@ -59,7 +59,7 @@ class TimeLapseVideoPage():
                 EC.presence_of_element_located(("id", self.UpgradeTitle))
             )
             return True
-        except AssertionError:
+        except :
             return False
     def is_in_discard_dialog(self):
         try:
@@ -69,7 +69,7 @@ class TimeLapseVideoPage():
             self.driver.find_element(AppiumBy.ID, self.DiscardMessage)
             return True
 
-        except AssertionError:
+        except :
             return False
     def is_in_timer(self):
         try:
@@ -79,7 +79,7 @@ class TimeLapseVideoPage():
             self.driver.find_element(AppiumBy.ID, self.Cancel)
             return True
 
-        except AssertionError:
+        except :
             return False
 
     def is_switch_on(self):
@@ -97,7 +97,7 @@ class TimeLapseVideoPage():
             )
             element = self.driver.find_element("id", self.Header)
             return element.text
-        except AssertionError:
+        except :
             return None
     def title(self):
         try:
@@ -106,7 +106,7 @@ class TimeLapseVideoPage():
             )
             element = self.driver.find_element("id", self.TimeLapseRecording)
             return element.text
-        except AssertionError:
+        except :
             return None
     def description(self):
         try:
@@ -115,7 +115,7 @@ class TimeLapseVideoPage():
             )
             element = self.driver.find_element("id", self.Subtitle)
             return element.text
-        except AssertionError:
+        except :
             return None
     def upgrade_title_txt(self):
         try:
@@ -124,7 +124,7 @@ class TimeLapseVideoPage():
             )
             element = self.driver.find_element("id", self.UpgradeTitle)
             return element.text
-        except AssertionError:
+        except :
             return None
     def upgrade_subscription_txt(self):
         try:
@@ -133,7 +133,7 @@ class TimeLapseVideoPage():
             )
             element = self.driver.find_element("id", self.UpgradeSubscription)
             return element.text
-        except AssertionError:
+        except :
             return None
     def upgrade_no_txt(self):
         try:
@@ -142,7 +142,7 @@ class TimeLapseVideoPage():
             )
             element = self.driver.find_element("id", self.UpgradeNo)
             return element.text
-        except AssertionError:
+        except :
             return None
     def recording_mode_text(self):
         try:
@@ -151,7 +151,7 @@ class TimeLapseVideoPage():
             )
             element = self.driver.find_element("id", self.RecordingMode)
             return element.text
-        except AssertionError:
+        except :
             return None
     def time_span_text(self):
         try:
@@ -160,7 +160,7 @@ class TimeLapseVideoPage():
             )
             element = self.driver.find_element("id", self.TimeSpan)
             return element.text
-        except AssertionError:
+        except :
             return None
     def entire_time_text(self):
         try:
@@ -169,7 +169,7 @@ class TimeLapseVideoPage():
             )
             element = self.driver.find_element("id", self.EntireTime)
             return element.text
-        except AssertionError:
+        except :
             return None
     def people_in_view_text(self):
         try:
@@ -178,7 +178,7 @@ class TimeLapseVideoPage():
             )
             element = self.driver.find_element("id", self.PeopleInView)
             return element.text
-        except AssertionError:
+        except :
             return None
     def twelve_hours_text(self):
         try:
@@ -187,7 +187,7 @@ class TimeLapseVideoPage():
             )
             element = self.driver.find_element("id", self.TwelveHours)
             return element.text
-        except AssertionError:
+        except :
             return None
     def twenty_four_hours_text(self):
         try:
@@ -196,7 +196,7 @@ class TimeLapseVideoPage():
             )
             element = self.driver.find_element("id", self.TwentyFourHours)
             return element.text
-        except AssertionError:
+        except :
             return None
     def starting_time_text(self):
         try:
@@ -205,7 +205,7 @@ class TimeLapseVideoPage():
             )
             element = self.driver.find_element("id", self.StartingTime)
             return element.text
-        except AssertionError:
+        except :
             return None
     def timer_text(self):
         try:
@@ -214,7 +214,7 @@ class TimeLapseVideoPage():
             )
             element = self.driver.find_element("id", self.Timer)
             return element.text
-        except AssertionError:
+        except :
             return None
     def cancel_txt(self):
         WebDriverWait(self.driver, 10).until(

@@ -155,7 +155,7 @@ class AreaDetectionCase(BaseTestCase):
 		except AssertionError :
 			raise AssertionError("second tutor indicator doesn't displayed")
 
-		self.left_wipe()
+		self.right_wipe()
 		# check first tutor page
 		try:
 			self.assertTrue(area_detection_page.is_in_tutor_first_page())
