@@ -142,12 +142,12 @@ class UserProfilePage():
         element = self.driver.find_element("xpath", self.photosCategory_xpath)
         element.click()
 
-    def click_first_photo(self):
+    def click_selected_photo(self, number=0):
         WebDriverWait(self.driver, 20).until(
             EC.presence_of_element_located(("class name", self.photos_classname))
         )
         elements = self.driver.find_elements("class name", self.photos_classname)
-        elements[0].click()
+        elements[number].click()
 
     def click_edit_photo_done(self):
         WebDriverWait(self.driver, 20).until(
@@ -246,10 +246,10 @@ class UserProfilePage():
         element = buttons[1].find_element("class name", self.addBackupEmailDialogText_classname)
         return element.text
 
-    def select_avatar(self):
+    def select_avatar(self, number=0):
         self.click_user_photo()
         self.click_photos_category()
-        self.click_first_photo()
+        self.click_selected_photo(number)
         time.sleep(1)
         self.click_edit_photo_done()
 

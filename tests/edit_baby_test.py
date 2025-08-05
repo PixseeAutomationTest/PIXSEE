@@ -5,9 +5,10 @@ from pages.baby_timeline_page import BabyTimelinePage
 from pages.menu_pages.menu_page import MenuPage
 from pages.menu_pages.add_baby_profile_page import AddBabyProfilePage
 from pages.menu_pages.edit_baby_profile_pages.edit_baby_profile_page import EditBabyProfilePage
-from pages.menu_pages.edit_baby_profile_pages.delete_baby_profile import DeleteBabyProfilePage
+from pages.delete_profile_page import DeleteProfilePage
 from pages.download_account_data_page import DownloadAccountDataPage
 
+import time
 import random
 
 class EditBabyTest(BaseTestCase):
@@ -21,7 +22,7 @@ class EditBabyTest(BaseTestCase):
             add_baby_profile_page = AddBabyProfilePage(self.driver)
             baby_timeline_page = BabyTimelinePage(self.driver)
             edit_baby_profile_page = EditBabyProfilePage(self.driver)
-            delete_baby_profile_page = DeleteBabyProfilePage(self.driver)
+            delete_baby_profile_page = DeleteProfilePage(self.driver)
 
             '''Go to Menu Page'''
             baby_monitor_page.click_home()
@@ -64,12 +65,12 @@ class EditBabyTest(BaseTestCase):
             self.assertEqual(delete_baby_profile_page.get_page_title(), self.get_string("delete_baby_title"), "Text \"Delete baby’s profile\" is not properly displayed")
             self.assertEqual(delete_baby_profile_page.get_warning_text(), (self.get_string("delete_baby_warning") + " " + self.get_string("delete_warning_instruction")).replace("\\n", "\n"), "Warning Hint is not properly displayed")
             self.assertEqual(delete_baby_profile_page.get_check_info_text(), self.get_string("delete_baby_check"), "Text \"Your baby’s data will be gone forever and cannot be recovered.\" is not properly displayed")
-            self.assertEqual(delete_baby_profile_page.get_delete_baby_profile_button_text(), self.get_string("delete_baby_btn_delete"), "\"Delete baby's profile\" Button is not properly displayed")
+            self.assertEqual(delete_baby_profile_page.get_delete_profile_button_text(), self.get_string("delete_baby_btn_delete"), "\"Delete baby's profile\" Button is not properly displayed")
             self.assertEqual(delete_baby_profile_page.get_cancel_button_text(), self.get_string("cancel"), "\"Cancel\" Button is not properly displayed")
 
             '''Click Delete Baby Profile Button'''
             delete_baby_profile_page.click_check()
-            delete_baby_profile_page.click_delete_baby_profile()
+            delete_baby_profile_page.click_delete_profile()
 
             '''Go to Baby monitor page'''
             self.assertTrue(baby_monitor_page.is_in_baby_monitor_page(), "Can't automatically go to Baby Monitor Page after deleting a baby profile")
@@ -93,6 +94,7 @@ class EditBabyTest(BaseTestCase):
             add_baby_profile_page = AddBabyProfilePage(self.driver)
             baby_timeline_page = BabyTimelinePage(self.driver)
             edit_baby_profile_page = EditBabyProfilePage(self.driver)
+            delete_baby_profile_page = DeleteProfilePage(self.driver)
 
             '''Go to Menu Page'''
             baby_monitor_page.click_home()
@@ -135,6 +137,7 @@ class EditBabyTest(BaseTestCase):
             self.assertTrue(edit_baby_profile_page.get_gender_girl_status(), "Gender girl should be selected after clicking gender girl")
 
             '''Change baby's profile contents'''
+            add_baby_profile_page.select_avatar()
             if random.choice([True, False]):
                 edit_baby_profile_page.click_gender_boy()
             else:
@@ -156,6 +159,13 @@ class EditBabyTest(BaseTestCase):
             self.assertEqual(edit_baby_profile_page.get_nation_text(), old_baby_nation, "Baby nation should not be changed after canceling changing")
             self.assertEqual(edit_baby_profile_page.get_relative_text(), old_baby_relative, "Baby relative should not be changed after canceling changing")
 
+            '''Delete the baby profile to let the next test can run properly'''
+            edit_baby_profile_page.click_delete_baby_profile()
+            edit_baby_profile_page.click_dialog_yes()
+            delete_baby_profile_page.click_check()
+            delete_baby_profile_page.click_delete_profile()
+            time.sleep(5)
+
         except AssertionError as ae:
             print(f"Test failed with assertion error: {ae}")
             raise ae
@@ -174,6 +184,7 @@ class EditBabyTest(BaseTestCase):
             add_baby_profile_page = AddBabyProfilePage(self.driver)
             baby_timeline_page = BabyTimelinePage(self.driver)
             edit_baby_profile_page = EditBabyProfilePage(self.driver)
+            delete_baby_profile_page = DeleteProfilePage(self.driver)
 
             '''Go to Menu Page'''
             baby_monitor_page.click_home()
@@ -209,6 +220,7 @@ class EditBabyTest(BaseTestCase):
             self.assertTrue(edit_baby_profile_page.get_gender_girl_status(), "Gender girl should be selected after clicking gender girl")
 
             '''Change baby's profile contents'''
+            add_baby_profile_page.select_avatar()
             if random.choice([True, False]):
                 edit_baby_profile_page.click_gender_boy()
             else:
@@ -236,6 +248,13 @@ class EditBabyTest(BaseTestCase):
             self.assertEqual(edit_baby_profile_page.get_baby_birthday_text(), new_baby_birthday, "Baby birthday should be changed after saving changing")
             self.assertEqual(edit_baby_profile_page.get_nation_text(), new_baby_nation, "Baby nation should be changed after saving changing")
             self.assertEqual(edit_baby_profile_page.get_relative_text(), new_baby_relative, "Baby relative should be changed after saving changing")
+
+            '''Delete the baby profile to let the next test can run properly'''
+            edit_baby_profile_page.click_delete_baby_profile()
+            edit_baby_profile_page.click_dialog_yes()
+            delete_baby_profile_page.click_check()
+            delete_baby_profile_page.click_delete_profile()
+            time.sleep(5)
 
         except AssertionError as ae:
             print(f"Test failed with assertion error: {ae}")
@@ -298,7 +317,7 @@ class EditBabyTest(BaseTestCase):
             baby_monitor_page = BabyMonitorPage(self.driver)
             menu_page = MenuPage(self.driver)
             edit_baby_profile_page = EditBabyProfilePage(self.driver)
-            delete_baby_profile_page = DeleteBabyProfilePage(self.driver)
+            delete_baby_profile_page = DeleteProfilePage(self.driver)
 
             '''Go to Menu Page'''
             baby_monitor_page.click_home()
@@ -329,7 +348,7 @@ class EditBabyTest(BaseTestCase):
             self.assertEqual(delete_baby_profile_page.get_page_title(), self.get_string("delete_baby_title"), "Text \"Delete baby’s profile\" is not properly displayed")
             self.assertEqual(delete_baby_profile_page.get_warning_text(), (self.get_string("delete_baby_warning") + " " + self.get_string("delete_warning_instruction")).replace("\\n", "\n"), "Warning Hint is not properly displayed")
             self.assertEqual(delete_baby_profile_page.get_check_info_text(), self.get_string("delete_baby_check"), "Text \"Your baby’s data will be gone forever and cannot be recovered.\" is not properly displayed")
-            self.assertEqual(delete_baby_profile_page.get_delete_baby_profile_button_text(), self.get_string("delete_baby_btn_delete"), "\"Delete baby's profile\" Button is not properly displayed")
+            self.assertEqual(delete_baby_profile_page.get_delete_profile_button_text(), self.get_string("delete_baby_btn_delete"), "\"Delete baby's profile\" Button is not properly displayed")
             self.assertEqual(delete_baby_profile_page.get_cancel_button_text(), self.get_string("cancel"), "\"Cancel\" Button is not properly displayed")
 
             '''Click Cancel Button'''
