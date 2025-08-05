@@ -59,7 +59,6 @@ class UserProfilePage():
         element = self.driver.find_element("id", self.userPhoto)
         element.click()
 
-
     def click_done(self):
         WebDriverWait(self.driver, 20).until(
             EC.presence_of_element_located(("id", self.doneButton))

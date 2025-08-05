@@ -151,8 +151,6 @@ class UserProfileTest(BaseTestCase):
             self.assertEqual(user_profile_page.get_user_name_text(), new_user_name, "User name should be changed")
             self.assertEqual(user_profile_page.get_user_birthday_text(), new_user_birthday, "User birthday should be changed")
 
-
-
         except AssertionError as ae:
             print(f"Test failed with assertion error: {ae}")
             raise ae
@@ -214,6 +212,7 @@ class UserProfileTest(BaseTestCase):
         finally:
             self.shutdown_app()
 
+    # Please check the account has no backup email before run this test
     def test_add_backup_email_dialog_with_cancel(self):
         try:
             self.open_app()
@@ -262,7 +261,8 @@ class UserProfileTest(BaseTestCase):
         finally:
             self.shutdown_app()
 
-    def test_add_backup_email_dialog_with_cancel(self):
+    # Please check the account has no backup email before run this test
+    def test_add_backup_email_dialog_with_yes(self):
         try:
             self.open_app()
 
@@ -300,7 +300,6 @@ class UserProfileTest(BaseTestCase):
             '''Click ok Button and verify add backup email page contents'''
             user_profile_page.click_add_backup_email_dialog_ok()
             self.assertTrue(user_profile_page.is_in_user_profile_page(), "Can't return to User Profile Page after clicking \"Cancel\" button in Add Backup Email Dialog")
-
 
         except AssertionError as ae:
             print(f"Test failed with assertion error: {ae}")
