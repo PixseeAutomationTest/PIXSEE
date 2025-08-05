@@ -12,22 +12,98 @@ import re
 
 class EnvironmentSettingsCase(BaseTestCase):
 	def setUp(self):
-		super().setUp(no_reset=False)
-	def test_01_environment_set_switch(self):
+		super().setUp(no_reset=True)
+
+	# start from the Pixsee Settings page
+	def test_01_environment_set_back(self):
+			environment_settings_page = EnvironmentSettingsPage(self.driver)
+			menu_page = MenuPage(self.driver)
+			baby_monitor_page = BabyMonitorPage(self.driver)
+			pixsee_settings_page = PixseeSettingsPage(self.driver)
+
+			pixsee_settings_page.click_environment_settings()
+			# back to settings page
+			environment_settings_page.click_back()
+			try:
+				self.assertTrue(pixsee_settings_page.is_in_settings())
+				print("Back to Pixsee Settings page")
+			except AssertionError:
+				raise AssertionError("Not in Pixsee Settings page")
+	# start from the Pixsee Settings page
+	def test_02_environment_set_save(self):
 		environment_settings_page = EnvironmentSettingsPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		login_page = LoginPage(self.driver)
 
-		login_page.login(self.account(),self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-		self.skip_first_four_tutor()
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		menu_page.click_logout()
+		origin_status = pixsee_settings_page.environment_settings_status_text()
+		pixsee_settings_page.click_environment_settings()
+		# check save enable = false
+		try:
+			self.assertFalse(environment_settings_page.is_save_enable())
+			print("Save diable test pass")
+		except AssertionError:
+			raise AssertionError("Save disable test failed")
 
-		menu_page.click_settings()
+		# turn on switch
+		environment_settings_page.click_switch()
+		environment_settings_page.click_save()
+		new_status = pixsee_settings_page.environment_settings_status_text()
+		if origin_status != new_status:
+			print("save function success")
+		else:
+			print("save function failed")
+			raise AssertionError("save function failed, status not changed")
+	# start from the Pixsee Settings page
+	def test_03_environment_set_back_discard(self):
+		environment_settings_page = EnvironmentSettingsPage(self.driver)
+		menu_page = MenuPage(self.driver)
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+
+		origin_status = pixsee_settings_page.environment_settings_status_text()
+		pixsee_settings_page.click_environment_settings()
+		environment_settings_page.click_switch()
+		environment_settings_page.click_back()
+		# check if is in discard dialog
+		try:
+			self.assertTrue(environment_settings_page.is_in_discard_dialog())
+			print("In discard dialog")
+			# check discard dialog text
+			try:
+				discard = environment_settings_page.discard_message_text()
+				hint = self.get_string("discard_environment_detection_confirmation_message")
+				self.assertEqual(discard, hint)
+			except AssertionError:
+				raise AssertionError("Discard dialog title wrong")
+			try:
+				yes = environment_settings_page.discard_yes_text()
+				hint = self.get_string("yes")
+				self.assertEqual(yes, hint)
+			except AssertionError:
+				raise AssertionError("Discard dialog yes text wrong")
+			try:
+				no = environment_settings_page.discard_no_text()
+				hint = self.get_string("no")
+				self.assertEqual(no, hint)
+			except AssertionError:
+				raise AssertionError("Discard dialog no text wrong")
+			# click yes
+			environment_settings_page.click_discard_yes()
+			new_status = pixsee_settings_page.environment_settings_status_text()
+			try:
+				self.assertEqual(origin_status, new_status)
+			except AssertionError:
+				raise AssertionError("Discard function failed, status changed")
+		except AssertionError:
+			print("Not in discard dialog")
+			raise AssertionError("Not in discard dialog")
+	# start from the Pixsee Settings page
+	def test_04_environment_set_switch(self):
+		environment_settings_page = EnvironmentSettingsPage(self.driver)
+		menu_page = MenuPage(self.driver)
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
 
 		pixsee_settings_page.click_environment_settings()
 		# check header text
@@ -53,79 +129,13 @@ class EnvironmentSettingsCase(BaseTestCase):
 		time.sleep(1)
 		after_status = environment_settings_page.is_switch_on()
 		self.check_switch_and_content(after_status, environment_settings_page.Sensitivity)
-	def test_02_environment_set_save(self):
+	# start from environment page
+	def test_05_environment_set_tap_checkbox(self):
 		environment_settings_page = EnvironmentSettingsPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		login_page = LoginPage(self.driver)
 
-		login_page.login(self.account(), self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-
-		self.skip_first_four_tutor()
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		menu_page.click_logout()
-		menu_page.click_settings()
-		origin_status = pixsee_settings_page.environment_settings_status_text()
-		pixsee_settings_page.click_environment_settings()
-		# check save enable = false
-		try:
-			self.assertFalse(environment_settings_page.is_save_enable())
-			print("Save diable test pass")
-		except AssertionError:
-			raise AssertionError("Save disable test failed")
-
-		# turn on switch
-		environment_settings_page.click_switch()
-		environment_settings_page.click_save()
-		new_status = pixsee_settings_page.environment_settings_status_text()
-		if origin_status != new_status:
-			print("save function success")
-		else:
-			print("save function failed")
-			raise AssertionError("save function failed, status not changed")
-	def test_03_environment_set_back(self):
-		environment_settings_page = EnvironmentSettingsPage(self.driver)
-		menu_page = MenuPage(self.driver)
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		login_page = LoginPage(self.driver)
-
-		login_page.login(self.account(), self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-
-		self.skip_first_four_tutor()
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		menu_page.click_logout()
-		menu_page.click_settings()
-		pixsee_settings_page.click_environment_settings()
-		# back to settings page
-		environment_settings_page.click_back()
-		try:
-			self.assertTrue(pixsee_settings_page.is_in_settings())
-			print("Back to Pixsee Settings page")
-		except AssertionError:
-			raise AssertionError("Not in Pixsee Settings page")
-	def test_04_environment_set_tap_checkbox(self):
-		environment_settings_page = EnvironmentSettingsPage(self.driver)
-		menu_page = MenuPage(self.driver)
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		login_page = LoginPage(self.driver)
-
-		login_page.login(self.account(), self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-		self.skip_first_four_tutor()
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		menu_page.click_logout()
-
-		menu_page.click_settings()
-
-		pixsee_settings_page.click_environment_settings()
 		# ensure switch is on
 		if environment_settings_page.is_switch_on():
 			pass
@@ -198,23 +208,13 @@ class EnvironmentSettingsCase(BaseTestCase):
 			print("High checkbox is clickable")
 		except AssertionError:
 			raise AssertionError("High checkbox is not clickable")
-	def test_05_environment_celsius_fahrenheit(self):
+	# stay
+	def test_06_environment_celsius_fahrenheit(self):
 		environment_settings_page = EnvironmentSettingsPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		login_page = LoginPage(self.driver)
 
-		login_page.login(self.account(), self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-		self.skip_first_four_tutor()
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		menu_page.click_logout()
-
-		menu_page.click_settings()
-
-		pixsee_settings_page.click_environment_settings()
 		if environment_settings_page.is_switch_on() :
 			pass
 		else:
@@ -264,74 +264,13 @@ class EnvironmentSettingsCase(BaseTestCase):
 				print("Fahrenheit is clickable")
 			except AssertionError:
 				raise AssertionError("Fahrenheit is not clickable")
-	def test_06_environment_set_back_discard(self):
-		environment_settings_page = EnvironmentSettingsPage(self.driver)
-		menu_page = MenuPage(self.driver)
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		login_page = LoginPage(self.driver)
-
-		login_page.login(self.account(), self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-		self.skip_first_four_tutor()
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		menu_page.click_logout()
-		menu_page.click_settings()
-		origin_status = pixsee_settings_page.environment_settings_status_text()
-		pixsee_settings_page.click_environment_settings()
-		environment_settings_page.click_switch()
-		environment_settings_page.click_back()
-		# check if is in discard dialog
-		try:
-			self.assertTrue(environment_settings_page.is_in_discard_dialog())
-			print("In discard dialog")
-			# check discard dialog text
-			try:
-				discard = environment_settings_page.discard_message_text()
-				hint = self.get_string("discard_environment_detection_confirmation_message")
-				self.assertEqual(discard, hint)
-			except AssertionError:
-				raise AssertionError("Discard dialog title wrong")
-			try:
-				yes = environment_settings_page.discard_yes_text()
-				hint = self.get_string("yes")
-				self.assertEqual(yes, hint)
-			except AssertionError:
-				raise AssertionError("Discard dialog yes text wrong")
-			try:
-				no = environment_settings_page.discard_no_text()
-				hint = self.get_string("no")
-				self.assertEqual(no, hint)
-			except AssertionError:
-				raise AssertionError("Discard dialog no text wrong")
-			# click yes
-			environment_settings_page.click_discard_yes()
-			new_status = pixsee_settings_page.environment_settings_status_text()
-			try:
-				self.assertEqual(origin_status, new_status)
-			except AssertionError:
-				raise AssertionError("Discard function failed, status changed")
-		except AssertionError:
-			print("Not in discard dialog")
-			raise AssertionError("Not in discard dialog")
+	# stay
 	def test_07_environment_set_temperature_scrolling_bar(self):
 		environment_settings_page = EnvironmentSettingsPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		login_page = LoginPage(self.driver)
 
-		login_page.login(self.account(), self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-		self.skip_first_four_tutor()
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		menu_page.click_logout()
-
-		menu_page.click_settings()
-
-		pixsee_settings_page.click_environment_settings()
 		if environment_settings_page.is_switch_on() :
 			pass
 		else:
@@ -377,21 +316,13 @@ class EnvironmentSettingsCase(BaseTestCase):
 				print("Scrolling bar works")
 			else:
 				raise AssertionError("Scrolling bar doesn't work, values not changed")
+	# stay
 	def test_08_environment_set_humidity_scrolling_bar(self):
 		environment_settings_page = EnvironmentSettingsPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		login_page = LoginPage(self.driver)
 
-		login_page.login(self.account(), self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-		self.skip_first_four_tutor()
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		menu_page.click_logout()
-		menu_page.click_settings()
-		pixsee_settings_page.click_environment_settings()
 		# ensure switch is on
 		if environment_settings_page.is_switch_on() :
 			pass
@@ -436,7 +367,9 @@ class EnvironmentSettingsCase(BaseTestCase):
 			print("Scrolling bar works")
 		else:
 			raise AssertionError("Scrolling bar doesn't work, values not changed")
-
+		environment_settings_page.click_back()
+		environment_settings_page.click_discard_yes()
+	# back to Pixsee Settings page
 
 
 

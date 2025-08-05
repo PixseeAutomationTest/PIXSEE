@@ -12,11 +12,8 @@ class SDcardStatusPage():
 		self.Dialog = "com.compal.bioslab.pixsee.pixm01:id/tvtitleAlertDialog"
 		self.Go = "com.compal.bioslab.pixsee.pixm01:id/btnPositiveAlertDialog"
 		self.No = "com.compal.bioslab.pixsee.pixm01:id/btnNegativeAlertDialog"
-		self.Formatting = "com.compal.bioslab.pixsee.pixm01:id/tvFormatting"
-
-
-
-
+		self.Formatting = "com.compal.bioslab.pixsee.pixm01:id/tvInitializing"
+		self.Close = "com.compal.bioslab.pixsee.pixm01:id/ibFormattingExternalSDCardClose"
 
 	def click_back(self):
 		WebDriverWait(self.driver, 10).until(
@@ -41,6 +38,12 @@ class SDcardStatusPage():
 			EC.presence_of_element_located(("id", self.No))
 		)
 		element = self.driver.find_element("id", self.No)
+		element.click()
+	def click_close(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located(("id", self.Close))
+		)
+		element = self.driver.find_element("id", self.Close)
 		element.click()
 
 	def header_text(self):

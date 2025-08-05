@@ -9,198 +9,70 @@ from pages.menu_pages.pixsee_settings_pages.area_detection_page import AreaDetec
 from appium.webdriver.common.appiumby import AppiumBy
 
 
-class AreaDetectionCase(BaseTestCase):
+class AreaDetectionCase2(BaseTestCase):
 	def setUp(self):
-		super().setUp(no_reset=False)
-
-	def test_01_area_detection_tutor_skip_1(self):
+		super().setUp(no_reset=True)
+	# start from desktop page
+	def test_01_area_detection_back(self):
 		area_detection_page = AreaDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		login_page = LoginPage(self.driver)
 
-		login_page.login(self.account(), self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-		self.skip_first_four_tutor()
-		# ensure is connected to machine
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		if not baby_monitor_page.is_connected():
-			self.skipTest("not online，skip all test")
-
+		self.open_app()
 		baby_monitor_page.click_home()
-		# skip menu tutor
-		menu_page.click_logout()
-
 		menu_page.click_settings()
-
 		pixsee_settings_page.click_area_detection()
-		# check first tutor title
+		# check save enable = false
 		try:
-			title = area_detection_page.tutor_first_title_text()
-			hint = self.get_string("safe_area_tutorial_title")
-			self.assertEqual(title, hint)
-			print("first tutor  title right")
-		except AssertionError :
-			raise AssertionError("first tutor  title wrong")
-		# check first tutor indicator
+			self.assertFalse(area_detection_page.is_save_enable())
+			print("Save diable test pass")
+		except AssertionError:
+			raise AssertionError("Save diable test failed")
+		# back to settings page
+		area_detection_page.click_back()
 		try:
-			self.assertTrue(area_detection_page.is_in_tutor_first_page())
-			print("first tutor indicator displayed")
+			self.assertTrue(pixsee_settings_page.is_in_settings())
+			print("Back to Pixsee Settings page")
 		except AssertionError :
-			raise AssertionError("first tutor indicator doesn't displayed")
-		# check skip
-		try:
-			skip = area_detection_page.skip_text()
-			hint = self.get_string("skip")
-			self.assertEqual(skip, hint)
-			print("skip display right")
-		except AssertionError :
-			raise AssertionError("skip display wrong")
-		area_detection_page.click_skip()
-		# check in area area_detection_page
-		try:
-			self.assertTrue(area_detection_page.is_in_area_detection_page())
-			print("skip first tutor successfully")
-		except AssertionError :
-			raise AssertionError("skip first tutor unsuccessfully")
-	def test_02_area_detection_tutor_skip_2(self):
+			raise AssertionError("Not in Pixsee Settings page")
+	# start from pixsee settings page
+	def test_02_area_detection_save(self):
 		area_detection_page = AreaDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		login_page = LoginPage(self.driver)
 
-		login_page.login(self.account(), self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-		self.skip_first_four_tutor()
-		# ensure is connected to machine
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		if not baby_monitor_page.is_connected():
-			self.skipTest("not online，skip all test")
-
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		menu_page.click_logout()
-
-		menu_page.click_settings()
-
+		origin_status = pixsee_settings_page.area_detection_status_text()
 		pixsee_settings_page.click_area_detection()
-		self.left_wipe()
-		# check second tutor title
-		try:
-			title = area_detection_page.tutor_second_title_text()
-			hint = self.get_string("caution_area_tutorial_title")
-			self.assertEqual(title, hint)
-			print("second tutor  title right")
-		except AssertionError :
-			raise AssertionError("second tutor  title wrong")
-		# check second tutor indicator
-		try:
-			self.assertTrue(area_detection_page.is_in_tutor_second_page())
-			print("second tutor indicator displayed")
-		except AssertionError :
-			raise AssertionError("second tutor indicator doesn't displayed")
-		# check skip
-		try:
-			skip = area_detection_page.skip_text()
-			hint = self.get_string("skip")
-			self.assertEqual(skip, hint)
-			print("skip display right")
-		except AssertionError :
-			raise AssertionError("skip display wrong")
-
-		area_detection_page.click_skip()
-		# check in area area_detection_page
-		try:
-			self.assertTrue(area_detection_page.is_in_area_detection_page())
-			print("skip second tutor successfully")
-		except AssertionError :
-			raise AssertionError("skip second tutor unsuccessfully")
-	def test_03_area_detection_tutor_skip_121(self):
+		# change switch status
+		if area_detection_page.is_switch_on():
+			area_detection_page.click_switch()
+			area_detection_page.click_turn_off()
+		else:
+			area_detection_page.click_switch()
+			area_detection_page.click_save()
+		new_status = pixsee_settings_page.area_detection_status_text()
+		if origin_status != new_status:
+			print("save function success")
+		else:
+			raise AssertionError("save function failed, status not changed")
+	# start from pixsee settings page
+	def test_03_area_detection_switch(self):
 		area_detection_page = AreaDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		login_page = LoginPage(self.driver)
-
-		login_page.login(self.account(), self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-		self.skip_first_four_tutor()
-		# ensure is connected to machine
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		if not baby_monitor_page.is_connected():
-			self.skipTest("not online，skip all test")
-
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		menu_page.click_logout()
-
-		menu_page.click_settings()
 
 		pixsee_settings_page.click_area_detection()
-
-		# check first tutor page
-		try:
-			self.assertTrue(area_detection_page.is_in_tutor_first_page())
-			print("first tutor displayed")
-		except AssertionError :
-			raise AssertionError("first tutor doesn't displayed")
-
-		self.left_wipe()
-		# check second tutor page
-		try:
-			self.assertTrue(area_detection_page.is_in_tutor_second_page())
-			print("second tutor indicator displayed")
-		except AssertionError :
-			raise AssertionError("second tutor indicator doesn't displayed")
-
-		self.right_wipe()
-		# check first tutor page
-		try:
-			self.assertTrue(area_detection_page.is_in_tutor_first_page())
-			print("first tutor displayed")
-		except AssertionError :
-			raise AssertionError("first tutor doesn't displayed")
-
-		area_detection_page.click_skip()
-		# check in area area_detection_page
-		try:
-			self.assertTrue(area_detection_page.is_in_area_detection_page())
-			print("skip second tutor successfully")
-		except AssertionError :
-			raise AssertionError("skip second tutor unsuccessfully")
-	def test_04_area_detection_switch(self):
-		area_detection_page = AreaDetectionPage(self.driver)
-		menu_page = MenuPage(self.driver)
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		login_page = LoginPage(self.driver)
-
-		login_page.login(self.account(),self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-		self.skip_first_four_tutor()
-		# ensure is connected to machine
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		if not baby_monitor_page.is_connected():
-			self.skipTest("not online，skip all test")
-
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		menu_page.click_logout()
-
-		menu_page.click_settings()
-
-		pixsee_settings_page.click_area_detection()
-		area_detection_page.click_skip()
 		# check header text
 		try:
 			header = area_detection_page.header_text()
 			hint = self.get_string("area_detection")
 			self.assertEqual(header, hint)
-			print("Area detection title right")
+			print("Area detection header right")
 		except AssertionError :
-			raise AssertionError("Area detection title wrong")
+			raise AssertionError("Area detection header wrong")
 		# check Area detection title
 		try:
 			title = area_detection_page.title()
@@ -231,6 +103,7 @@ class AreaDetectionCase(BaseTestCase):
 			try:
 				self.assertTrue(area_detection_page.is_in_turn_off_dialog())
 				print("switch off successfully")
+				area_detection_page.click_turn_off_cancel()
 			except AssertionError :
 				raise AssertionError("switch off unsuccessfully")
 		else:
@@ -239,101 +112,13 @@ class AreaDetectionCase(BaseTestCase):
 			time.sleep(1)
 			after_status = area_detection_page.is_switch_on()
 			self.check_switch_and_content(after_status, area_detection_page.Sensitivity)
-	def test_05_area_detection_save(self):
+	# start from area detection page
+	def test_04_area_detection_tap_checkbox_sensitivity(self):
 		area_detection_page = AreaDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		login_page = LoginPage(self.driver)
 
-		login_page.login(self.account(),self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-
-		self.skip_first_four_tutor()
-		# ensure is connected to machine
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		if not baby_monitor_page.is_connected():
-			self.skipTest("not online，skip all test")
-
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		menu_page.click_logout()
-		menu_page.click_settings()
-		origin_status = pixsee_settings_page.area_detection_status_text()
-		pixsee_settings_page.click_area_detection()
-		area_detection_page.click_skip()
-		# check save enable = false
-		try:
-			self.assertFalse(area_detection_page.is_save_enable())
-			print("Save diable test pass")
-		except AssertionError :
-			raise AssertionError("Save diable test failed")
-		# change switch status
-		if area_detection_page.is_switch_on():
-			area_detection_page.click_switch()
-			area_detection_page.click_turn_off()
-		else:
-			area_detection_page.click_switch()
-			area_detection_page.click_save()
-		new_status = pixsee_settings_page.area_detection_status_text()
-		if origin_status != new_status:
-			print("save function success")
-		else:
-			raise AssertionError("save function failed, status not changed")
-	def test_06_area_detection_back(self):
-		area_detection_page = AreaDetectionPage(self.driver)
-		menu_page = MenuPage(self.driver)
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		login_page = LoginPage(self.driver)
-
-		login_page.login(self.account(),self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-
-		self.skip_first_four_tutor()
-		# ensure is connected to machine
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		if not baby_monitor_page.is_connected():
-			self.skipTest("not online，skip all test")
-
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		menu_page.click_logout()
-		menu_page.click_settings()
-		pixsee_settings_page.click_area_detection()
-		area_detection_page.click_skip()
-		# back to settings page
-		area_detection_page.click_back()
-		try:
-			self.assertTrue(pixsee_settings_page.is_in_settings())
-			print("Back to Pixsee Settings page")
-		except AssertionError :
-			raise AssertionError("Not in Pixsee Settings page")
-	def test_07_area_detection_tap_checkbox_sensitivity(self):
-		area_detection_page = AreaDetectionPage(self.driver)
-		menu_page = MenuPage(self.driver)
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		login_page = LoginPage(self.driver)
-
-		login_page.login(self.account(),self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-		self.skip_first_four_tutor()
-		# ensure is connected to machine
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		if not baby_monitor_page.is_connected():
-			self.skipTest("not online，skip all test")
-
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		time.sleep(2)
-
-		menu_page.click_logout()
-
-		menu_page.click_settings()
-
-		pixsee_settings_page.click_area_detection()
-		area_detection_page.click_skip()
 		if area_detection_page.is_switch_on():
 			pass
 		else:
@@ -391,28 +176,13 @@ class AreaDetectionCase(BaseTestCase):
 			print("High checkbox is clickable")
 		except AssertionError :
 			raise AssertionError("High checkbox is not clickable")
-	def test_08_area_detection_tap_checkbox_detection_type(self):
+	# start from area detection page
+	def test_05_area_detection_tap_checkbox_detection_type(self):
 		area_detection_page = AreaDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		login_page = LoginPage(self.driver)
 
-		login_page.login(self.account(),self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-		self.skip_first_four_tutor()
-		# ensure is connected to machine
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		if not baby_monitor_page.is_connected():
-			self.skipTest("not online，skip all test")
-
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		menu_page.click_logout()
-		menu_page.click_settings()
-
-		pixsee_settings_page.click_area_detection()
-		area_detection_page.click_skip()
 		if area_detection_page.is_switch_on():
 			pass
 		else:
@@ -470,27 +240,13 @@ class AreaDetectionCase(BaseTestCase):
 			print("baby out color is correct")
 		else:
 			print("baby out color is wrong")
-	def test_09_area_detection_turn_off_page(self):
+	# start from area detection page
+	def test_06_area_detection_turn_off_page(self):
 		area_detection_page = AreaDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		login_page = LoginPage(self.driver)
 
-		login_page.login(self.account(), self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-		self.skip_first_four_tutor()
-		# ensure is connected to machine
-		if not baby_monitor_page.is_connected():
-			self.skipTest("not online，skip all test")
-
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		menu_page.click_logout()
-		menu_page.click_settings()
-
-		pixsee_settings_page.click_area_detection()
-		area_detection_page.click_skip()
 		if area_detection_page.is_switch_on():
 			pass
 		else:
@@ -566,29 +322,14 @@ class AreaDetectionCase(BaseTestCase):
 			print("turn off detection worked")
 		except AssertionError:
 			raise AssertionError("turn off detection failed")
-	def test_10_area_detection_back_discard(self):
+	# start from pixsee settings page
+	def test_07_area_detection_back_discard(self):
 		area_detection_page = AreaDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		login_page = LoginPage(self.driver)
-		# login
-		login_page.login(self.account(),self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-		self.skip_first_four_tutor()
-		# ensure is connected to machine
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		if not baby_monitor_page.is_connected():
-			self.skipTest("not online，skip all test")
 
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		time.sleep(2)
-
-		menu_page.click_logout()
-		menu_page.click_settings()
 		pixsee_settings_page.click_area_detection()
-		area_detection_page.click_skip()
 		# check if is in discard dialog
 		if area_detection_page.is_switch_on():
 			area_detection_page.click_switch()
@@ -626,32 +367,18 @@ class AreaDetectionCase(BaseTestCase):
 			# click yes
 			area_detection_page.click_discard_yes()
 			# check status = false
-			self.assertEqual(pixsee_settings_page.area_detection_status_text(),"Off")
+			self.assertEqual(pixsee_settings_page.area_detection_status_text(),self.get_string("off_selection"))
 			print("back button worked")
 		except AssertionError :
 			raise AssertionError("Not in discard dialog")
-	def test_11_area_detection_information(self):
+	# start from pixsee settings page
+	def test_08_area_detection_information(self):
 		area_detection_page = AreaDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		login_page = LoginPage(self.driver)
-
-		login_page.login(self.account(),self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-		self.skip_first_four_tutor()
-		# ensure is connected to machine
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		if not baby_monitor_page.is_connected():
-			self.skipTest("not online，skip all test")
-
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		menu_page.click_logout()
-		menu_page.click_settings()
 
 		pixsee_settings_page.click_area_detection()
-		area_detection_page.click_skip()
 		area_detection_page.click_information()
 		# check if is in information page
 		try:
@@ -659,6 +386,9 @@ class AreaDetectionCase(BaseTestCase):
 			print("information button worked")
 		except AssertionError :
 			raise AssertionError("Not in information page")
+		area_detection_page.click_skip()
+		area_detection_page.click_back()
+	# back to pixsee settings page
 
 
 

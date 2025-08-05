@@ -11,28 +11,12 @@ from pages.menu_pages.subscription_pages.subscription_page import SubscriptionPa
 
 class TimeLapseVideoCase(BaseTestCase):
     def setUp(self):
-        super().setUp(no_reset=False)
+        super().setUp(no_reset=True)
     def test_01_time_lapse_video_subscription_click_no(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
-        login_page = LoginPage(self.driver)
-
-        login_page.login(self.account(),self.password())
-        baby_monitor_page.is_in_baby_monitor_page()
-        self.skip_first_four_tutor()
-        # ensure is connected to machine
-        baby_monitor_page = BabyMonitorPage(self.driver)
-        if not baby_monitor_page.is_connected():
-            self.skipTest("not online，skip all test")
-
-        baby_monitor_page.click_home()
-
-        # skip menu tutor
-        menu_page.click_logout()
-
-        menu_page.click_settings()
 
         pixsee_settings_page.click_time_lapse_video()
         # check header text
@@ -103,25 +87,8 @@ class TimeLapseVideoCase(BaseTestCase):
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
-        login_page = LoginPage(self.driver)
         subscriptionion_page = SubscriptionPage(self.driver)
 
-        login_page.login(self.account(),self.password())
-        baby_monitor_page.is_in_baby_monitor_page()
-        self.skip_first_four_tutor()
-        # ensure is connected to machine
-        baby_monitor_page = BabyMonitorPage(self.driver)
-        if not baby_monitor_page.is_connected():
-            self.skipTest("not online，skip all test")
-
-        baby_monitor_page.click_home()
-
-        # skip menu tutor
-        menu_page.click_logout()
-
-        menu_page.click_settings()
-
-        pixsee_settings_page.click_time_lapse_video()
         time_lapse_video.click_switch()
         time_lapse_video.click_upgrade_subscription()
         # check if in subscription page
@@ -135,26 +102,8 @@ class TimeLapseVideoCase(BaseTestCase):
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
-        login_page = LoginPage(self.driver)
         subscription_page = SubscriptionPage(self.driver)
 
-        login_page.login(self.account(),self.password())
-        baby_monitor_page.is_in_baby_monitor_page()
-
-        self.skip_first_four_tutor()
-        # ensure is connected to machine
-        baby_monitor_page = BabyMonitorPage(self.driver)
-        if not baby_monitor_page.is_connected():
-            self.skipTest("not online，skip all test")
-
-        baby_monitor_page.click_home()
-        # skip menu tutor
-        menu_page.click_logout()
-
-        menu_page.click_settings()
-        pixsee_settings_page.click_time_lapse_video()
-        time_lapse_video.click_switch()
-        time_lapse_video.click_upgrade_subscription()
         time.sleep(1)
         subscription_page.click_x()
         # check if back to time lapse video page
@@ -172,20 +121,6 @@ class TimeLapseVideoCase(BaseTestCase):
         login_page = LoginPage(self.driver)
         subscription_page = SubscriptionPage(self.driver)
 
-        login_page.login(self.account(),self.password())
-        baby_monitor_page.is_in_baby_monitor_page()
-
-        self.skip_first_four_tutor()
-        # ensure is connected to machine
-        baby_monitor_page = BabyMonitorPage(self.driver)
-        if not baby_monitor_page.is_connected():
-            self.skipTest("not online，skip all test")
-
-        baby_monitor_page.click_home()
-        # skip menu tutor
-        menu_page.click_logout()
-        menu_page.click_settings()
-        pixsee_settings_page.click_time_lapse_video()
         time_lapse_video.click_switch()
         # check if in upgrade dialog
         try:
@@ -207,27 +142,102 @@ class TimeLapseVideoCase(BaseTestCase):
             raise AssertionError("Not in time lapse video page after subscribe")
 
     # already subscribed
-    def test_05_time_lapse_video_switch(self):
+    # start from pixsee settings page
+    def test_05_time_lapse_video_save(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
-        login_page = LoginPage(self.driver)
 
+        origin_status = pixsee_settings_page.time_lapse_video_status_text()
+        pixsee_settings_page.click_time_lapse_video()
+        # check save enable = false
+        try:
+            self.assertFalse(time_lapse_video.is_save_enable())
+            print("Save diable test pass")
+        except AssertionError:
+            raise AssertionError("Save diable test failed")
 
-        login_page.login(self.account(),self.password())
-        baby_monitor_page.is_in_baby_monitor_page()
-        self.skip_first_four_tutor()
-        # ensure is connected to machine
+        time_lapse_video.click_switch()
+        # save
+        time_lapse_video.click_save()
+        new_status = pixsee_settings_page.time_lapse_video_status_text()
+        if origin_status != new_status:
+            print("save function success")
+        else:
+            print("save function failed")
+            raise AssertionError("save function failed, status not changed")
+    # same
+    def test_06_time_lapse_video_back(self):
+        time_lapse_video = TimeLapseVideoPage(self.driver)
+        menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
-        if not baby_monitor_page.is_connected():
-            self.skipTest("not online，skip all test")
+        pixsee_settings_page = PixseeSettingsPage(self.driver)
 
-        baby_monitor_page.click_home()
+        pixsee_settings_page.click_time_lapse_video()
+        # check back to pixsee settings page
+        time_lapse_video.click_back()
+        try:
+            self.assertTrue(pixsee_settings_page.is_in_settings())
+            print("Back to pixsee settings page")
+        except AssertionError:
+            raise AssertionError("Not in pixsee settings page")
+    # same
+    def test_07_time_lapse_video_discard_dialog(self):
+        time_lapse_video = TimeLapseVideoPage(self.driver)
+        menu_page = MenuPage(self.driver)
+        baby_monitor_page = BabyMonitorPage(self.driver)
+        pixsee_settings_page = PixseeSettingsPage(self.driver)
 
-        # skip menu tutor
-        menu_page.click_logout()
-        menu_page.click_settings()
+        pixsee_settings_page.click_time_lapse_video()
+        time_lapse_video.click_switch()
+        time_lapse_video.click_back()
+        # check discard dialog
+        try:
+            self.assertTrue(time_lapse_video.is_in_discard_dialog())
+            print("In discard dialog")
+            # check discard dialog title
+            try:
+                discard_title = time_lapse_video.discard_message_txt()
+                hint = self.get_string("timelapse_discard")
+                self.assertEqual(discard_title, hint)
+                print("Discard dialog title right")
+            except AssertionError:
+                print("Discard dialog title wrong")
+            # check discard dialog cancel text
+            try:
+                discard_cancel = time_lapse_video.discard_no_txt()
+                hint = self.get_string("no")
+                self.assertEqual(discard_cancel, hint)
+                print("Discard dialog cancel text right")
+            except AssertionError:
+                print("Discard dialog cancel text wrong")
+            # check discard dialog confirm text
+            try:
+                discard_confirm = time_lapse_video.discard_yes_txt()
+                hint = self.get_string("yes")
+                self.assertEqual(discard_confirm, hint)
+                print("Discard dialog confirm text right")
+            except AssertionError:
+                print("Discard dialog confirm text wrong")
+            # click confirm
+            time_lapse_video.click_discard_yes()
+            # back to pixsee settings page
+            try:
+                self.assertTrue(pixsee_settings_page.is_in_settings())
+                print("Back to pixsee settings page after discard")
+            except AssertionError:
+                raise AssertionError("Not in pixsee settings page after discard")
+        except AssertionError:
+            print("Not in discard dialog")
+            raise AssertionError("Not in discard dialog")
+    # same
+    def test_08_time_lapse_video_switch(self):
+        time_lapse_video = TimeLapseVideoPage(self.driver)
+        menu_page = MenuPage(self.driver)
+        baby_monitor_page = BabyMonitorPage(self.driver)
+        pixsee_settings_page = PixseeSettingsPage(self.driver)
+
         pixsee_settings_page.click_time_lapse_video()
         current_status = time_lapse_video.is_switch_on()
         self.check_switch_and_content(current_status, time_lapse_video.RecordingMode)
@@ -235,27 +245,12 @@ class TimeLapseVideoCase(BaseTestCase):
         time.sleep(1)  # wait for the switch to toggle
         after_status = time_lapse_video.is_switch_on()
         self.check_switch_and_content(after_status, time_lapse_video.RecordingMode)
+    # start from time lapse video page
     def test_06_time_lapse_video_check_text(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
-        login_page = LoginPage(self.driver)
-
-        login_page.login(self.account(),self.password())
-        baby_monitor_page.is_in_baby_monitor_page()
-        self.skip_first_four_tutor()
-        # ensure is connected to machine
-        baby_monitor_page = BabyMonitorPage(self.driver)
-        if not baby_monitor_page.is_connected():
-            self.skipTest("not online，skip all test")
-
-        baby_monitor_page.click_home()
-        # skip menu tutor
-        menu_page.click_logout()
-
-        menu_page.click_settings()
-        pixsee_settings_page.click_time_lapse_video()
         # ensure time lapse video switch is on
         if time_lapse_video.is_switch_on() :
             pass
@@ -312,27 +307,12 @@ class TimeLapseVideoCase(BaseTestCase):
             print("time_lapse_video twenty four hour text right")
         except AssertionError:
             print("time_lapse_video twenty four hour text wrong")
+    # stay
     def test_07_time_lapse_video_checkbox(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
-        login_page = LoginPage(self.driver)
-
-        login_page.login(self.account(),self.password())
-        baby_monitor_page.is_in_baby_monitor_page()
-        self.skip_first_four_tutor()
-        # ensure is connected to machine
-        baby_monitor_page = BabyMonitorPage(self.driver)
-        if not baby_monitor_page.is_connected():
-            self.skipTest("not online，skip all test")
-
-        baby_monitor_page.click_home()
-        # skip menu tutor
-        menu_page.click_logout()
-
-        menu_page.click_settings()
-        pixsee_settings_page.click_time_lapse_video()
         # ensure time lapse video switch is on
         if time_lapse_video.is_switch_on():
             pass
@@ -358,27 +338,12 @@ class TimeLapseVideoCase(BaseTestCase):
             print("Twenty four hours checkbox is checked")
         except AssertionError:
             raise AssertionError("Twenty four hours checkbox is not checked")
+    # stay
     def test_08_time_lapse_video_select_time(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
-        login_page = LoginPage(self.driver)
-
-        login_page.login(self.account(),self.password())
-        baby_monitor_page.is_in_baby_monitor_page()
-        self.skip_first_four_tutor()
-        # ensure is connected to machine
-        baby_monitor_page = BabyMonitorPage(self.driver)
-        if not baby_monitor_page.is_connected():
-            self.skipTest("not online，skip all test")
-
-        baby_monitor_page.click_home()
-        # skip menu tutor
-        menu_page.click_logout()
-
-        menu_page.click_settings()
-        pixsee_settings_page.click_time_lapse_video()
         # ensure time lapse video switch is on
         if time_lapse_video.is_switch_on() :
             pass
@@ -424,134 +389,8 @@ class TimeLapseVideoCase(BaseTestCase):
                 raise AssertionError("timer confirm function failed, start time not changed")
         except AssertionError:
             raise AssertionError("Not in time selecter")
-    def test_09_time_lapse_video_save(self):
-        time_lapse_video = TimeLapseVideoPage(self.driver)
-        menu_page = MenuPage(self.driver)
-        baby_monitor_page = BabyMonitorPage(self.driver)
-        pixsee_settings_page = PixseeSettingsPage(self.driver)
-        login_page = LoginPage(self.driver)
-
-        login_page.login(self.account(),self.password())
-        baby_monitor_page.is_in_baby_monitor_page()
-        self.skip_first_four_tutor()
-        # ensure is connected to machine
-        baby_monitor_page = BabyMonitorPage(self.driver)
-        if not baby_monitor_page.is_connected():
-            self.skipTest("not online，skip all test")
-
-        baby_monitor_page.click_home()
-        # skip menu tutor
-        menu_page.click_logout()
-
-        menu_page.click_settings()
-        origin_status = pixsee_settings_page.time_lapse_video_status_text()
-        pixsee_settings_page.click_time_lapse_video()
-        # check save enable = false
-        try:
-            self.assertFalse(time_lapse_video.is_save_enable())
-            print("Save diable test pass")
-        except AssertionError:
-            raise AssertionError("Save diable test failed")
-
-        time_lapse_video.click_switch()
-        # save
-        time_lapse_video.click_save()
-        new_status = pixsee_settings_page.time_lapse_video_status_text()
-        if origin_status != new_status:
-            print("save function success")
-        else:
-            print("save function failed")
-            raise AssertionError("save function failed, status not changed")
-    def test_10_time_lapse_video_back(self):
-        time_lapse_video = TimeLapseVideoPage(self.driver)
-        menu_page = MenuPage(self.driver)
-        baby_monitor_page = BabyMonitorPage(self.driver)
-        pixsee_settings_page = PixseeSettingsPage(self.driver)
-        login_page = LoginPage(self.driver)
-
-        login_page.login(self.account(),self.password())
-        baby_monitor_page.is_in_baby_monitor_page()
-        self.skip_first_four_tutor()
-        # ensure is connected to machine
-        baby_monitor_page = BabyMonitorPage(self.driver)
-        if not baby_monitor_page.is_connected():
-            self.skipTest("not online，skip all test")
-
-        baby_monitor_page.click_home()
-        # skip menu tutor
-        menu_page.click_logout()
-
-        menu_page.click_settings()
-        pixsee_settings_page.click_time_lapse_video()
-        # check back to pixsee settings page
         time_lapse_video.click_back()
-        try:
-            self.assertTrue(pixsee_settings_page.is_in_settings())
-            print("Back to pixsee settings page")
-        except AssertionError:
-            raise AssertionError("Not in pixsee settings page")
-    def test_11_time_lapse_video_discard_dialog(self):
-        time_lapse_video = TimeLapseVideoPage(self.driver)
-        menu_page = MenuPage(self.driver)
-        baby_monitor_page = BabyMonitorPage(self.driver)
-        pixsee_settings_page = PixseeSettingsPage(self.driver)
-        login_page = LoginPage(self.driver)
-
-        login_page.login(self.account(),self.password())
-        baby_monitor_page.is_in_baby_monitor_page()
-        self.skip_first_four_tutor()
-        # ensure is connected to machine
-        baby_monitor_page = BabyMonitorPage(self.driver)
-        if not baby_monitor_page.is_connected():
-            self.skipTest("not online，skip all test")
-
-        baby_monitor_page.click_home()
-        # skip menu tutor
-        menu_page.click_logout()
-
-        menu_page.click_settings()
-        pixsee_settings_page.click_time_lapse_video()
-        time_lapse_video.click_switch()
-        time_lapse_video.click_back()
-        # check discard dialog
-        try:
-            self.assertTrue(time_lapse_video.is_in_discard_dialog())
-            print("In discard dialog")
-            # check discard dialog title
-            try:
-                discard_title = time_lapse_video.discard_message_txt()
-                hint = self.get_string("timelapse_discard")
-                self.assertEqual(discard_title, hint)
-                print("Discard dialog title right")
-            except AssertionError:
-                print("Discard dialog title wrong")
-            # check discard dialog cancel text
-            try:
-                discard_cancel = time_lapse_video.discard_no_txt()
-                hint = self.get_string("no")
-                self.assertEqual(discard_cancel, hint)
-                print("Discard dialog cancel text right")
-            except AssertionError:
-                print("Discard dialog cancel text wrong")
-            # check discard dialog confirm text
-            try:
-                discard_confirm = time_lapse_video.discard_yes_txt()
-                hint = self.get_string("yes")
-                self.assertEqual(discard_confirm, hint)
-                print("Discard dialog confirm text right")
-            except AssertionError:
-                print("Discard dialog confirm text wrong")
-            # click confirm
-            time_lapse_video.click_discard_yes()
-            # back to pixsee settings page
-            try:
-                self.assertTrue(pixsee_settings_page.is_in_settings())
-                print("Back to pixsee settings page after discard")
-            except AssertionError:
-                raise AssertionError("Not in pixsee settings page after discard")
-        except AssertionError:
-            print("Not in discard dialog")
-            raise AssertionError("Not in discard dialog")
+    # back to pixsee settings page
 
 
 

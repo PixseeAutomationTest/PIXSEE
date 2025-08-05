@@ -27,6 +27,7 @@ class CryDetectionPage():
 		self.DiscardTitle = "com.compal.bioslab.pixsee.pixm01:id/tvtitleAlertDialog"
 		self.DiscardNo = "com.compal.bioslab.pixsee.pixm01:id/btnNegativeAlertDialog"
 		self.DiscardYes = "com.compal.bioslab.pixsee.pixm01:id/btnPositiveAlertDialog"
+		self.MusicBack = "com.compal.bioslab.pixsee.pixm01:id/ibBackToHome"
 
 	def header_text(self):
 		try:
@@ -206,6 +207,12 @@ class CryDetectionPage():
 			EC.presence_of_element_located(("id", self.DiscardYes))
 		)
 		element = self.driver.find_element("id", self.DiscardYes)
+		element.click()
+	def click_music_back(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located(("id", self.MusicBack))
+		)
+		element = self.driver.find_element("id", self.MusicBack)
 		element.click()
 
 	def is_in_music_page(self):

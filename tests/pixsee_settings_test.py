@@ -18,21 +18,14 @@ from pages.menu_pages.pixsee_settings_pages.wifi_settings_page import WifiSettin
 
 class PixseeSettingsTest(BaseTestCase):
     def setUp(self):
-        super().setUp(no_reset=False)
+        super().setUp(no_reset=True)
+    # all start from pixsee settings page end up in pixsee settings page too
     def test_01_enter_pixsee_profile(self):
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
-        login_page = LoginPage(self.driver)
         pixsee_profile_page = PixseeProfilePage(self.driver)
 
-        login_page.login(self.account(),self.password())
-        baby_monitor_page.is_in_baby_monitor_page()
-        self.skip_first_four_tutor()
-        baby_monitor_page.click_home()
-        # skip menu tutor
-        menu_page.click_logout()
-        menu_page.click_settings()
         # check pixsee profile title on settings page
         try:
             hint = self.get_string("profile_settings")
@@ -48,20 +41,13 @@ class PixseeSettingsTest(BaseTestCase):
             print("successfully enter Pixsee Profile page")
         except AssertionError:
             raise AssertionError("failed to enter Pixsee Profile page")
+        pixsee_profile_page.click_back()
     def test_02_enter_wifi_settings(self):
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
-        login_page = LoginPage(self.driver)
         wifi_settings_page = WifiSettingsPage(self.driver)
 
-        login_page.login(self.account(),self.password())
-        baby_monitor_page.is_in_baby_monitor_page()
-        self.skip_first_four_tutor()
-        baby_monitor_page.click_home()
-        # skip menu tutor
-        menu_page.click_logout()
-        menu_page.click_settings()
         # check wifi settings title on settings page
         try:
             hint = self.get_string("wifi_settings")
@@ -78,21 +64,12 @@ class PixseeSettingsTest(BaseTestCase):
         except AssertionError:
             print("failed to enter wifi settings page")
             raise AssertionError("Not in Wifi Settings page")
+        wifi_settings_page.click_pop_up_cancel()
     def test_03_enter_pixsee_friends_detection(self):
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
-        login_page = LoginPage(self.driver)
         pixsee_friends_page = PixseeFriendsDetPage(self.driver)
-
-        login_page.login(self.account(),self.password())
-        baby_monitor_page.is_in_baby_monitor_page()
-        self.skip_first_four_tutor()
-        baby_monitor_page.click_home()
-        # skip menu tutor
-        menu_page.click_logout()
-
-        menu_page.click_settings()
 
         # check friends detection title on settings page
         try:
@@ -111,20 +88,12 @@ class PixseeSettingsTest(BaseTestCase):
         except AssertionError:
             print("failed to enter Pixsee Friends Detection page")
             raise AssertionError("Not in Pixsee Friends Detection page")
+        pixsee_friends_page.click_back()
     def test_04_enter_environment_settings(self):
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
-        login_page = LoginPage(self.driver)
         environment_settings_page = EnvironmentSettingsPage(self.driver)
-
-        login_page.login(self.account(),self.password())
-        baby_monitor_page.is_in_baby_monitor_page()
-        self.skip_first_four_tutor()
-        baby_monitor_page.click_home()
-        # skip menu tutor
-        menu_page.click_logout()
-        menu_page.click_settings()
         # check environment settings title on settings page
         try:
             hint = self.get_string("sensor_settings")
@@ -141,6 +110,7 @@ class PixseeSettingsTest(BaseTestCase):
         except AssertionError:
             print("Not in Environment Settings page")
             raise AssertionError("Not in Environment Settings page")
+        environment_settings_page.click_back()
     def test_05_enter_cry_detection(self):
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)

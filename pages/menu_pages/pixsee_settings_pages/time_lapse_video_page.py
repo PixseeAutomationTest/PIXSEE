@@ -39,8 +39,8 @@ class TimeLapseVideoPage():
 
     def is_in_timelapse_video_page(self):
         try:
-            WebDriverWait(self.driver, 10).until(
-                EC.presence_of_element_located(("id", self.Header))
+            WebDriverWait(self.driver, 30).until(
+                EC.presence_of_element_located(("id", self.Subtitle))
             )
             return True
         except :
