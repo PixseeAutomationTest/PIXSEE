@@ -12,78 +12,63 @@ from appium.webdriver.common.appiumby import AppiumBy
 
 
 
-class CoveredFaceDetectionCase(BaseTestCase):
+class CoveredFaceDetectionCase2(BaseTestCase):
 	def setUp(self):
-		super().setUp(no_reset=False)
-
-
-	def test_01_covered_face_detection_tutor_skip(self):
+		super().setUp(no_reset=True)
+	# start from desktop
+	def test_02_covered_face_detection_back(self):
 		covered_face_detection_page = CoveredFaceDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		login_page = LoginPage(self.driver)
 
-		login_page.login(self.account(), self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-		self.skip_first_four_tutor()
-		# ensure is connected to machine
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		if not baby_monitor_page.is_connected():
-			self.skipTest("not online，skip all test")
-
+		self.open_app()
 		baby_monitor_page.click_home()
-		# skip menu tutor
-		menu_page.click_logout()
-
 		menu_page.click_settings()
-
 		pixsee_settings_page.click_covered_face_detection()
-		# check first tutor title
+		# back to settings page
+		covered_face_detection_page.click_back()
 		try:
-			title = covered_face_detection_page.tutor_title_text()
-			hint = self.get_string("covered_face")
-			self.assertEqual(title, hint)
-			print("tutor title right")
+			self.assertTrue(pixsee_settings_page.is_in_settings())
+			print("Back to Pixsee Settings page")
 		except AssertionError :
-			raise AssertionError("tutor title wrong")
-		# check skip
-		try:
-			skip = covered_face_detection_page.skip_text()
-			hint = self.get_string("skip")
-			self.assertEqual(skip, hint)
-			print("skip display right")
-		except AssertionError :
-			raise AssertionError("skip display wrong")
-		covered_face_detection_page.click_skip()
-		# check in covered_face_detection_page
-		try:
-			self.assertTrue(covered_face_detection_page.is_in_covered_face_detection_page())
-			print("skip tutor successfully")
-		except AssertionError :
-			raise AssertionError("skip tutor unsuccessfully")
-	def test_02_covered_face_detection_switch(self):
+			raise AssertionError("Not in Pixsee Settings page")
+	# start from pixsee settings page
+	def test_03_covered_face_detection_save(self):
 		covered_face_detection_page = CoveredFaceDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		login_page = LoginPage(self.driver)
 
-		login_page.login(self.account(),self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-		self.skip_first_four_tutor()
-		# ensure is connected to machine
+		origin_status = pixsee_settings_page.covered_face_detection_status_text()
+		pixsee_settings_page.click_covered_face_detection()
+		# check save enable = false
+		try:
+			self.assertFalse(covered_face_detection_page.is_save_enable())
+			print("Save diable test pass")
+		except AssertionError:
+			raise AssertionError("Save diable test failed")
+		# change switch status
+		if covered_face_detection_page.is_switch_on():
+			covered_face_detection_page.click_switch()
+			covered_face_detection_page.click_turn_off()
+		else:
+			covered_face_detection_page.click_switch()
+			covered_face_detection_page.click_save()
+		new_status = pixsee_settings_page.covered_face_detection_status_text()
+		if origin_status != new_status:
+			print("save function success")
+		else:
+			raise AssertionError("save function failed, status not changed")
+	# start from pixsee settings page
+	def test_04_covered_face_detection_switch(self):
+		covered_face_detection_page = CoveredFaceDetectionPage(self.driver)
+		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
-		if not baby_monitor_page.is_connected():
-			self.skipTest("not online，skip all test")
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		menu_page.click_logout()
-
-		menu_page.click_settings()
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
 
 		pixsee_settings_page.click_covered_face_detection()
-		covered_face_detection_page.click_skip()
 		# check header text
 		try:
 			header = covered_face_detection_page.header_text()
@@ -122,6 +107,7 @@ class CoveredFaceDetectionCase(BaseTestCase):
 			try:
 				self.assertTrue(covered_face_detection_page.is_in_turn_off_dialog())
 				print("switch off successfully")
+				covered_face_detection_page.click_turn_off_cancel()
 			except AssertionError :
 				raise AssertionError("switch off unsuccessfully")
 		else:
@@ -130,99 +116,14 @@ class CoveredFaceDetectionCase(BaseTestCase):
 			time.sleep(1)
 			after_status = covered_face_detection_page.is_switch_on()
 			self.check_switch_and_content(after_status, covered_face_detection_page.Sensitivity)
-	def test_03_covered_face_detection_save(self):
-		covered_face_detection_page = CoveredFaceDetectionPage(self.driver)
-		menu_page = MenuPage(self.driver)
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		login_page = LoginPage(self.driver)
-
-		login_page.login(self.account(),self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-
-		self.skip_first_four_tutor()
-		# ensure is connected to machine
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		if not baby_monitor_page.is_connected():
-			self.skipTest("not online，skip all test")
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		menu_page.click_logout()
-		menu_page.click_settings()
-		origin_status = pixsee_settings_page.covered_face_detection_status_text()
-		pixsee_settings_page.click_covered_face_detection()
-		covered_face_detection_page.click_skip()
-		# check save enable = false
-		try:
-			self.assertFalse(covered_face_detection_page.is_save_enable())
-			print("Save diable test pass")
-		except AssertionError :
-			raise AssertionError("Save diable test failed")
-		# change switch status
-		if covered_face_detection_page.is_switch_on():
-			covered_face_detection_page.click_switch()
-			covered_face_detection_page.click_turn_off()
-		else:
-			covered_face_detection_page.click_switch()
-			covered_face_detection_page.click_save()
-		new_status = pixsee_settings_page.covered_face_detection_status_text()
-		if origin_status != new_status:
-			print("save function success")
-		else :
-			raise AssertionError("save function failed, status not changed")
-	def test_04_covered_face_detection_back(self):
-		covered_face_detection_page = CoveredFaceDetectionPage(self.driver)
-		menu_page = MenuPage(self.driver)
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		login_page = LoginPage(self.driver)
-
-		login_page.login(self.account(),self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-
-		self.skip_first_four_tutor()
-		# ensure is connected to machine
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		if not baby_monitor_page.is_connected():
-			self.skipTest("not online，skip all test")
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		menu_page.click_logout()
-		menu_page.click_settings()
-		pixsee_settings_page.click_covered_face_detection()
-		covered_face_detection_page.click_skip()
-		# back to settings page
-		covered_face_detection_page.click_back()
-		try:
-			self.assertTrue(pixsee_settings_page.is_in_settings())
-			print("Back to Pixsee Settings page")
-		except AssertionError :
-			raise AssertionError("Not in Pixsee Settings page")
+	# start from covered face detection page
 	def test_05_covered_face_detection_tap_checkbox_sensitivity(self):
 		covered_face_detection_page = CoveredFaceDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		login_page = LoginPage(self.driver)
 
-		login_page.login(self.account(),self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-		self.skip_first_four_tutor()
-		# ensure is connected to machine
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		if not baby_monitor_page.is_connected():
-			self.skipTest("not online，skip all test")
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		time.sleep(2)
-
-		menu_page.click_logout()
-
-		menu_page.click_settings()
-
-		pixsee_settings_page.click_covered_face_detection()
-		covered_face_detection_page.click_skip()
-		if covered_face_detection_page.is_switch_on() == "true":
+		if covered_face_detection_page.is_switch_on() :
 			pass
 		else:
 			covered_face_detection_page.click_switch()
@@ -279,28 +180,14 @@ class CoveredFaceDetectionCase(BaseTestCase):
 			print("High checkbox is clickable")
 		except AssertionError :
 			raise AssertionError("High checkbox is not clickable")
+	# start from covered face detection page
 	def test_06_covered_face_detection_turn_off_page(self):
 		covered_face_detection_page = CoveredFaceDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		login_page = LoginPage(self.driver)
 
-		login_page.login(self.account(), self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-		self.skip_first_four_tutor()
-		# ensure is connected to machine
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		if not baby_monitor_page.is_connected():
-			self.skipTest("not online，skip all test")
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		menu_page.click_logout()
-		menu_page.click_settings()
-
-		pixsee_settings_page.click_covered_face_detection()
-		covered_face_detection_page.click_skip()
-		if covered_face_detection_page.is_switch_on() == "true":
+		if covered_face_detection_page.is_switch_on() :
 			pass
 		else:
 			covered_face_detection_page.click_switch()
@@ -376,28 +263,14 @@ class CoveredFaceDetectionCase(BaseTestCase):
 			print("turn off detection worked")
 		except AssertionError:
 			raise AssertionError("turn off detection failed")
+	# start from pixsee settings page
 	def test_07_covered_face_detection_back_discard(self):
 		covered_face_detection_page = CoveredFaceDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		login_page = LoginPage(self.driver)
 
-		login_page.login(self.account(),self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-		self.skip_first_four_tutor()
-		# ensure is connected to machine
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		if not baby_monitor_page.is_connected():
-			self.skipTest("not online，skip all test")
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		time.sleep(2)
-
-		menu_page.click_logout()
-		menu_page.click_settings()
 		pixsee_settings_page.click_covered_face_detection()
-		covered_face_detection_page.click_skip()
 		# check if is in discard dialog
 		if covered_face_detection_page.is_switch_on() == "true":
 			covered_face_detection_page.click_switch()
@@ -439,36 +312,24 @@ class CoveredFaceDetectionCase(BaseTestCase):
 			print("back button worked")
 		except AssertionError :
 			raise AssertionError("Not in discard dialog")
+	# start from pixsee settings page
 	def test_08_covered_face_detection_information(self):
 		covered_face_detection_page = CoveredFaceDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		login_page = LoginPage(self.driver)
-
-		login_page.login(self.account(),self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-		self.skip_first_four_tutor()
-		# ensure is connected to machine
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		if not baby_monitor_page.is_connected():
-			self.skipTest("not online，skip all test")
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		menu_page.click_logout()
-
-		menu_page.click_settings()
 
 		pixsee_settings_page.click_covered_face_detection()
-		covered_face_detection_page.click_skip()
-		covered_face_detection_page.click_information()
 		# check if is in information page
+		covered_face_detection_page.click_information()
 		try:
 			self.assertTrue(covered_face_detection_page.is_in_covered_face_detection_tutor_page())
 			print("information button worked")
 		except AssertionError :
 			raise AssertionError("Not in information page")
-
+		covered_face_detection_page.click_skip()
+		covered_face_detection_page.click_back()
+		# back to pixsee settings page
 
 
 

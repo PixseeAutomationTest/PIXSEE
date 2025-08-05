@@ -11,24 +11,14 @@ from pages.menu_pages.pixsee_settings_pages.wifi_settings_page import WifiSettin
 
 class WifiSettingsCase(BaseTestCase):
 	def setUp(self):
-		super().setUp(no_reset=False)
-
-	def test_wifi_reset_cancel(self):
+		super().setUp(no_reset=True)
+	# start from pixsee settings page
+	def test_01_wifi_reset_cancel(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		wifi_settings_page = WifiSettingsPage(self.driver)
 
-		login_page = LoginPage(self.driver)
-
-		login_page.login(self.account(), self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-		self.skip_first_four_tutor()
-
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		menu_page.click_logout()
-		menu_page.click_settings()
 		pixsee_settings_page.click_wifi_settings()
 		# check the text on popup screen
 		try:
@@ -60,21 +50,13 @@ class WifiSettingsCase(BaseTestCase):
 			print("back to settings page")
 		except AssertionError:
 			raise AssertionError("not back to settings page")
-	def test_wifi_reset_ok(self):
+	# start from pixsee settings page
+	def test_02_wifi_reset_ok(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		wifi_settings_page = WifiSettingsPage(self.driver)
 
-		login_page = LoginPage(self.driver)
-
-		login_page.login(self.account(), self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-		self.skip_first_four_tutor()
-
-		baby_monitor_page.click_home()
-		menu_page.click_logout()
-		menu_page.click_settings()
 		pixsee_settings_page.click_wifi_settings()
 		wifi_settings_page.click_pop_up_ok()
 		time.sleep(2)
@@ -83,23 +65,13 @@ class WifiSettingsCase(BaseTestCase):
 			print("ok function success")
 		except AssertionError:
 			raise AssertionError("ok function failed")
-	def test_wifi_settings_x(self):
+	# start from wifi settings page
+	def test_03_wifi_settings_x(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		wifi_settings_page = WifiSettingsPage(self.driver)
 
-		login_page = LoginPage(self.driver)
-
-		login_page.login(self.account(), self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-		self.skip_first_four_tutor()
-
-		baby_monitor_page.click_home()
-		menu_page.click_logout()
-		menu_page.click_settings()
-		pixsee_settings_page.click_wifi_settings()
-		wifi_settings_page.click_pop_up_ok()
 		# check header text
 		try:
 			header_text = wifi_settings_page.header_text()
@@ -121,24 +93,13 @@ class WifiSettingsCase(BaseTestCase):
 			print("x function success")
 		except AssertionError:
 			raise AssertionError("x function failed")
-	def test_wifi_quit_dialog_no_yes(self):
+	# start from wifi settings quit dialog
+	def test_04_wifi_quit_dialog_no_yes(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		wifi_settings_page = WifiSettingsPage(self.driver)
 
-		login_page = LoginPage(self.driver)
-
-		login_page.login(self.account(), self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-		self.skip_first_four_tutor()
-
-		baby_monitor_page.click_home()
-		menu_page.click_logout()
-		menu_page.click_settings()
-		pixsee_settings_page.click_wifi_settings()
-		wifi_settings_page.click_pop_up_ok()
-		wifi_settings_page.click_x()
 		# check dialog text
 		try:
 			dialog_text = wifi_settings_page.quit_dialog_text()
@@ -177,21 +138,13 @@ class WifiSettingsCase(BaseTestCase):
 			print("quit dialog yes function success")
 		except AssertionError:
 			raise AssertionError("quit dialog yes function failed")
-	def test_wifi_settings_next_empty_password(self):
+	# start from pixsee settings page
+	def test_05_wifi_settings_next_empty_password(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		wifi_settings_page = WifiSettingsPage(self.driver)
 
-		login_page = LoginPage(self.driver)
-
-		login_page.login(self.account(), self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-		self.skip_first_four_tutor()
-
-		baby_monitor_page.click_home()
-		menu_page.click_logout()
-		menu_page.click_settings()
 		pixsee_settings_page.click_wifi_settings()
 		wifi_settings_page.click_pop_up_ok()
 		wifi_settings_page.click_next()
@@ -222,23 +175,13 @@ class WifiSettingsCase(BaseTestCase):
 			print("empty password dialog yes function success")
 		except AssertionError:
 			raise AssertionError("empty password dialog yes function failed, not in wifi settings page")
-	def test_wifi_settings_next(self):
+	# start from wifi settings page
+	def test_06_wifi_settings_next(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		wifi_settings_page = WifiSettingsPage(self.driver)
 
-		login_page = LoginPage(self.driver)
-
-		login_page.login(self.account(), self.password())
-		baby_monitor_page.is_in_baby_monitor_page()
-		self.skip_first_four_tutor()
-
-		baby_monitor_page.click_home()
-		menu_page.click_logout()
-		menu_page.click_settings()
-		pixsee_settings_page.click_wifi_settings()
-		wifi_settings_page.click_pop_up_ok()
 		wifi_settings_page.input_password("12345678")
 		wifi_settings_page.click_next()
 		try:
@@ -246,6 +189,15 @@ class WifiSettingsCase(BaseTestCase):
 			print("next function success")
 		except AssertionError:
 			raise AssertionError("next function failed")
+		time.sleep(30)
+		try:
+			self.assertTrue(wifi_settings_page.is_in_wifi_quit_dialog())
+			print("wifi settings function success")
+		except AssertionError:
+			raise AssertionError("wifi settings function failed")
+	# back to pixsee settings page
+
+
 
 
 
