@@ -12,6 +12,17 @@ from pages.menu_pages.pixsee_settings_pages.SD_card_stat_page import SDcardStatu
 class SDcardCase(BaseTestCase):
 	def setUp(self):
 		super().setUp(no_reset=True)
+
+	def test_00_open_app(self):
+		menu_page = MenuPage(self.driver)
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+		self.shutdown_app()
+		# open app
+		self.open_app()
+		baby_monitor_page.is_in_baby_monitor_page()
+		baby_monitor_page.click_home()
+		menu_page.click_settings()
 	# start from pixsee settings page
 	def test_01_check_word(self):
 		menu_page = MenuPage(self.driver)
@@ -137,7 +148,18 @@ class SDcardCase(BaseTestCase):
 	# start from formatting dialog
 	def test_05_check_formatting_close(self):
 		sd_card_page = SDcardStatusPage(self.driver)
-		# check formatted dialog
+
+
+		# click close button
+		sd_card_page.click_close()
+		# check if is in pixsee settings page
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+		try:
+			self.assertTrue(pixsee_settings_page.is_in_settings())
+			print("Back to Pixsee Settings page test success")
+		except AssertionError:
+			raise AssertionError("Back to Pixsee Settings page test failed")
+			# check formatted dialog
 		time.sleep(150)
 		try:
 			self.assertTrue(sd_card_page.is_in_format_dialog())
@@ -163,16 +185,7 @@ class SDcardCase(BaseTestCase):
 		# click go button
 		sd_card_page.click_go()
 
-		# click close button
-		sd_card_page.click_close()
-		# check if is in pixsee settings page
-		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		try:
-			self.assertTrue(pixsee_settings_page.is_in_settings())
-			print("Back to Pixsee Settings page test success")
-		except AssertionError:
-			raise AssertionError("Back to Pixsee Settings page test failed")
-	# back to pixsee settings page
+# back to pixsee settings page
 
 
 

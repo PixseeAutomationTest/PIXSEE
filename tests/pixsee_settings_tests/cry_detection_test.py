@@ -15,6 +15,16 @@ class CryDetectionCase(BaseTestCase):
 	def setUp(self):
 		super().setUp(no_reset=True)
 
+	def test_00_open_app(self):
+		menu_page = MenuPage(self.driver)
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+		self.shutdown_app()
+		# open app
+		self.open_app()
+		baby_monitor_page.is_in_baby_monitor_page()
+		baby_monitor_page.click_home()
+		menu_page.click_settings()
 	# start from pixsee settings page
 	def test_01_cry_detection_back(self):
 		cry_detection_page = CryDetectionPage(self.driver)

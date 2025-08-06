@@ -12,6 +12,16 @@ from pages.menu_pages.subscription_pages.subscription_page import SubscriptionPa
 class TimeLapseVideoCase(BaseTestCase):
     def setUp(self):
         super().setUp(no_reset=True)
+    def test_00_open_app(self):
+        menu_page = MenuPage(self.driver)
+        baby_monitor_page = BabyMonitorPage(self.driver)
+        pixsee_settings_page = PixseeSettingsPage(self.driver)
+        self.shutdown_app()
+        # open app
+        self.open_app()
+        baby_monitor_page.is_in_baby_monitor_page()
+        baby_monitor_page.click_home()
+        menu_page.click_settings()
     def test_01_time_lapse_video_subscription_click_no(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
         menu_page = MenuPage(self.driver)

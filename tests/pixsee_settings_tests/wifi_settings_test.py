@@ -12,6 +12,16 @@ from pages.menu_pages.pixsee_settings_pages.wifi_settings_page import WifiSettin
 class WifiSettingsCase(BaseTestCase):
 	def setUp(self):
 		super().setUp(no_reset=True)
+
+	def test_00_open_app(self):
+		menu_page = MenuPage(self.driver)
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+		self.shutdown_app()
+		# open app
+		self.open_app()
+		baby_monitor_page.click_home()
+		menu_page.click_settings()
 	# start from pixsee settings page
 	def test_01_wifi_reset_cancel(self):
 		menu_page = MenuPage(self.driver)
