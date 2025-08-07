@@ -22,7 +22,6 @@ class AboutTest(BaseTestCase):
             elif not baby_monitor_page.is_in_baby_monitor_page():
                 self.shutdown_app()
                 self.open_app()
-            print("Finish opening app.")
             baby_monitor_page.click_home()
             menu_page.click_about()
         except Exception as e:

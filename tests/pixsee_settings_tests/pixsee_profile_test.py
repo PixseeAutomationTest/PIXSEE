@@ -14,25 +14,35 @@ import time
 import re
 
 class PixseeProfileTest(BaseTestCase):
+    def setUp(self):
+        super().setUp()
+
+        baby_monitor_page = BabyMonitorPage(self.driver)
+        menu_page = MenuPage(self.driver)
+        pixsee_settings_page = PixseeSettingsPage(self.driver)
+        pixsee_profile_page = PixseeProfilePage(self.driver)
+        try:
+            while self.driver.current_package != self.driver.capabilities.get("appPackage"):
+                self.driver.terminate_app(self.driver.current_package)
+                self.open_app()
+            if pixsee_profile_page.is_in_pixsee_profile_page():
+                return
+            elif not baby_monitor_page.is_in_baby_monitor_page():
+                self.shutdown_app()
+                self.open_app()
+            baby_monitor_page.click_home()
+            menu_page.click_settings()
+            pixsee_settings_page.click_pixsee_profile()
+        except Exception as e:
+            print(f"Test failed with exception: {e}")
+            raise e
     def test_select_location(self):
         try:
-            self.open_app()
-
             baby_monitor_page = BabyMonitorPage(self.driver)
             menu_page = MenuPage(self.driver)
             pixsee_settings_page = PixseeSettingsPage(self.driver)
             pixsee_profile_page = PixseeProfilePage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page")
-
-            '''Go to Pixsee Settings Page'''
-            menu_page.click_settings()
-            self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
-
-            '''Go to Pixsee Profile Page'''
-            pixsee_settings_page.click_pixsee_profile()
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
 
             '''Verify Pixsee Profile Page'''
@@ -62,36 +72,21 @@ class PixseeProfileTest(BaseTestCase):
             self.assertTrue(baby_monitor_page.is_in_baby_monitor_page(), "Can't return to Baby Monitor Page from Menu Page")
             self.assertEqual(select_location, baby_monitor_page.get_stream_title(), "Selected location is not displayed correctly in Baby Monitor Page")
 
-
         except AssertionError as ae:
             print(f"Test failed with assertion error: {ae}")
             raise ae
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
 
     # FIXME: No checking the time in Baby Monitor Page because Android doesn't support Daylight Saving Time (DST).
     def test_select_time_zone(self):
         try:
-            self.open_app()
-
             baby_monitor_page = BabyMonitorPage(self.driver)
             menu_page = MenuPage(self.driver)
             pixsee_settings_page = PixseeSettingsPage(self.driver)
             pixsee_profile_page = PixseeProfilePage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page")
-
-            '''Go to Pixsee Settings Page'''
-            menu_page.click_settings()
-            self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
-
-            '''Go to Pixsee Profile Page'''
-            pixsee_settings_page.click_pixsee_profile()
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
 
             '''Verify Pixsee Profile Page'''
@@ -114,28 +109,14 @@ class PixseeProfileTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
 
     def test_check_device_info(self):
         try:
-            self.open_app()
-
             baby_monitor_page = BabyMonitorPage(self.driver)
             menu_page = MenuPage(self.driver)
             pixsee_settings_page = PixseeSettingsPage(self.driver)
             pixsee_profile_page = PixseeProfilePage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page")
-
-            '''Go to Pixsee Settings Page'''
-            menu_page.click_settings()
-            self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
-
-            '''Go to Pixsee Profile Page'''
-            pixsee_settings_page.click_pixsee_profile()
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
 
             '''Verify Pixsee Profile Page'''
@@ -172,28 +153,14 @@ class PixseeProfileTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
 
     def test_reboot_device(self):
         try:
-            self.open_app()
-
             baby_monitor_page = BabyMonitorPage(self.driver)
             menu_page = MenuPage(self.driver)
             pixsee_settings_page = PixseeSettingsPage(self.driver)
             pixsee_profile_page = PixseeProfilePage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page")
-
-            '''Go to Pixsee Settings Page'''
-            menu_page.click_settings()
-            self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
-
-            '''Go to Pixsee Profile Page'''
-            pixsee_settings_page.click_pixsee_profile()
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
 
             '''Verify Pixsee Profile Page'''
@@ -210,7 +177,7 @@ class PixseeProfileTest(BaseTestCase):
             pixsee_profile_page.click_reboot_device()
             self.assertTrue(baby_monitor_page.is_in_baby_monitor_page(), "Can't automatically return to Baby Monitor Page")
             self.assertEqual(baby_monitor_page.get_connecting_status_text(), self.get_string("stream_connecting_status"), "Text \"Connecting\" is not properly displayed")
-            time.sleep(10)  # Wait for the device to reboot
+            time.sleep(30)  # Wait for the device to reboot
 
         except AssertionError as ae:
             print(f"Test failed with assertion error: {ae}")
@@ -218,28 +185,14 @@ class PixseeProfileTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
 
     def test_rotate_screen(self):
         try:
-            self.open_app()
-
             baby_monitor_page = BabyMonitorPage(self.driver)
             menu_page = MenuPage(self.driver)
             pixsee_settings_page = PixseeSettingsPage(self.driver)
             pixsee_profile_page = PixseeProfilePage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page")
-
-            '''Go to Pixsee Settings Page'''
-            menu_page.click_settings()
-            self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
-
-            '''Go to Pixsee Profile Page'''
-            pixsee_settings_page.click_pixsee_profile()
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
 
             '''Verify Pixsee Profile Page'''
@@ -264,28 +217,14 @@ class PixseeProfileTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
 
     def test_IQ_setting_with_no_changing(self):
         try:
-            self.open_app()
-
             baby_monitor_page = BabyMonitorPage(self.driver)
             menu_page = MenuPage(self.driver)
             pixsee_settings_page = PixseeSettingsPage(self.driver)
             pixsee_profile_page = PixseeProfilePage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page")
-
-            '''Go to Pixsee Settings Page'''
-            menu_page.click_settings()
-            self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
-
-            '''Go to Pixsee Profile Page'''
-            pixsee_settings_page.click_pixsee_profile()
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
 
             '''Verify Pixsee Profile Page'''
@@ -311,28 +250,14 @@ class PixseeProfileTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
 
     def test_IQ_setting_with_changing(self):
         try:
-            self.open_app()
-
             baby_monitor_page = BabyMonitorPage(self.driver)
             menu_page = MenuPage(self.driver)
             pixsee_settings_page = PixseeSettingsPage(self.driver)
             pixsee_profile_page = PixseeProfilePage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page")
-
-            '''Go to Pixsee Settings Page'''
-            menu_page.click_settings()
-            self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
-
-            '''Go to Pixsee Profile Page'''
-            pixsee_settings_page.click_pixsee_profile()
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
 
             '''Verify Pixsee Profile Page'''
@@ -361,28 +286,14 @@ class PixseeProfileTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
 
     def test_check_update(self):
         try:
-            self.open_app()
-
             baby_monitor_page = BabyMonitorPage(self.driver)
             menu_page = MenuPage(self.driver)
             pixsee_settings_page = PixseeSettingsPage(self.driver)
             pixsee_profile_page = PixseeProfilePage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page")
-
-            '''Go to Pixsee Settings Page'''
-            menu_page.click_settings()
-            self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
-
-            '''Go to Pixsee Profile Page'''
-            pixsee_settings_page.click_pixsee_profile()
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
 
             '''Verify Pixsee Profile Page'''
@@ -406,28 +317,14 @@ class PixseeProfileTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
 
     def test_device_unbind_dialog_with_no(self):
         try:
-            self.open_app()
-
             baby_monitor_page = BabyMonitorPage(self.driver)
             menu_page = MenuPage(self.driver)
             pixsee_settings_page = PixseeSettingsPage(self.driver)
             pixsee_profile_page = PixseeProfilePage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page")
-
-            '''Go to Pixsee Settings Page'''
-            menu_page.click_settings()
-            self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
-
-            '''Go to Pixsee Profile Page'''
-            pixsee_settings_page.click_pixsee_profile()
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
 
             '''Verify Pixsee Profile Page'''
@@ -458,29 +355,15 @@ class PixseeProfileTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
 
     def test_device_unbind_page_with_close(self):
         try:
-            self.open_app()
-
             baby_monitor_page = BabyMonitorPage(self.driver)
             menu_page = MenuPage(self.driver)
             pixsee_settings_page = PixseeSettingsPage(self.driver)
             pixsee_profile_page = PixseeProfilePage(self.driver)
             device_unbind_page = DeviceUnbindPage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page")
-
-            '''Go to Pixsee Settings Page'''
-            menu_page.click_settings()
-            self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
-
-            '''Go to Pixsee Profile Page'''
-            pixsee_settings_page.click_pixsee_profile()
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
 
             '''Verify Pixsee Profile Page'''
@@ -521,29 +404,15 @@ class PixseeProfileTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
 
     def test_device_unbind_page_with_cancel(self):
         try:
-            self.open_app()
-
             baby_monitor_page = BabyMonitorPage(self.driver)
             menu_page = MenuPage(self.driver)
             pixsee_settings_page = PixseeSettingsPage(self.driver)
             pixsee_profile_page = PixseeProfilePage(self.driver)
             device_unbind_page = DeviceUnbindPage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page")
-
-            '''Go to Pixsee Settings Page'''
-            menu_page.click_settings()
-            self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
-
-            '''Go to Pixsee Profile Page'''
-            pixsee_settings_page.click_pixsee_profile()
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
 
             '''Verify Pixsee Profile Page'''
@@ -584,14 +453,10 @@ class PixseeProfileTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
 
     @unittest.skip("Important: This test will unbind the device. If you want to run other tests after this, you may need to bind the device manually.")
     def test_device_unbind_success(self):
         try:
-            self.open_app()
-
             baby_monitor_page = BabyMonitorPage(self.driver)
             baby_timeline_page = BabyTimelinePage(self.driver)
             menu_page = MenuPage(self.driver)
@@ -599,16 +464,6 @@ class PixseeProfileTest(BaseTestCase):
             pixsee_profile_page = PixseeProfilePage(self.driver)
             device_unbind_page = DeviceUnbindPage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page")
-
-            '''Go to Pixsee Settings Page'''
-            menu_page.click_settings()
-            self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
-
-            '''Go to Pixsee Profile Page'''
-            pixsee_settings_page.click_pixsee_profile()
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
 
             '''Verify Pixsee Profile Page'''
@@ -652,12 +507,11 @@ class PixseeProfileTest(BaseTestCase):
             self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page from Baby Timeline Page")
             self.assertEqual(menu_page.get_settings_button_text(),self.get_string("home_initialization_menu_add_device"), "button \"Add device\" is not properly displayed")
 
-
         except AssertionError as ae:
             print(f"Test failed with assertion error: {ae}")
             raise ae
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
+        
+

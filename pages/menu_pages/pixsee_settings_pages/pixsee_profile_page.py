@@ -469,9 +469,9 @@ class PixseeProfilePage:
     def is_in_pixsee_profile_page(self):
         try:
             WebDriverWait(self.driver, 20).until(
-                EC.presence_of_element_located(("id", self.videoView))
+                EC.presence_of_element_located(("id", self.deviceInfo))
             )
-            self.driver.find_element("id", self.videoView)
+            self.driver.find_element("id", self.deviceInfo)
             return True
         except:
             return False
