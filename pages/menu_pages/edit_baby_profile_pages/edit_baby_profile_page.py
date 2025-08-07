@@ -10,7 +10,7 @@ class EditBabyProfilePage():
 
         self.pageTitleText = "com.compal.bioslab.pixsee.pixm01:id/toolbar_title"
 
-        self.babyPicture = "com.compal.bioslab.pixsee.pixm01:id/baby_profile_picture_img"
+        self.babyPhoto = "com.compal.bioslab.pixsee.pixm01:id/baby_profile_picture_img"
         self.babyNameEditText = "com.compal.bioslab.pixsee.pixm01:id/baby_profile_name_edx"
         self.birthdayEditText = "com.compal.bioslab.pixsee.pixm01:id/baby_profile_birthday_edx"
 
@@ -47,6 +47,12 @@ class EditBabyProfilePage():
         self.list_classname = "android.widget.ListView"
         self.listOption = "android:id/text1"
 
+        '''Photos (edit page & outside)'''
+        self.photosCategory_xpath = "//android.support.v7.widget.RecyclerView/android.widget.RelativeLayout[1]"
+        self.photos_classname = "android.widget.ImageView"
+        self.editPhotoDoneButton = "com.compal.bioslab.pixsee.pixm01:id/tvImageEditorDone"
+        self.editPhotoReturnButton = "com.compal.bioslab.pixsee.pixm01:id/image_editor_toolbar_back_img"
+
     def click_cancel(self):
         WebDriverWait(self.driver, 20).until(
             EC.presence_of_element_located(("id", self.cancelButton))
@@ -62,11 +68,11 @@ class EditBabyProfilePage():
         element.click()
         time.sleep(1)
 
-    def click_baby_picture(self):
+    def click_baby_photo(self):
         WebDriverWait(self.driver, 20).until(
-            EC.presence_of_element_located(("id", self.babyPicture))
+            EC.presence_of_element_located(("id", self.babyPhoto))
         )
-        element = self.driver.find_element("id", self.babyPicture)
+        element = self.driver.find_element("id", self.babyPhoto)
         element.click()
 
     def click_gender_boy(self):
@@ -140,6 +146,27 @@ class EditBabyProfilePage():
             EC.presence_of_element_located(("id", self.dialogCancelButton))
         )
         element = self.driver.find_element("id", self.dialogCancelButton)
+        element.click()
+
+    def click_photos_category(self):
+        WebDriverWait(self.driver, 20).until(
+            EC.presence_of_element_located(("xpath", self.photosCategory_xpath))
+        )
+        element = self.driver.find_element("xpath", self.photosCategory_xpath)
+        element.click()
+
+    def click_selected_photo(self, number = 0):
+        WebDriverWait(self.driver, 20).until(
+            EC.presence_of_element_located(("class name", self.photos_classname))
+        )
+        elements = self.driver.find_elements("class name", self.photos_classname)
+        elements[number].click()
+
+    def click_edit_photo_done(self):
+        WebDriverWait(self.driver, 20).until(
+            EC.presence_of_element_located(("id", self.editPhotoDoneButton))
+        )
+        element = self.driver.find_element("id", self.editPhotoDoneButton)
         element.click()
 
     def get_page_title(self):
@@ -248,6 +275,13 @@ class EditBabyProfilePage():
         )
         element = self.driver.find_element("id", self.dialogCancelButton)
         return element.text
+
+    def select_avatar(self, number = 0):
+        self.click_baby_photo()
+        self.click_photos_category()
+        self.click_selected_photo(number)
+        time.sleep(1)
+        self.click_edit_photo_done()
 
     def select_baby_birthday(self, year = datetime.date.today().year, month = datetime.date.today().month, day = datetime.date.today().day):
         # Validate the input date
@@ -414,9 +448,9 @@ class EditBabyProfilePage():
     def is_in_edit_baby_profile_page(self):
         try:
             WebDriverWait(self.driver, 20).until(
-                EC.presence_of_element_located(("id", self.babyPicture))
+                EC.presence_of_element_located(("id", self.babyPhoto))
             )
-            self.driver.find_element("id", self.babyPicture)
+            self.driver.find_element("id", self.babyPhoto)
             return True
         except:
             return False

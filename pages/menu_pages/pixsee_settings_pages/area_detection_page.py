@@ -2,6 +2,7 @@ from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from PIL import Image
+import os
 
 
 class AreaDetectionPage():
@@ -434,5 +435,6 @@ class AreaDetectionPage():
 
 		in_range = (r_min <= r <= r_max) and (g_min <= g <= g_max) and (b_min <= b <= b_max)
 		print(f"Pixel at ({x},{y}) = {pixel}, in range: {in_range}")
+		os.remove(screenshot_path)
 		return in_range
 

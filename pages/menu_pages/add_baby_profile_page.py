@@ -44,6 +44,12 @@ class AddBabyProfilePage():
         self.list_classname = "android.widget.ListView"
         self.listOption = "android:id/text1"
 
+        '''Photos (edit page & outside)'''
+        self.photosCategory_xpath = "//android.support.v7.widget.RecyclerView/android.widget.RelativeLayout[1]"
+        self.photos_classname = "android.widget.ImageView"
+        self.editPhotoDoneButton = "com.compal.bioslab.pixsee.pixm01:id/tvImageEditorDone"
+        self.editPhotoReturnButton = "com.compal.bioslab.pixsee.pixm01:id/image_editor_toolbar_back_img"
+
     def click_cancel(self):
         WebDriverWait(self.driver, 20).until(
             EC.presence_of_element_located(("id", self.cancelButton))
@@ -138,6 +144,26 @@ class AddBabyProfilePage():
             element = self.driver.find_element("id", self.calendarCancelButton)
             element.click()
 
+    def click_photos_category(self):
+        WebDriverWait(self.driver, 20).until(
+            EC.presence_of_element_located(("xpath", self.photosCategory_xpath))
+        )
+        element = self.driver.find_element("xpath", self.photosCategory_xpath)
+        element.click()
+
+    def click_selected_photo(self, number=0):
+        WebDriverWait(self.driver, 20).until(
+            EC.presence_of_element_located(("class name", self.photos_classname))
+        )
+        elements = self.driver.find_elements("class name", self.photos_classname)
+        elements[number].click()
+
+    def click_edit_photo_done(self):
+        WebDriverWait(self.driver, 20).until(
+            EC.presence_of_element_located(("id", self.editPhotoDoneButton))
+        )
+        element = self.driver.find_element("id", self.editPhotoDoneButton)
+        element.click()
 
     def get_page_title(self):
         WebDriverWait(self.driver, 20).until(
@@ -238,6 +264,13 @@ class AddBabyProfilePage():
         )
         element = self.driver.find_element("id", self.cancelNoButton)
         return element.text
+
+    def select_avatar(self, number = 0):
+        self.click_baby_photo()
+        self.click_photos_category()
+        self.click_selected_photo(number)
+        time.sleep(1)
+        self.click_edit_photo_done()
 
     def select_baby_birthday(self, year = datetime.date.today().year, month = datetime.date.today().month, day = datetime.date.today().day):
         # Validate the input date
@@ -412,6 +445,7 @@ class AddBabyProfilePage():
             return False
 
     def add_new_baby(self, baby_name = "Test_Baby 01"):
+        self.select_avatar()
         if random.choice([True, False]):
             self.click_gender_boy()
         else:

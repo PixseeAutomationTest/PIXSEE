@@ -36,6 +36,9 @@ class AddBabyTest(BaseTestCase):
             self.assertEqual(add_baby_profile_page.get_finish_button_text(), self.get_string("save"), "Text \"Save\" is not properly displayed")
             self.assertEqual(add_baby_profile_page.get_message_text(), self.get_string("baby_profile_footer_message"), "Text \"You can change the profile from settings\" is not properly displayed")
 
+            '''Select avatar'''
+            add_baby_profile_page.select_avatar()
+
             '''Select one gender and verify their status'''
             add_baby_profile_page.click_gender_boy()
             self.assertTrue(add_baby_profile_page.get_gender_boy_status(), "Gender boy should be selected after clicking gender boy")
@@ -116,6 +119,9 @@ class AddBabyTest(BaseTestCase):
             self.assertEqual(add_baby_profile_page.get_finish_button_text(), self.get_string("save"), "Text \"Save\" is not properly displayed")
             self.assertEqual(add_baby_profile_page.get_message_text(), self.get_string("baby_profile_footer_message"), "Text \"You can change the profile from settings\" is not properly displayed")
 
+            '''Select avatar'''
+            add_baby_profile_page.select_avatar()
+
             '''Select one gender and verify their status'''
             add_baby_profile_page.click_gender_boy()
             self.assertTrue(add_baby_profile_page.get_gender_boy_status(), "Gender boy should be selected after clicking gender boy")
@@ -185,6 +191,9 @@ class AddBabyTest(BaseTestCase):
             self.assertEqual(add_baby_profile_page.get_baby_birthday_hint(), self.get_string("baby_profile_birthday"), "Hint \"Birthday\" is not properly displayed")
             self.assertEqual(add_baby_profile_page.get_finish_button_text(), self.get_string("save"), "Text \"Save\" is not properly displayed")
             self.assertEqual(add_baby_profile_page.get_message_text(), self.get_string("baby_profile_footer_message"), "Text \"You can change the profile from settings\" is not properly displayed")
+
+            '''Select avatar'''
+            add_baby_profile_page.select_avatar()
 
             '''Select one gender and verify their status'''
             add_baby_profile_page.click_gender_boy()

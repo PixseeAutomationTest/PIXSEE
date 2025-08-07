@@ -18,7 +18,7 @@ class BaseTestCase(unittest.TestCase):
     def setUp(self, no_reset=True):
         capabilities = UiAutomator2Options()
         capabilities.platform_name = "Android"
-        capabilities.device_name = "2A141FDH2009E8"
+        capabilities.device_name = "emulator-5554"
         capabilities.language = "en-us text"  # Chinese (Taiwan): "tw text", English: "en-us text"
         # capabilities.device_name = "emulator-5554"
 
@@ -38,9 +38,10 @@ class BaseTestCase(unittest.TestCase):
         self.driver.update_settings({"waitForIdleTimeout": 1000})
     def open_app(self):
         self.driver.activate_app(self.driver.capabilities.get("appPackage"))
-        time.sleep(5)
+        time.sleep(10)
     def shutdown_app(self):
         self.driver.terminate_app(self.driver.capabilities.get("appPackage"))
+        time.sleep(5)
     # from right to left
     def left_wipe(self):
         time.sleep(0.5)

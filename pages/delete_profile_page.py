@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-class DeleteBabyProfilePage():
+class DeleteProfilePage():
     def __init__(self, driver):
         self.driver = driver
 
@@ -11,7 +11,7 @@ class DeleteBabyProfilePage():
         self.checkInfoText = "com.compal.bioslab.pixsee.pixm01:id/delete_account_baby_tv_check_info"
 
         self.checkButton = "com.compal.bioslab.pixsee.pixm01:id/delete_account_baby_check"
-        self.deleteBabyProfileButton = "com.compal.bioslab.pixsee.pixm01:id/delete_account_baby_bt_delete"
+        self.deleteProfileButton = "com.compal.bioslab.pixsee.pixm01:id/delete_account_baby_bt_delete"
         self.cancelButton = "com.compal.bioslab.pixsee.pixm01:id/delete_account_baby_bt_cancel"
 
     def click_check(self):
@@ -21,11 +21,11 @@ class DeleteBabyProfilePage():
         element = self.driver.find_element("id", self.checkButton)
         element.click()
 
-    def click_delete_baby_profile(self):
+    def click_delete_profile(self):
         WebDriverWait(self.driver, 20).until(
-            EC.presence_of_element_located(("id", self.deleteBabyProfileButton))
+            EC.presence_of_element_located(("id", self.deleteProfileButton))
         )
-        element = self.driver.find_element("id", self.deleteBabyProfileButton)
+        element = self.driver.find_element("id", self.deleteProfileButton)
         element.click()
 
     def click_cancel(self):
@@ -56,11 +56,11 @@ class DeleteBabyProfilePage():
         element = self.driver.find_element("id", self.checkInfoText)
         return element.text
 
-    def get_delete_baby_profile_button_text(self):
+    def get_delete_profile_button_text(self):
         WebDriverWait(self.driver, 20).until(
-            EC.presence_of_element_located(("id", self.deleteBabyProfileButton))
+            EC.presence_of_element_located(("id", self.deleteProfileButton))
         )
-        element = self.driver.find_element("id", self.deleteBabyProfileButton)
+        element = self.driver.find_element("id", self.deleteProfileButton)
         return element.text
 
     def get_cancel_button_text(self):
