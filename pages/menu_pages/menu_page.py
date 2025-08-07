@@ -13,7 +13,6 @@ class MenuPage():
 		self.homeButton = "com.compal.bioslab.pixsee.pixm01:id/ibMenuButtonHome"
 		self.notificationsButton = "com.compal.bioslab.pixsee.pixm01:id/btNotificationCenter"
 		self.babyListButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsBabiesList"
-
 		self.babyEditButton = "com.compal.bioslab.pixsee.pixm01:id/baby_edit_icon"
 		self.babyAddButton = "com.compal.bioslab.pixsee.pixm01:id/baby_list_item"
 		self.membersButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsMembers"
@@ -64,7 +63,7 @@ class MenuPage():
 			EC.presence_of_element_located(("id", self.babyListButton))
 		)
 		self.driver.find_element(AppiumBy.ID, self.babyListButton).click()
-		time.sleep(1)  # 等待頁面加載完成，必要時可調整時間
+		time.sleep(1)  # Wait for the page to load
 
 	def click_baby_edit(self):
 		WebDriverWait(self.driver, 20).until(
@@ -74,7 +73,8 @@ class MenuPage():
 		time.sleep(1)
 
 	def click_baby_add(self):
-		self.click_baby_list()
+		if not self.get_has_baby_add_button():
+			self.click_baby_list()
 		WebDriverWait(self.driver, 20).until(
 			EC.presence_of_element_located(("id", self.babyAddButton))
 		)
@@ -232,6 +232,16 @@ class MenuPage():
 		parent_element = self.driver.find_element(AppiumBy.ID, self.logoutButton)
 		element = parent_element.find_element(AppiumBy.CLASS_NAME, self.buttonText_class_name)
 		return element.text
+
+	def get_has_baby_add_button(self):
+		try:
+			WebDriverWait(self.driver, 20).until(
+				EC.presence_of_element_located(("id", self.babyAddButton))
+			)
+			self.driver.find_element(AppiumBy.ID, self.babyAddButton)
+			return True
+		except:
+			return False
 
 	def is_in_menu_page(self):
 		try:

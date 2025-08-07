@@ -1,3 +1,5 @@
+from idlelib.mainmenu import menudefs
+
 from pages.base import BaseTestCase
 
 from pages.baby_monitor_page import BabyMonitorPage
@@ -5,26 +7,38 @@ from pages.baby_timeline_page import BabyTimelinePage
 from pages.menu_pages.menu_page import MenuPage
 from pages.menu_pages.add_baby_profile_page import AddBabyProfilePage
 from pages.menu_pages.edit_baby_profile_pages.edit_baby_profile_page import EditBabyProfilePage
+from pages.delete_profile_page import DeleteProfilePage
 import random
 
 class AddBabyTest(BaseTestCase):
+    def setUp(self):
+        super().setUp()
 
+        baby_monitor_page = BabyMonitorPage(self.driver)
+        menu_page = MenuPage(self.driver)
+        add_baby_profile_page = AddBabyProfilePage(self.driver)
+        try:
+            while self.driver.current_package != self.driver.capabilities.get("appPackage"):
+                self.driver.terminate_app(self.driver.current_package)
+                self.open_app()
+            if add_baby_profile_page.is_in_add_baby_profile_page():
+                return
+            elif not baby_monitor_page.is_in_baby_monitor_page():
+                self.shutdown_app()
+                self.open_app()
+            baby_monitor_page.click_home()
+            menu_page.click_baby_add()
+        except Exception as e:
+            print(f"Test failed with exception: {e}")
+            raise e
     def test_add_baby_profile_success(self):
         try:
-            self.open_app()
-
-            baby_monitor_page = BabyMonitorPage(self.driver)
             baby_timeline_page = BabyTimelinePage(self.driver)
             menu_page = MenuPage(self.driver)
             add_baby_profile_page = AddBabyProfilePage(self.driver)
             edit_baby_profile_page = EditBabyProfilePage(self.driver)
+            delete_profile_page = DeleteProfilePage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page")
-
-            '''Go to Add Baby Profile Page'''
-            menu_page.click_baby_add()
             self.assertTrue(add_baby_profile_page.is_in_add_baby_profile_page(), "Can't go to Add Baby Profile Page")
 
             '''Verify Add Baby Profile Page'''
@@ -85,29 +99,24 @@ class AddBabyTest(BaseTestCase):
             self.assertEqual(edit_baby_profile_page.get_nation_text(), new_baby_nation, "Baby's nation is not properly displayed in Edit Baby Profile Page")
             self.assertEqual(edit_baby_profile_page.get_relative_text(), new_baby_relative, "Baby's relative is not properly displayed in Edit Baby Profile Page")
 
+            '''Delete the baby profile'''
+            edit_baby_profile_page.click_delete_baby_profile()
+            edit_baby_profile_page.click_dialog_yes()
+            delete_profile_page.click_check()
+            delete_profile_page.click_delete_profile()
+
         except AssertionError as ae:
             print(f"Test failed with assertion error: {ae}")
             raise ae
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
 
     def test_add_baby_profile_cancel_with_yes(self):
         try:
-            self.open_app()
-
-            baby_monitor_page = BabyMonitorPage(self.driver)
             menu_page = MenuPage(self.driver)
             add_baby_profile_page = AddBabyProfilePage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page")
-
-            '''Go to Add Baby Profile Page'''
-            menu_page.click_baby_add()
             self.assertTrue(add_baby_profile_page.is_in_add_baby_profile_page(), "Can't go to Add Baby Profile Page")
 
             '''Verify Add Baby Profile Page'''
@@ -155,8 +164,10 @@ class AddBabyTest(BaseTestCase):
 
             '''Click Yes button'''
             add_baby_profile_page.click_cancel_yes()
-            self.assertTrue(baby_monitor_page.is_in_baby_monitor_page(), "Can't automatically go to Menu Page after canceling adding a baby profile")
+            self.assertTrue(menu_page.is_in_menu_page(), "Can't automatically go to Menu Page after canceling adding a baby profile")
 
+            '''Go back to Add Baby Profile Page'''
+            menu_page.click_baby_add()
 
         except AssertionError as ae:
             print(f"Test failed with assertion error: {ae}")
@@ -164,23 +175,11 @@ class AddBabyTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
 
     def test_add_baby_profile_cancel_with_no(self):
         try:
-            self.open_app()
-
-            baby_monitor_page = BabyMonitorPage(self.driver)
-            menu_page = MenuPage(self.driver)
             add_baby_profile_page = AddBabyProfilePage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page")
-
-            '''Go to Add Baby Profile Page'''
-            menu_page.click_baby_add()
             self.assertTrue(add_baby_profile_page.is_in_add_baby_profile_page(), "Can't go to Add Baby Profile Page")
 
             '''Verify Add Baby Profile Page'''
@@ -232,7 +231,7 @@ class AddBabyTest(BaseTestCase):
             self.assertEqual(add_baby_profile_page.get_cancel_yes_button_text(), self.get_string("yes"), "\"Yes\" Button is not properly displayed")
             self.assertEqual(add_baby_profile_page.get_cancel_no_button_text(), self.get_string("no"), "\"No\" Button is not properly displayed")
 
-            '''Click Yes button'''
+            '''Click No button'''
             add_baby_profile_page.click_cancel_no()
             self.assertTrue(add_baby_profile_page.is_in_add_baby_profile_page(), "Can't return to Add Baby Profile Page after clicking No in Cancel confirmation dialog")
 
@@ -250,5 +249,3 @@ class AddBabyTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
