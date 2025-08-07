@@ -3,6 +3,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from appium.webdriver.common.appiumby import AppiumBy
 import datetime
 import time
+import pages.base as base
 
 class EditBabyProfilePage():
     def __init__(self, driver):
@@ -54,14 +55,14 @@ class EditBabyProfilePage():
         self.editPhotoReturnButton = "com.compal.bioslab.pixsee.pixm01:id/image_editor_toolbar_back_img"
 
     def click_cancel(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.cancelButton))
         )
         element = self.driver.find_element("id", self.cancelButton)
         element.click()
 
     def click_done(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.doneButton))
         )
         element = self.driver.find_element("id", self.doneButton)
@@ -69,28 +70,28 @@ class EditBabyProfilePage():
         time.sleep(1)
 
     def click_baby_photo(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.babyPhoto))
         )
         element = self.driver.find_element("id", self.babyPhoto)
         element.click()
 
     def click_gender_boy(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.genderBoyButton))
         )
         element = self.driver.find_element("id", self.genderBoyButton)
         element.click()
 
     def click_gender_girl(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.genderGirlButton))
         )
         element = self.driver.find_element("id", self.genderGirlButton)
         element.click()
 
     def input_baby_name(self, new_name = "Test_Baby 01"):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.babyNameEditText))
         )
         element = self.driver.find_element("id", self.babyNameEditText)
@@ -100,119 +101,119 @@ class EditBabyProfilePage():
         element.send_keys(new_name)
 
     def click_baby_birthday(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.birthdayEditText))
         )
         element = self.driver.find_element("id", self.birthdayEditText)
         element.click()
 
     def click_nation(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.nationButton))
         )
         element = self.driver.find_element("id", self.nationButton)
         element.click()
 
     def click_relative(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.relativeButton))
         )
         element = self.driver.find_element("id", self.relativeButton)
         element.click()
 
     def click_delete_baby_profile(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.deleteBabyProfileButton))
         )
         element = self.driver.find_element("id", self.deleteBabyProfileButton)
         element.click()
 
     def click_dialog_no(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.dialogNoButton))
         )
         element = self.driver.find_element("id", self.dialogNoButton)
         element.click()
 
     def click_dialog_yes(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.dialogYesButton))
         )
         element = self.driver.find_element("id", self.dialogYesButton)
         element.click()
 
     def click_dialog_cancel(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.dialogCancelButton))
         )
         element = self.driver.find_element("id", self.dialogCancelButton)
         element.click()
 
     def click_photos_category(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("xpath", self.photosCategory_xpath))
         )
         element = self.driver.find_element("xpath", self.photosCategory_xpath)
         element.click()
 
     def click_selected_photo(self, number = 0):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("class name", self.photos_classname))
         )
         elements = self.driver.find_elements("class name", self.photos_classname)
         elements[number].click()
 
     def click_edit_photo_done(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.editPhotoDoneButton))
         )
         element = self.driver.find_element("id", self.editPhotoDoneButton)
         element.click()
 
     def get_page_title(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.pageTitleText))
         )
         element = self.driver.find_element("id", self.pageTitleText)
         return element.text
 
     def get_done_button_text(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.doneButton))
         )
         element = self.driver.find_element("id", self.doneButton)
         return element.text
 
     def get_gender_boy_status(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.genderBoyButton))
         )
         element = self.driver.find_element("id", self.genderBoyButton)
         return element.get_attribute("checked") == "true"
 
     def get_gender_girl_status(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.genderGirlButton))
         )
         element = self.driver.find_element("id", self.genderGirlButton)
         return element.get_attribute("checked") == "true"
 
     def get_baby_name_text(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.babyNameEditText))
         )
         element = self.driver.find_element("id", self.babyNameEditText)
         return element.text
 
     def get_baby_birthday_text(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.birthdayEditText))
         )
         element = self.driver.find_element("id", self.birthdayEditText)
         return element.text
 
     def get_nation_text(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.nationButton))
         )
         parent_element = self.driver.find_element("id", self.nationButton)
@@ -220,7 +221,7 @@ class EditBabyProfilePage():
         return element.text
 
     def get_relative_text(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.relativeButton))
         )
         parent_element = self.driver.find_element("id", self.relativeButton)
@@ -228,49 +229,49 @@ class EditBabyProfilePage():
         return element.text
 
     def get_delete_baby_profile_button_text(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.deleteBabyProfileButton))
         )
         element = self.driver.find_element("id", self.deleteBabyProfileButton)
         return element.text
 
     def get_dialog_title(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.dialogTitle))
         )
         element = self.driver.find_element("id", self.dialogTitle)
         return element.text
 
     def get_dialog_message(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.dialogMessage))
         )
         element = self.driver.find_element("id", self.dialogMessage)
         return element.text
 
     def get_dialog_warning_message(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.dialogWarningMessage))
         )
         element = self.driver.find_element("id", self.dialogWarningMessage)
         return element.text.removeprefix("ICON_WARNING").strip() # Warning message has an icon prefix needs to remove it
 
     def get_dialog_no_button_text(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.dialogNoButton))
         )
         element = self.driver.find_element("id", self.dialogNoButton)
         return element.text
 
     def get_dialog_yes_button_text(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.dialogYesButton))
         )
         element = self.driver.find_element("id", self.dialogYesButton)
         return element.text
 
     def get_dialog_cancel_button_text(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.dialogCancelButton))
         )
         element = self.driver.find_element("id", self.dialogCancelButton)
@@ -417,7 +418,7 @@ class EditBabyProfilePage():
 
     def has_calendar(self):
         try:
-            WebDriverWait(self.driver, 20).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.calendar))
             )
             self.driver.find_element("id", self.calendar)
@@ -427,7 +428,7 @@ class EditBabyProfilePage():
 
     def has_selection_list(self):
         try:
-            WebDriverWait(self.driver, 20).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("class name", self.list_classname))
             )
             self.driver.find_element("class name", self.list_classname)
@@ -437,7 +438,7 @@ class EditBabyProfilePage():
 
     def has_dialog(self):
         try:
-            WebDriverWait(self.driver, 20).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.dialog))
             )
             self.driver.find_element("id", self.dialog)
@@ -447,7 +448,7 @@ class EditBabyProfilePage():
 
     def is_in_edit_baby_profile_page(self):
         try:
-            WebDriverWait(self.driver, 20).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.babyPhoto))
             )
             self.driver.find_element("id", self.babyPhoto)

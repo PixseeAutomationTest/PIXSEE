@@ -1,6 +1,7 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
+import pages.base as base
 
 
 class PixseeSettingsPage():
@@ -65,15 +66,9 @@ class PixseeSettingsPage():
 		self.SDcard = "com.compal.bioslab.pixsee.pixm01:id/clSDCardStatus"
 		self.SDcardStatustxt = "com.compal.bioslab.pixsee.pixm01:id/tvSDCardStatus"
 
-
-
-
-
-
-
 	def is_in_settings(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.AreaDetection))
 			)
 			self.driver.find_element("id", self.AreaDetection)
@@ -84,7 +79,7 @@ class PixseeSettingsPage():
 	# click
 
 	def click_back(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.backButton))
 		)
 		element = self.driver.find_element("id", self.backButton)
@@ -92,7 +87,7 @@ class PixseeSettingsPage():
 		time.sleep(1)
 
 	def click_pixsee_profile(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.PixseeProfile))
 		)
 		element = self.driver.find_element("id", self.PixseeProfile)
@@ -100,7 +95,7 @@ class PixseeSettingsPage():
 		time.sleep(1)
 
 	def click_wifi_settings(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.WifiSettings))
 		)
 		element = self.driver.find_element("id", self.WifiSettings)
@@ -108,7 +103,7 @@ class PixseeSettingsPage():
 		time.sleep(1)
 
 	def click_pixsee_friends_detection(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.PixseeFriendsDetection))
 		)
 		element = self.driver.find_element("id", self.PixseeFriendsDetection)
@@ -116,7 +111,7 @@ class PixseeSettingsPage():
 		time.sleep(1)
 
 	def click_environment_settings(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.EnvironmentSettings))
 		)
 		element = self.driver.find_element("id", self.EnvironmentSettings)
@@ -124,7 +119,7 @@ class PixseeSettingsPage():
 		time.sleep(1)
 
 	def click_cry_detection(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.CryDetection))
 		)
 		element = self.driver.find_element("id", self.CryDetection)
@@ -132,7 +127,7 @@ class PixseeSettingsPage():
 		time.sleep(1)
 
 	def click_area_detection(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.AreaDetection))
 		)
 		element = self.driver.find_element("id", self.AreaDetection)
@@ -140,7 +135,7 @@ class PixseeSettingsPage():
 		time.sleep(1)
 
 	def click_covered_face_detection(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.CoveredFaceDetection))
 		)
 		element = self.driver.find_element("id", self.CoveredFaceDetection)
@@ -148,7 +143,7 @@ class PixseeSettingsPage():
 		time.sleep(1)
 
 	def click_time_lapse_video(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.TimeLapseVideo))
 		)
 		element = self.driver.find_element("id", self.TimeLapseVideo)
@@ -156,7 +151,7 @@ class PixseeSettingsPage():
 		time.sleep(1)
 
 	def click_voice_service(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.VoiceService))
 		)
 		element = self.driver.find_element("id", self.VoiceService)
@@ -164,7 +159,7 @@ class PixseeSettingsPage():
 		time.sleep(1)
 
 	def click_shutter_sound_switch(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.ShutterSoundSwitch))
 		)
 		element = self.driver.find_element("id", self.ShutterSoundSwitch)
@@ -172,7 +167,7 @@ class PixseeSettingsPage():
 		time.sleep(1)
 
 	def click_led_indicator_switch(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.LEDindicatorSwitch))
 		)
 		element = self.driver.find_element("id", self.LEDindicatorSwitch)
@@ -180,7 +175,7 @@ class PixseeSettingsPage():
 		time.sleep(1)
 
 	def click_night_mode_switch(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.NightModeSwitch))
 		)
 		element = self.driver.find_element("id", self.NightModeSwitch)
@@ -188,7 +183,7 @@ class PixseeSettingsPage():
 		time.sleep(1)
 
 	def click_privacy_mode_switch(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.PrivacySettingsSwitch))
 		)
 		element = self.driver.find_element("id", self.PrivacySettingsSwitch)
@@ -196,7 +191,7 @@ class PixseeSettingsPage():
 		time.sleep(1)
 
 	def click_sd_card(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.SDcard))
 		)
 		element = self.driver.find_element("id", self.SDcard)
@@ -206,7 +201,7 @@ class PixseeSettingsPage():
 	# text
 	def location_name_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.locationNametxt))
 			)
 			element = self.driver.find_element("id", self.locationNametxt)
@@ -216,7 +211,7 @@ class PixseeSettingsPage():
 
 	def profile_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.PixseeProfiletxt))
 			)
 			element = self.driver.find_element("id", self.PixseeProfiletxt)
@@ -226,7 +221,7 @@ class PixseeSettingsPage():
 
 	def wifi_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.WifiSettingstxt))
 			)
 			element = self.driver.find_element("id", self.WifiSettingstxt)
@@ -236,7 +231,7 @@ class PixseeSettingsPage():
 
 	def pixsee_friends_detection_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.PixseeFriendsDetectiontxt))
 			)
 			element = self.driver.find_element("id", self.PixseeFriendsDetectiontxt)
@@ -246,7 +241,7 @@ class PixseeSettingsPage():
 
 	def pixsee_friends_detection_status_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.PixseeFriendsDetectionStatus))
 			)
 			element = self.driver.find_element("id", self.PixseeFriendsDetectionStatus)
@@ -256,7 +251,7 @@ class PixseeSettingsPage():
 
 	def environment_settings_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.EnvironmentSettingstxt))
 			)
 			element = self.driver.find_element("id", self.EnvironmentSettingstxt)
@@ -266,7 +261,7 @@ class PixseeSettingsPage():
 
 	def environment_settings_status_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.EnvironmentSettingsStatus))
 			)
 			element = self.driver.find_element("id", self.EnvironmentSettingsStatus)
@@ -276,7 +271,7 @@ class PixseeSettingsPage():
 
 	def cry_detection_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.CryDetectiontxt))
 			)
 			element = self.driver.find_element("id", self.CryDetectiontxt)
@@ -286,7 +281,7 @@ class PixseeSettingsPage():
 
 	def cry_detection_status_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.CryDetectionStatus))
 			)
 			element = self.driver.find_element("id", self.CryDetectionStatus)
@@ -296,7 +291,7 @@ class PixseeSettingsPage():
 
 	def area_detection_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.AreaDetectiontxt))
 			)
 			element = self.driver.find_element("id", self.AreaDetectiontxt)
@@ -306,7 +301,7 @@ class PixseeSettingsPage():
 
 	def area_detection_status_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.AreaDetectionStatus))
 			)
 			element = self.driver.find_element("id", self.AreaDetectionStatus)
@@ -316,7 +311,7 @@ class PixseeSettingsPage():
 
 	def covered_face_detection_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.CoveredFaceDetectiontxt))
 			)
 			element = self.driver.find_element("id", self.CoveredFaceDetectiontxt)
@@ -326,7 +321,7 @@ class PixseeSettingsPage():
 
 	def covered_face_detection_status_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.CoveredFaceDetectionStatus))
 			)
 			element = self.driver.find_element("id", self.CoveredFaceDetectionStatus)
@@ -336,7 +331,7 @@ class PixseeSettingsPage():
 
 	def time_lapse_video_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.TimeLapseVideotxt))
 			)
 			element = self.driver.find_element("id", self.TimeLapseVideotxt)
@@ -346,7 +341,7 @@ class PixseeSettingsPage():
 
 	def time_lapse_video_status_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.TimeLapseVideoStatus))
 			)
 			element = self.driver.find_element("id", self.TimeLapseVideoStatus)
@@ -356,7 +351,7 @@ class PixseeSettingsPage():
 
 	def voice_service_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.VoiceServicetxt))
 			)
 			element = self.driver.find_element("id", self.VoiceServicetxt)
@@ -366,7 +361,7 @@ class PixseeSettingsPage():
 
 	def shutter_sound_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.ShutterSoundtxt))
 			)
 			element = self.driver.find_element("id", self.ShutterSoundtxt)
@@ -376,7 +371,7 @@ class PixseeSettingsPage():
 
 	def led_indicator_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.LEDindicatortxt))
 			)
 			element = self.driver.find_element("id", self.LEDindicatortxt)
@@ -386,7 +381,7 @@ class PixseeSettingsPage():
 
 	def night_mode_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.NightModetxt))
 			)
 			element = self.driver.find_element("id", self.NightModetxt)
@@ -396,7 +391,7 @@ class PixseeSettingsPage():
 
 	def night_mode_subtext(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.NightModeSubtext))
 			)
 			element = self.driver.find_element("id", self.NightModeSubtext)
@@ -406,7 +401,7 @@ class PixseeSettingsPage():
 
 	def privacy_mode_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.PrivacySettingstxt))
 			)
 			element = self.driver.find_element("id", self.PrivacySettingstxt)
@@ -416,7 +411,7 @@ class PixseeSettingsPage():
 
 	def privacy_mode_subtext(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.PrivacySettingsSubtext))
 			)
 			element = self.driver.find_element("id", self.PrivacySettingsSubtext)
@@ -426,7 +421,7 @@ class PixseeSettingsPage():
 
 	def sdcard_status_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.SDcardStatustxt))
 			)
 			element = self.driver.find_element("id", self.SDcardStatustxt)
@@ -437,7 +432,7 @@ class PixseeSettingsPage():
 	# switch
 	def shutter_sound_switch_status(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.ShutterSoundSwitch))
 			)
 			element = self.driver.find_element("id", self.ShutterSoundSwitch)
@@ -447,7 +442,7 @@ class PixseeSettingsPage():
 
 	def led_indicator_switch_status(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.LEDindicatorSwitch))
 			)
 			element = self.driver.find_element("id", self.LEDindicatorSwitch)
@@ -457,7 +452,7 @@ class PixseeSettingsPage():
 
 	def night_mode_switch_status(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.NightModeSwitch))
 			)
 			element = self.driver.find_element("id", self.NightModeSwitch)
@@ -467,7 +462,7 @@ class PixseeSettingsPage():
 
 	def privacy_mode_switch_status(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.PrivacySettingsSwitch))
 			)
 			element = self.driver.find_element("id", self.PrivacySettingsSwitch)

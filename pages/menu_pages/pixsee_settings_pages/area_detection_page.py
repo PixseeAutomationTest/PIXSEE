@@ -3,6 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from PIL import Image
 import os
+import pages.base as base
 
 
 class AreaDetectionPage():
@@ -45,97 +46,97 @@ class AreaDetectionPage():
 		self.information = "com.compal.bioslab.pixsee.pixm01:id/btEffenceInformation"
 		self.Stream = "com.compal.bioslab.pixsee.pixm01:id/area_stream"
 	def click_skip(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.Skip))
 		)
 		element = self.driver.find_element("id", self.Skip)
 		element.click()
 	def click_back(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.Back))
 		)
 		element = self.driver.find_element("id", self.Back)
 		element.click()
 	def click_save(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.Save))
 		)
 		element = self.driver.find_element("id", self.Save)
 		element.click()
 	def click_switch(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.Switch))
 		)
 		element = self.driver.find_element(AppiumBy.ID, self.Switch)
 		element.click()
 	def click_low(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.LowCheckBox))
 		)
 		element = self.driver.find_element("id", self.LowCheckBox)
 		element.click()
 	def click_medium(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.MediumCheckBox))
 		)
 		element = self.driver.find_element("id", self.MediumCheckBox)
 		element.click()
 	def click_high(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.HighCheckBox))
 		)
 		element = self.driver.find_element("id", self.HighCheckBox)
 		element.click()
 	def click_turn_off_15_min(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.TurnOff15Button))
 		)
 		element = self.driver.find_element("id", self.TurnOff15Button)
 		element.click()
 	def click_turn_off_30_min(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.TurnOff30Button))
 		)
 		element = self.driver.find_element("id", self.TurnOff30Button)
 		element.click()
 	def click_turn_off(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.TurnOffButton))
 		)
 		element = self.driver.find_element("id", self.TurnOffButton)
 		element.click()
 	def click_turn_off_cancel(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.TurnOffCancelButton))
 		)
 		element = self.driver.find_element("id", self.TurnOffCancelButton)
 		element.click()
 	def click_baby_out(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.Baby0utCheckBox))
 		)
 		element = self.driver.find_element("id", self.Baby0utCheckBox)
 		element.click()
 	def click_baby_in(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.BabyInCheckBox))
 		)
 		element = self.driver.find_element("id", self.BabyInCheckBox)
 		element.click()
 	def click_discard_no(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.DiscardNo))
 		)
 		element = self.driver.find_element("id", self.DiscardNo)
 		element.click()
 	def click_discard_yes(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.DiscardYes))
 		)
 		element = self.driver.find_element("id", self.DiscardYes)
 		element.click()
 	def click_information(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.information))
 		)
 		element = self.driver.find_element("id", self.information)
@@ -143,7 +144,7 @@ class AreaDetectionPage():
 
 	def discard_message_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.DiscardTitle))
 			)
 			element = self.driver.find_element("id", self.DiscardTitle)
@@ -152,7 +153,7 @@ class AreaDetectionPage():
 			return None
 	def discard_no_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.DiscardNo))
 			)
 			element = self.driver.find_element("id", self.DiscardNo)
@@ -161,7 +162,7 @@ class AreaDetectionPage():
 			return None
 	def discard_yes_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.DiscardYes))
 			)
 			element = self.driver.find_element("id", self.DiscardYes)
@@ -170,7 +171,7 @@ class AreaDetectionPage():
 			return None
 	def header_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Header))
 			)
 			element = self.driver.find_element("id", self.Header)
@@ -179,7 +180,7 @@ class AreaDetectionPage():
 			return None
 	def tutor_first_title_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.TutorTitle1))
 			)
 			element = self.driver.find_element("id", self.TutorTitle1)
@@ -188,7 +189,7 @@ class AreaDetectionPage():
 			return None
 	def tutor_second_title_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.TutorTitle2))
 			)
 			element = self.driver.find_element("id", self.TutorTitle2)
@@ -197,7 +198,7 @@ class AreaDetectionPage():
 			return None
 	def skip_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Skip))
 			)
 			element = self.driver.find_element("id", self.Skip)
@@ -206,7 +207,7 @@ class AreaDetectionPage():
 			return None
 	def title(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Detection))
 			)
 			element = self.driver.find_element("id", self.Detection)
@@ -215,7 +216,7 @@ class AreaDetectionPage():
 			return None
 	def detection_description(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.DetectionSubtitle))
 			)
 			element = self.driver.find_element("id", self.DetectionSubtitle)
@@ -224,7 +225,7 @@ class AreaDetectionPage():
 			return None
 	def sensitivity_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Sensitivity))
 			)
 			element = self.driver.find_element("id", self.Sensitivity)
@@ -232,43 +233,43 @@ class AreaDetectionPage():
 		except :
 			return None
 	def dettype_txt(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.DetectionType))
 		)
 		return self.driver.find_element(AppiumBy.ID, self.DetectionType).text
 	def turn_off_dialog_title(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.TurnOffDialog))
 		)
 		return self.driver.find_element(AppiumBy.ID, self.TurnOffDialog).text
 	def turn_off_15_min_text(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.TurnOff15Button))
 		)
 		return self.driver.find_element(AppiumBy.ID, self.TurnOff15Button).text
 	def turn_off_30_min_text(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.TurnOff30Button))
 		)
 		return self.driver.find_element(AppiumBy.ID, self.TurnOff30Button).text
 	def turn_off_text(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.TurnOffButton))
 		)
 		return self.driver.find_element(AppiumBy.ID, self.TurnOffButton).text
 	def turn_off_cancel_text(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.TurnOffCancelButton))
 		)
 		return self.driver.find_element(AppiumBy.ID, self.TurnOffCancelButton).text
 	def drag_text(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.DragDescription))
 		)
 		return self.driver.find_element(AppiumBy.ID, self.DragDescription).text
 	def low_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Low))
 			)
 			element = self.driver.find_element("id", self.Low)
@@ -277,7 +278,7 @@ class AreaDetectionPage():
 			return None
 	def medium_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Medium))
 			)
 			element = self.driver.find_element("id", self.Medium)
@@ -286,7 +287,7 @@ class AreaDetectionPage():
 			return None
 	def high_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.High))
 			)
 			element = self.driver.find_element("id", self.High)
@@ -295,7 +296,7 @@ class AreaDetectionPage():
 			return None
 	def baby_in_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.BabyIn))
 			)
 			element = self.driver.find_element("id", self.BabyIn)
@@ -304,7 +305,7 @@ class AreaDetectionPage():
 			return None
 	def baby_out_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.BabyOut))
 			)
 			element = self.driver.find_element("id", self.BabyOut)
@@ -314,7 +315,7 @@ class AreaDetectionPage():
 
 	def is_in_area_detection_tutor_page(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.TutorTitle1))
 			)
 			return True
@@ -322,21 +323,21 @@ class AreaDetectionPage():
 			return False
 	def is_in_area_detection_page(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Header))
 			)
 			return True
 		except :
 			return False
 	def is_in_tutor_first_page(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("xpath", self.TutorFirstPageIndicator))
 		)
 		light = self.driver.find_element("xpath", self.TutorFirstPageIndicator)
 		is_in_right = light.get_attribute("selected")
 		return is_in_right == "true"
 	def is_in_tutor_second_page(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("xpath", self.TutorSecondPageIndicator))
 		)
 		light = self.driver.find_element("xpath", self.TutorSecondPageIndicator)
@@ -344,7 +345,7 @@ class AreaDetectionPage():
 		return is_in_left == "true"
 	def is_in_turn_off_dialog(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.TurnOffDialog))
 			)
 			return True
@@ -352,7 +353,7 @@ class AreaDetectionPage():
 			return False
 	def is_in_discard_dialog(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.DiscardTitle))
 			)
 			return True
@@ -360,34 +361,34 @@ class AreaDetectionPage():
 			return False
 
 	def is_save_enable(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.Save))
 		)
 		button = self.driver.find_element(AppiumBy.ID, self.Save)
 		is_enable = button.get_attribute("enabled")
 		return is_enable == "true"
 	def is_switch_on(self):
-		WebDriverWait(self.driver, 3).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.Switch))
 		)
 		switch = self.driver.find_element(AppiumBy.ID, self.Switch)
 		return switch.get_attribute("checked") == "true"
 	def is_low_clickable(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.LowCheckBox))
 		)
 		button = self.driver.find_element(AppiumBy.ID, self.LowCheckBox)
 		is_clickable = button.get_attribute("clickable")
 		return is_clickable == "true"
 	def is_medium_clickable(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.MediumCheckBox))
 		)
 		button = self.driver.find_element(AppiumBy.ID, self.MediumCheckBox)
 		is_clickable = button.get_attribute("clickable")
 		return is_clickable == "true"
 	def is_high_clickable(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.HighCheckBox))
 		)
 		button = self.driver.find_element(AppiumBy.ID, self.HighCheckBox)
@@ -396,7 +397,7 @@ class AreaDetectionPage():
 
 	def snooze_shows(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Snooze))
 			)
 			return True

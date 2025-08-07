@@ -3,6 +3,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from appium.webdriver.common.appiumby import AppiumBy
 import datetime
 import time
+import pages.base as base
 
 class UserProfilePage():
     def __init__(self, driver):
@@ -53,28 +54,28 @@ class UserProfilePage():
         self.editPhotoReturnButton = "com.compal.bioslab.pixsee.pixm01:id/image_editor_toolbar_back_img"
 
     def click_user_photo(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.userPhoto))
         )
         element = self.driver.find_element("id", self.userPhoto)
         element.click()
 
     def click_done(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.doneButton))
         )
         element = self.driver.find_element("id", self.doneButton)
         element.click()
 
     def click_return(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.returnButton))
         )
         element = self.driver.find_element("id", self.returnButton)
         element.click()
 
     def input_user_name(self, new_name = "Test_User 01"):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.userNameEditText))
         )
         element = self.driver.find_element("id", self.userNameEditText)
@@ -84,42 +85,42 @@ class UserProfilePage():
         element.send_keys(new_name)
 
     def click_change_password(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.changePasswordButton))
         )
         element = self.driver.find_element("id", self.changePasswordButton)
         element.click()
 
     def click_birthday(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.birthdayButton))
         )
         element = self.driver.find_element("id", self.birthdayButton)
         element.click()
 
     def click_add_backup_email(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.addBackupEmailButton))
         )
         element = self.driver.find_element("id", self.addBackupEmailButton)
         element.click()
 
     def click_change_backup_email(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.changeBackupEmailButton))
         )
         element = self.driver.find_element("id", self.changeBackupEmailButton)
         element.click()
 
     def click_delete_account(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.deleteAccountButton))
         )
         element = self.driver.find_element("id", self.deleteAccountButton)
         element.click()
 
     def click_add_backup_email_dialog_ok(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("xpath", self.addBackupEmailDialog_xpath))
         )
         dialog = self.driver.find_element("xpath", self.addBackupEmailDialog_xpath)
@@ -127,7 +128,7 @@ class UserProfilePage():
         buttons[0].click()
 
     def click_add_backup_email_dialog_cancel(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("xpath", self.addBackupEmailDialog_xpath))
         )
         dialog = self.driver.find_element("xpath", self.addBackupEmailDialog_xpath)
@@ -135,84 +136,84 @@ class UserProfilePage():
         buttons[1].click()
 
     def click_photos_category(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("xpath", self.photosCategory_xpath))
         )
         element = self.driver.find_element("xpath", self.photosCategory_xpath)
         element.click()
 
     def click_selected_photo(self, number=0):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("class name", self.photos_classname))
         )
         elements = self.driver.find_elements("class name", self.photos_classname)
         elements[number].click()
 
     def click_edit_photo_done(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.editPhotoDoneButton))
         )
         element = self.driver.find_element("id", self.editPhotoDoneButton)
         element.click()
 
     def get_page_title(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.pageTitleText))
         )
         element = self.driver.find_element("id", self.pageTitleText)
         return element.text
 
     def get_done_button_text(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.doneButton))
         )
         element = self.driver.find_element("id", self.doneButton)
         return element.text
 
     def get_user_name_text(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.userNameEditText))
         )
         element = self.driver.find_element("id", self.userNameEditText)
         return element.text
 
     def get_user_birthday_text(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.birthdayButton))
         )
         element = self.driver.find_element("id", self.birthdayButton)
         return element.text
 
     def get_change_password_button_text(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.changePasswordButton))
         )
         element = self.driver.find_element("id", self.changePasswordButton)
         return element.text
 
     def get_add_backup_email_button_text(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.addBackupEmailButton))
         )
         element = self.driver.find_element("id", self.addBackupEmailButton)
         return element.text
 
     def get_change_backup_email_button_text(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.changeBackupEmailButton))
         )
         element = self.driver.find_element("id", self.changeBackupEmailButton)
         return element.text
 
     def get_delete_account_button_text(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.deleteAccountButton))
         )
         element = self.driver.find_element("id", self.deleteAccountButton)
         return element.text
 
     def get_add_backup_email_dialog_title_text(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("xpath", self.addBackupEmailDialog_xpath))
         )
         dialog = self.driver.find_element("xpath", self.addBackupEmailDialog_xpath)
@@ -220,7 +221,7 @@ class UserProfilePage():
         return elements[0].text
 
     def get_add_backup_email_dialog_info_text(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("xpath", self.addBackupEmailDialog_xpath))
         )
         dialog = self.driver.find_element("xpath", self.addBackupEmailDialog_xpath)
@@ -228,7 +229,7 @@ class UserProfilePage():
         return elements[1].text
 
     def get_add_backup_email_dialog_ok_button_text(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("xpath", self.addBackupEmailDialog_xpath))
         )
         dialog = self.driver.find_element("xpath", self.addBackupEmailDialog_xpath)
@@ -237,7 +238,7 @@ class UserProfilePage():
         return element.text
 
     def get_add_backup_email_dialog_cancel_button_text(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("xpath", self.addBackupEmailDialog_xpath))
         )
         dialog = self.driver.find_element("xpath", self.addBackupEmailDialog_xpath)
@@ -336,7 +337,7 @@ class UserProfilePage():
 
     def has_backup_email(self):
         try:
-            WebDriverWait(self.driver, 20).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.backupEmailText))
             )
             self.driver.find_element("id", self.backupEmailText)
@@ -346,7 +347,7 @@ class UserProfilePage():
 
     def has_calendar(self):
         try:
-            WebDriverWait(self.driver, 20).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.calendar))
             )
             self.driver.find_element("id", self.calendar)
@@ -356,7 +357,7 @@ class UserProfilePage():
 
     def has_delete_account_dialog(self):
         try:
-            WebDriverWait(self.driver, 20).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.deleteAccountDialog))
             )
             self.driver.find_element("id", self.deleteAccountDialog)
@@ -366,7 +367,7 @@ class UserProfilePage():
 
     def has_add_backup_email_dialog(self):
         try:
-            WebDriverWait(self.driver, 20).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("xpath", self.addBackupEmailDialog_xpath))
             )
             self.driver.find_element("xpath", self.addBackupEmailDialog_xpath)
@@ -376,7 +377,7 @@ class UserProfilePage():
 
     def is_in_user_profile_page(self):
         try:
-            WebDriverWait(self.driver, 20).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.userPhoto))
             )
             self.driver.find_element("id", self.userPhoto)

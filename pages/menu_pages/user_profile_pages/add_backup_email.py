@@ -1,5 +1,6 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import pages.base as base
 
 class AddBackupEmailPage():
 		def __init__(self, driver):
@@ -12,35 +13,35 @@ class AddBackupEmailPage():
 			self.cancelButton_xpath = "//androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.view.View[1]"
 
 		def click_cancel(self):
-			WebDriverWait(self.driver, 20).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("xpath", self.cancelButton_xpath))
 			)
 			element = self.driver.find_element("xpath", self.cancelButton_xpath)
 			element.click()
 
 		def click_next(self):
-			WebDriverWait(self.driver, 20).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("xpath", self.nextButton_xpath))
 			)
 			element = self.driver.find_element("xpath", self.nextButton_xpath)
 			element.click()
 
 		def input_email(self, email):
-			WebDriverWait(self.driver, 20).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("class name", self.emailEdit_classname))
 			)
 			element = self.driver.find_element("class name", self.emailEdit_classname)
 			element.send_keys(email)
 
 		def get_title_text(self):
-			WebDriverWait(self.driver, 20).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("class name", self.text_classname))
 			)
 			elements = self.driver.find_elements("class name", self.text_classname)
 			return elements[0].text # The first element is the title text
 
 		def get_edit_email_hint(self):
-			WebDriverWait(self.driver, 20).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("class name", self.emailEdit_classname))
 			)
 			email_edittext = self.driver.find_element("class name", self.emailEdit_classname)
@@ -48,7 +49,7 @@ class AddBackupEmailPage():
 			return element.text
 
 		def get_next_button_text(self):
-			WebDriverWait(self.driver, 20).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("xpath", self.nextButton_xpath))
 			)
 			next_button = self.driver.find_element("xpath", self.nextButton_xpath)
@@ -56,7 +57,7 @@ class AddBackupEmailPage():
 			return element.text
 
 		def has_error_message_text(self):
-			WebDriverWait(self.driver, 20).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("xpath", self.activity_xpath))
 			)
 			activity = self.driver.find_element("xpath", self.activity_xpath)

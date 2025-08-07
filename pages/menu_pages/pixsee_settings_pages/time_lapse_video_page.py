@@ -2,6 +2,7 @@ from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
+import pages.base as base
 
 
 class TimeLapseVideoPage():
@@ -39,7 +40,7 @@ class TimeLapseVideoPage():
 
     def is_in_timelapse_video_page(self):
         try:
-            WebDriverWait(self.driver, 30).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.Subtitle))
             )
             return True
@@ -47,7 +48,7 @@ class TimeLapseVideoPage():
             return False
     def is_in_timelapse_upgrade_dialog(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.UpgradeTitle))
             )
             return True
@@ -55,7 +56,7 @@ class TimeLapseVideoPage():
             return False
     def is_in_upgrade_dialog(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.UpgradeTitle))
             )
             return True
@@ -63,7 +64,7 @@ class TimeLapseVideoPage():
             return False
     def is_in_discard_dialog(self):
         try:
-            WebDriverWait(self.driver, 20).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located((AppiumBy.ID, self.DiscardMessage))
             )
             self.driver.find_element(AppiumBy.ID, self.DiscardMessage)
@@ -73,7 +74,7 @@ class TimeLapseVideoPage():
             return False
     def is_in_timer(self):
         try:
-            WebDriverWait(self.driver, 20).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located((AppiumBy.ID, self.Cancel))
             )
             self.driver.find_element(AppiumBy.ID, self.Cancel)
@@ -83,7 +84,7 @@ class TimeLapseVideoPage():
             return False
 
     def is_switch_on(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.Switch))
         )
         element = self.driver.find_element("id", self.Switch)
@@ -92,7 +93,7 @@ class TimeLapseVideoPage():
 
     def header_text(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.Header))
             )
             element = self.driver.find_element("id", self.Header)
@@ -101,7 +102,7 @@ class TimeLapseVideoPage():
             return None
     def title(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.TimeLapseRecording))
             )
             element = self.driver.find_element("id", self.TimeLapseRecording)
@@ -110,7 +111,7 @@ class TimeLapseVideoPage():
             return None
     def description(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.Subtitle))
             )
             element = self.driver.find_element("id", self.Subtitle)
@@ -119,7 +120,7 @@ class TimeLapseVideoPage():
             return None
     def upgrade_title_txt(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.UpgradeTitle))
             )
             element = self.driver.find_element("id", self.UpgradeTitle)
@@ -128,7 +129,7 @@ class TimeLapseVideoPage():
             return None
     def upgrade_subscription_txt(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.UpgradeSubscription))
             )
             element = self.driver.find_element("id", self.UpgradeSubscription)
@@ -137,7 +138,7 @@ class TimeLapseVideoPage():
             return None
     def upgrade_no_txt(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.UpgradeNo))
             )
             element = self.driver.find_element("id", self.UpgradeNo)
@@ -146,7 +147,7 @@ class TimeLapseVideoPage():
             return None
     def recording_mode_text(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.RecordingMode))
             )
             element = self.driver.find_element("id", self.RecordingMode)
@@ -155,7 +156,7 @@ class TimeLapseVideoPage():
             return None
     def time_span_text(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.TimeSpan))
             )
             element = self.driver.find_element("id", self.TimeSpan)
@@ -164,7 +165,7 @@ class TimeLapseVideoPage():
             return None
     def entire_time_text(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.EntireTime))
             )
             element = self.driver.find_element("id", self.EntireTime)
@@ -173,7 +174,7 @@ class TimeLapseVideoPage():
             return None
     def people_in_view_text(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.PeopleInView))
             )
             element = self.driver.find_element("id", self.PeopleInView)
@@ -182,7 +183,7 @@ class TimeLapseVideoPage():
             return None
     def twelve_hours_text(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.TwelveHours))
             )
             element = self.driver.find_element("id", self.TwelveHours)
@@ -191,7 +192,7 @@ class TimeLapseVideoPage():
             return None
     def twenty_four_hours_text(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.TwentyFourHours))
             )
             element = self.driver.find_element("id", self.TwentyFourHours)
@@ -200,7 +201,7 @@ class TimeLapseVideoPage():
             return None
     def starting_time_text(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.StartingTime))
             )
             element = self.driver.find_element("id", self.StartingTime)
@@ -209,7 +210,7 @@ class TimeLapseVideoPage():
             return None
     def timer_text(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.Timer))
             )
             element = self.driver.find_element("id", self.Timer)
@@ -217,27 +218,27 @@ class TimeLapseVideoPage():
         except :
             return None
     def cancel_txt(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located((AppiumBy.ID, self.Cancel))
         )
         return self.driver.find_element(AppiumBy.ID, self.Cancel).text
     def confirm_txt(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located((AppiumBy.ID, self.Confirm))
         )
         return self.driver.find_element(AppiumBy.ID, self.Confirm).text
     def discard_message_txt(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located((AppiumBy.ID, self.DiscardMessage))
         )
         return self.driver.find_element(AppiumBy.ID, self.DiscardMessage).text
     def discard_yes_txt(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located((AppiumBy.ID, self.DiscardYes))
         )
         return self.driver.find_element(AppiumBy.ID, self.DiscardYes).text
     def discard_no_txt(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located((AppiumBy.ID, self.DiscardNo))
         )
         return self.driver.find_element(AppiumBy.ID, self.DiscardNo).text
@@ -261,88 +262,88 @@ class TimeLapseVideoPage():
         time.sleep(1)
 
     def click_back(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.Back))
         )
         element = self.driver.find_element("id", self.Back)
         element.click()
     def click_save(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.Save))
         )
         element = self.driver.find_element("id", self.Save)
         element.click()
     def click_switch(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.Switch))
         )
         element = self.driver.find_element("id", self.Switch)
         element.click()
     def click_upgrade_subscription(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.UpgradeSubscription))
         )
         element = self.driver.find_element("id", self.UpgradeSubscription)
         element.click()
     def click_upgrade_no(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.UpgradeNo))
         )
         element = self.driver.find_element("id", self.UpgradeNo)
         element.click()
     def click_entire_time_checkbox(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.EntireTimeCheckbox))
         )
         element = self.driver.find_element("id", self.EntireTimeCheckbox)
         element.click()
     def click_people_in_view_checkbox(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.PeopleInViewCheckbox))
         )
         element = self.driver.find_element("id", self.PeopleInViewCheckbox)
         element.click()
     def click_twelve_hours_checkbox(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.TwelveHoursCheckbox))
         )
         element = self.driver.find_element("id", self.TwelveHoursCheckbox)
         element.click()
     def click_twenty_four_hours_checkbox(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.TwentyFourHoursCheckbox))
         )
         element = self.driver.find_element("id", self.TwentyFourHoursCheckbox)
         element.click()
     def click_timer(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.Timer))
         )
         element = self.driver.find_element("id", self.Timer)
         element.click()
     def click_cancel(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located((AppiumBy.ID, self.Cancel))
         )
         self.driver.find_element(AppiumBy.ID, self.Cancel).click()
     def click_confirm(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located((AppiumBy.ID, self.Confirm))
         )
         self.driver.find_element(AppiumBy.ID, self.Confirm).click()
     def click_discard_yes(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located((AppiumBy.ID, self.DiscardYes))
         )
         self.driver.find_element(AppiumBy.ID, self.DiscardYes).click()
     def click_discard_no(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located((AppiumBy.ID, self.DiscardNo))
         )
         self.driver.find_element(AppiumBy.ID, self.DiscardNo).click()
 
     def is_save_enable(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located((AppiumBy.ID, self.Save))
         )
         button = self.driver.find_element(AppiumBy.ID, self.Save)
@@ -351,14 +352,14 @@ class TimeLapseVideoPage():
 
     # check if the checkbox is clicked
     def is_twelve_hours_clicked(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located((AppiumBy.ID, self.TwelveHoursCheckbox))
         )
         button = self.driver.find_element(AppiumBy.ID, self.TwelveHoursCheckbox)
         is_clickable = button.get_attribute("checked")
         return is_clickable == "true"
     def is_twenty_four_hours_clicked(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located((AppiumBy.ID, self.TwentyFourHoursCheckbox))
         )
         button = self.driver.find_element(AppiumBy.ID, self.TwentyFourHoursCheckbox)
