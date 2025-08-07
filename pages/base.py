@@ -38,9 +38,10 @@ class BaseTestCase(unittest.TestCase):
         self.driver.update_settings({"waitForIdleTimeout": 1000})
     def open_app(self):
         self.driver.activate_app(self.driver.capabilities.get("appPackage"))
-        time.sleep(5)
+        time.sleep(10)
     def shutdown_app(self):
         self.driver.terminate_app(self.driver.capabilities.get("appPackage"))
+        time.sleep(5)
     # from right to left
     def left_wipe(self):
         time.sleep(0.5)

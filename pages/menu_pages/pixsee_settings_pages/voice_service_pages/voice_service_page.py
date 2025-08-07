@@ -9,7 +9,7 @@ class VoiceServicePage():
 		self.pageTitleText = "com.compal.bioslab.pixsee.pixm01:id/toolbar_title"
 		self.detectionNotificationText = "com.compal.bioslab.pixsee.pixm01:id/cl_voice_command_detection_label"
 		self.serviceSectionParent = "com.compal.bioslab.pixsee.pixm01:id/clServiceSection"
-		self.serviceSectionText_class_name = "android.widget.TextView"
+		self.serviceSectionText_classname = "android.widget.TextView"
 		self.voiceCommandText = "com.compal.bioslab.pixsee.pixm01:id/tvVoiceCommand"
 
 		self.backButton = "com.compal.bioslab.pixsee.pixm01:id/toolbar_back"
@@ -91,7 +91,7 @@ class VoiceServicePage():
 			EC.presence_of_element_located(("id", self.serviceSectionParent))
 		)
 		parent_element = self.driver.find_element("id", self.serviceSectionParent)
-		element = parent_element.find_element("class name", self.serviceSectionText_class_name)
+		element = parent_element.find_element("class name", self.serviceSectionText_classname)
 		return element.text
 
 	def get_voice_command_button_text(self):

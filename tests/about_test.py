@@ -4,21 +4,36 @@ from pages.baby_monitor_page import BabyMonitorPage
 from pages.menu_pages.menu_page import MenuPage
 from pages.menu_pages.about_page import AboutPage
 
-class AboutTest(BaseTestCase):
-    def test_about_pixsee(self):
-        self.open_app()
+import time
 
+class AboutTest(BaseTestCase):
+    def setUp(self):
+        super().setUp()
+
+        baby_monitor_page = BabyMonitorPage(self.driver)
+        menu_page = MenuPage(self.driver)
+        about_page = AboutPage(self.driver)
+        try:
+            while self.driver.current_package != self.driver.capabilities.get("appPackage"):
+                self.driver.terminate_app(self.driver.current_package)
+                self.open_app()
+            if about_page.is_in_about_page():
+                return
+            elif not baby_monitor_page.is_in_baby_monitor_page():
+                self.shutdown_app()
+                self.open_app()
+            print("Finish opening app.")
+            baby_monitor_page.click_home()
+            menu_page.click_about()
+        except Exception as e:
+            print(f"Test failed with exception: {e}")
+            raise e
+    def test_about_pixsee(self):
         baby_monitor_page = BabyMonitorPage(self.driver)
         menu_page = MenuPage(self.driver)
         about_page = AboutPage(self.driver)
 
         try:
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page")
-
-            '''Go to About Page'''
-            menu_page.click_about()
             self.assertTrue(about_page.is_in_about_page(), "Can't go to About Page")
 
             '''Verify About Page content'''
@@ -43,23 +58,13 @@ class AboutTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
 
     def test_privacy_policy(self):
-        self.open_app()
-
         baby_monitor_page = BabyMonitorPage(self.driver)
         menu_page = MenuPage(self.driver)
         about_page = AboutPage(self.driver)
 
         try:
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page")
-
-            '''Go to About Page'''
-            menu_page.click_about()
             self.assertTrue(about_page.is_in_about_page(), "Can't go to About Page")
 
             '''Verify About Page content'''
@@ -84,23 +89,13 @@ class AboutTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
 
     def test_terms_of_service(self):
-        self.open_app()
-
         baby_monitor_page = BabyMonitorPage(self.driver)
         menu_page = MenuPage(self.driver)
         about_page = AboutPage(self.driver)
 
         try:
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page")
-
-            '''Go to About Page'''
-            menu_page.click_about()
             self.assertTrue(about_page.is_in_about_page(), "Can't go to About Page")
 
             '''Verify About Page content'''
@@ -125,5 +120,3 @@ class AboutTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
