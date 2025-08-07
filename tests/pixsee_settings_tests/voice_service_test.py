@@ -7,25 +7,35 @@ from pages.menu_pages.pixsee_settings_pages.voice_service_pages.voice_service_pa
 from pages.menu_pages.pixsee_settings_pages.voice_service_pages.voice_command_page import VoiceCommandPage
 
 class VoiceServiceTest(BaseTestCase):
+    def setUp(self):
+        super().setUp()
+
+        baby_monitor_page = BabyMonitorPage(self.driver)
+        menu_page = MenuPage(self.driver)
+        pixsee_settings_page = PixseeSettingsPage(self.driver)
+        voice_service_page = VoiceServicePage(self.driver)
+        try:
+            while self.driver.current_package != self.driver.capabilities.get("appPackage"):
+                self.driver.terminate_app(self.driver.current_package)
+                self.open_app()
+            if voice_service_page.is_in_voice_service_page():
+                if voice_service_page.get_save_button_enabled():
+                    voice_service_page.click_detection_switch()
+                return
+            elif not baby_monitor_page.is_in_baby_monitor_page():
+                self.shutdown_app()
+                self.open_app()
+            baby_monitor_page.click_home()
+            menu_page.click_settings()
+            pixsee_settings_page.click_voice_service()
+        except Exception as e:
+            print(f"Test failed with exception: {e}")
+            raise e
     def test_changing_status_discard_with_yes(self):
         try:
-            self.open_app()
-
-            baby_monitor_page = BabyMonitorPage(self.driver)
-            menu_page = MenuPage(self.driver)
             pixsee_settings_page = PixseeSettingsPage(self.driver)
             voice_service_page = VoiceServicePage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Baby Monitor Page")
-
-            '''Go to Pixsee Settings Page'''
-            menu_page.click_settings()
-            self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
-
-            '''Go to Voice Service Page'''
-            pixsee_settings_page.click_voice_service()
             self.assertTrue(voice_service_page.is_in_voice_service_page(), "Can't go to Voice Service Page")
 
             '''Verify Voice Service Page'''
@@ -65,28 +75,11 @@ class VoiceServiceTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
 
     def test_changing_status_discard_with_no(self):
         try:
-            self.open_app()
-
-            baby_monitor_page = BabyMonitorPage(self.driver)
-            menu_page = MenuPage(self.driver)
-            pixsee_settings_page = PixseeSettingsPage(self.driver)
             voice_service_page = VoiceServicePage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Baby Monitor Page")
-
-            '''Go to Pixsee Settings Page'''
-            menu_page.click_settings()
-            self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
-
-            '''Go to Voice Service Page'''
-            pixsee_settings_page.click_voice_service()
             self.assertTrue(voice_service_page.is_in_voice_service_page(), "Can't go to Voice Service Page")
 
             '''Verify Voice Service Page'''
@@ -105,8 +98,6 @@ class VoiceServiceTest(BaseTestCase):
             self.assertTrue(voice_service_page.get_save_button_enabled(), "button \"Save\" is not enabled after changing detection switch")
 
             '''Verify Discard dialog'''
-            if before_detection_switch_status == voice_service_page.get_detection_switch_status():
-                voice_service_page.click_detection_switch()
             voice_service_page.click_back()
             self.assertTrue(voice_service_page.has_discard_dialog(), "\"Discard Voice Commands settings\" window doesn't appear")
             self.assertEqual(voice_service_page.get_discard_dialog_title(), self.get_string("voice_commands_discard"), "Text \"Discard Voice Commands settings?\" is not properly displayed")
@@ -124,28 +115,12 @@ class VoiceServiceTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
 
     def test_changing_status_save(self):
         try:
-            self.open_app()
-
-            baby_monitor_page = BabyMonitorPage(self.driver)
-            menu_page = MenuPage(self.driver)
             pixsee_settings_page = PixseeSettingsPage(self.driver)
             voice_service_page = VoiceServicePage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Baby Monitor Page")
-
-            '''Go to Pixsee Settings Page'''
-            menu_page.click_settings()
-            self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
-
-            '''Go to Voice Service Page'''
-            pixsee_settings_page.click_voice_service()
             self.assertTrue(voice_service_page.is_in_voice_service_page(), "Can't go to Voice Service Page")
 
             '''Verify Voice Service Page'''
@@ -176,28 +151,12 @@ class VoiceServiceTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
 
     def test_no_changing_status(self):
         try:
-            self.open_app()
-
-            baby_monitor_page = BabyMonitorPage(self.driver)
-            menu_page = MenuPage(self.driver)
             pixsee_settings_page = PixseeSettingsPage(self.driver)
             voice_service_page = VoiceServicePage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Baby Monitor Page")
-
-            '''Go to Pixsee Settings Page'''
-            menu_page.click_settings()
-            self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
-
-            '''Go to Voice Service Page'''
-            pixsee_settings_page.click_voice_service()
             self.assertTrue(voice_service_page.is_in_voice_service_page(), "Can't go to Voice Service Page")
 
             '''Verify Voice Service Page'''
@@ -230,32 +189,16 @@ class VoiceServiceTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
 
     def test_changing_language_discard_with_yes(self):
         try:
-            self.open_app()
-
-            baby_monitor_page = BabyMonitorPage(self.driver)
-            menu_page = MenuPage(self.driver)
-            pixsee_settings_page = PixseeSettingsPage(self.driver)
             voice_service_page = VoiceServicePage(self.driver)
             voice_command_page = VoiceCommandPage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Baby Monitor Page")
-
-            '''Go to Pixsee Settings Page'''
-            menu_page.click_settings()
-            self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
-
-            '''Go to Voice Service Page'''
-            pixsee_settings_page.click_voice_service()
             self.assertTrue(voice_service_page.is_in_voice_service_page(), "Can't go to Voice Service Page")
 
             '''Go to Voice Command Page'''
+            before_detection_switch_status = voice_service_page.get_detection_switch_status()
             if not voice_service_page.get_detection_switch_status():
                 voice_service_page.click_detection_switch()
             voice_service_page.click_voice_command_button()
@@ -302,7 +245,7 @@ class VoiceServiceTest(BaseTestCase):
             self.assertTrue(voice_command_page.is_in_voice_command_page(), "Can't go to Voice Command Page")
             self.assertEqual(before_english_checkbox_status, voice_command_page.get_english_checkbox_status(), "Changing English checkbox is not discarded")
             self.assertEqual(before_chinese_checkbox_status, voice_command_page.get_chinese_checkbox_status(), "Changing Chinese checkbox is not discarded")
-
+            voice_command_page.click_back()
 
         except AssertionError as ae:
             print(f"Test failed with assertion error: {ae}")
@@ -310,32 +253,16 @@ class VoiceServiceTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
 
     def test_changing_language_discard_with_no(self):
         try:
-            self.open_app()
-
-            baby_monitor_page = BabyMonitorPage(self.driver)
-            menu_page = MenuPage(self.driver)
-            pixsee_settings_page = PixseeSettingsPage(self.driver)
             voice_service_page = VoiceServicePage(self.driver)
             voice_command_page = VoiceCommandPage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Baby Monitor Page")
-
-            '''Go to Pixsee Settings Page'''
-            menu_page.click_settings()
-            self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
-
-            '''Go to Voice Service Page'''
-            pixsee_settings_page.click_voice_service()
             self.assertTrue(voice_service_page.is_in_voice_service_page(), "Can't go to Voice Service Page")
 
             '''Go to Voice Command Page'''
+            before_detection_switch_status = voice_service_page.get_detection_switch_status()
             if not voice_service_page.get_detection_switch_status():
                 voice_service_page.click_detection_switch()
             voice_service_page.click_voice_command_button()
@@ -380,6 +307,8 @@ class VoiceServiceTest(BaseTestCase):
             self.assertTrue(voice_command_page.is_in_voice_command_page(), "Canceling discard dialog doesn't return to Voice Command Page")
             self.assertNotEqual(before_english_checkbox_status, voice_command_page.get_english_checkbox_status(), "Changing English checkbox is discarded")
             self.assertNotEqual(before_chinese_checkbox_status, voice_command_page.get_chinese_checkbox_status(), "Changing Chinese checkbox is discarded")
+            voice_command_page.click_back()
+            voice_command_page.click_discard_dialog_yes()
 
         except AssertionError as ae:
             print(f"Test failed with assertion error: {ae}")
@@ -387,32 +316,16 @@ class VoiceServiceTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
 
     def test_changing_language_save(self):
         try:
-            self.open_app()
-
-            baby_monitor_page = BabyMonitorPage(self.driver)
-            menu_page = MenuPage(self.driver)
-            pixsee_settings_page = PixseeSettingsPage(self.driver)
             voice_service_page = VoiceServicePage(self.driver)
             voice_command_page = VoiceCommandPage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Baby Monitor Page")
-
-            '''Go to Pixsee Settings Page'''
-            menu_page.click_settings()
-            self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
-
-            '''Go to Voice Service Page'''
-            pixsee_settings_page.click_voice_service()
             self.assertTrue(voice_service_page.is_in_voice_service_page(), "Can't go to Voice Service Page")
 
             '''Go to Voice Command Page'''
+            before_detection_switch_status = voice_service_page.get_detection_switch_status()
             if not voice_service_page.get_detection_switch_status():
                 voice_service_page.click_detection_switch()
             voice_service_page.click_voice_command_button()
@@ -452,6 +365,7 @@ class VoiceServiceTest(BaseTestCase):
             self.assertTrue(voice_command_page.is_in_voice_command_page(), "Can't go to Voice Command Page")
             self.assertNotEqual(before_english_checkbox_status, voice_command_page.get_english_checkbox_status(), "Changing English checkbox is not saved")
             self.assertNotEqual(before_chinese_checkbox_status, voice_command_page.get_chinese_checkbox_status(), "Changing Chinese checkbox is not saved")
+            voice_command_page.click_back()
 
         except AssertionError as ae:
             print(f"Test failed with assertion error: {ae}")
@@ -459,32 +373,16 @@ class VoiceServiceTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
 
     def test_no_changing_language(self):
         try:
-            self.open_app()
-
-            baby_monitor_page = BabyMonitorPage(self.driver)
-            menu_page = MenuPage(self.driver)
-            pixsee_settings_page = PixseeSettingsPage(self.driver)
             voice_service_page = VoiceServicePage(self.driver)
             voice_command_page = VoiceCommandPage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Baby Monitor Page")
-
-            '''Go to Pixsee Settings Page'''
-            menu_page.click_settings()
-            self.assertTrue(pixsee_settings_page.is_in_settings(), "Can't go to Pixsee Settings Page")
-
-            '''Go to Voice Service Page'''
-            pixsee_settings_page.click_voice_service()
             self.assertTrue(voice_service_page.is_in_voice_service_page(), "Can't go to Voice Service Page")
 
             '''Go to Voice Command Page'''
+            before_detection_switch_status = voice_service_page.get_detection_switch_status()
             if not voice_service_page.get_detection_switch_status():
                 voice_service_page.click_detection_switch()
             voice_service_page.click_voice_command_button()
@@ -520,6 +418,7 @@ class VoiceServiceTest(BaseTestCase):
             self.assertTrue(voice_command_page.is_in_voice_command_page(), "Can't go to Voice Command Page")
             self.assertEqual(english_checkbox_status, voice_command_page.get_english_checkbox_status(),  "English checkbox is changed after clicking back button")
             self.assertEqual(chinese_checkbox_status, voice_command_page.get_chinese_checkbox_status(), "Chinese checkbox is changed after clicking back button")
+            voice_command_page.click_back()
 
         except AssertionError as ae:
             print(f"Test failed with assertion error: {ae}")
@@ -527,5 +426,3 @@ class VoiceServiceTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()

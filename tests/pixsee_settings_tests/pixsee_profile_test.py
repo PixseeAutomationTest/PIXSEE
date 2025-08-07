@@ -82,9 +82,6 @@ class PixseeProfileTest(BaseTestCase):
     # FIXME: No checking the time in Baby Monitor Page because Android doesn't support Daylight Saving Time (DST).
     def test_select_time_zone(self):
         try:
-            baby_monitor_page = BabyMonitorPage(self.driver)
-            menu_page = MenuPage(self.driver)
-            pixsee_settings_page = PixseeSettingsPage(self.driver)
             pixsee_profile_page = PixseeProfilePage(self.driver)
 
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
@@ -112,9 +109,6 @@ class PixseeProfileTest(BaseTestCase):
 
     def test_check_device_info(self):
         try:
-            baby_monitor_page = BabyMonitorPage(self.driver)
-            menu_page = MenuPage(self.driver)
-            pixsee_settings_page = PixseeSettingsPage(self.driver)
             pixsee_profile_page = PixseeProfilePage(self.driver)
 
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
@@ -157,8 +151,6 @@ class PixseeProfileTest(BaseTestCase):
     def test_reboot_device(self):
         try:
             baby_monitor_page = BabyMonitorPage(self.driver)
-            menu_page = MenuPage(self.driver)
-            pixsee_settings_page = PixseeSettingsPage(self.driver)
             pixsee_profile_page = PixseeProfilePage(self.driver)
 
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
@@ -188,9 +180,6 @@ class PixseeProfileTest(BaseTestCase):
 
     def test_rotate_screen(self):
         try:
-            baby_monitor_page = BabyMonitorPage(self.driver)
-            menu_page = MenuPage(self.driver)
-            pixsee_settings_page = PixseeSettingsPage(self.driver)
             pixsee_profile_page = PixseeProfilePage(self.driver)
 
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
@@ -220,9 +209,6 @@ class PixseeProfileTest(BaseTestCase):
 
     def test_IQ_setting_with_no_changing(self):
         try:
-            baby_monitor_page = BabyMonitorPage(self.driver)
-            menu_page = MenuPage(self.driver)
-            pixsee_settings_page = PixseeSettingsPage(self.driver)
             pixsee_profile_page = PixseeProfilePage(self.driver)
 
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
@@ -253,9 +239,6 @@ class PixseeProfileTest(BaseTestCase):
 
     def test_IQ_setting_with_changing(self):
         try:
-            baby_monitor_page = BabyMonitorPage(self.driver)
-            menu_page = MenuPage(self.driver)
-            pixsee_settings_page = PixseeSettingsPage(self.driver)
             pixsee_profile_page = PixseeProfilePage(self.driver)
 
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
@@ -289,9 +272,6 @@ class PixseeProfileTest(BaseTestCase):
 
     def test_check_update(self):
         try:
-            baby_monitor_page = BabyMonitorPage(self.driver)
-            menu_page = MenuPage(self.driver)
-            pixsee_settings_page = PixseeSettingsPage(self.driver)
             pixsee_profile_page = PixseeProfilePage(self.driver)
 
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
@@ -320,9 +300,6 @@ class PixseeProfileTest(BaseTestCase):
 
     def test_device_unbind_dialog_with_no(self):
         try:
-            baby_monitor_page = BabyMonitorPage(self.driver)
-            menu_page = MenuPage(self.driver)
-            pixsee_settings_page = PixseeSettingsPage(self.driver)
             pixsee_profile_page = PixseeProfilePage(self.driver)
 
             self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
@@ -358,9 +335,6 @@ class PixseeProfileTest(BaseTestCase):
 
     def test_device_unbind_page_with_close(self):
         try:
-            baby_monitor_page = BabyMonitorPage(self.driver)
-            menu_page = MenuPage(self.driver)
-            pixsee_settings_page = PixseeSettingsPage(self.driver)
             pixsee_profile_page = PixseeProfilePage(self.driver)
             device_unbind_page = DeviceUnbindPage(self.driver)
 
@@ -407,9 +381,6 @@ class PixseeProfileTest(BaseTestCase):
 
     def test_device_unbind_page_with_cancel(self):
         try:
-            baby_monitor_page = BabyMonitorPage(self.driver)
-            menu_page = MenuPage(self.driver)
-            pixsee_settings_page = PixseeSettingsPage(self.driver)
             pixsee_profile_page = PixseeProfilePage(self.driver)
             device_unbind_page = DeviceUnbindPage(self.driver)
 
@@ -457,10 +428,8 @@ class PixseeProfileTest(BaseTestCase):
     @unittest.skip("Important: This test will unbind the device. If you want to run other tests after this, you may need to bind the device manually.")
     def test_device_unbind_success(self):
         try:
-            baby_monitor_page = BabyMonitorPage(self.driver)
             baby_timeline_page = BabyTimelinePage(self.driver)
             menu_page = MenuPage(self.driver)
-            pixsee_settings_page = PixseeSettingsPage(self.driver)
             pixsee_profile_page = PixseeProfilePage(self.driver)
             device_unbind_page = DeviceUnbindPage(self.driver)
 
