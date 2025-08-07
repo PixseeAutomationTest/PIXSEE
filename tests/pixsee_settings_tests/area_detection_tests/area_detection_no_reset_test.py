@@ -12,16 +12,34 @@ from appium.webdriver.common.appiumby import AppiumBy
 class AreaDetectionCase2(BaseTestCase):
 	def setUp(self):
 		super().setUp(no_reset=True)
-	# start from desktop page
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		menu_page = MenuPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+		area_detection_page = AreaDetectionPage(self.driver)
+		try:
+			while self.driver.current_package != self.driver.capabilities.get("appPackage"):
+				self.driver.terminate_app(self.driver.current_package)
+				self.open_app()
+			if pixsee_settings_page.is_in_settings():
+				return
+			elif area_detection_page.is_in_area_detection_page():
+				return
+			elif not baby_monitor_page.is_in_baby_monitor_page():
+				self.shutdown_app()
+				self.open_app()
+			print("Finish opening app.")
+			baby_monitor_page.click_home()
+			menu_page.click_settings()
+		except Exception as e:
+			print(f"Test failed with exception: {e}")
+			raise e
+	# start from pixsee settings page
 	def test_01_area_detection_back(self):
 		area_detection_page = AreaDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 
-		self.open_app()
-		baby_monitor_page.click_home()
-		menu_page.click_settings()
 		pixsee_settings_page.click_area_detection()
 		# check save enable = false
 		try:
@@ -387,7 +405,10 @@ class AreaDetectionCase2(BaseTestCase):
 		except AssertionError :
 			raise AssertionError("Not in information page")
 		area_detection_page.click_skip()
-		area_detection_page.click_back()
+		if area_detection_page.is_save_enable():
+			area_detection_page.click_save()
+		else:
+			area_detection_page.click_back()
 	# back to pixsee settings page
 
 

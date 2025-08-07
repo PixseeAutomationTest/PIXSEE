@@ -12,16 +12,29 @@ from pages.menu_pages.pixsee_settings_pages.wifi_settings_page import WifiSettin
 class WifiSettingsCase(BaseTestCase):
 	def setUp(self):
 		super().setUp(no_reset=True)
-
-	def test_00_open_app(self):
-		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
+		menu_page = MenuPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		self.shutdown_app()
-		# open app
-		self.open_app()
-		baby_monitor_page.click_home()
-		menu_page.click_settings()
+		wifi_settings_page = WifiSettingsPage(self.driver)
+		try:
+			while self.driver.current_package != self.driver.capabilities.get("appPackage"):
+				self.driver.terminate_app(self.driver.current_package)
+				self.open_app()
+			if pixsee_settings_page.is_in_settings():
+				return
+			elif wifi_settings_page.is_in_wifi_settings_page():
+				return
+			elif wifi_settings_page.is_in_wifi_quit_dialog():
+				return
+			elif not baby_monitor_page.is_in_baby_monitor_page():
+				self.shutdown_app()
+				self.open_app()
+			print("Finish opening app.")
+			baby_monitor_page.click_home()
+			menu_page.click_settings()
+		except Exception as e:
+			print(f"Test failed with exception: {e}")
+			raise e
 	# start from pixsee settings page
 	def test_01_wifi_reset_cancel(self):
 		menu_page = MenuPage(self.driver)
@@ -201,8 +214,25 @@ class WifiSettingsCase(BaseTestCase):
 			raise AssertionError("next function failed")
 		time.sleep(30)
 		try:
-			self.assertTrue(wifi_settings_page.is_in_wifi_quit_dialog())
+			self.assertTrue(wifi_settings_page.is_in_wifi_password_empty_dialog())
 			print("wifi settings function success")
+			# check not found
+			try:
+				no_found_title = wifi_settings_page.empty_dialog_text()
+				hint = self.get_string("ble_device_not_found_title").replace("\\n","\n")
+				self.assertEqual(no_found_title, hint)
+				print("no found title text correct")
+			except AssertionError:
+				raise AssertionError("no found title text wrong")
+			try:
+				no_found_description = wifi_settings_page.not_found_message_text()
+				hint = self.get_string("ble_device_not_found_description").replace("\\n","\n")
+				self.assertEqual(no_found_description, hint)
+				print("no found description text correct")
+			except AssertionError:
+				raise AssertionError("no found description text wrong")
+			# click yes to quit
+			wifi_settings_page.click_empty_dialog_yes()
 		except AssertionError:
 			raise AssertionError("wifi settings function failed")
 	# back to pixsee settings page

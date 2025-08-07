@@ -15,7 +15,28 @@ from appium.webdriver.common.appiumby import AppiumBy
 class CoveredFaceDetectionCase2(BaseTestCase):
 	def setUp(self):
 		super().setUp(no_reset=True)
-	# start from desktop
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		menu_page = MenuPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+		covered_face_detection_page = CoveredFaceDetectionPage(self.driver)
+		try:
+			while self.driver.current_package != self.driver.capabilities.get("appPackage"):
+				self.driver.terminate_app(self.driver.current_package)
+				self.open_app()
+			if pixsee_settings_page.is_in_settings():
+				return
+			elif covered_face_detection_page.is_in_covered_face_detection_page():
+				return
+			elif not baby_monitor_page.is_in_baby_monitor_page():
+				self.shutdown_app()
+				self.open_app()
+			print("Finish opening app.")
+			baby_monitor_page.click_home()
+			menu_page.click_settings()
+		except Exception as e:
+			print(f"Test failed with exception: {e}")
+			raise e
+	# start from pixsee settings page
 	def test_02_covered_face_detection_back(self):
 		covered_face_detection_page = CoveredFaceDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
@@ -23,9 +44,6 @@ class CoveredFaceDetectionCase2(BaseTestCase):
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		login_page = LoginPage(self.driver)
 
-		self.open_app()
-		baby_monitor_page.click_home()
-		menu_page.click_settings()
 		pixsee_settings_page.click_covered_face_detection()
 		# back to settings page
 		covered_face_detection_page.click_back()
@@ -328,7 +346,10 @@ class CoveredFaceDetectionCase2(BaseTestCase):
 		except AssertionError :
 			raise AssertionError("Not in information page")
 		covered_face_detection_page.click_skip()
-		covered_face_detection_page.click_back()
+		if covered_face_detection_page.is_save_enable():
+			covered_face_detection_page.click_save()
+		else:
+			covered_face_detection_page.click_back()
 		# back to pixsee settings page
 
 

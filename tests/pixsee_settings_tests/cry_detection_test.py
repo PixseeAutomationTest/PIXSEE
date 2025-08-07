@@ -274,7 +274,10 @@ class CryDetectionCase(BaseTestCase):
 		except AssertionError:
 			raise AssertionError("Not in music room")
 		cry_detection_page.click_music_back()
-		cry_detection_page.click_back()
+		if cry_detection_page.is_save_enable():
+			cry_detection_page.click_save()
+		else:
+			cry_detection_page.click_back()
 	# back to pixsee settings page
 
 

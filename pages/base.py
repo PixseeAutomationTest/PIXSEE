@@ -33,9 +33,8 @@ class BaseTestCase(unittest.TestCase):
         #     "com.compal.bioslab.pixsee.pixm01"
         # ])
         self.tutor_id = "com.compal.bioslab.pixsee.pixm01:id/tvDescription"
-
         self.driver = webdriver.Remote("http://localhost:4723", options=capabilities)
-        self.driver.update_settings({"waitForIdleTimeout": 1000})
+        self.driver.update_settings({"waitForIdleTimeout": 300})
     def open_app(self):
         self.driver.activate_app(self.driver.capabilities.get("appPackage"))
         time.sleep(10)
