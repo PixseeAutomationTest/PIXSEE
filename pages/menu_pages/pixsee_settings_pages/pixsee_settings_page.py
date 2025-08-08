@@ -475,6 +475,36 @@ class PixseeSettingsPage():
 		except :
 			return None
 
+	def is_cry_detection_able_to_click(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located(("id", self.CryDetection))
+		)
+		button = self.driver.find_element("id", self.CryDetection)
+		is_enable = button.get_attribute("enabled")
+		return is_enable == "true"
 
+	def is_area_detection_able_to_click (self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located(("id", self.AreaDetection))
+		)
+		button = self.driver.find_element("id", self.AreaDetection)
+		is_enable = button.get_attribute("enabled")
+		return is_enable == "true"
+
+	def is_covered_face_detection_able_to_click(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located(("id", self.CoveredFaceDetection))
+		)
+		button = self.driver.find_element("id", self.CoveredFaceDetection)
+		is_enable = button.get_attribute("enabled")
+		return is_enable == "true"
+
+	def is_time_lapse_video_able_to_click(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located(("id", self.TimeLapseVideo))
+		)
+		button = self.driver.find_element("id", self.TimeLapseVideo)
+		is_enable = button.get_attribute("enabled")
+		return is_enable == "true"
 
 

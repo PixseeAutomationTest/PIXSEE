@@ -14,16 +14,27 @@ class EnvironmentSettingsCase(BaseTestCase):
 	def setUp(self):
 		super().setUp(no_reset=True)
 
-	def test_00_open_app(self):
-		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
+		menu_page = MenuPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		self.shutdown_app()
-		# open app
-		self.open_app()
-		baby_monitor_page.is_in_baby_monitor_page()
-		baby_monitor_page.click_home()
-		menu_page.click_settings()
+		environment_settings_page = EnvironmentSettingsPage(self.driver)
+		try:
+			while self.driver.current_package != self.driver.capabilities.get("appPackage"):
+				self.driver.terminate_app(self.driver.current_package)
+				self.open_app()
+			if pixsee_settings_page.is_in_settings():
+				return
+			elif environment_settings_page.is_in_envir_page():
+				return
+			elif not baby_monitor_page.is_in_baby_monitor_page():
+				self.shutdown_app()
+				self.open_app()
+			print("Finish opening app.")
+			baby_monitor_page.click_home()
+			menu_page.click_settings()
+		except Exception as e:
+			print(f"Test failed with exception: {e}")
+			raise e
 	# start from the Pixsee Settings page
 	def test_01_environment_set_back(self):
 			environment_settings_page = EnvironmentSettingsPage(self.driver)

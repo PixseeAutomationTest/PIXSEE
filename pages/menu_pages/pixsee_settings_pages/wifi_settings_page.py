@@ -21,6 +21,7 @@ class WifiSettingsPage():
         self.EmptyDialog = "com.compal.bioslab.pixsee.pixm01:id/tvtitleAlertDialog"
         self.EmptyDialogYes = "com.compal.bioslab.pixsee.pixm01:id/btnPositiveAlertDialog"
         self.SearchingDevice = "com.compal.bioslab.pixsee.pixm01:id/tvTitle"
+        self.NotFoundMessage = "com.compal.bioslab.pixsee.pixm01:id/tvMessageAlertDialog"
 
     def is_in_wifi_popup_page(self):
         try:
@@ -150,6 +151,15 @@ class WifiSettingsPage():
                 EC.presence_of_element_located(("id", self.EmptyDialogYes))
             )
             element = self.driver.find_element("id", self.EmptyDialogYes)
+            return element.text
+        except :
+            return None
+    def not_found_message_text(self):
+        try:
+            WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located(("id", self.NotFoundMessage))
+            )
+            element = self.driver.find_element("id", self.NotFoundMessage)
             return element.text
         except :
             return None
