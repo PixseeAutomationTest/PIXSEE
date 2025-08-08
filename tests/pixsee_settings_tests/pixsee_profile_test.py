@@ -169,7 +169,7 @@ class PixseeProfileTest(BaseTestCase):
             pixsee_profile_page.click_reboot_device()
             self.assertTrue(baby_monitor_page.is_in_baby_monitor_page(), "Can't automatically return to Baby Monitor Page")
             self.assertEqual(baby_monitor_page.get_connecting_status_text(), self.get_string("stream_connecting_status"), "Text \"Connecting\" is not properly displayed")
-            time.sleep(30)  # Wait for the device to reboot
+            time.sleep(60)  # Wait for the device to reboot
 
         except AssertionError as ae:
             print(f"Test failed with assertion error: {ae}")

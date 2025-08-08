@@ -1,5 +1,3 @@
-from idlelib.mainmenu import menudefs
-
 from pages.base import BaseTestCase
 
 from pages.baby_monitor_page import BabyMonitorPage
@@ -9,6 +7,7 @@ from pages.menu_pages.add_baby_profile_page import AddBabyProfilePage
 from pages.menu_pages.edit_baby_profile_pages.edit_baby_profile_page import EditBabyProfilePage
 from pages.delete_profile_page import DeleteProfilePage
 import random
+import time
 
 class AddBabyTest(BaseTestCase):
     def setUp(self):
@@ -104,6 +103,7 @@ class AddBabyTest(BaseTestCase):
             edit_baby_profile_page.click_dialog_yes()
             delete_profile_page.click_check()
             delete_profile_page.click_delete_profile()
+            time.sleep(5)
 
         except AssertionError as ae:
             print(f"Test failed with assertion error: {ae}")

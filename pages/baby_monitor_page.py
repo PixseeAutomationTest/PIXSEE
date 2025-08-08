@@ -12,7 +12,7 @@ class BabyMonitorPage():
     def __init__(self, driver):
         self.driver = driver
 
-        self.babyMonitorScreen = "com.compal.bioslab.pixsee.pixm01:id/videoTextureView"
+        self.liveStreamScreen = "com.compal.bioslab.pixsee.pixm01:id/backgroundHomeLivestreamCardAuxView"
         self.sleepButton = "com.compal.bioslab.pixsee.pixm01:id/ibSleepMode"
         self.twoWayTalkButton = "com.compal.bioslab.pixsee.pixm01:id/ibPushToTalkHomeAct"
         self.musicButton = "com.compal.bioslab.pixsee.pixm01:id/ibPlayMusic"
@@ -98,9 +98,9 @@ class BabyMonitorPage():
     def is_in_baby_monitor_page(self):
         try:
             WebDriverWait(self.driver, base.wait_time).until(
-                EC.presence_of_element_located((AppiumBy.ID, self.babyMonitorScreen))
+                EC.presence_of_element_located((AppiumBy.ID, self.liveStreamScreen))
             )
-            self.driver.find_element(AppiumBy.ID, self.babyMonitorScreen)
+            self.driver.find_element(AppiumBy.ID, self.liveStreamScreen)
             return True
 
         except:
