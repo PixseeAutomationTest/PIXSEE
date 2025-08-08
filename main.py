@@ -3,7 +3,8 @@ from htmltestreport import HTMLTestReport
 
 from tests.login_test import LoginCase
 from tests.add_baby_test import AddBabyTest
-from tests.edit_baby_test import EditBabyTest
+from tests.edit_baby_test import EditBabyTestWithAdding
+from tests.edit_baby_test import EditBabyTestWithoutAdding
 from tests.pixsee_settings_test import PixseeSettingsTest
 from tests.pixsee_settings_tests.pixsee_profile_test import PixseeProfileTest
 from tests.pixsee_settings_tests.wifi_settings_test import WifiSettingsCase
@@ -26,8 +27,9 @@ if __name__ == '__main__':
     suite = unittest.TestSuite()
 
     # Include all test cases in the suite
-    # suite.addTests(loader.loadTestsFromTestCase(AddBabyTest))
-    # suite.addTests(loader.loadTestsFromTestCase(EditBabyTest))
+    suite.addTests(loader.loadTestsFromTestCase(AddBabyTest))
+    suite.addTests(loader.loadTestsFromTestCase(EditBabyTestWithAdding))
+    suite.addTests(loader.loadTestsFromTestCase(EditBabyTestWithoutAdding))
     suite.addTests(loader.loadTestsFromTestCase(PixseeProfileTest))
     suite.addTests(loader.loadTestsFromTestCase(VoiceServiceTest))
     suite.addTests(loader.loadTestsFromTestCase(AboutTest))

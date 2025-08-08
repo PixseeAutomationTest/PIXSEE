@@ -11,37 +11,37 @@ from pages.download_account_data_page import DownloadAccountDataPage
 import time
 import random
 
-class EditBabyTest(BaseTestCase):
-    # The tests under this comment will add a new baby profile and then edit it.
+# The tests in this TestCase will add a new baby profile first..
+class EditBabyTestWithAdding(BaseTestCase):
+    def setUp(self):
+        super().setUp()
+
+        baby_monitor_page = BabyMonitorPage(self.driver)
+        menu_page = MenuPage(self.driver)
+        add_baby_profile_page = AddBabyProfilePage(self.driver)
+        baby_timeline_page = BabyTimelinePage(self.driver)
+        edit_baby_profile_page = EditBabyProfilePage(self.driver)
+        try:
+            while self.driver.current_package != self.driver.capabilities.get("appPackage"):
+                self.driver.terminate_app(self.driver.current_package)
+                self.open_app()
+            if not baby_monitor_page.is_in_baby_monitor_page():
+                self.shutdown_app()
+                self.open_app()
+            baby_monitor_page.click_home()
+            menu_page.click_baby_add()
+            add_baby_profile_page.add_new_baby()
+            baby_timeline_page.click_menu()
+            menu_page.click_baby_edit()
+        except Exception as e:
+            print(f"Test failed with exception: {e}")
+            raise e
     def test_delete_baby_profile_success(self):
         try:
-            self.open_app()
-
             baby_monitor_page = BabyMonitorPage(self.driver)
-            menu_page = MenuPage(self.driver)
-            add_baby_profile_page = AddBabyProfilePage(self.driver)
-            baby_timeline_page = BabyTimelinePage(self.driver)
             edit_baby_profile_page = EditBabyProfilePage(self.driver)
             delete_baby_profile_page = DeleteProfilePage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page")
-
-            '''Go to Add Baby Profile Page and add a new baby profile'''
-            menu_page.click_baby_add()
-            self.assertTrue(add_baby_profile_page.is_in_add_baby_profile_page(), "Can't go to Add Baby Profile Page")
-            add_baby_profile_page.add_new_baby()
-
-            '''Go to Baby Timeline Page'''
-            self.assertTrue(baby_timeline_page.is_in_baby_timeline_page(), "Can't automatically go to Baby Timeline Page after adding a new baby profile")
-
-            '''Go to Menu Page'''
-            baby_timeline_page.click_menu()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page from Baby Timeline Page")
-
-            '''Go to Edit Baby Profile Page'''
-            menu_page.click_baby_edit()
             self.assertTrue(edit_baby_profile_page.is_in_edit_baby_profile_page(), "Can't go to Edit Baby Profile Page")
 
             '''Verify Edit Baby Profile Page'''
@@ -75,45 +75,20 @@ class EditBabyTest(BaseTestCase):
             '''Go to Baby monitor page'''
             self.assertTrue(baby_monitor_page.is_in_baby_monitor_page(), "Can't automatically go to Baby Monitor Page after deleting a baby profile")
 
-
         except AssertionError as ae:
             print(f"Test failed with assertion error: {ae}")
             raise ae
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
 
     def test_change_baby_profile_cancel(self):
         try:
-            self.open_app()
-
-            baby_monitor_page = BabyMonitorPage(self.driver)
             menu_page = MenuPage(self.driver)
             add_baby_profile_page = AddBabyProfilePage(self.driver)
-            baby_timeline_page = BabyTimelinePage(self.driver)
             edit_baby_profile_page = EditBabyProfilePage(self.driver)
             delete_baby_profile_page = DeleteProfilePage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page")
-
-            '''Go to Add Baby Profile Page and add a new baby profile'''
-            menu_page.click_baby_add()
-            self.assertTrue(add_baby_profile_page.is_in_add_baby_profile_page(), "Can't go to Add Baby Profile Page")
-            add_baby_profile_page.add_new_baby()
-
-            '''Go to Baby Timeline Page'''
-            self.assertTrue(baby_timeline_page.is_in_baby_timeline_page(), "Can't automatically go to Baby Timeline Page after adding a new baby profile")
-
-            '''Go to Menu Page'''
-            baby_timeline_page.click_menu()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page from Baby Timeline Page")
-
-            '''Go to Edit Baby Profile Page'''
-            menu_page.click_baby_edit()
             self.assertTrue(edit_baby_profile_page.is_in_edit_baby_profile_page(), "Can't go to Edit Baby Profile Page")
 
             '''Verify Edit Baby Profile Page'''
@@ -172,38 +147,14 @@ class EditBabyTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
 
     def test_change_baby_profile_save(self):
         try:
-            self.open_app()
-
-            baby_monitor_page = BabyMonitorPage(self.driver)
             menu_page = MenuPage(self.driver)
             add_baby_profile_page = AddBabyProfilePage(self.driver)
-            baby_timeline_page = BabyTimelinePage(self.driver)
             edit_baby_profile_page = EditBabyProfilePage(self.driver)
             delete_baby_profile_page = DeleteProfilePage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page")
-
-            '''Go to Add Baby Profile Page and add a new baby profile'''
-            menu_page.click_baby_add()
-            self.assertTrue(add_baby_profile_page.is_in_add_baby_profile_page(), "Can't go to Add Baby Profile Page")
-            add_baby_profile_page.add_new_baby()
-
-            '''Go to Baby Timeline Page'''
-            self.assertTrue(baby_timeline_page.is_in_baby_timeline_page(), "Can't automatically go to Baby Timeline Page after adding a new baby profile")
-
-            '''Go to Menu Page'''
-            baby_timeline_page.click_menu()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page from Baby Timeline Page")
-
-            '''Go to Edit Baby Profile Page'''
-            menu_page.click_baby_edit()
             self.assertTrue(edit_baby_profile_page.is_in_edit_baby_profile_page(), "Can't go to Edit Baby Profile Page")
 
             '''Verify Edit Baby Profile Page'''
@@ -262,24 +213,33 @@ class EditBabyTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
 
-    # The tests under this comment will edit baby profile directly.
+    # The tests in this TestCase will edit baby profile directly.
+class EditBabyTestWithoutAdding(BaseTestCase):
+    def setUp(self):
+        super().setUp()
+
+        baby_monitor_page = BabyMonitorPage(self.driver)
+        menu_page = MenuPage(self.driver)
+        edit_baby_page = EditBabyProfilePage(self.driver)
+        try:
+            while self.driver.current_package != self.driver.capabilities.get("appPackage"):
+                self.driver.terminate_app(self.driver.current_package)
+                self.open_app()
+            if edit_baby_page.is_in_edit_baby_profile_page():
+                return
+            elif not baby_monitor_page.is_in_baby_monitor_page():
+                self.shutdown_app()
+                self.open_app()
+            baby_monitor_page.click_home()
+            menu_page.click_baby_edit()
+        except Exception as e:
+            print(f"Test failed with exception: {e}")
+            raise e
     def test_delete_baby_profile_dialog_with_cancel(self):
         try:
-            self.open_app()
-
-            baby_monitor_page = BabyMonitorPage(self.driver)
-            menu_page = MenuPage(self.driver)
             edit_baby_profile_page = EditBabyProfilePage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page")
-
-            '''Go to Edit Baby Profile Page'''
-            menu_page.click_baby_edit()
             self.assertTrue(edit_baby_profile_page.is_in_edit_baby_profile_page(), "Can't go to Edit Baby Profile Page")
 
             '''Verify Edit Baby Profile Page'''
@@ -307,24 +267,12 @@ class EditBabyTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
 
     def test_delete_baby_profile_page_with_cancel(self):
         try:
-            self.open_app()
-
-            baby_monitor_page = BabyMonitorPage(self.driver)
-            menu_page = MenuPage(self.driver)
             edit_baby_profile_page = EditBabyProfilePage(self.driver)
             delete_baby_profile_page = DeleteProfilePage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page")
-
-            '''Go to Edit Baby Profile Page'''
-            menu_page.click_baby_edit()
             self.assertTrue(edit_baby_profile_page.is_in_edit_baby_profile_page(), "Can't go to Edit Baby Profile Page")
 
             '''Verify Edit Baby Profile Page'''
@@ -361,24 +309,12 @@ class EditBabyTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
 
     def test_backup_baby_profile_dialog_with_ok(self):
         try:
-            self.open_app()
-
-            baby_monitor_page = BabyMonitorPage(self.driver)
-            menu_page = MenuPage(self.driver)
             edit_baby_profile_page = EditBabyProfilePage(self.driver)
             download_account_data_page = DownloadAccountDataPage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page")
-
-            '''Go to Edit Baby Profile Page'''
-            menu_page.click_baby_edit()
             self.assertTrue(edit_baby_profile_page.is_in_edit_baby_profile_page(), "Can't go to Edit Baby Profile Page")
 
             '''Verify Edit Baby Profile Page'''
@@ -402,6 +338,7 @@ class EditBabyTest(BaseTestCase):
             download_account_data_page.click_all_data()
             download_account_data_page.click_dialog_ok()
             self.assertTrue(download_account_data_page.is_in_download_account_data_page(), "Can't go to Download Account Data Page from Edit Baby Profile Page")
+            self.go_back()
 
         except AssertionError as ae:
             print(f"Test failed with assertion error: {ae}")
@@ -409,24 +346,12 @@ class EditBabyTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
 
     def test_backup_baby_profile_dialog_with_cancel(self):
         try:
-            self.open_app()
-
-            baby_monitor_page = BabyMonitorPage(self.driver)
-            menu_page = MenuPage(self.driver)
             edit_baby_profile_page = EditBabyProfilePage(self.driver)
             download_account_data_page = DownloadAccountDataPage(self.driver)
 
-            '''Go to Menu Page'''
-            baby_monitor_page.click_home()
-            self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page")
-
-            '''Go to Edit Baby Profile Page'''
-            menu_page.click_baby_edit()
             self.assertTrue(edit_baby_profile_page.is_in_edit_baby_profile_page(), "Can't go to Edit Baby Profile Page")
 
             '''Verify Edit Baby Profile Page'''
@@ -456,16 +381,14 @@ class EditBabyTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-        finally:
-            self.shutdown_app()
 
-    # TODO: Uncompleted function. Wait App bug to be fixed.
     # Please confirm the baby profile has photos from over 280 days ago before running this test.
+    # TODO: Uncompleted function. Wait App bug to be fixed.
     def test_change_baby_birthday_dialog_cancel(self):
         pass
 
-    # TODO: Uncompleted function. Wait App bug to be fixed.
     # Please confirm the baby profile has photos from over 280 days ago before running this test.
+    # TODO: Uncompleted function. Wait App bug to be fixed.
     def test_change_baby_birthday_dialog_ok(self):
         pass
 

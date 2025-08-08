@@ -6,7 +6,7 @@ from appium.options.android import UiAutomator2Options
 from appium.webdriver.common.appiumby import AppiumBy
 import time
 import re
-import osS
+import os
 from selenium.common import NoSuchElementException
 import csv
 import subprocess
