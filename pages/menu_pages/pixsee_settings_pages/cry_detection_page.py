@@ -1,6 +1,7 @@
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import pages.base as base
 
 class CryDetectionPage():
 	def __init__(self, driver):
@@ -31,7 +32,7 @@ class CryDetectionPage():
 
 	def header_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Header))
 			)
 			element = self.driver.find_element("id", self.Header)
@@ -40,7 +41,7 @@ class CryDetectionPage():
 			return None
 	def title(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Detection))
 			)
 			element = self.driver.find_element("id", self.Detection)
@@ -49,7 +50,7 @@ class CryDetectionPage():
 			return None
 	def detection_description(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.DetectionSubtitle))
 			)
 			element = self.driver.find_element("id", self.DetectionSubtitle)
@@ -58,7 +59,7 @@ class CryDetectionPage():
 			return None
 	def sensitivity_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Sensitivity))
 			)
 			element = self.driver.find_element("id", self.Sensitivity)
@@ -67,7 +68,7 @@ class CryDetectionPage():
 			return None
 	def music_settings_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.MusicSettings))
 			)
 			element = self.driver.find_element("id", self.MusicSettings)
@@ -76,7 +77,7 @@ class CryDetectionPage():
 			return None
 	def smart_soothing_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.SmartSoothing))
 			)
 			element = self.driver.find_element("id", self.SmartSoothing)
@@ -85,7 +86,7 @@ class CryDetectionPage():
 			return None
 	def low_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Low))
 			)
 			element = self.driver.find_element("id", self.Low)
@@ -94,7 +95,7 @@ class CryDetectionPage():
 			return None
 	def medium_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Medium))
 			)
 			element = self.driver.find_element("id", self.Medium)
@@ -103,7 +104,7 @@ class CryDetectionPage():
 			return None
 	def high_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.High))
 			)
 			element = self.driver.find_element("id", self.High)
@@ -112,7 +113,7 @@ class CryDetectionPage():
 			return None
 	def music_title(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Music))
 			)
 			element = self.driver.find_element("id", self.Music)
@@ -121,7 +122,7 @@ class CryDetectionPage():
 			return None
 	def discard_message_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.DiscardTitle))
 			)
 			element = self.driver.find_element("id", self.DiscardTitle)
@@ -130,7 +131,7 @@ class CryDetectionPage():
 			return None
 	def discard_no_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.DiscardNo))
 			)
 			element = self.driver.find_element("id", self.DiscardNo)
@@ -139,7 +140,7 @@ class CryDetectionPage():
 			return None
 	def discard_yes_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.DiscardYes))
 			)
 			element = self.driver.find_element("id", self.DiscardYes)
@@ -149,67 +150,67 @@ class CryDetectionPage():
 
 
 	def click_back(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.Back))
 		)
 		element = self.driver.find_element("id", self.Back)
 		element.click()
 	def click_save(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.Save))
 		)
 		element = self.driver.find_element("id", self.Save)
 		element.click()
 	def click_switch(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.Switch))
 		)
 		element = self.driver.find_element("id", self.Switch)
 		element.click()
 	def click_low(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.LowCheckBox))
 		)
 		element = self.driver.find_element("id", self.LowCheckBox)
 		element.click()
 	def click_medium(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.MediumCheckBox))
 		)
 		element = self.driver.find_element("id", self.MediumCheckBox)
 		element.click()
 	def click_high(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.HighCheckBox))
 		)
 		element = self.driver.find_element("id", self.HighCheckBox)
 		element.click()
 	def click_smart_soothing_switch(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.SmartSoothingSwitch))
 		)
 		element = self.driver.find_element("id", self.SmartSoothingSwitch)
 		element.click()
 	def click_music(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.MusicButton))
 		)
 		element = self.driver.find_element("id", self.MusicButton)
 		element.click()
 	def click_discard_no(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.DiscardNo))
 		)
 		element = self.driver.find_element("id", self.DiscardNo)
 		element.click()
 	def click_discard_yes(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.DiscardYes))
 		)
 		element = self.driver.find_element("id", self.DiscardYes)
 		element.click()
 	def click_music_back(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.MusicBack))
 		)
 		element = self.driver.find_element("id", self.MusicBack)
@@ -217,7 +218,7 @@ class CryDetectionPage():
 
 	def is_in_music_page(self):
 		try:
-			WebDriverWait(self.driver, 3).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located((AppiumBy.ID, self.MusicRoom))
 			)
 			return True
@@ -225,7 +226,7 @@ class CryDetectionPage():
 			return False
 	def is_in_cry_detection_page(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Header))
 			)
 			return True
@@ -233,7 +234,7 @@ class CryDetectionPage():
 			return False
 	def is_in_discard_dialog(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.DiscardTitle))
 			)
 			return True
@@ -241,41 +242,41 @@ class CryDetectionPage():
 			return False
 
 	def is_switch_on(self):
-		WebDriverWait(self.driver, 3).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.Switch))
 		)
 		switch = self.driver.find_element(AppiumBy.ID, self.Switch)
 		return switch.get_attribute("checked") == "true"
 	def is_smart_soothing_switch_on(self):
-		WebDriverWait(self.driver, 3).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.SmartSoothingSwitch))
 		)
 		switch = self.driver.find_element(AppiumBy.ID, self.SmartSoothingSwitch)
 		return switch.get_attribute("checked") == "true"
 
 	def is_low_clickable(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.LowCheckBox))
 		)
 		button = self.driver.find_element(AppiumBy.ID, self.LowCheckBox)
 		is_clickable = button.get_attribute("clickable")
 		return is_clickable == "true"
 	def is_medium_clickable(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.MediumCheckBox))
 		)
 		button = self.driver.find_element(AppiumBy.ID, self.MediumCheckBox)
 		is_clickable = button.get_attribute("clickable")
 		return is_clickable == "true"
 	def is_high_clickable(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.HighCheckBox))
 		)
 		button = self.driver.find_element(AppiumBy.ID, self.HighCheckBox)
 		is_clickable = button.get_attribute("clickable")
 		return is_clickable == "true"
 	def is_save_enable(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.Save))
 		)
 		button = self.driver.find_element(AppiumBy.ID, self.Save)

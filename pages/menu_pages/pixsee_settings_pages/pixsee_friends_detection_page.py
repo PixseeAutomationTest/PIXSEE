@@ -2,6 +2,7 @@ from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
+import pages.base as base
 
 class PixseeFriendsDetPage():
 	def __init__(self, driver):
@@ -34,14 +35,14 @@ class PixseeFriendsDetPage():
 		self.DiscardNo = "com.compal.bioslab.pixsee.pixm01:id/btnNegativeAlertDialog"
 	# status
 	def is_switch_on(self):
-		WebDriverWait(self.driver, 3).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located((AppiumBy.ID, self.Switch))
 		)
 		switch = self.driver.find_element(AppiumBy.ID, self.Switch)
 		return switch.get_attribute("checked") == "true"
 	def is_in_pixsee_friends_det_page(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located((AppiumBy.ID, self.Header))
 			)
 			return True
@@ -49,7 +50,7 @@ class PixseeFriendsDetPage():
 			return False
 	def is_in_timer(self):
 		try:
-			WebDriverWait(self.driver, 20).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located((AppiumBy.ID, self.Cancel))
 			)
 			self.driver.find_element(AppiumBy.ID, self.Cancel)
@@ -59,7 +60,7 @@ class PixseeFriendsDetPage():
 			return False
 	def is_in_discard_dialog(self):
 		try:
-			WebDriverWait(self.driver, 20).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located((AppiumBy.ID, self.DiscardMessage))
 			)
 			self.driver.find_element(AppiumBy.ID, self.DiscardMessage)
@@ -70,135 +71,135 @@ class PixseeFriendsDetPage():
 
 	# click
 	def click_all_day(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.AllDay))
 		)
 		self.driver.find_element(AppiumBy.ID, self.AllDay).click()
 	def click_set_time(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.SetTime))
 		)
 		self.driver.find_element(AppiumBy.ID, self.SetTime).click()
 	def click_save(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.Save))
 		)
 		self.driver.find_element(AppiumBy.ID, self.Save).click()
 	def click_switch(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.Switch))
 		)
 		self.driver.find_element(AppiumBy.ID, self.Switch).click()
 	def click_back(self):
 		self.driver.find_element(AppiumBy.ID, self.Back).click()
 	def click_start_time_block(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.StartTimeBlock))
 		)
 		self.driver.find_element(AppiumBy.ID, self.StartTimeBlock).click()
 	def click_end_time_block(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.EndTimeBlock))
 		)
 		self.driver.find_element(AppiumBy.ID, self.EndTimeBlock).click()
 	def click_cancel(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.Cancel))
 		)
 		self.driver.find_element(AppiumBy.ID, self.Cancel).click()
 	def click_confirm(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.Confirm))
 		)
 		self.driver.find_element(AppiumBy.ID, self.Confirm).click()
 	def click_discard_yes(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.DiscardYes))
 		)
 		self.driver.find_element(AppiumBy.ID, self.DiscardYes).click()
 	def click_discard_no(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.DiscardNo))
 		)
 		self.driver.find_element(AppiumBy.ID, self.DiscardNo).click()
 	# text
 	def title(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.Header))
 		)
 		return self.driver.find_element(AppiumBy.ID, self.Header).text
 	def description(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.Title))
 		)
 		return self.driver.find_element(AppiumBy.ID, self.Title).text
 	def description_subtitle(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.Description))
 		)
 		return self.driver.find_element(AppiumBy.ID, self.Description).text
 	def dettype_txt(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.DetectionType))
 		)
 		return self.driver.find_element(AppiumBy.ID, self.DetectionType).text
 	def time_span_txt(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.TimeSpan))
 		)
 		return self.driver.find_element(AppiumBy.ID, self.TimeSpan).text
 	def all_day_txt(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.AllDaytxt))
 		)
 		return self.driver.find_element(AppiumBy.ID, self.AllDaytxt).text
 	def set_time_txt(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.SetTimetxt))
 		)
 		return self.driver.find_element(AppiumBy.ID, self.SetTimetxt).text
 	def start_time_txt(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.StartTime))
 		)
 		return self.driver.find_element(AppiumBy.ID, self.StartTime).text
 	def end_time_txt(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.EndTime))
 		)
 		return self.driver.find_element(AppiumBy.ID, self.EndTime).text
 	def start_time_block_txt(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.StartTimeBlock))
 		)
 		return self.driver.find_element(AppiumBy.ID, self.StartTimeBlock).text
 	def end_time_block_txt(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.EndTimeBlock))
 		)
 		return self.driver.find_element(AppiumBy.ID, self.EndTimeBlock).text
 	def cancel_txt(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.Cancel))
 		)
 		return self.driver.find_element(AppiumBy.ID, self.Cancel).text
 	def confirm_txt(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.Confirm))
 		)
 		return self.driver.find_element(AppiumBy.ID, self.Confirm).text
 	def discard_message_txt(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.DiscardMessage))
 		)
 		return self.driver.find_element(AppiumBy.ID, self.DiscardMessage).text
 	def discard_yes_txt(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.DiscardYes))
 		)
 		return self.driver.find_element(AppiumBy.ID, self.DiscardYes).text
 	def discard_no_txt(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.DiscardNo))
 		)
 		return self.driver.find_element(AppiumBy.ID, self.DiscardNo).text
@@ -206,12 +207,12 @@ class PixseeFriendsDetPage():
 
 	# check if the checkbox is clicked
 	def all_day_status(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.AllDay))
 		)
 		return self.driver.find_element(AppiumBy.ID, self.AllDay).get_attribute("checked")
 	def set_time_status(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.SetTime))
 		)
 		return self.driver.find_element(AppiumBy.ID, self.SetTime).get_attribute("checked")
@@ -242,7 +243,7 @@ class PixseeFriendsDetPage():
 		time.sleep(1)
 
 	def is_save_enable(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.Save))
 		)
 		button = self.driver.find_element(AppiumBy.ID, self.Save)

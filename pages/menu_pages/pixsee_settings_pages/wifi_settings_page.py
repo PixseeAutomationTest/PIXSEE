@@ -1,6 +1,6 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+import pages.base as base
 
 
 class WifiSettingsPage():
@@ -25,7 +25,7 @@ class WifiSettingsPage():
 
     def is_in_wifi_popup_page(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.PopUpTitle))
             )
             return True
@@ -33,7 +33,7 @@ class WifiSettingsPage():
             return False
     def is_in_wifi_settings_page(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.Header))
             )
             return True
@@ -41,7 +41,7 @@ class WifiSettingsPage():
             return False
     def is_in_wifi_quit_dialog(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.QuitDialog))
             )
             return True
@@ -49,7 +49,7 @@ class WifiSettingsPage():
             return False
     def is_in_wifi_password_empty_dialog(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.EmptyDialog))
             )
             return True
@@ -57,7 +57,7 @@ class WifiSettingsPage():
             return False
     def is_in_wifi_searching_device(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.SearchingDevice))
             )
             return True
@@ -66,7 +66,7 @@ class WifiSettingsPage():
 
     def header_text(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.Header))
             )
             element = self.driver.find_element("id", self.Header)
@@ -75,7 +75,7 @@ class WifiSettingsPage():
             return None
     def description(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.Description))
             )
             element = self.driver.find_element("id", self.Description)
@@ -84,7 +84,7 @@ class WifiSettingsPage():
             return None
     def pop_up_title_text(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.PopUpTitle))
             )
             element = self.driver.find_element("id", self.PopUpTitle)
@@ -93,7 +93,7 @@ class WifiSettingsPage():
             return None
     def pop_up_ok_text(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.PopUpOk))
             )
             element = self.driver.find_element("id", self.PopUpOk)
@@ -102,7 +102,7 @@ class WifiSettingsPage():
             return None
     def pop_up_cancel_text(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.PopUpCancel))
             )
             element = self.driver.find_element("id", self.PopUpCancel)
@@ -111,7 +111,7 @@ class WifiSettingsPage():
             return None
     def quit_dialog_text(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.QuitDialog))
             )
             element = self.driver.find_element("id", self.QuitDialog)
@@ -120,7 +120,7 @@ class WifiSettingsPage():
             return None
     def quit_dialog_yes_text(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.Yes))
             )
             element = self.driver.find_element("id", self.Yes)
@@ -129,7 +129,7 @@ class WifiSettingsPage():
             return None
     def quit_dialog_no_text(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.No))
             )
             element = self.driver.find_element("id", self.No)
@@ -138,7 +138,7 @@ class WifiSettingsPage():
             return None
     def empty_dialog_text(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.EmptyDialog))
             )
             element = self.driver.find_element("id", self.EmptyDialog)
@@ -147,7 +147,7 @@ class WifiSettingsPage():
             return None
     def empty_dialog_yes_text(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.EmptyDialogYes))
             )
             element = self.driver.find_element("id", self.EmptyDialogYes)
@@ -165,49 +165,49 @@ class WifiSettingsPage():
             return None
 
     def click_x(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.X))
         )
         element = self.driver.find_element("id", self.X)
         element.click()
     def click_next(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.Next))
         )
         element = self.driver.find_element("id", self.Next)
         element.click()
     def click_wifi_name(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.WifiName))
         )
         element = self.driver.find_element("id", self.WifiName)
         element.click()
     def click_pop_up_ok(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.PopUpOk))
         )
         element = self.driver.find_element("id", self.PopUpOk)
         element.click()
     def click_pop_up_cancel(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.PopUpCancel))
         )
         element = self.driver.find_element("id", self.PopUpCancel)
         element.click()
     def click_quit_yes(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.Yes))
         )
         element = self.driver.find_element("id", self.Yes)
         element.click()
     def click_quit_no(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.No))
         )
         element = self.driver.find_element("id", self.No)
         element.click()
     def click_empty_dialog_yes(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.EmptyDialogYes))
         )
         element = self.driver.find_element("id", self.EmptyDialogYes)
@@ -215,7 +215,7 @@ class WifiSettingsPage():
 
 
     def input_password(self, password):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.Password))
         )
         element = self.driver.find_element("id", self.Password)

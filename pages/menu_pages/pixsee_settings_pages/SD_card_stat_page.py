@@ -1,5 +1,6 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import pages.base as base
 
 class SDcardStatusPage():
 	def __init__(self, driver):
@@ -16,31 +17,31 @@ class SDcardStatusPage():
 		self.Close = "com.compal.bioslab.pixsee.pixm01:id/ibFormattingExternalSDCardClose"
 
 	def click_back(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.Back))
 		)
 		element = self.driver.find_element("id", self.Back)
 		element.click()
 	def click_format(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.FormatButton))
 		)
 		element = self.driver.find_element("id", self.FormatButton)
 		element.click()
 	def click_go(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.Go))
 		)
 		element = self.driver.find_element("id", self.Go)
 		element.click()
 	def click_no(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.No))
 		)
 		element = self.driver.find_element("id", self.No)
 		element.click()
 	def click_close(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.Close))
 		)
 		element = self.driver.find_element("id", self.Close)
@@ -48,7 +49,7 @@ class SDcardStatusPage():
 
 	def header_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Header))
 			)
 			element = self.driver.find_element("id", self.Header)
@@ -57,7 +58,7 @@ class SDcardStatusPage():
 			return None
 	def title_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Title))
 			)
 			element = self.driver.find_element("id", self.Title)
@@ -66,7 +67,7 @@ class SDcardStatusPage():
 			return None
 	def description_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Description))
 			)
 			element = self.driver.find_element("id", self.Description)
@@ -75,7 +76,7 @@ class SDcardStatusPage():
 			return None
 	def format_button_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.FormatButton))
 			)
 			element = self.driver.find_element("id", self.FormatButton)
@@ -84,7 +85,7 @@ class SDcardStatusPage():
 			return None
 	def dialog_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Dialog))
 			)
 			element = self.driver.find_element("id", self.Dialog)
@@ -93,7 +94,7 @@ class SDcardStatusPage():
 			return None
 	def go_button_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Go))
 			)
 			element = self.driver.find_element("id", self.Go)
@@ -102,7 +103,7 @@ class SDcardStatusPage():
 			return None
 	def no_button_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.No))
 			)
 			element = self.driver.find_element("id", self.No)
@@ -112,7 +113,7 @@ class SDcardStatusPage():
 
 	def is_in_sdcard_page(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Header))
 			)
 			return True
@@ -120,7 +121,7 @@ class SDcardStatusPage():
 			return False
 	def is_in_format_dialog(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Dialog))
 			)
 			return True
@@ -128,7 +129,7 @@ class SDcardStatusPage():
 			return False
 	def is_formatting(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Formatting))
 			)
 			return True
@@ -137,7 +138,7 @@ class SDcardStatusPage():
 
 	def format_button_enabled(self):
 		try:
-			WebDriverWait(self.driver, 5).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.FormatButton))
 			)
 			self.driver.find_element("id", self.FormatButton)

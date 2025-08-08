@@ -14,6 +14,8 @@ from appium.webdriver.extensions.android.nativekey import AndroidKey
 from selenium.webdriver.support.wait import WebDriverWait
 
 
+wait_time = 5
+
 class BaseTestCase(unittest.TestCase):
     def setUp(self, no_reset=True):
         capabilities = UiAutomator2Options()

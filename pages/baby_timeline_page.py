@@ -1,6 +1,7 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
+import pages.base as base
 
 class BabyTimelinePage():
     def __init__(self, driver):
@@ -13,28 +14,28 @@ class BabyTimelinePage():
         self.frameButton = "com.compal.bioslab.pixsee.pixm01:id/ibParentingTips"
 
     def click_home(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.homeButton))
         )
         self.driver.find_element("id", self.homeButton).click()
         time.sleep(1)
 
     def click_menu(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.menuButton))
         )
         self.driver.find_element("id", self.menuButton).click()
         time.sleep(1)
 
     def click_album(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.albumButton))
         )
         self.driver.find_element("id", self.albumButton).click()
         time.sleep(1)
 
     def click_frame(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.frameButton))
         )
         self.driver.find_element("id", self.frameButton).click()
@@ -42,7 +43,7 @@ class BabyTimelinePage():
 
     def is_in_baby_timeline_page(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.timeline))
             )
             self.driver.find_element("id", self.timeline)

@@ -1,6 +1,7 @@
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import pages.base as base
 
 class EnvironmentSettingsPage():
 	def __init__(self, driver):
@@ -36,67 +37,67 @@ class EnvironmentSettingsPage():
 		self.DiscardYes = "com.compal.bioslab.pixsee.pixm01:id/btnPositiveAlertDialog"
 
 	def click_back(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.Back))
 		)
 		element = self.driver.find_element("id", self.Back)
 		element.click()
 	def click_save(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.Save))
 		)
 		element = self.driver.find_element("id", self.Save)
 		element.click()
 	def click_switch(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.Switch))
 		)
 		element = self.driver.find_element("id", self.Switch)
 		element.click()
 	def click_low(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.LowCheckBox))
 		)
 		element = self.driver.find_element("id", self.LowCheckBox)
 		element.click()
 	def click_medium(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.MediumCheckBox))
 		)
 		element = self.driver.find_element("id", self.MediumCheckBox)
 		element.click()
 	def click_high(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.HighCheckBox))
 		)
 		element = self.driver.find_element("id", self.HighCheckBox)
 		element.click()
 	def click_temperature_switch(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.TemperatureSwitch))
 		)
 		element = self.driver.find_element("id", self.TemperatureSwitch)
 		element.click()
 	def click_celsius(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.Celsius))
 		)
 		element = self.driver.find_element("id", self.Celsius)
 		element.click()
 	def click_fahrenheit(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.Fahrenheit))
 		)
 		element = self.driver.find_element("id", self.Fahrenheit)
 		element.click()
 	def click_discard_no(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.DiscardNo))
 		)
 		element = self.driver.find_element("id", self.DiscardNo)
 		element.click()
 	def click_discard_yes(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.DiscardYes))
 		)
 		element = self.driver.find_element("id", self.DiscardYes)
@@ -104,7 +105,7 @@ class EnvironmentSettingsPage():
 
 	def header_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Header))
 			)
 			element = self.driver.find_element("id", self.Header)
@@ -113,7 +114,7 @@ class EnvironmentSettingsPage():
 			return None
 	def detection_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Detection))
 			)
 			element = self.driver.find_element("id", self.Detection)
@@ -122,7 +123,7 @@ class EnvironmentSettingsPage():
 			return None
 	def sensitivity_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Sensitivity))
 			)
 			element = self.driver.find_element("id", self.Sensitivity)
@@ -131,7 +132,7 @@ class EnvironmentSettingsPage():
 			return None
 	def temperature_title_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.TemperatureTitle))
 			)
 			element = self.driver.find_element("id", self.TemperatureTitle)
@@ -140,7 +141,7 @@ class EnvironmentSettingsPage():
 			return None
 	def temperature_subtitle_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.TemperatureSubTitle))
 			)
 			element = self.driver.find_element("id", self.TemperatureSubTitle)
@@ -149,7 +150,7 @@ class EnvironmentSettingsPage():
 			return None
 	def temperature_range_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.TemperatureRange))
 			)
 			element = self.driver.find_element("id", self.TemperatureRange)
@@ -158,7 +159,7 @@ class EnvironmentSettingsPage():
 			return None
 	def humidity_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Humidity))
 			)
 			element = self.driver.find_element("id", self.Humidity)
@@ -167,7 +168,7 @@ class EnvironmentSettingsPage():
 			return None
 	def humidity_range_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.HumidityRange))
 			)
 			element = self.driver.find_element("id", self.HumidityRange)
@@ -176,7 +177,7 @@ class EnvironmentSettingsPage():
 			return None
 	def temperature_min_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.TemperatureMin))
 			)
 			element = self.driver.find_element("id", self.TemperatureMin)
@@ -185,7 +186,7 @@ class EnvironmentSettingsPage():
 			return None
 	def temperature_max_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.TempaeratureMax))
 			)
 			element = self.driver.find_element("id", self.TempaeratureMax)
@@ -194,7 +195,7 @@ class EnvironmentSettingsPage():
 			return None
 	def humidity_min_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.HumidityMin))
 			)
 			element = self.driver.find_element("id", self.HumidityMin)
@@ -203,7 +204,7 @@ class EnvironmentSettingsPage():
 			return None
 	def humidity_max_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.HumidityMax))
 			)
 			element = self.driver.find_element("id", self.HumidityMax)
@@ -212,7 +213,7 @@ class EnvironmentSettingsPage():
 			return None
 	def low_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Low))
 			)
 			element = self.driver.find_element("id", self.Low)
@@ -221,7 +222,7 @@ class EnvironmentSettingsPage():
 			return None
 	def medium_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Medium))
 			)
 			element = self.driver.find_element("id", self.Medium)
@@ -230,7 +231,7 @@ class EnvironmentSettingsPage():
 			return None
 	def high_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.High))
 			)
 			element = self.driver.find_element("id", self.High)
@@ -239,7 +240,7 @@ class EnvironmentSettingsPage():
 			return None
 	def celsius_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Celsius))
 			)
 			element = self.driver.find_element("id", self.Celsius)
@@ -248,7 +249,7 @@ class EnvironmentSettingsPage():
 			return None
 	def fahrenheit_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Fahrenheit))
 			)
 			element = self.driver.find_element("id", self.Fahrenheit)
@@ -257,7 +258,7 @@ class EnvironmentSettingsPage():
 			return None
 	def discard_message_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.DiscardTitle))
 			)
 			element = self.driver.find_element("id", self.DiscardTitle)
@@ -266,7 +267,7 @@ class EnvironmentSettingsPage():
 			return None
 	def discard_no_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.DiscardNo))
 			)
 			element = self.driver.find_element("id", self.DiscardNo)
@@ -275,7 +276,7 @@ class EnvironmentSettingsPage():
 			return None
 	def discard_yes_text(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.DiscardYes))
 			)
 			element = self.driver.find_element("id", self.DiscardYes)
@@ -285,21 +286,21 @@ class EnvironmentSettingsPage():
 
 	def is_in_envir_page(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Header))
 			)
 			return True
 		except :
 			return False
 	def is_switch_on(self):
-		WebDriverWait(self.driver, 3).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.Switch))
 		)
 		switch = self.driver.find_element(AppiumBy.ID, self.Switch)
 		return switch.get_attribute("checked") == "true"
 	def is_in_discard_dialog(self):
 		try:
-			WebDriverWait(self.driver, 10).until(
+			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.DiscardTitle))
 			)
 			return True
@@ -307,28 +308,28 @@ class EnvironmentSettingsPage():
 			return False
 
 	def is_low_clickable(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.LowCheckBox))
 		)
 		button = self.driver.find_element(AppiumBy.ID, self.LowCheckBox)
 		is_clickable = button.get_attribute("clickable")
 		return is_clickable == "true"
 	def is_medium_clickable(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.MediumCheckBox))
 		)
 		button = self.driver.find_element(AppiumBy.ID, self.MediumCheckBox)
 		is_clickable = button.get_attribute("clickable")
 		return is_clickable == "true"
 	def is_high_clickable(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.HighCheckBox))
 		)
 		button = self.driver.find_element(AppiumBy.ID, self.HighCheckBox)
 		is_clickable = button.get_attribute("clickable")
 		return is_clickable == "true"
 	def is_save_enable(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.Save))
 		)
 		button = self.driver.find_element(AppiumBy.ID, self.Save)
@@ -336,25 +337,25 @@ class EnvironmentSettingsPage():
 		return is_enable == "true"
 
 	def temperature_bar_location(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.TemperatureBar))
 		)
 		bar = self.driver.find_element(AppiumBy.ID, self.TemperatureBar)
 		return bar.location
 	def temperature_bar_size(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.TemperatureBar))
 		)
 		bar = self.driver.find_element(AppiumBy.ID, self.TemperatureBar)
 		return bar.size
 	def humidity_bar_location(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.HumidityBar))
 		)
 		bar = self.driver.find_element(AppiumBy.ID, self.HumidityBar)
 		return bar.location
 	def humidity_bar_size(self):
-		WebDriverWait(self.driver, 10).until(
+		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.HumidityBar))
 		)
 		bar = self.driver.find_element(AppiumBy.ID, self.HumidityBar)

@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.actions.pointer_input import PointerInput
 from selenium.webdriver.common.action_chains import ActionChains
-from pages.base import BaseTestCase
+import pages.base as base
 import time
 from selenium.webdriver.common.actions.interaction import Interaction
 
@@ -12,7 +12,7 @@ class BabyMonitorPage():
     def __init__(self, driver):
         self.driver = driver
 
-        self.babyMonitorScreen = "com.compal.bioslab.pixsee.pixm01:id/videoTextureView"
+        self.liveStreamScreen = "com.compal.bioslab.pixsee.pixm01:id/backgroundHomeLivestreamCardAuxView"
         self.sleepButton = "com.compal.bioslab.pixsee.pixm01:id/ibSleepMode"
         self.twoWayTalkButton = "com.compal.bioslab.pixsee.pixm01:id/ibPushToTalkHomeAct"
         self.musicButton = "com.compal.bioslab.pixsee.pixm01:id/ibPlayMusic"
@@ -30,31 +30,31 @@ class BabyMonitorPage():
         self.captureButton_xpath = '//android.widget.RelativeLayout[@resource-id="com.compal.bioslab.pixsee.pixm01:id/btnSwipeCapture"]/android.widget.ImageView[2]'
 
     def click_sleep(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.sleepButton))
         )
         element = self.driver.find_element("id", self.sleepButton)
         element.click()
     def click_two_way_talk(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.twoWayTalkButton))
         )
         element = self.driver.find_element("id", self.twoWayTalkButton)
         element.click()
     def click_music(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.musicButton))
         )
         element = self.driver.find_element("id", self.musicButton)
         element.click()
     def click_record(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.recordButton))
         )
         element = self.driver.find_element("id", self.recordButton)
         element.click()
     def click_capture(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("xpath", self.captureButton_xpath))
         )
         element = self.driver.find_element("xpath", self.captureButton_xpath)
@@ -63,7 +63,7 @@ class BabyMonitorPage():
     #TODO: function uncompleted 2025/07/15
     def change_camera_mode(self):
         # 等待按鈕出現並抓到元素
-        element = WebDriverWait(self.driver, 20).until(
+        element = WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.captureButton))
         )
 
@@ -84,66 +84,66 @@ class BabyMonitorPage():
 
         actions.perform()
     def click_change_quality(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.changeQualityButton))
         )
         element = self.driver.find_element("id", self.changeQualityButton)
         element.click()
     def click_mute(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.muteButton))
         )
         element = self.driver.find_element("id", self.muteButton)
         element.click()
     def is_in_baby_monitor_page(self):
         try:
-            WebDriverWait(self.driver, 20).until(
-                EC.presence_of_element_located((AppiumBy.ID, self.babyMonitorScreen))
+            WebDriverWait(self.driver, base.wait_time).until(
+                EC.presence_of_element_located((AppiumBy.ID, self.liveStreamScreen))
             )
-            self.driver.find_element(AppiumBy.ID, self.babyMonitorScreen)
+            self.driver.find_element(AppiumBy.ID, self.liveStreamScreen)
             return True
 
         except:
             return False
-    def get_tutor_description(self, timeout=20):
+    def get_tutor_description(self):
         """wait for the tutor text to appear by its ID"""
-        WebDriverWait(self.driver, timeout).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located((AppiumBy.ID, self.tutor_id))
         )
         return self.driver.find_element(AppiumBy.ID, self.tutor_id).text
-    def get_tutor_title(self, timeout=20):
+    def get_tutor_title(self):
         """wait for the tutor title to appear by its ID"""
-        WebDriverWait(self.driver, timeout).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located((AppiumBy.ID, self.tutor_title))
         )
         return self.driver.find_element(AppiumBy.ID, self.tutor_title).text
     def click_stream_title(self):
         """點擊畫面標題"""
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located((AppiumBy.ID, self.stream_title))
         )
         self.driver.find_element(AppiumBy.ID, self.stream_title).click()
     def click_home(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located((AppiumBy.ID, self.homeButton))
         )
         self.driver.find_element(AppiumBy.ID, self.homeButton).click()
     def get_stream_title(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located((AppiumBy.ID, self.stream_title))
         )
         element = self.driver.find_element("id", self.stream_title)
         return element.text
 
     def get_connecting_status_text(self):
-        WebDriverWait(self.driver, 20).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located((AppiumBy.ID, self.connectingStatusText))
         )
         element = self.driver.find_element("id", self.connectingStatusText)
         return element.text
     def has_photo_upload_dialog(self):
         try:
-            WebDriverWait(self.driver, 20).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located((AppiumBy.ID, self.photoUploadDialog))
             )
             self.driver.find_element(AppiumBy.ID, self.photoUploadDialog)
@@ -151,7 +151,7 @@ class BabyMonitorPage():
         except:
             return False
     def is_connected(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located((AppiumBy.ID, self.twoWayTalkButton))
         )
         button = self.driver.find_element(AppiumBy.ID, self.twoWayTalkButton)

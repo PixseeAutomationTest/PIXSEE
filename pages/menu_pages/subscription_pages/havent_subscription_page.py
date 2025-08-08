@@ -2,6 +2,7 @@ from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from PIL import Image
+import pages.base as base
 
 
 class SubscriptionPage1():
@@ -29,7 +30,7 @@ class SubscriptionPage1():
 
     def is_in_subscription_page(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.Header))
             )
             return True
@@ -37,7 +38,7 @@ class SubscriptionPage1():
             return False
     def is_in_coupon_dialog(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.CouponTitle))
             )
             return True
@@ -45,7 +46,7 @@ class SubscriptionPage1():
             return False
     def is_in_info_dialog(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.Chrome))
             )
             return True
@@ -53,7 +54,7 @@ class SubscriptionPage1():
             return False
     def is_in_price_plan_dialog(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("xpath", self.Plan1Button))
             )
             return True
@@ -61,7 +62,7 @@ class SubscriptionPage1():
             return False
     def is_in_pay_dialog(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("xpath", self.PayButton))
             )
             return True
@@ -69,7 +70,7 @@ class SubscriptionPage1():
             return False
     def is_in_chrome(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.Chrome))
             )
             return True
@@ -78,7 +79,7 @@ class SubscriptionPage1():
 
     def header_text(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.Header))
             )
             element = self.driver.find_element("id", self.Header)
@@ -87,7 +88,7 @@ class SubscriptionPage1():
             return None
     def gold_star_button_text(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.GoldStarButton))
             )
             element = self.driver.find_element("id", self.GoldStarButton)
@@ -96,7 +97,7 @@ class SubscriptionPage1():
             return None
     def more_details_text(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.MoreDetails))
             )
             element = self.driver.find_element("id", self.MoreDetails)
@@ -105,7 +106,7 @@ class SubscriptionPage1():
             return None
     def coupon_title_txt(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.CouponTitle))
             )
             element = self.driver.find_element("id", self.CouponTitle)
@@ -114,7 +115,7 @@ class SubscriptionPage1():
             return None
     def coupon_cancel_txt(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.CouponCancel))
             )
             element = self.driver.find_element("id", self.CouponCancel)
@@ -123,7 +124,7 @@ class SubscriptionPage1():
             return None
     def coupon_ok_txt(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.CouponOk))
             )
             element = self.driver.find_element("id", self.CouponOk)
@@ -132,7 +133,7 @@ class SubscriptionPage1():
             return None
     def coupon_code_hint(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.CouponCodeField))
             )
             element = self.driver.find_element("id", self.CouponCodeField)
@@ -141,7 +142,7 @@ class SubscriptionPage1():
             return None
     def coupon_wrong_code_text(self):
         try:
-            WebDriverWait(self.driver, 10).until(
+            WebDriverWait(self.driver, base.wait_time).until(
                 EC.presence_of_element_located(("id", self.CouponWrongCode))
             )
             element = self.driver.find_element("id", self.CouponWrongCode)
@@ -150,61 +151,61 @@ class SubscriptionPage1():
             return None
 
     def click_x(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.X))
         )
         element = self.driver.find_element("id", self.X)
         element.click()
     def click_info(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.Info))
         )
         element = self.driver.find_element("id", self.Info)
         element.click()
     def click_coupon(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.CouponButton))
         )
         element = self.driver.find_element("id", self.CouponButton)
         element.click()
     def click_coupon_cancel(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.CouponCancel))
         )
         element = self.driver.find_element("id", self.CouponCancel)
         element.click()
     def click_coupon_ok(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.CouponOk))
         )
         element = self.driver.find_element("id", self.CouponOk)
         element.click()
     def click_coupon_info(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.CouponInfo))
         )
         element = self.driver.find_element("id", self.CouponInfo)
         element.click()
     def click_gold_star(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.GoldStarButton))
         )
         element = self.driver.find_element("id", self.GoldStarButton)
         element.click()
     def click_plan1(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("xpath", self.Plan1Button))
         )
         element = self.driver.find_element("xpath", self.Plan1Button)
         element.click()
     def click_plan2(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("xpath", self.Plan2Button))
         )
         element = self.driver.find_element("xpath", self.Plan2Button)
         element.click()
     def click_pay(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("xpath", self.PayButton))
         )
         element = self.driver.find_element("xpath", self.PayButton)
@@ -255,7 +256,7 @@ class SubscriptionPage1():
         return in_range
 
     def enter_coupon_code(self, code):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.CouponCodeField))
         )
         element = self.driver.find_element("id", self. CouponCodeField)
@@ -263,7 +264,7 @@ class SubscriptionPage1():
         element.send_keys(code)
 
     def is_coupon_ok_enabled(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located((AppiumBy.ID, self.CouponOk))
         )
         button = self.driver.find_element(AppiumBy.ID, self.CouponOk)

@@ -22,15 +22,12 @@ class AboutTest(BaseTestCase):
             elif not baby_monitor_page.is_in_baby_monitor_page():
                 self.shutdown_app()
                 self.open_app()
-            print("Finish opening app.")
             baby_monitor_page.click_home()
             menu_page.click_about()
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
     def test_about_pixsee(self):
-        baby_monitor_page = BabyMonitorPage(self.driver)
-        menu_page = MenuPage(self.driver)
         about_page = AboutPage(self.driver)
 
         try:
@@ -51,7 +48,6 @@ class AboutTest(BaseTestCase):
             self.go_back()
             self.assertTrue(about_page.is_in_about_page(), "Can't return to About Page from Privacy Policy website")
 
-
         except AssertionError as ae:
             print(f"Test failed with assertion error: {ae}")
             raise ae
@@ -60,8 +56,6 @@ class AboutTest(BaseTestCase):
             raise e
 
     def test_privacy_policy(self):
-        baby_monitor_page = BabyMonitorPage(self.driver)
-        menu_page = MenuPage(self.driver)
         about_page = AboutPage(self.driver)
 
         try:
@@ -91,8 +85,6 @@ class AboutTest(BaseTestCase):
             raise e
 
     def test_terms_of_service(self):
-        baby_monitor_page = BabyMonitorPage(self.driver)
-        menu_page = MenuPage(self.driver)
         about_page = AboutPage(self.driver)
 
         try:
