@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from PIL import Image
 
 
-class SubscriptionPage():
+class SubscriptionPage1():
     def __init__(self, driver):
         self.driver = driver
         self.Header = "com.compal.bioslab.pixsee.pixm01:id/tvBarTitle"
@@ -12,11 +12,17 @@ class SubscriptionPage():
         self.Info = "com.compal.bioslab.pixsee.pixm01:id/ivSubscInfo"
         self.GoldStarButton = "com.compal.bioslab.pixsee.pixm01:id/btNewSubscription"
         self.CouponButton = "com.compal.bioslab.pixsee.pixm01:id/ibCoupon"
-        self.Capacity = "com.compal.bioslab.pixsee.pixm01:id/tvPlanTypeTitle"
-        self.Coupon = "com.compal.bioslab.pixsee.pixm01:id/btnUpgradeTimeLapseCancel"
+        self.CouponTitle = "com.compal.bioslab.pixsee.pixm01:id/tvTitle"
+        self.CouponInfo = "com.compal.bioslab.pixsee.pixm01:id/ivInfo"
+        self.CouponCodeField = "com.compal.bioslab.pixsee.pixm01:id/etCoupon"
+        self.CouponCancel = "com.compal.bioslab.pixsee.pixm01:id/btCancel"
+        self.CouponOk = "com.compal.bioslab.pixsee.pixm01:id/btOK"
+        self.CouponWrongCode = "com.compal.bioslab.pixsee.pixm01:id/tvError"
         self.Chrome = "com.android.chrome:id/compositor_view_holder"
         self.MoreDetails = "com.compal.bioslab.pixsee.pixm01:id/tvMoreDetail"
+        self.Plan1Color ='(//android.widget.LinearLayout[@resource-id="com.compal.bioslab.pixsee.pixm01:id/llPlanType"])[1]/android.view.ViewGroup'
         self.Plan1Button= '(//android.widget.RadioButton[@resource-id="com.compal.bioslab.pixsee.pixm01:id/rb"])[1]'
+        self.Plan2Color = '(//android.widget.LinearLayout[@resource-id="com.compal.bioslab.pixsee.pixm01:id/llPlanType"])[2]/android.view.ViewGroup'
         self.Plan2Button= '(//android.widget.RadioButton[@resource-id="com.compal.bioslab.pixsee.pixm01:id/rb"])[2]'
         self.PayButton = '//android.widget.Button[@resource-id="com.android.vending:id/0_resource_name_obfuscated"]'
         self.Chrome = "com.android.chrome:id/compositor_view_holder"
@@ -32,7 +38,7 @@ class SubscriptionPage():
     def is_in_coupon_dialog(self):
         try:
             WebDriverWait(self.driver, 10).until(
-                EC.presence_of_element_located(("id", self.Coupon))
+                EC.presence_of_element_located(("id", self.CouponTitle))
             )
             return True
         except AssertionError:
@@ -45,7 +51,7 @@ class SubscriptionPage():
             return True
         except AssertionError:
             return False
-    def is_in_prize_plan_dialog(self):
+    def is_in_price_plan_dialog(self):
         try:
             WebDriverWait(self.driver, 10).until(
                 EC.presence_of_element_located(("xpath", self.Plan1Button))
@@ -79,15 +85,6 @@ class SubscriptionPage():
             return element.text
         except AssertionError:
             return None
-    def title(self):
-        try:
-            WebDriverWait(self.driver, 10).until(
-                EC.presence_of_element_located(("id", self.Capacity))
-            )
-            element = self.driver.find_element("id", self.Capacity)
-            return element.text
-        except AssertionError:
-            return None
     def gold_star_button_text(self):
         try:
             WebDriverWait(self.driver, 10).until(
@@ -103,6 +100,51 @@ class SubscriptionPage():
                 EC.presence_of_element_located(("id", self.MoreDetails))
             )
             element = self.driver.find_element("id", self.MoreDetails)
+            return element.text
+        except AssertionError:
+            return None
+    def coupon_title_txt(self):
+        try:
+            WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located(("id", self.CouponTitle))
+            )
+            element = self.driver.find_element("id", self.CouponTitle)
+            return element.text
+        except AssertionError:
+            return None
+    def coupon_cancel_txt(self):
+        try:
+            WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located(("id", self.CouponCancel))
+            )
+            element = self.driver.find_element("id", self.CouponCancel)
+            return element.text
+        except AssertionError:
+            return None
+    def coupon_ok_txt(self):
+        try:
+            WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located(("id", self.CouponOk))
+            )
+            element = self.driver.find_element("id", self.CouponOk)
+            return element.text
+        except AssertionError:
+            return None
+    def coupon_code_hint(self):
+        try:
+            WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located(("id", self.CouponCodeField))
+            )
+            element = self.driver.find_element("id", self.CouponCodeField)
+            return element.get_attribute("hint")
+        except AssertionError:
+            return None
+    def coupon_wrong_code_text(self):
+        try:
+            WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located(("id", self.CouponWrongCode))
+            )
+            element = self.driver.find_element("id", self.CouponWrongCode)
             return element.text
         except AssertionError:
             return None
@@ -124,6 +166,24 @@ class SubscriptionPage():
             EC.presence_of_element_located(("id", self.CouponButton))
         )
         element = self.driver.find_element("id", self.CouponButton)
+        element.click()
+    def click_coupon_cancel(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(("id", self.CouponCancel))
+        )
+        element = self.driver.find_element("id", self.CouponCancel)
+        element.click()
+    def click_coupon_ok(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(("id", self.CouponOk))
+        )
+        element = self.driver.find_element("id", self.CouponOk)
+        element.click()
+    def click_coupon_info(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(("id", self.CouponInfo))
+        )
+        element = self.driver.find_element("id", self.CouponInfo)
         element.click()
     def click_gold_star(self):
         WebDriverWait(self.driver, 10).until(
@@ -150,11 +210,10 @@ class SubscriptionPage():
         element = self.driver.find_element("xpath", self.PayButton)
         element.click()
 
-
-    def find_stream_left_top(self):
-        element_color = self.driver.find_element(AppiumBy.ID, self.Stream)
-        x = element_color.location['x']
-        y = element_color.location['y']
+    def plan_1_color(self):
+        element_color = self.driver.find_element(AppiumBy.XPATH, self.Plan1Color)
+        x = element_color.location['x'] + 100
+        y = element_color.location['y'] + 50
         '''
         w = element_color.size['width']
         h = element_color.size['height']
@@ -162,8 +221,17 @@ class SubscriptionPage():
         center_y = y + h // 2
         '''
         return x, y
-
-
+    def plan_2_color(self):
+        element_color = self.driver.find_element(AppiumBy.XPATH, self.Plan2Color)
+        x = element_color.location['x'] + 100
+        y = element_color.location['y'] + 50
+        '''
+        w = element_color.size['width']
+        h = element_color.size['height']
+        center_x = x + w // 2
+        center_y = y + h // 2
+        '''
+        return x, y
     def is_color_in_range(self, x, y, color_range):
         """
         Take a screenshot and check if the pixel at coordinates (x, y) is within the given RGB color range.。
@@ -185,3 +253,24 @@ class SubscriptionPage():
         in_range = (r_min <= r <= r_max) and (g_min <= g <= g_max) and (b_min <= b <= b_max)
         print(f"Pixel at ({x},{y}) = {pixel}, in range: {in_range}")
         return in_range
+
+    def enter_coupon_code(self, code):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(("id", self.CouponCodeField))
+        )
+        element = self.driver.find_element("id", self. CouponCodeField)
+        element.clear()
+        element.send_keys(code)
+
+    def is_coupon_ok_enabled(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((AppiumBy.ID, self.CouponOk))
+        )
+        button = self.driver.find_element(AppiumBy.ID, self.CouponOk)
+        is_enable = button.get_attribute("enabled")
+        return is_enable == "true"
+
+
+
+
+

@@ -24,6 +24,8 @@ class SDcardCase(BaseTestCase):
 				return
 			elif sd_card_page.is_in_sdcard_page():
 				return
+			elif sd_card_page.is_formatting():
+				return
 			elif not baby_monitor_page.is_in_baby_monitor_page():
 				self.shutdown_app()
 				self.open_app()
@@ -155,15 +157,13 @@ class SDcardCase(BaseTestCase):
 			print("Formatting test success")
 		except AssertionError:
 			raise AssertionError("Formatting test failed")
-	# start from formatting dialog
+	# start from formatting loading page
 	def test_05_check_formatting_close(self):
 		sd_card_page = SDcardStatusPage(self.driver)
-
-
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		# click close button
 		sd_card_page.click_close()
 		# check if is in pixsee settings page
-		pixsee_settings_page = PixseeSettingsPage(self.driver)
 		try:
 			self.assertTrue(pixsee_settings_page.is_in_settings())
 			print("Back to Pixsee Settings page test success")
@@ -194,7 +194,7 @@ class SDcardCase(BaseTestCase):
 			raise AssertionError("Formatted dialog go button text test failed")
 		# click go button
 		sd_card_page.click_go()
-
+		sd_card_page.click_back()
 # back to pixsee settings page
 
 

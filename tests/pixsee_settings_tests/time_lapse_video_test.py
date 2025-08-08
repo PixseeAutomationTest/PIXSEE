@@ -6,8 +6,7 @@ from pages.base import BaseTestCase
 from pages.baby_monitor_page import BabyMonitorPage
 from pages.login_page import LoginPage
 from pages.menu_pages.pixsee_settings_pages.time_lapse_video_page import TimeLapseVideoPage
-from pages.menu_pages.subscription_pages.subscription_page import SubscriptionPage
-
+from pages.menu_pages.subscription_pages.havent_subscription_page import SubscriptionPage1
 
 class TimeLapseVideoCase(BaseTestCase):
     def setUp(self):
@@ -17,6 +16,7 @@ class TimeLapseVideoCase(BaseTestCase):
         menu_page = MenuPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
         time_lapse_video_page = TimeLapseVideoPage(self.driver)
+        subscription_page = SubscriptionPage1(self.driver)
         try:
             while self.driver.current_package != self.driver.capabilities.get("appPackage"):
                 self.driver.terminate_app(self.driver.current_package)
@@ -24,6 +24,8 @@ class TimeLapseVideoCase(BaseTestCase):
             if pixsee_settings_page.is_in_settings():
                 return
             elif time_lapse_video_page.is_in_timelapse_video_page():
+                return
+            elif subscription_page.is_in_subscription_page():
                 return
             elif not baby_monitor_page.is_in_baby_monitor_page():
                 self.shutdown_app()
@@ -111,7 +113,7 @@ class TimeLapseVideoCase(BaseTestCase):
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
-        subscriptionion_page = SubscriptionPage(self.driver)
+        subscriptionion_page = SubscriptionPage1(self.driver)
 
         time_lapse_video.click_switch()
         time_lapse_video.click_upgrade_subscription()
@@ -127,7 +129,7 @@ class TimeLapseVideoCase(BaseTestCase):
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
-        subscription_page = SubscriptionPage(self.driver)
+        subscription_page = SubscriptionPage1(self.driver)
 
         time.sleep(1)
         subscription_page.click_x()
@@ -144,7 +146,7 @@ class TimeLapseVideoCase(BaseTestCase):
         baby_monitor_page = BabyMonitorPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
         login_page = LoginPage(self.driver)
-        subscription_page = SubscriptionPage(self.driver)
+        subscription_page = SubscriptionPage1(self.driver)
 
         time_lapse_video.click_switch()
         # check if in upgrade dialog
@@ -165,7 +167,7 @@ class TimeLapseVideoCase(BaseTestCase):
             print("subscribe successfully")
         except AssertionError:
             raise AssertionError("Not in time lapse video page after subscribe")
-
+        time_lapse_video.click_back()
     # already subscribed
     # start from pixsee settings page
     def test_05_time_lapse_video_save(self):
@@ -271,7 +273,7 @@ class TimeLapseVideoCase(BaseTestCase):
         after_status = time_lapse_video.is_switch_on()
         self.check_switch_and_content(after_status, time_lapse_video.RecordingMode)
     # start from time lapse video page
-    def test_06_time_lapse_video_check_text(self):
+    def test_09_time_lapse_video_check_text(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
@@ -333,7 +335,7 @@ class TimeLapseVideoCase(BaseTestCase):
         except AssertionError:
             print("time_lapse_video twenty four hour text wrong")
     # stay
-    def test_07_time_lapse_video_checkbox(self):
+    def test_10_time_lapse_video_checkbox(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
@@ -364,7 +366,7 @@ class TimeLapseVideoCase(BaseTestCase):
         except AssertionError:
             raise AssertionError("Twenty four hours checkbox is not checked")
     # stay
-    def test_08_time_lapse_video_select_time(self):
+    def test_11_time_lapse_video_select_time(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
@@ -414,7 +416,10 @@ class TimeLapseVideoCase(BaseTestCase):
                 raise AssertionError("timer confirm function failed, start time not changed")
         except AssertionError:
             raise AssertionError("Not in time selecter")
-        time_lapse_video.click_back()
+        if time_lapse_video.is_save_enable():
+            time_lapse_video.click_save()
+        else:
+            time_lapse_video.click_back()
     # back to pixsee settings page
 
 

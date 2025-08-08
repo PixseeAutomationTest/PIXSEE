@@ -20,16 +20,24 @@ from pages.menu_pages.pixsee_settings_pages.wifi_settings_page import WifiSettin
 class PixseeSettingsTest(BaseTestCase):
     def setUp(self):
         super().setUp(no_reset=True)
-    def test_00_open_app(self):
-        menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
+        menu_page = MenuPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
-        self.shutdown_app()
-        # open app
-        self.open_app()
-        baby_monitor_page.is_in_baby_monitor_page()
-        baby_monitor_page.click_home()
-        menu_page.click_settings()
+        try:
+            while self.driver.current_package != self.driver.capabilities.get("appPackage"):
+                self.driver.terminate_app(self.driver.current_package)
+                self.open_app()
+            if pixsee_settings_page.is_in_settings():
+                return
+            elif not baby_monitor_page.is_in_baby_monitor_page():
+                self.shutdown_app()
+                self.open_app()
+            print("Finish opening app.")
+            baby_monitor_page.click_home()
+            menu_page.click_settings()
+        except Exception as e:
+            print(f"Test failed with exception: {e}")
+            raise e
     # all start from pixsee settings page end up in pixsee settings page too
     def test_01_enter_pixsee_profile(self):
         menu_page = MenuPage(self.driver)
@@ -128,12 +136,7 @@ class PixseeSettingsTest(BaseTestCase):
         pixsee_settings_page = PixseeSettingsPage(self.driver)
         cry_detection_page = CryDetectionPage(self.driver)
 
-        self.shutdown_app()
-        self.open_app()
-        baby_monitor_page.is_in_baby_monitor_page()
-        if baby_monitor_page.is_connected():
-            baby_monitor_page.click_home()
-            menu_page.click_settings()
+        if pixsee_settings_page.is_cry_detection_able_to_click():
             # check cry detection title on settings page
             try:
                 hint = self.get_string("crying_detection")
@@ -153,18 +156,14 @@ class PixseeSettingsTest(BaseTestCase):
         else:
             print("Baby monitor is not connected, can't enter Cry Detection page")
             raise AssertionError("Baby monitor is not connected, can't enter Cry Detection page")
+        cry_detection_page.click_back()
     def test_06_enter_area_detection(self):
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
         area_detection_page = AreaDetectionPage(self.driver)
 
-        self.shutdown_app()
-        self.open_app()
-        baby_monitor_page.is_in_baby_monitor_page()
-        if baby_monitor_page.is_connected():
-            baby_monitor_page.click_home()
-            menu_page.click_settings()
+        if pixsee_settings_page.is_area_detection_able_to_click():
             # check area detection title on settings page
             try:
                 hint = self.get_string("area_detection")
@@ -184,18 +183,14 @@ class PixseeSettingsTest(BaseTestCase):
         else:
             print("Baby monitor is not connected, can't enter Area Detection page")
             raise AssertionError("Baby monitor is not connected, can't enter Area Detection page")
+        area_detection_page.click_back()
     def test_07_enter_covered_face_detection(self):
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
         covered_face_page = CoveredFaceDetectionPage(self.driver)
 
-        self.shutdown_app()
-        self.open_app()
-        baby_monitor_page.is_in_baby_monitor_page()
-        if baby_monitor_page.is_connected():
-            baby_monitor_page.click_home()
-            menu_page.click_settings()
+        if pixsee_settings_page.is_covered_face_detection_able_to_click():
             # check covered face detection title on settings page
             try:
                 hint = self.get_string("cover_detection_settings_label")
@@ -215,18 +210,14 @@ class PixseeSettingsTest(BaseTestCase):
         else:
             print("Baby monitor is not connected, can't enter Covered Face Detection page")
             raise AssertionError("Baby monitor is not connected, can't enter Covered Face Detection page")
+        covered_face_page.click_back()
     def test_08_enter_timelapse_video(self):
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
         pixsee_settings_page = PixseeSettingsPage(self.driver)
         timelapse_video_page = TimeLapseVideoPage(self.driver)
 
-        self.shutdown_app()
-        self.open_app()
-        baby_monitor_page.is_in_baby_monitor_page()
-        if baby_monitor_page.is_connected():
-            baby_monitor_page.click_home()
-            menu_page.click_settings()
+        if pixsee_settings_page.is_time_lapse_video_able_to_click():
             # check timelapse video title on settings page
             try:
                 hint = self.get_string("time_lapse")
@@ -277,10 +268,7 @@ class PixseeSettingsTest(BaseTestCase):
         login_page = LoginPage(self.driver)
         sd_card_page = SDcardStatusPage(self.driver)
 
-        self.shutdown_app()
-        self.open_app()
-        baby_monitor_page.is_in_baby_monitor_page()
-        baby_monitor_page.click_home()
+        pixsee_settings_page.click_back()
 
         hint = self.get_string("device_settings")
         try:
