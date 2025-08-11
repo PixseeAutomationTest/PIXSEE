@@ -20,6 +20,8 @@ from tests.pixsee_settings_tests.voice_service_test import VoiceServiceTest
 from tests.pixsee_settings_tests.SD_card_test import SDcardCase
 from tests.about_test import AboutTest
 from tests.new_photo_check_test import NewPhotoCheckCase
+from tests.subscription_tests.havent_subscription_test import SubscriptionCase1
+from tests.subscription_tests.already_subscription_test import SubscriptionCase2
 
 
 if __name__ == '__main__':
@@ -35,9 +37,9 @@ if __name__ == '__main__':
     suite.addTests(loader.loadTestsFromTestCase(AboutTest))
 
     suite.addTests(loader.loadTestsFromTestCase(LoginCase))
-    suite.addTests(loader.loadTestsFromTestCase(NewPhotoCheckCase))
     suite.addTests(loader.loadTestsFromTestCase(AreaDetectionCase1))
     suite.addTests(loader.loadTestsFromTestCase(AreaDetectionCase2))
+    suite.addTests(loader.loadTestsFromTestCase(NewPhotoCheckCase))
     suite.addTests(loader.loadTestsFromTestCase(WifiSettingsCase))
     suite.addTests(loader.loadTestsFromTestCase(PixseeFriendsDetectionCase))
     suite.addTests(loader.loadTestsFromTestCase(CoveredFaceDetectionCase1))
@@ -45,8 +47,12 @@ if __name__ == '__main__':
     suite.addTests(loader.loadTestsFromTestCase(EnvironmentSettingsCase))
     suite.addTests(loader.loadTestsFromTestCase(CryDetectionCase))
     suite.addTests(loader.loadTestsFromTestCase(SDcardCase))
+    suite.addTests(loader.loadTestsFromTestCase(SubscriptionCase1))
     suite.addTests(loader.loadTestsFromTestCase(TimeLapseVideoCase))
+    suite.addTests(loader.loadTestsFromTestCase(SubscriptionCase2))
     suite.addTests(loader.loadTestsFromTestCase(PixseeSettingsTest))
+
+
     # Run the test suite
-    runner = HTMLTestReport("./results.html", title="Pixsee Test Results")
+    runner = HTMLTestReport("results/20250808-2.html", title="Pixsee Test Results")
     runner.run(suite)

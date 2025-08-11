@@ -175,8 +175,9 @@ class PixseeSettingsTest(BaseTestCase):
             pixsee_settings_page.click_area_detection()
             # check if is in area detection page
             try:
-                self.assertTrue(area_detection_page.is_in_area_detection_page())
+                self.assertTrue(area_detection_page.is_in_area_detection_tutor_page())
                 print("entered Area Detection page successfully")
+                area_detection_page.click_skip()
             except AssertionError:
                 print("entered Area Detection page unsuccessfully")
                 raise AssertionError("Not in Area Detection page")

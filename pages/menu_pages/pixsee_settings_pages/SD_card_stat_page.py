@@ -124,6 +124,7 @@ class SDcardStatusPage():
 			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.Dialog))
 			)
+			self.driver.find_element("id", self.Dialog)
 			return True
 		except :
 			return False

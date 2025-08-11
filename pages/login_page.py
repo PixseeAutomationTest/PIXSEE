@@ -1,6 +1,7 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import pages.base as base
+import time
 
 class LoginPage():
     def __init__(self, driver):
@@ -46,6 +47,7 @@ class LoginPage():
         self._input_email(email)
         self._input_password(password)
         self._click_signin()
+        time.sleep(15)
 
     def get_email_error_text(self):
         try:

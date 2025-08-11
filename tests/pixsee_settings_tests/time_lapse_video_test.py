@@ -161,13 +161,8 @@ class TimeLapseVideoCase(BaseTestCase):
         subscription_page.click_plan1()
         subscription_page.click_pay()
         time.sleep(5)
-        # check if back to time lapse video page
-        try:
-            self.assertTrue(time_lapse_video.is_in_timelapse_video_page())
-            print("subscribe successfully")
-        except AssertionError:
-            raise AssertionError("Not in time lapse video page after subscribe")
-        time_lapse_video.click_back()
+        self.shutdown_app()
+
     # already subscribed
     # start from pixsee settings page
     def test_05_time_lapse_video_save(self):

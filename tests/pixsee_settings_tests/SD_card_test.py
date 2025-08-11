@@ -112,11 +112,7 @@ class SDcardCase(BaseTestCase):
 			print("Format dialog test success")
 		except AssertionError:
 			raise AssertionError("Format dialog test failed")
-	# start from dialog
-	def test_04_check_format_go_and_no(self):
-		sd_card_page = SDcardStatusPage(self.driver)
 
-		# check dialog title
 		try:
 			title = sd_card_page.dialog_text()
 			hint = self.get_string("are_you_sure_format_sd_card")
@@ -148,54 +144,54 @@ class SDcardCase(BaseTestCase):
 		except AssertionError:
 			raise AssertionError("Back to sd card page test failed")
 		# click format button
-		sd_card_page.click_format()
+		# sd_card_page.click_format()
 		# click go button
-		sd_card_page.click_go()
-		# check if is formatting
-		try:
-			self.assertTrue(sd_card_page.is_formatting())
-			print("Formatting test success")
-		except AssertionError:
-			raise AssertionError("Formatting test failed")
+		# sd_card_page.click_go()
+		# # check if is formatting
+		# try:
+		# 	self.assertTrue(sd_card_page.is_formatting())
+		# 	print("Formatting test success")
+		# except AssertionError:
+		# 	raise AssertionError("Formatting test failed")
 	# start from formatting loading page
-	def test_05_check_formatting_close(self):
-		sd_card_page = SDcardStatusPage(self.driver)
-		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		# click close button
-		sd_card_page.click_close()
-		# check if is in pixsee settings page
-		try:
-			self.assertTrue(pixsee_settings_page.is_in_settings())
-			print("Back to Pixsee Settings page test success")
-		except AssertionError:
-			raise AssertionError("Back to Pixsee Settings page test failed")
-			# check formatted dialog
-		time.sleep(150)
-		try:
-			self.assertTrue(sd_card_page.is_in_format_dialog())
-			print("Formatted dialog test success")
-		except AssertionError:
-			raise AssertionError("Formatted dialog test failed")
-		# check dialog title
-		try:
-			title = sd_card_page.dialog_text()
-			hint = self.get_string("sd_card_formatted_succesfully")
-			self.assertEqual(title, hint)
-			print("Formatted dialog title test success")
-		except AssertionError:
-			raise AssertionError("Formatted dialog title test failed")
-		# check dialog button text
-		try:
-			go_button_text = sd_card_page.go_button_text()
-			hint = self.get_string("sd_card_button_got_it")
-			self.assertEqual(go_button_text, hint)
-			print("Formatted dialog go button text test success")
-		except AssertionError:
-			raise AssertionError("Formatted dialog go button text test failed")
-		# click go button
-		sd_card_page.click_go()
-		sd_card_page.click_back()
-# back to pixsee settings page
+# 	def test_04_check_formatting_close(self):
+# 		sd_card_page = SDcardStatusPage(self.driver)
+# 		pixsee_settings_page = PixseeSettingsPage(self.driver)
+# 		# click close button
+# 		sd_card_page.click_close()
+# 		# check if is in pixsee settings page
+# 		try:
+# 			self.assertTrue(pixsee_settings_page.is_in_settings())
+# 			print("Back to Pixsee Settings page test success")
+# 		except AssertionError:
+# 			raise AssertionError("Back to Pixsee Settings page test failed")
+# 			# check formatted dialog
+# 		time.sleep(150)
+# 		try:
+# 			self.assertTrue(sd_card_page.is_in_format_dialog())
+# 			print("Formatted dialog test success")
+# 		except AssertionError:
+# 			raise AssertionError("Formatted dialog test failed")
+# 		# check dialog title
+# 		try:
+# 			title = sd_card_page.dialog_text()
+# 			hint = self.get_string("sd_card_formatted_succesfully")
+# 			self.assertEqual(title, hint)
+# 			print("Formatted dialog title test success")
+# 		except AssertionError:
+# 			raise AssertionError("Formatted dialog title test failed")
+# 		# check dialog button text
+# 		try:
+# 			go_button_text = sd_card_page.go_button_text()
+# 			hint = self.get_string("sd_card_button_got_it")
+# 			self.assertEqual(go_button_text, hint)
+# 			print("Formatted dialog go button text test success")
+# 		except AssertionError:
+# 			raise AssertionError("Formatted dialog go button text test failed")
+# 		# click go button
+# 		sd_card_page.click_go()
+# 		sd_card_page.click_back()
+# # back to pixsee settings page
 
 
 

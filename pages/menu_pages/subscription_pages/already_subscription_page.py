@@ -35,7 +35,7 @@ class SubscriptionPage2():
                 EC.presence_of_element_located(("id", self.ChangeButton))
             )
             return True
-        except AssertionError:
+        except :
             return False
     def is_in_coupon_dialog(self):
         try:
@@ -43,7 +43,7 @@ class SubscriptionPage2():
                 EC.presence_of_element_located(("id", self.CouponTitle))
             )
             return True
-        except AssertionError:
+        except :
             return False
     def is_in_info_dialog(self):
         try:
@@ -51,7 +51,7 @@ class SubscriptionPage2():
                 EC.presence_of_element_located(("id", self.Chrome))
             )
             return True
-        except AssertionError:
+        except :
             return False
     def is_in_price_plan_dialog(self):
         try:
@@ -59,7 +59,7 @@ class SubscriptionPage2():
                 EC.presence_of_element_located(("id", self.CouponTitle))
             )
             return True
-        except AssertionError:
+        except :
             return False
     def is_in_chrome(self):
         try:
@@ -67,7 +67,7 @@ class SubscriptionPage2():
                 EC.presence_of_element_located(("id", self.Chrome))
             )
             return True
-        except AssertionError:
+        except :
             return False
 
     def coupon_title_txt(self):
@@ -77,7 +77,7 @@ class SubscriptionPage2():
             )
             element = self.driver.find_element("id", self.CouponTitle)
             return element.text
-        except AssertionError:
+        except :
             return None
     def coupon_cancel_txt(self):
         try:
@@ -86,7 +86,7 @@ class SubscriptionPage2():
             )
             element = self.driver.find_element("id", self.CouponCancel)
             return element.text
-        except AssertionError:
+        except :
             return None
     def coupon_ok_txt(self):
         try:
@@ -95,7 +95,7 @@ class SubscriptionPage2():
             )
             element = self.driver.find_element("id", self.CouponOk)
             return element.text
-        except AssertionError:
+        except :
             return None
     def coupon_code_hint(self):
         try:
@@ -104,7 +104,7 @@ class SubscriptionPage2():
             )
             element = self.driver.find_element("id", self.CouponCodeField)
             return element.get_attribute("hint")
-        except AssertionError:
+        except :
             return None
     def coupon_wrong_code_text(self):
         try:
@@ -113,7 +113,7 @@ class SubscriptionPage2():
             )
             element = self.driver.find_element("id", self.CouponWrongCode)
             return element.text
-        except AssertionError:
+        except :
             return None
     def current_plan_text(self):
         try:
@@ -122,7 +122,7 @@ class SubscriptionPage2():
             )
             element = self.driver.find_element("id", self.CurrentPlan)
             return element.text
-        except AssertionError:
+        except :
             return None
     def payment_method_text(self):
         try:
@@ -131,7 +131,7 @@ class SubscriptionPage2():
             )
             element = self.driver.find_element("id", self.PaymentMethod)
             return element.text
-        except AssertionError:
+        except :
             return None
     def in_app_purchase_text(self):
         try:
@@ -140,7 +140,7 @@ class SubscriptionPage2():
             )
             element = self.driver.find_element("id", self.Method)
             return element.text
-        except AssertionError:
+        except :
             return None
     def expiration_text(self):
         try:
@@ -149,7 +149,7 @@ class SubscriptionPage2():
             )
             element = self.driver.find_element("id", self.Expiration)
             return element.text
-        except AssertionError:
+        except :
             return None
     def promotion_text(self):
         try:
@@ -158,7 +158,7 @@ class SubscriptionPage2():
             )
             element = self.driver.find_element("id", self.Promotion)
             return element.text
-        except AssertionError:
+        except :
             return None
     def ok_button_text(self):
         try:
@@ -167,7 +167,7 @@ class SubscriptionPage2():
             )
             element = self.driver.find_element("id", self.Ok)
             return element.text
-        except AssertionError:
+        except :
             return None
 
     def click_back(self):

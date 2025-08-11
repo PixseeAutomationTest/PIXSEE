@@ -31,10 +31,10 @@ class SubscriptionPage1():
     def is_in_subscription_page(self):
         try:
             WebDriverWait(self.driver, base.wait_time).until(
-                EC.presence_of_element_located(("id", self.Header))
+                EC.presence_of_element_located(("id", self.GoldStarButton))
             )
             return True
-        except AssertionError:
+        except :
             return False
     def is_in_coupon_dialog(self):
         try:
@@ -42,7 +42,7 @@ class SubscriptionPage1():
                 EC.presence_of_element_located(("id", self.CouponTitle))
             )
             return True
-        except AssertionError:
+        except :
             return False
     def is_in_info_dialog(self):
         try:
@@ -50,7 +50,7 @@ class SubscriptionPage1():
                 EC.presence_of_element_located(("id", self.Chrome))
             )
             return True
-        except AssertionError:
+        except :
             return False
     def is_in_price_plan_dialog(self):
         try:
@@ -58,7 +58,7 @@ class SubscriptionPage1():
                 EC.presence_of_element_located(("xpath", self.Plan1Button))
             )
             return True
-        except AssertionError:
+        except :
             return False
     def is_in_pay_dialog(self):
         try:
@@ -66,7 +66,7 @@ class SubscriptionPage1():
                 EC.presence_of_element_located(("xpath", self.PayButton))
             )
             return True
-        except AssertionError:
+        except :
             return False
     def is_in_chrome(self):
         try:
@@ -74,7 +74,7 @@ class SubscriptionPage1():
                 EC.presence_of_element_located(("id", self.Chrome))
             )
             return True
-        except AssertionError:
+        except :
             return False
 
     def header_text(self):
@@ -84,7 +84,7 @@ class SubscriptionPage1():
             )
             element = self.driver.find_element("id", self.Header)
             return element.text
-        except AssertionError:
+        except :
             return None
     def gold_star_button_text(self):
         try:
@@ -93,7 +93,7 @@ class SubscriptionPage1():
             )
             element = self.driver.find_element("id", self.GoldStarButton)
             return element.text
-        except AssertionError:
+        except :
             return None
     def more_details_text(self):
         try:
@@ -102,7 +102,7 @@ class SubscriptionPage1():
             )
             element = self.driver.find_element("id", self.MoreDetails)
             return element.text
-        except AssertionError:
+        except :
             return None
     def coupon_title_txt(self):
         try:
@@ -111,7 +111,7 @@ class SubscriptionPage1():
             )
             element = self.driver.find_element("id", self.CouponTitle)
             return element.text
-        except AssertionError:
+        except :
             return None
     def coupon_cancel_txt(self):
         try:
@@ -120,7 +120,7 @@ class SubscriptionPage1():
             )
             element = self.driver.find_element("id", self.CouponCancel)
             return element.text
-        except AssertionError:
+        except :
             return None
     def coupon_ok_txt(self):
         try:
@@ -129,7 +129,7 @@ class SubscriptionPage1():
             )
             element = self.driver.find_element("id", self.CouponOk)
             return element.text
-        except AssertionError:
+        except :
             return None
     def coupon_code_hint(self):
         try:
@@ -138,7 +138,7 @@ class SubscriptionPage1():
             )
             element = self.driver.find_element("id", self.CouponCodeField)
             return element.get_attribute("hint")
-        except AssertionError:
+        except :
             return None
     def coupon_wrong_code_text(self):
         try:
@@ -147,7 +147,7 @@ class SubscriptionPage1():
             )
             element = self.driver.find_element("id", self.CouponWrongCode)
             return element.text
-        except AssertionError:
+        except :
             return None
 
     def click_x(self):
