@@ -8,6 +8,7 @@ class BabyTimelinePage():
         self.driver = driver
 
         self.timeline = "com.compal.bioslab.pixsee.pixm01:id/rvTimeline"
+        self.frameTutor = "com.compal.bioslab.pixsee.pixm01:id/clTutorialDescriptionContainer"
         self.homeButton = "com.compal.bioslab.pixsee.pixm01:id/ibButtonHome"
         self.menuButton = "com.compal.bioslab.pixsee.pixm01:id/ibDailyCoverTimelineMenuButtonHome" # When no device are connected
         self.albumButton = "com.compal.bioslab.pixsee.pixm01:id/ibAlbum"
@@ -42,6 +43,16 @@ class BabyTimelinePage():
         )
         self.driver.find_element("id", self.frameButton).click()
         time.sleep(1)
+
+    def has_frame_tutor(self):
+        try:
+            WebDriverWait(self.driver, base.wait_time).until(
+                EC.presence_of_element_located(("id", self.frameTutor))
+            )
+            self.driver.find_element("id", self.frameTutor)
+            return True
+        except:
+            return False
 
     def is_in_baby_timeline_page(self):
         try:

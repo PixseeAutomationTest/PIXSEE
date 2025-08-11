@@ -89,7 +89,9 @@ class AddBabyTest(BaseTestCase):
 
             '''Save profile and go to Edit Baby Profile Page'''
             add_baby_profile_page.click_finish()
-            time.sleep(10)
+            time.sleep(5)
+            if baby_timeline_page.has_frame_tutor():
+                self.click_middle()
             self.assertTrue(baby_timeline_page.is_in_baby_timeline_page(), "Can't automatically go to Baby Timeline Page after adding a baby profile")
             baby_timeline_page.click_menu()
             self.assertTrue(menu_page.is_in_menu_page(), "Can't go to Menu Page from Baby Timeline Page")

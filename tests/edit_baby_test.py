@@ -10,7 +10,7 @@ from pages.download_account_data_page import DownloadAccountDataPage
 
 import time
 import random
-
+import unittest
 # The tests in this TestCase will add a new baby profile first..
 class EditBabyTestWithAdding(BaseTestCase):
     def __init__(self, methodName='runTest', language="zh", locale="TW"):
@@ -36,6 +36,8 @@ class EditBabyTestWithAdding(BaseTestCase):
             baby_monitor_page.click_home()
             menu_page.click_baby_add()
             add_baby_profile_page.add_new_baby()
+            if baby_timeline_page.has_frame_tutor():
+                self.click_middle()
             baby_timeline_page.click_menu()
             menu_page.click_baby_edit()
         except Exception as e:
@@ -393,12 +395,12 @@ class EditBabyTestWithoutAdding(BaseTestCase):
             raise e
 
     # Please confirm the baby profile has photos from over 280 days ago before running this test.
-    # TODO: Uncompleted function. Wait App bug to be fixed.
+    @unittest.skip("Incomplete test: Because the app bug found (2025/7/30).")
     def test_change_baby_birthday_dialog_cancel(self):
         pass
 
     # Please confirm the baby profile has photos from over 280 days ago before running this test.
-    # TODO: Uncompleted function. Wait App bug to be fixed.
+    @unittest.skip("Incomplete test: Because the app bug found (2025/7/30).")
     def test_change_baby_birthday_dialog_ok(self):
         pass
 

@@ -19,7 +19,7 @@ class UserProfilePage():
         self.changePasswordButton = "com.compal.bioslab.pixsee.pixm01:id/tvForgotPasswordUserProfileEditAct"
         self.birthdayButton = "com.compal.bioslab.pixsee.pixm01:id/etBirthdayUserProfileEditAct"
         self.addBackupEmailButton = "com.compal.bioslab.pixsee.pixm01:id/btAddBackupEmail"
-        self.changeBackupEmailButton = "com.compal.bioslab.pixsee.pixm01:id/etBackupEmail"
+        self.changeBackupEmailButton = "com.compal.bioslab.pixsee.pixm01:id/tvChangeBackupEmail"
         self.deleteAccountButton = "com.compal.bioslab.pixsee.pixm01:id/btDeleteAccountProfileEditAct"
 
         '''Calendar'''
