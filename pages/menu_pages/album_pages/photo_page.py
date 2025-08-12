@@ -34,7 +34,7 @@ class PhotoPage():
 	def scroll_down_photo(self):
 		window = self.driver.get_window_size()
 		x = window["width"] // 2
-		start_y = int(window["height"] * 0.8)
+		start_y = int(window["height"] * 0.7)
 		end_y = int(window["height"] * 0.3)
 
 		self.driver.swipe(x, start_y, x, end_y, 500)  # 500 毫秒完成滑動
@@ -65,6 +65,7 @@ class PhotoPage():
 
 		collecting = False
 		found_new_date = False
+		current_day_num = None
 
 		while not found_new_date:
 			all_blocks = self.driver.find_elements(AppiumBy.XPATH, "//android.view.ViewGroup")
@@ -76,6 +77,8 @@ class PhotoPage():
 				# print(block.id)
 
 				try:
+					day_txt = block.find_element(AppiumBy.ID,
+												 "com.compal.bioslab.pixsee.pixm01:id/gallery_item_day_number_txt").text
 					date_txt = block.find_element(AppiumBy.ID,
 												  "com.compal.bioslab.pixsee.pixm01:id/gallery_item_date_txt").text
 					date_clean = date_txt.strip().replace(" ", "").replace("／", "/").replace(" / ",
@@ -84,11 +87,13 @@ class PhotoPage():
 
 					if current_date == target_date:
 						collecting = True
+						current_day_num = day_txt
 						continue
 
-					if collecting and current_date != target_date:
-						found_new_date = True
-						break
+					if collecting:
+						if current_date != target_date or day_txt != current_day_num:
+							found_new_date = True
+							break
 
 				except:
 					if collecting:

@@ -52,7 +52,7 @@ class NewPhotoCheckCase(BaseTestCase):
 		time.sleep(5)
 		baby_monitor_page.click_home()
 		menu_page.click_album()
-		time.sleep(5)
+		time.sleep(9)
 		after = photo_page.count_photos_today()
 		if after == origin + 1:
 			print(f"new photo storage success origin amount: {origin}, current amount: {after}")
