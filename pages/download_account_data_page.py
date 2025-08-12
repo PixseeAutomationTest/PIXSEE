@@ -17,6 +17,7 @@ class DownloadAccountDataPage():
 
         ''' Select download dialog'''
         self.dialog = "com.compal.bioslab.pixsee.pixm01:id/llLayoutAlertDialog"
+        self.dialogSubtitle = "com.compal.bioslab.pixsee.pixm01:id/tvMessageAlertDialog"
 
         self.allDataText = "com.compal.bioslab.pixsee.pixm01:id/tvAllData"
         self.babyNameText = "com.compal.bioslab.pixsee.pixm01:id/tvBabyName"
@@ -25,6 +26,9 @@ class DownloadAccountDataPage():
         self.selectBabyButton = "com.compal.bioslab.pixsee.pixm01:id/ckBaby"
         self.dialogOkButton = "com.compal.bioslab.pixsee.pixm01:id/btnOK"
         self.dialogCancelButton = "com.compal.bioslab.pixsee.pixm01:id/btnCancel"
+
+        self.dialogfriendlyok = "com.compal.bioslab.pixsee.pixm01:id/btnPositiveAlertDialog"
+        self.dialogfriendlycancel = "com.compal.bioslab.pixsee.pixm01:id/btnNegativeAlertDialog"
 
     def click_close(self):
         WebDriverWait(self.driver, base.wait_time).until(
@@ -76,6 +80,20 @@ class DownloadAccountDataPage():
             EC.presence_of_element_located(("id", self.dialogCancelButton))
         )
         element = self.driver.find_element("id", self.dialogCancelButton)
+        element.click()
+
+    def click_dialog_friendly_ok(self):
+        WebDriverWait(self.driver, base.wait_time).until(
+            EC.presence_of_element_located(("id", self.dialogfriendlyok))
+        )
+        element = self.driver.find_element("id", self.dialogfriendlyok)
+        element.click()
+
+    def click_dialog_friendly_cancel(self):
+        WebDriverWait(self.driver, base.wait_time).until(
+            EC.presence_of_element_located(("id", self.dialogfriendlycancel))
+        )
+        element = self.driver.find_element("id", self.dialogfriendlycancel)
         element.click()
 
     def get_title_text(self):
@@ -136,6 +154,13 @@ class DownloadAccountDataPage():
             return elements[number].text
         else:
             raise IndexError("Baby index out of range")
+
+    def get_dialog_subtitle_text(self):
+        WebDriverWait(self.driver, base.wait_time).until(
+            EC.presence_of_element_located(("id", self.dialogSubtitle))
+        )
+        element = self.driver.find_element("id", self.dialogSubtitle)
+        return element.text
 
     def get_dialog_ok_button_text(self):
         WebDriverWait(self.driver, base.wait_time).until(

@@ -10,11 +10,21 @@ class AssistantPage():
 
         self.returnButton = "com.compal.bioslab.pixsee.pixm01:id/ibHelpMenuBackButton"
         self.backgroundPlayButton = "com.compal.bioslab.pixsee.pixm01:id/clBackgroundPlayContainer"
+        self.backgroundPlayText = "com.compal.bioslab.pixsee.pixm01:id/background_play_label"
+        self.backgroundPlaySub = '//android.widget.TextView[@text="Audio monitoring & floating video"]'
         self.pixseeCloudButton = "com.compal.bioslab.pixsee.pixm01:id/clPixseeCloudAssistant"
+        self.pixseeCloudText = "com.compal.bioslab.pixsee.pixm01:id/tvPixseeCloudItemTitle"
+        self.pixseeCloudSub = "com.compal.bioslab.pixsee.pixm01:id/tvCloudUsage"
         self.tutorialButton = "com.compal.bioslab.pixsee.pixm01:id/clTutorialButton"
+        self.tutorialText = "com.compal.bioslab.pixsee.pixm01:id/tvTutorialMenuItemTitle"
         self.qaButton = "com.compal.bioslab.pixsee.pixm01:id/clQeAButton"
+        self.qaText = "com.compal.bioslab.pixsee.pixm01:id/tvQeAMenuItemTitle"
         self.contactUsButton = "com.compal.bioslab.pixsee.pixm01:id/clTroubleShootingButton"
+        self.contactUsText = "com.compal.bioslab.pixsee.pixm01:id/tvTroubleShootingMenuItemTitle"
         self.sendErrorButton = "com.compal.bioslab.pixsee.pixm01:id/clSendReportError"
+        self.sendErrorText = "com.compal.bioslab.pixsee.pixm01:id/tvSendReportErrorMenuItemTitle"
+        self.sendButton = "com.compal.bioslab.pixsee.pixm01:id/btSendReportError"
+        self.SupportWeb = "com.android.chrome:id/url_bar"
 
     def click_return(self):
         WebDriverWait(self.driver, 10).until(
@@ -65,6 +75,13 @@ class AssistantPage():
         element = self.driver.find_element("id", self.sendErrorButton)
         element.click()
 
+    def click_send(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(("id", self.sendButton))
+        )
+        element = self.driver.find_element("id", self.sendButton)
+        element.click()
+
     def is_in_assistant_page(self):
         try:
             WebDriverWait(self.driver, 10).until(
@@ -74,3 +91,106 @@ class AssistantPage():
             return True
         except:
             return False
+
+    def url_text(self):
+        try:
+            WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located(("id", self.SupportWeb))
+            )
+            element = self.driver.find_element("id", self.SupportWeb)
+            return element.text
+        except:
+            return None
+
+    def background_play_text(self):
+        try:
+            WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located(("id", self.backgroundPlayText))
+            )
+            element = self.driver.find_element("id", self.backgroundPlayText)
+            return element.text
+        except:
+            return None
+
+    def background_play_sub_text(self):
+        try:
+            WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located(("xpath", self.backgroundPlaySub))
+            )
+            element = self.driver.find_element("xpath", self.backgroundPlaySub)
+            return element.text
+        except:
+            return None
+
+    def pixsee_cloud_text(self):
+        try:
+            WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located(("id", self.pixseeCloudText))
+            )
+            element = self.driver.find_element("id", self.pixseeCloudText)
+            return element.text
+        except:
+            return None
+
+    def pixsee_cloud_sub_text(self):
+        try:
+            WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located(("id", self.pixseeCloudSub))
+            )
+            element = self.driver.find_element("id", self.pixseeCloudSub)
+            return element.text
+        except:
+            return None
+
+    def tutorial_text(self):
+        try:
+            WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located(("id", self.tutorialText))
+            )
+            element = self.driver.find_element("id", self.tutorialText)
+            return element.text
+        except:
+            return None
+
+    def qa_text(self):
+        try:
+            WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located(("id", self.qaText))
+            )
+            element = self.driver.find_element("id", self.qaText)
+            return element.text
+        except:
+            return None
+
+    def contact_us_text(self):
+        try:
+            WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located(("id", self.contactUsText))
+            )
+            element = self.driver.find_element("id", self.contactUsText)
+            return element.text
+        except:
+            return None
+
+    def send_error_text(self):
+        try:
+            WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located(("id", self.sendErrorText))
+            )
+            element = self.driver.find_element("id", self.sendErrorText)
+            return element.text
+        except:
+            return None
+
+    def send_button_text(self):
+        try:
+            WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located(("id", self.sendButton))
+            )
+            element = self.driver.find_element("id", self.sendButton)
+            return element.text
+        except:
+            return None
+
+
+
