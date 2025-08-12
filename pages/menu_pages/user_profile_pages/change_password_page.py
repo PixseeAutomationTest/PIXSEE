@@ -119,6 +119,13 @@ class ChangePasswordPage():
         element = self.driver.find_element("id", self.cancelButton)
         return element.text
 
+    def get_wrong_bar_text(self):
+        WebDriverWait(self.driver, base.wait_time).until(
+            EC.presence_of_element_located(("id", self.wrongBarText))
+        )
+        element = self.driver.find_element("id", self.wrongBarText)
+        return element.text
+
     def is_in_change_password_page(self):
         try:
             WebDriverWait(self.driver, base.wait_time).until(

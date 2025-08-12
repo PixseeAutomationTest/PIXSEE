@@ -10,13 +10,13 @@ class AddBackupEmailPage():
 			self.text_classname = "android.widget.TextView"
 			self.emailEdit_classname = "android.widget.EditText"
 			self.nextButton_xpath = "//androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.view.View[2]"
-			self.cancelButton_xpath = "//androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.view.View[1]"
+			self.closeButton_xpath = "//androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.view.View[1]"
 
-		def click_cancel(self):
+		def click_close(self):
 			WebDriverWait(self.driver, base.wait_time).until(
-				EC.presence_of_element_located(("xpath", self.cancelButton_xpath))
+				EC.presence_of_element_located(("xpath", self.closeButton_xpath))
 			)
-			element = self.driver.find_element("xpath", self.cancelButton_xpath)
+			element = self.driver.find_element("xpath", self.closeButton_xpath)
 			element.click()
 
 		def click_next(self):
