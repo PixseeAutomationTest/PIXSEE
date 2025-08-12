@@ -9,7 +9,7 @@ from pages.menu_pages.assistant_pages.pixsee_cloud_page import PixseeCloudPage
 import re
 
 
-class PixseeSettingsTest(BaseTestCase):
+class AssistantTest(BaseTestCase):
     def setUp(self):
         super().setUp(no_reset=True)
         baby_monitor_page = BabyMonitorPage(self.driver)

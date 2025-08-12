@@ -9,7 +9,7 @@ import re
 
 
 
-class PixseeSettingsTest(BaseTestCase):
+class PixseeCloudTest(BaseTestCase):
     def setUp(self):
         super().setUp(no_reset=True)
         baby_monitor_page = BabyMonitorPage(self.driver)
