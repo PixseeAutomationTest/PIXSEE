@@ -2,12 +2,15 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import pages.base as base
 
+import time
+
 class AddBackupEmailPage():
 		def __init__(self, driver):
 			self.driver = driver
 
 			self.activity_xpath = "//androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View"
 			self.text_classname = "android.widget.TextView"
+			self.text_xpath = "//android.widget.TextView"
 			self.emailEdit_classname = "android.widget.EditText"
 			self.nextButton_xpath = "//androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.view.View[2]"
 			self.closeButton_xpath = "//androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.view.View[1]"
@@ -25,6 +28,7 @@ class AddBackupEmailPage():
 			)
 			element = self.driver.find_element("xpath", self.nextButton_xpath)
 			element.click()
+
 
 		def input_email(self, email):
 			WebDriverWait(self.driver, base.wait_time).until(
@@ -56,15 +60,10 @@ class AddBackupEmailPage():
 			element = next_button.find_element("class name", self.text_classname)
 			return element.text
 
-		def has_error_message_text(self):
+		def get_all_text(self):
 			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("xpath", self.activity_xpath))
 			)
-			activity = self.driver.find_element("xpath", self.activity_xpath)
-			elements = activity.find_elements("xpath", "./*")
-			print("Number of elements found:", len(elements))
-			for element in elements:
-				print("Element class name:", element)
-			# if elements[3] and elements[3].get_attribute("class name") == self.text_classname:
-			# 	return True
-			return False
+			elements = self.driver.find_elements("class name", self.text_classname)
+			print("Elements found:", len(elements))
+			return elements

@@ -4,11 +4,11 @@ from pages.base import BaseTestCase
 
 from pages.login_page import LoginPage
 from pages.baby_monitor_page import BabyMonitorPage
-from pages.menu_pages import menu_page
 from pages.menu_pages.menu_page import MenuPage
 from pages.menu_pages.user_profile_pages.user_profile_page import UserProfilePage
 from pages.menu_pages.user_profile_pages.change_password_page import ChangePasswordPage
-from pages.menu_pages.user_profile_pages.add_backup_email import AddBackupEmailPage
+from pages.menu_pages.user_profile_pages.add_backup_email_page import AddBackupEmailPage
+from pages.menu_pages.user_profile_pages.verification_page import VerificationPage
 
 class UserProfileTest(BaseTestCase):
     def setUp(self):
@@ -626,7 +626,11 @@ class UserProfileTest(BaseTestCase):
                 self.assertEqual(user_profile_page.get_add_backup_email_dialog_ok_button_text(), self.get_string("add_backup_email_button_title"), "Button \"Add a backup email\" is not properly displayed")
                 self.assertEqual(user_profile_page.get_add_backup_email_dialog_cancel_button_text(), self.get_string("cancel"), "Button \"Cancel\" is not properly displayed")
                 user_profile_page.click_add_backup_email_dialog_ok()
-            self.assertEqual(add_backup_email_page.get_title_text(), self.get_string("backup_email_screen_title"), "Can't go to Add Backup Email Page")
+
+            '''Verify Add Backup Email Page'''
+            self.assertEqual(add_backup_email_page.get_title_text(), self.get_string("backup_email_screen_title"), "\"Add backup email\" button is not properly displayed")
+            self.assertEqual(add_backup_email_page.get_edit_email_hint(), self.get_string("backup_email_text_field_hint"), "Text \"Please enter your backup email\" is not properly displayed")
+            self.assertEqual(add_backup_email_page.get_next_button_text(), self.get_string("backup_email_screen_button_next"), "button \"Next\" is not properly displayed")
 
             '''Click close button'''
             add_backup_email_page.click_close()
@@ -668,12 +672,292 @@ class UserProfileTest(BaseTestCase):
                 self.assertEqual(user_profile_page.get_add_backup_email_dialog_ok_button_text(), self.get_string("add_backup_email_button_title"), "Button \"Add a backup email\" is not properly displayed")
                 self.assertEqual(user_profile_page.get_add_backup_email_dialog_cancel_button_text(), self.get_string("cancel"), "Button \"Cancel\" is not properly displayed")
                 user_profile_page.click_add_backup_email_dialog_ok()
-            self.assertEqual(add_backup_email_page.get_title_text(), self.get_string("backup_email_screen_title"), "Can't go to Add Backup Email Page")
+
+            '''Verify Add Backup Email Page'''
+            self.assertEqual(add_backup_email_page.get_title_text(), self.get_string("backup_email_screen_title"), "\"Add backup email\" button is not properly displayed")
+            self.assertEqual(add_backup_email_page.get_edit_email_hint(), self.get_string("backup_email_text_field_hint"), "Text \"Please enter your backup email\" is not properly displayed")
+            self.assertEqual(add_backup_email_page.get_next_button_text(), self.get_string("backup_email_screen_button_next"), "button \"Next\" is not properly displayed")
 
             '''Input invalid email and click next button'''
             add_backup_email_page.input_email("amypixsee@")
             add_backup_email_page.click_next()
-            self.assertTrue(add_backup_email_page.has_error_message_text(), "Text \"Please enter a valid email address\" is not properly displayed.")
+            texts = add_backup_email_page.get_all_text()
+            flag = False
+            for text in texts:
+                if text == self.get_string("backup_email_screen_error_wrong_format"):
+                    flag = True
+                    break
+            self.assertTrue(flag, "Text \"Please enter a valid email address\" is not properly displayed")
+            add_backup_email_page.click_close()
+
+
+        except AssertionError as ae:
+            print(f"Test failed with assertion error: {ae}")
+            raise ae
+        except Exception as e:
+            print(f"Test failed with exception: {e}")
+            raise e
+
+    def test_add_or_change_backup_email_with_registered_email(self):
+        try:
+            user_profile_page = UserProfilePage(self.driver)
+            add_backup_email_page = AddBackupEmailPage(self.driver)
+
+            self.assertTrue(user_profile_page.is_in_user_profile_page(), "Can't go to User Profile Page")
+
+            '''Verify User Profile Page'''
+            self.assertEqual(user_profile_page.get_page_title(), self.get_string("user_profile_title"), "Text \"User Profile\" is not properly displayed")
+            self.assertEqual(user_profile_page.get_done_button_text(), self.get_string("done"), "Button \"Done\" is not properly displayed")
+            self.assertEqual(user_profile_page.get_change_password_button_text(), self.get_string("user_profile_change_password_button"), "Button \"Change password\" is properly displayed")
+            if user_profile_page.has_backup_email():
+                self.assertEqual(user_profile_page.get_change_backup_email_button_text(), self.get_string("backup_email_change_backup_email"), "Button \"Change backup email\" is properly displayed")
+            else:
+                self.assertEqual(user_profile_page.get_add_backup_email_button_text(), self.get_string("add_backup_email_button_title"), "Button \"Add backup mail\" is properly displayed")
+                self.skipTest("Backup email doesn't exist, skipping this test")
+            self.assertEqual(user_profile_page.get_delete_account_button_text(), self.get_string("account_profile_btn_delete"), "Button \"Delete account\" is properly displayed")
+
+            '''Go to Add Backup Email page'''
+            if user_profile_page.has_backup_email():
+                user_profile_page.click_change_backup_email()
+            else:
+                user_profile_page.click_add_backup_email()
+                self.assertTrue(user_profile_page.has_add_backup_email_dialog(), "\"Help us protect your account\" window isn't displayed")
+                self.assertEqual(user_profile_page.get_add_backup_email_dialog_title_text(), self.get_string("backup_email_title_dialog"), "Text \"Help us protect your account\" is properly displayed")
+                self.assertEqual(user_profile_page.get_add_backup_email_dialog_info_text(), self.get_string("backup_email_description_dialog"), "Text \"Add backup information to enhance your account security.\" is not properly displayed")
+                self.assertEqual(user_profile_page.get_add_backup_email_dialog_ok_button_text(), self.get_string("add_backup_email_button_title"), "Button \"Add a backup email\" is not properly displayed")
+                self.assertEqual(user_profile_page.get_add_backup_email_dialog_cancel_button_text(), self.get_string("cancel"), "Button \"Cancel\" is not properly displayed")
+                user_profile_page.click_add_backup_email_dialog_ok()
+            '''Verify Add Backup Email Page'''
+            self.assertEqual(add_backup_email_page.get_title_text(), self.get_string("backup_email_screen_title"), "\"Add backup email\" button is not properly displayed")
+            self.assertEqual(add_backup_email_page.get_edit_email_hint(), self.get_string("backup_email_text_field_hint"), "Text \"Please enter your backup email\" is not properly displayed")
+            self.assertEqual(add_backup_email_page.get_next_button_text(), self.get_string("backup_email_screen_button_next"), "button \"Next\" is not properly displayed")
+
+            '''Input registered email and click next button'''
+            add_backup_email_page.input_email("amypixsee03@gmail.com")
+            add_backup_email_page.click_next()
+            texts = add_backup_email_page.get_all_text()
+            flag = False
+            for text in texts:
+                if text == self.get_string("backup_email_screen_error_account_registered"):
+                    flag = True
+                    break
+            self.assertTrue(flag, "Text \"This account has been registered.\" is not properly displayed")
+            add_backup_email_page.click_close()
+
+        except AssertionError as ae:
+            print(f"Test failed with assertion error: {ae}")
+            raise ae
+        except Exception as e:
+            print(f"Test failed with exception: {e}")
+            raise e
+
+    def test_backup_email_with_cancel_verification_code(self):
+        try:
+            user_profile_page = UserProfilePage(self.driver)
+            add_backup_email_page = AddBackupEmailPage(self.driver)
+            verification_page = VerificationPage(self.driver)
+
+            self.assertTrue(user_profile_page.is_in_user_profile_page(), "Can't go to User Profile Page")
+
+            '''Verify User Profile Page'''
+            self.assertEqual(user_profile_page.get_page_title(), self.get_string("user_profile_title"), "Text \"User Profile\" is not properly displayed")
+            self.assertEqual(user_profile_page.get_done_button_text(), self.get_string("done"), "Button \"Done\" is not properly displayed")
+            self.assertEqual(user_profile_page.get_change_password_button_text(), self.get_string("user_profile_change_password_button"), "Button \"Change password\" is properly displayed")
+            if user_profile_page.has_backup_email():
+                self.assertEqual(user_profile_page.get_change_backup_email_button_text(), self.get_string("backup_email_change_backup_email"), "Button \"Change backup email\" is properly displayed")
+            else:
+                self.assertEqual(user_profile_page.get_add_backup_email_button_text(), self.get_string("add_backup_email_button_title"), "Button \"Add backup mail\" is properly displayed")
+                self.skipTest("Backup email doesn't exist, skipping this test")
+            self.assertEqual(user_profile_page.get_delete_account_button_text(), self.get_string("account_profile_btn_delete"), "Button \"Delete account\" is properly displayed")
+
+            '''Go to Add Backup Email page'''
+            if user_profile_page.has_backup_email():
+                user_profile_page.click_change_backup_email()
+            else:
+                user_profile_page.click_add_backup_email()
+                self.assertTrue(user_profile_page.has_add_backup_email_dialog(), "\"Help us protect your account\" window isn't displayed")
+                self.assertEqual(user_profile_page.get_add_backup_email_dialog_title_text(), self.get_string("backup_email_title_dialog"), "Text \"Help us protect your account\" is properly displayed")
+                self.assertEqual(user_profile_page.get_add_backup_email_dialog_info_text(), self.get_string("backup_email_description_dialog"), "Text \"Add backup information to enhance your account security.\" is not properly displayed")
+                self.assertEqual(user_profile_page.get_add_backup_email_dialog_ok_button_text(), self.get_string("add_backup_email_button_title"), "Button \"Add a backup email\" is not properly displayed")
+                self.assertEqual(user_profile_page.get_add_backup_email_dialog_cancel_button_text(), self.get_string("cancel"), "Button \"Cancel\" is not properly displayed")
+                user_profile_page.click_add_backup_email_dialog_ok()
+            '''Verify Add Backup Email Page'''
+            self.assertEqual(add_backup_email_page.get_title_text(), self.get_string("backup_email_screen_title"), "\"Add backup email\" button is not properly displayed")
+            self.assertEqual(add_backup_email_page.get_edit_email_hint(), self.get_string("backup_email_text_field_hint"), "Text \"Please enter your backup email\" is not properly displayed")
+            self.assertEqual(add_backup_email_page.get_next_button_text(), self.get_string("backup_email_screen_button_next"), "button \"Next\" is not properly displayed")
+
+            '''Input email and go to Verification Page'''
+            test_email = "amypixsee99@gmail.com"
+            add_backup_email_page.input_email(test_email)
+            add_backup_email_page.click_next()
+
+            '''Verify Verification Page'''
+            self.assertEqual(verification_page.get_title_text(), self.get_string("backup_email_validation_verification"), "Text \"Verification\" is not properly displayed")
+            self.assertEqual(verification_page.get_info1_text(), self.get_string("backup_email_validation_verification_code_sent_to"), "Text \"A verification code has been sent to\" is not properly displayed")
+            self.assertEqual(verification_page.get_email_text(), test_email, "Email is not properly displayed")
+            self.assertEqual(verification_page.get_info2_text(), self.get_string("backup_email_validation_request"), "Text \"Please enter the code to verify.\" is not properly displayed")
+            elements = verification_page.get_all_text()
+            flag = False
+            for element in elements:
+                if element.text == self.get_string("backup_email_validation_resend_code"):
+                    flag = True
+                    break
+            if not flag:
+                self.fail("button \"Resend the code\" is properly displayed")
+            self.assertEqual(verification_page.get_confirm_button_text(), self.get_string("code_verification_verify_button"), "button \"Confirm\"  is properly displayed")
+            self.assertEqual(verification_page.get_cancel_button_text(), self.get_string("backup_email_button_dialog_cancel"), "button \"Cancel\" is properly displayed")
+
+            '''click Cancel Button'''
+            verification_page.click_cancel()
+            self.assertTrue(user_profile_page.is_in_user_profile_page(), "Can't return to User Profile Page after clicking \"Cancel\" button in Verification Page")
+        except AssertionError as ae:
+            print(f"Test failed with assertion error: {ae}")
+            raise ae
+        except Exception as e:
+            print(f"Test failed with exception: {e}")
+            raise e
+
+    def test_backup_email_with_wrong_verification_code(self):
+        try:
+            user_profile_page = UserProfilePage(self.driver)
+            add_backup_email_page = AddBackupEmailPage(self.driver)
+            verification_page = VerificationPage(self.driver)
+
+            self.assertTrue(user_profile_page.is_in_user_profile_page(), "Can't go to User Profile Page")
+
+            '''Verify User Profile Page'''
+            self.assertEqual(user_profile_page.get_page_title(), self.get_string("user_profile_title"), "Text \"User Profile\" is not properly displayed")
+            self.assertEqual(user_profile_page.get_done_button_text(), self.get_string("done"), "Button \"Done\" is not properly displayed")
+            self.assertEqual(user_profile_page.get_change_password_button_text(), self.get_string("user_profile_change_password_button"), "Button \"Change password\" is properly displayed")
+            if user_profile_page.has_backup_email():
+                self.assertEqual(user_profile_page.get_change_backup_email_button_text(), self.get_string("backup_email_change_backup_email"), "Button \"Change backup email\" is properly displayed")
+            else:
+                self.assertEqual(user_profile_page.get_add_backup_email_button_text(), self.get_string("add_backup_email_button_title"), "Button \"Add backup mail\" is properly displayed")
+                self.skipTest("Backup email doesn't exist, skipping this test")
+            self.assertEqual(user_profile_page.get_delete_account_button_text(), self.get_string("account_profile_btn_delete"), "Button \"Delete account\" is properly displayed")
+
+            '''Go to Add Backup Email page'''
+            if user_profile_page.has_backup_email():
+                user_profile_page.click_change_backup_email()
+            else:
+                user_profile_page.click_add_backup_email()
+                self.assertTrue(user_profile_page.has_add_backup_email_dialog(), "\"Help us protect your account\" window isn't displayed")
+                self.assertEqual(user_profile_page.get_add_backup_email_dialog_title_text(), self.get_string("backup_email_title_dialog"), "Text \"Help us protect your account\" is properly displayed")
+                self.assertEqual(user_profile_page.get_add_backup_email_dialog_info_text(), self.get_string("backup_email_description_dialog"), "Text \"Add backup information to enhance your account security.\" is not properly displayed")
+                self.assertEqual(user_profile_page.get_add_backup_email_dialog_ok_button_text(), self.get_string("add_backup_email_button_title"), "Button \"Add a backup email\" is not properly displayed")
+                self.assertEqual(user_profile_page.get_add_backup_email_dialog_cancel_button_text(), self.get_string("cancel"), "Button \"Cancel\" is not properly displayed")
+                user_profile_page.click_add_backup_email_dialog_ok()
+            '''Verify Add Backup Email Page'''
+            self.assertEqual(add_backup_email_page.get_title_text(), self.get_string("backup_email_screen_title"), "\"Add backup email\" button is not properly displayed")
+            self.assertEqual(add_backup_email_page.get_edit_email_hint(), self.get_string("backup_email_text_field_hint"), "Text \"Please enter your backup email\" is not properly displayed")
+            self.assertEqual(add_backup_email_page.get_next_button_text(), self.get_string("backup_email_screen_button_next"), "button \"Next\" is not properly displayed")
+
+            '''Input email and go to Verification Page'''
+            test_email = "amypixsee99@gmail.com"
+            add_backup_email_page.input_email(test_email)
+            add_backup_email_page.click_next()
+
+            '''Verify Verification Page'''
+            self.assertEqual(verification_page.get_title_text(), self.get_string("backup_email_validation_verification"), "Text \"Verification\" is not properly displayed")
+            self.assertEqual(verification_page.get_info1_text(), self.get_string("backup_email_validation_verification_code_sent_to"), "Text \"A verification code has been sent to\" is not properly displayed")
+            self.assertEqual(verification_page.get_email_text(), test_email, "Email is not properly displayed")
+            self.assertEqual(verification_page.get_info2_text(), self.get_string("backup_email_validation_request"), "Text \"Please enter the code to verify.\" is not properly displayed")
+            elements = verification_page.get_all_text()
+            flag = False
+            for element in elements:
+                if element.text == self.get_string("backup_email_validation_resend_code"):
+                    flag = True
+                    break
+            if not flag:
+                self.fail("button \"Resend the code\" is properly displayed")
+            self.assertEqual(verification_page.get_confirm_button_text(), self.get_string("code_verification_verify_button"), "button \"Confirm\"  is properly displayed")
+            self.assertEqual(verification_page.get_cancel_button_text(), self.get_string("backup_email_button_dialog_cancel"), "button \"Cancel\" is properly displayed")
+
+            '''Input wrong verification code and click Confirm Button'''
+            verification_page.input_verification_code("123456")
+            verification_page.click_confirm()
+            for element in elements:
+                if element.text == self.get_string("e10030"):
+                    flag = True
+                    break
+            if not flag:
+                self.fail("Text \"Code is incorrect, Please try again.\" is properly displayed")
+            verification_page.click_cancel()
+
+        except AssertionError as ae:
+            print(f"Test failed with assertion error: {ae}")
+            raise ae
+        except Exception as e:
+            print(f"Test failed with exception: {e}")
+            raise e
+
+    #TODO
+    def test_backup_email_with_resend_verification_code(self):
+        try:
+            user_profile_page = UserProfilePage(self.driver)
+            add_backup_email_page = AddBackupEmailPage(self.driver)
+            verification_page = VerificationPage(self.driver)
+
+            self.assertTrue(user_profile_page.is_in_user_profile_page(), "Can't go to User Profile Page")
+
+            '''Verify User Profile Page'''
+            self.assertEqual(user_profile_page.get_page_title(), self.get_string("user_profile_title"), "Text \"User Profile\" is not properly displayed")
+            self.assertEqual(user_profile_page.get_done_button_text(), self.get_string("done"), "Button \"Done\" is not properly displayed")
+            self.assertEqual(user_profile_page.get_change_password_button_text(), self.get_string("user_profile_change_password_button"), "Button \"Change password\" is properly displayed")
+            if user_profile_page.has_backup_email():
+                self.assertEqual(user_profile_page.get_change_backup_email_button_text(), self.get_string("backup_email_change_backup_email"), "Button \"Change backup email\" is properly displayed")
+            else:
+                self.assertEqual(user_profile_page.get_add_backup_email_button_text(), self.get_string("add_backup_email_button_title"), "Button \"Add backup mail\" is properly displayed")
+                self.skipTest("Backup email doesn't exist, skipping this test")
+            self.assertEqual(user_profile_page.get_delete_account_button_text(), self.get_string("account_profile_btn_delete"), "Button \"Delete account\" is properly displayed")
+
+            '''Go to Add Backup Email page'''
+            if user_profile_page.has_backup_email():
+                user_profile_page.click_change_backup_email()
+            else:
+                user_profile_page.click_add_backup_email()
+                self.assertTrue(user_profile_page.has_add_backup_email_dialog(), "\"Help us protect your account\" window isn't displayed")
+                self.assertEqual(user_profile_page.get_add_backup_email_dialog_title_text(), self.get_string("backup_email_title_dialog"), "Text \"Help us protect your account\" is properly displayed")
+                self.assertEqual(user_profile_page.get_add_backup_email_dialog_info_text(), self.get_string("backup_email_description_dialog"), "Text \"Add backup information to enhance your account security.\" is not properly displayed")
+                self.assertEqual(user_profile_page.get_add_backup_email_dialog_ok_button_text(), self.get_string("add_backup_email_button_title"), "Button \"Add a backup email\" is not properly displayed")
+                self.assertEqual(user_profile_page.get_add_backup_email_dialog_cancel_button_text(), self.get_string("cancel"), "Button \"Cancel\" is not properly displayed")
+                user_profile_page.click_add_backup_email_dialog_ok()
+            '''Verify Add Backup Email Page'''
+            self.assertEqual(add_backup_email_page.get_title_text(), self.get_string("backup_email_screen_title"), "\"Add backup email\" button is not properly displayed")
+            self.assertEqual(add_backup_email_page.get_edit_email_hint(), self.get_string("backup_email_text_field_hint"), "Text \"Please enter your backup email\" is not properly displayed")
+            self.assertEqual(add_backup_email_page.get_next_button_text(), self.get_string("backup_email_screen_button_next"), "button \"Next\" is not properly displayed")
+
+            '''Input email and go to Verification Page'''
+            test_email = "amypixsee99@gmail.com"
+            add_backup_email_page.input_email(test_email)
+            add_backup_email_page.click_next()
+
+            '''Verify Verification Page'''
+            self.assertEqual(verification_page.get_title_text(), self.get_string("backup_email_validation_verification"), "Text \"Verification\" is not properly displayed")
+            self.assertEqual(verification_page.get_info1_text(), self.get_string("backup_email_validation_verification_code_sent_to"), "Text \"A verification code has been sent to\" is not properly displayed")
+            self.assertEqual(verification_page.get_email_text(), test_email, "Email is not properly displayed")
+            self.assertEqual(verification_page.get_info2_text(), self.get_string("backup_email_validation_request"), "Text \"Please enter the code to verify.\" is not properly displayed")
+            elements = verification_page.get_all_text()
+            flag = False
+            for element in elements:
+                if element.text == self.get_string("backup_email_validation_resend_code"):
+                    flag = True
+                    break
+            if not flag:
+                self.fail("button \"Resend the code\" is properly displayed")
+            self.assertEqual(verification_page.get_confirm_button_text(), self.get_string("code_verification_verify_button"), "button \"Confirm\"  is properly displayed")
+            self.assertEqual(verification_page.get_cancel_button_text(), self.get_string("backup_email_button_dialog_cancel"), "button \"Cancel\" is properly displayed")
+
+            '''Input wrong verification code and click Confirm Button'''
+            verification_page.input_verification_code("123456")
+            verification_page.click_confirm()
+            for element in elements:
+                if element.text == self.get_string("e10030"):
+                    flag = True
+                    break
+            if not flag:
+                self.fail("Text \"Code is incorrect, Please try again.\" is properly displayed")
+            verification_page.click_cancel()
 
         except AssertionError as ae:
             print(f"Test failed with assertion error: {ae}")
