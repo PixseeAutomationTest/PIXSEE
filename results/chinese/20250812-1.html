@@ -1,0 +1,2981 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Pixsee Test Results</title>
+    <meta name="generator" content="HTMLTestReport 0.0.1"/>
+    <link rel="stylesheet" href="http://unpkg.com/layui@2.6.8/dist/css/layui.css">
+    
+<style type="text/css">
+    .title { width: auto; height: 60px; text-align: center; font: bolder 38px/60px "Microsoft YaHei UI"; color: #009688; }
+    .summary span { font: normal 16px/38px "Microsoft YaHei UI"; margin-left: 20px; }
+    .success-btn { background-color: #28a745; }
+    .skip-btn { background-color: #84898c; }
+    .passClass  { background-color: #bdedbc; }
+    .failClass  { background-color: #ffefa4; }
+    .errorClass { background-color: #ffc9c9; }
+    .passCase   { color: #5cb85c; }
+    .skipCase   { color: #84898c; }
+    .failCase   { color: #FF6600; font-weight: bold; }
+    .errorCase  { color: #c00; font-weight: bold; }
+    .hiddenRow  { display: none; }
+    .testcase   { margin-left: 2em; }
+    .layui-table tbody tr:hover, .layui-table-click, .layui-table-header, .layui-table-hover, .layui-table-mend, .layui-table-patch, .layui-table-tool, .layui-table[lay-even] tr:nth-child(even) {
+        background-color: transparent;
+    }
+</style>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+</head>
+<body>
+    <script language="javascript" type="text/javascript"><!--
+    output_list = Array();
+    function showCase(level) {
+        trs = document.getElementsByTagName("tr");
+        for (var i = 0; i < trs.length; i++) {
+            tr = trs[i];
+            id = tr.id;
+            if (id.substr(0,2) == 'ft') {
+                if (level == 2 || level == 0) {
+                    tr.className = 'hiddenRow';
+                }
+                else {
+                    tr.className = '';
+                }
+            }
+            if (id.substr(0,2) == 'pt') {
+                if (level < 2) {
+                    tr.className = 'hiddenRow';
+                }
+                else {
+                    tr.className = '';
+                }
+            }
+        }      
+    }
+    function showClassDetail(cid, count) {
+        var id_list = Array(count);
+        var toHide = 1;
+        for (var i = 0; i < count; i++) {
+            tid0 = 't' + cid.substr(1) + '.' + (i+1);
+            tid = 'f' + tid0;
+            tr = document.getElementById(tid);
+            if (!tr) {
+                tid = 'p' + tid0;
+                tr = document.getElementById(tid);
+            }
+            id_list[i] = tid;
+            if (tr.className) {
+                toHide = 0;
+            }
+        }
+        for (var i = 0; i < count; i++) {
+            tid = id_list[i];
+            if (toHide) {
+                document.getElementById(tid).className = 'hiddenRow';
+            }
+            else {
+                document.getElementById(tid).className = '';
+            }
+        }
+    }
+    function showTestDetail(div_id){
+        var details_div = document.getElementById(div_id)
+        var displayState = details_div.style.display
+        if (displayState == 'block' || displayState == '' ) {
+            details_div.style.display = 'none'
+        }
+        else {
+            displayState = 'block'
+            details_div.style.display = 'block'
+        }
+    }
+    function html_escape(s) {
+        s = s.replace(/&/g,'&amp;');
+        s = s.replace(/</g,'&lt;');
+        s = s.replace(/>/g,'&gt;');
+        return s;
+    }
+    --></script>
+    <div class="layui-container">
+        
+    <!--报告标题-->
+    <div class="title">Pixsee Test Results</div>
+    
+    <!--汇总信息-->
+    <fieldset class="layui-elem-field summary">
+        <legend>测试结果汇总</legend>
+        <div class="layui-field-box">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="50%">
+                    <col width="50%">
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <td>
+                            <button type="button" class="layui-btn">开始时间</button>
+                            <span class="text-dark">2025-08-12 12:19:59</span>
+                        </td>
+                        <td>
+                            <button type="button" class="layui-btn">执行时间</button>
+                            <span class="text-dark">0:45:36.529068 s</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="button" class="layui-btn">用例总数</button>
+                            <span class="text-dark">126</span>
+                        </td>
+                        <td>
+                            <button type="button" class="layui-btn">通过率</button>
+                            <span class="text-dark">80.16%</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <button type="button" class="layui-btn">描述信息</button>
+                            <span class="text-dark"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <button type="button" class="layui-btn success-btn">成功用例：101</button>
+                            <button type="button" class="layui-btn layui-btn-warm">失败用例：6</button>
+                            <button type="button" class="layui-btn layui-btn-danger">错误用例：15</button>
+                            <button type="button" class="layui-btn skip-btn">跳过用例：4</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+    
+    <!--图表展示-->
+    <fieldset class="layui-elem-field summary">
+        <legend>图表展示</legend>
+        <div class="layui-field-box">
+            <div class="char">
+                <div id="chart1" style="width: 49%;height: 400px;float: left"></div>
+                <div id="chart2" style="width: 49%;height: 400px;float: left"></div>
+            </div>
+        </div>
+    </fieldset>
+
+        
+    <fieldset class="layui-elem-field summary">
+        <legend>详细信息</legend>
+        <div class="layui-field-box">
+            <table id='result_table' class="layui-table">
+            <thead>
+                <tr id='header_row' style='background-color: #009688; color: #fff'>
+                    <th>测试用例</th>
+                    <th>总数</th>
+                    <th>通过</th>
+                    <th>失败</th>
+                    <th>错误</th>
+                    <th>跳过</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+				<tbody>
+                
+    <tr class='errorClass'>
+        <td class="text-center">tests.add_baby_test.AddBabyTest</td>
+        <td class="text-center">3</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">3</td>
+        <td class="text-center">0</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c1',3)">详细</button></td>
+    </tr>
+
+<tr id='ft1.1' class=''>
+    <td class='errorCase'><div class='testcase'>test_add_baby_profile_cancel_with_no</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_ft1.1')">
+        错误</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_ft1.1' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>ft1.1: Test failed with exception: time data '01 M08 2020' does not match format '%d %B %Y'
+Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\pages\menu_pages\add_baby_profile_page.py", line 317, in select_baby_birthday
+    if month == datetime.datetime.strptime(month_picker.text, "%b").month and day == int(day_picker.text):
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\_strptime.py", line 673, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\_strptime.py", line 452, in _strptime
+    raise ValueError("time data %r does not match format %r" %
+                     (data_string, format))
+ValueError: time data 'M08' does not match format '%b'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\add_baby_test.py", line 254, in test_add_baby_profile_cancel_with_no
+    raise e
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\add_baby_test.py", line 219, in test_add_baby_profile_cancel_with_no
+    add_baby_profile_page.select_baby_birthday(2020, 5, 31) # enter a random date
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JPR68\Desktop\PythonProject\pages\menu_pages\add_baby_profile_page.py", line 330, in select_baby_birthday
+    first_date = datetime.datetime.strptime(first_date_str, "%d %B %Y").date()
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\_strptime.py", line 673, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\_strptime.py", line 452, in _strptime
+    raise ValueError("time data %r does not match format %r" %
+                     (data_string, format))
+ValueError: time data '01 M08 2020' does not match format '%d %B %Y'
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1.2' class=''>
+    <td class='errorCase'><div class='testcase'>test_add_baby_profile_cancel_with_yes</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_ft1.2')">
+        错误</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_ft1.2' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>ft1.2: Test failed with exception: time data '01 M08 2020' does not match format '%d %B %Y'
+Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\pages\menu_pages\add_baby_profile_page.py", line 317, in select_baby_birthday
+    if month == datetime.datetime.strptime(month_picker.text, "%b").month and day == int(day_picker.text):
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\_strptime.py", line 673, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\_strptime.py", line 452, in _strptime
+    raise ValueError("time data %r does not match format %r" %
+                     (data_string, format))
+ValueError: time data 'M08' does not match format '%b'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\add_baby_test.py", line 180, in test_add_baby_profile_cancel_with_yes
+    raise e
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\add_baby_test.py", line 153, in test_add_baby_profile_cancel_with_yes
+    add_baby_profile_page.select_baby_birthday(2020, 5, 31) # enter a random date
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JPR68\Desktop\PythonProject\pages\menu_pages\add_baby_profile_page.py", line 330, in select_baby_birthday
+    first_date = datetime.datetime.strptime(first_date_str, "%d %B %Y").date()
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\_strptime.py", line 673, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\_strptime.py", line 452, in _strptime
+    raise ValueError("time data %r does not match format %r" %
+                     (data_string, format))
+ValueError: time data '01 M08 2020' does not match format '%d %B %Y'
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1.3' class=''>
+    <td class='errorCase'><div class='testcase'>test_add_baby_profile_success</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_ft1.3')">
+        错误</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_ft1.3' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>ft1.3: Test failed with exception: time data '01 M08 2020' does not match format '%d %B %Y'
+Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\pages\menu_pages\add_baby_profile_page.py", line 317, in select_baby_birthday
+    if month == datetime.datetime.strptime(month_picker.text, "%b").month and day == int(day_picker.text):
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\_strptime.py", line 673, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\_strptime.py", line 452, in _strptime
+    raise ValueError("time data %r does not match format %r" %
+                     (data_string, format))
+ValueError: time data 'M08' does not match format '%b'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\add_baby_test.py", line 116, in test_add_baby_profile_success
+    raise e
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\add_baby_test.py", line 74, in test_add_baby_profile_success
+    add_baby_profile_page.select_baby_birthday(2020, 5, 31) # enter a random date
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\JPR68\Desktop\PythonProject\pages\menu_pages\add_baby_profile_page.py", line 330, in select_baby_birthday
+    first_date = datetime.datetime.strptime(first_date_str, "%d %B %Y").date()
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\_strptime.py", line 673, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\_strptime.py", line 452, in _strptime
+    raise ValueError("time data %r does not match format %r" %
+                     (data_string, format))
+ValueError: time data '01 M08 2020' does not match format '%d %B %Y'
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+    <tr class='errorClass'>
+        <td class="text-center">tests.edit_baby_test.EditBabyTestWithAdding</td>
+        <td class="text-center">3</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">3</td>
+        <td class="text-center">0</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c2',3)">详细</button></td>
+    </tr>
+
+<tr id='ft2.1' class=''>
+    <td class='errorCase'><div class='testcase'>test_change_baby_profile_cancel</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_ft2.1')">
+        错误</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_ft2.1' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>ft2.1: Test failed with exception: time data '01 M08 2025' does not match format '%d %B %Y'
+Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\pages\menu_pages\add_baby_profile_page.py", line 317, in select_baby_birthday
+    if month == datetime.datetime.strptime(month_picker.text, "%b").month and day == int(day_picker.text):
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\_strptime.py", line 673, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\_strptime.py", line 452, in _strptime
+    raise ValueError("time data %r does not match format %r" %
+                     (data_string, format))
+ValueError: time data 'M08' does not match format '%b'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\edit_baby_test.py", line 40, in setUp
+    raise e
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\edit_baby_test.py", line 33, in setUp
+    add_baby_profile_page.add_new_baby()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JPR68\Desktop\PythonProject\pages\menu_pages\add_baby_profile_page.py", line 455, in add_new_baby
+    self.select_baby_birthday()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JPR68\Desktop\PythonProject\pages\menu_pages\add_baby_profile_page.py", line 330, in select_baby_birthday
+    first_date = datetime.datetime.strptime(first_date_str, "%d %B %Y").date()
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\_strptime.py", line 673, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\_strptime.py", line 452, in _strptime
+    raise ValueError("time data %r does not match format %r" %
+                     (data_string, format))
+ValueError: time data '01 M08 2025' does not match format '%d %B %Y'
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft2.2' class=''>
+    <td class='errorCase'><div class='testcase'>test_change_baby_profile_save</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_ft2.2')">
+        错误</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_ft2.2' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>ft2.2: Test failed with exception: Message: An unknown server-side error occurred while processing the command. Original error: 'POST /element' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+Stacktrace:
+UnknownError: An unknown server-side error occurred while processing the command. Original error: 'POST /element' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+    at UIA2Proxy.command (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\jsonwp-proxy\proxy.js:359:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at AndroidUiautomator2Driver.doFindElementOrEls (C:\Users\JPR68\.appium\node_modules\appium-uiautomator2-driver\lib\commands\find.js:40:5)
+    at doFind (C:\Users\JPR68\.appium\node_modules\appium-uiautomator2-driver\node_modules\appium-android-driver\lib\commands\find.ts:47:17)
+    at wrappedCondFn (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\timeout.ts:141:14)
+    at spin (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\asyncbox\lib\asyncbox.js:219:20)
+    at waitForCondition (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\asyncbox\lib\asyncbox.js:236:10)
+    at AndroidUiautomator2Driver.implicitWaitForCondition (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\timeout.ts:143:12)
+    at AndroidUiautomator2Driver.findElOrEls (C:\Users\JPR68\.appium\node_modules\appium-uiautomator2-driver\node_modules\appium-android-driver\lib\commands\find.ts:70:5)
+    at AndroidUiautomator2Driver.findElOrElsWithProcessing (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:60:12)
+    at AndroidUiautomator2Driver.findElement (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:75:12)
+Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\edit_baby_test.py", line 40, in setUp
+    raise e
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\edit_baby_test.py", line 31, in setUp
+    baby_monitor_page.click_home()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JPR68\Desktop\PythonProject\pages\baby_monitor_page.py", line 127, in click_home
+    WebDriverWait(self.driver, base.wait_time).until(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        EC.presence_of_element_located((AppiumBy.ID, self.homeButton))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\site-packages\selenium\webdriver\support\wait.py", line 129, in until
+    value = method(self._driver)
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\site-packages\selenium\webdriver\support\expected_conditions.py", line 104, in _predicate
+    return driver.find_element(*locator)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 922, in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 454, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\site-packages\appium\webdriver\errorhandler.py", line 125, in check_response
+    raise exception_class(msg=message, stacktrace=format_stacktrace(stacktrace))
+selenium.common.exceptions.WebDriverException: Message: An unknown server-side error occurred while processing the command. Original error: 'POST /element' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+Stacktrace:
+UnknownError: An unknown server-side error occurred while processing the command. Original error: 'POST /element' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+    at UIA2Proxy.command (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\jsonwp-proxy\proxy.js:359:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at AndroidUiautomator2Driver.doFindElementOrEls (C:\Users\JPR68\.appium\node_modules\appium-uiautomator2-driver\lib\commands\find.js:40:5)
+    at doFind (C:\Users\JPR68\.appium\node_modules\appium-uiautomator2-driver\node_modules\appium-android-driver\lib\commands\find.ts:47:17)
+    at wrappedCondFn (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\timeout.ts:141:14)
+    at spin (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\asyncbox\lib\asyncbox.js:219:20)
+    at waitForCondition (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\asyncbox\lib\asyncbox.js:236:10)
+    at AndroidUiautomator2Driver.implicitWaitForCondition (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\timeout.ts:143:12)
+    at AndroidUiautomator2Driver.findElOrEls (C:\Users\JPR68\.appium\node_modules\appium-uiautomator2-driver\node_modules\appium-android-driver\lib\commands\find.ts:70:5)
+    at AndroidUiautomator2Driver.findElOrElsWithProcessing (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:60:12)
+    at AndroidUiautomator2Driver.findElement (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:75:12)
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft2.3' class=''>
+    <td class='errorCase'><div class='testcase'>test_delete_baby_profile_success</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_ft2.3')">
+        错误</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_ft2.3' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>ft2.3: Test failed with exception: time data '01 M08 2025' does not match format '%d %B %Y'
+Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\pages\menu_pages\add_baby_profile_page.py", line 317, in select_baby_birthday
+    if month == datetime.datetime.strptime(month_picker.text, "%b").month and day == int(day_picker.text):
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\_strptime.py", line 673, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\_strptime.py", line 452, in _strptime
+    raise ValueError("time data %r does not match format %r" %
+                     (data_string, format))
+ValueError: time data 'M08' does not match format '%b'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\edit_baby_test.py", line 40, in setUp
+    raise e
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\edit_baby_test.py", line 33, in setUp
+    add_baby_profile_page.add_new_baby()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JPR68\Desktop\PythonProject\pages\menu_pages\add_baby_profile_page.py", line 455, in add_new_baby
+    self.select_baby_birthday()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JPR68\Desktop\PythonProject\pages\menu_pages\add_baby_profile_page.py", line 330, in select_baby_birthday
+    first_date = datetime.datetime.strptime(first_date_str, "%d %B %Y").date()
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\_strptime.py", line 673, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\_strptime.py", line 452, in _strptime
+    raise ValueError("time data %r does not match format %r" %
+                     (data_string, format))
+ValueError: time data '01 M08 2025' does not match format '%d %B %Y'
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+    <tr class='errorClass'>
+        <td class="text-center">tests.edit_baby_test.EditBabyTestWithoutAdding</td>
+        <td class="text-center">6</td>
+        <td class="text-center">3</td>
+        <td class="text-center">0</td>
+        <td class="text-center">1</td>
+        <td class="text-center">2</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c3',6)">详细</button></td>
+    </tr>
+
+<tr id='ft3.1' class=''>
+    <td class='errorCase'><div class='testcase'>test_backup_baby_profile_dialog_with_cancel</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_ft3.1')">
+        错误</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_ft3.1' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>ft3.1: Test failed with exception: Message: An unknown server-side error occurred while processing the command. Original error: 'POST /element' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+Stacktrace:
+UnknownError: An unknown server-side error occurred while processing the command. Original error: 'POST /element' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+    at UIA2Proxy.command (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\jsonwp-proxy\proxy.js:359:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at AndroidUiautomator2Driver.doFindElementOrEls (C:\Users\JPR68\.appium\node_modules\appium-uiautomator2-driver\lib\commands\find.js:40:5)
+    at doFind (C:\Users\JPR68\.appium\node_modules\appium-uiautomator2-driver\node_modules\appium-android-driver\lib\commands\find.ts:47:17)
+    at wrappedCondFn (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\timeout.ts:141:14)
+    at spin (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\asyncbox\lib\asyncbox.js:219:20)
+    at waitForCondition (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\asyncbox\lib\asyncbox.js:236:10)
+    at AndroidUiautomator2Driver.implicitWaitForCondition (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\timeout.ts:143:12)
+    at AndroidUiautomator2Driver.findElOrEls (C:\Users\JPR68\.appium\node_modules\appium-uiautomator2-driver\node_modules\appium-android-driver\lib\commands\find.ts:70:5)
+    at AndroidUiautomator2Driver.findElOrElsWithProcessing (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:60:12)
+    at AndroidUiautomator2Driver.findElement (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:75:12)
+Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\edit_baby_test.py", line 240, in setUp
+    raise e
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\edit_baby_test.py", line 236, in setUp
+    baby_monitor_page.click_home()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JPR68\Desktop\PythonProject\pages\baby_monitor_page.py", line 127, in click_home
+    WebDriverWait(self.driver, base.wait_time).until(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        EC.presence_of_element_located((AppiumBy.ID, self.homeButton))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\site-packages\selenium\webdriver\support\wait.py", line 129, in until
+    value = method(self._driver)
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\site-packages\selenium\webdriver\support\expected_conditions.py", line 104, in _predicate
+    return driver.find_element(*locator)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 922, in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 454, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\site-packages\appium\webdriver\errorhandler.py", line 125, in check_response
+    raise exception_class(msg=message, stacktrace=format_stacktrace(stacktrace))
+selenium.common.exceptions.WebDriverException: Message: An unknown server-side error occurred while processing the command. Original error: 'POST /element' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+Stacktrace:
+UnknownError: An unknown server-side error occurred while processing the command. Original error: 'POST /element' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+    at UIA2Proxy.command (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\jsonwp-proxy\proxy.js:359:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at AndroidUiautomator2Driver.doFindElementOrEls (C:\Users\JPR68\.appium\node_modules\appium-uiautomator2-driver\lib\commands\find.js:40:5)
+    at doFind (C:\Users\JPR68\.appium\node_modules\appium-uiautomator2-driver\node_modules\appium-android-driver\lib\commands\find.ts:47:17)
+    at wrappedCondFn (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\timeout.ts:141:14)
+    at spin (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\asyncbox\lib\asyncbox.js:219:20)
+    at waitForCondition (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\asyncbox\lib\asyncbox.js:236:10)
+    at AndroidUiautomator2Driver.implicitWaitForCondition (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\timeout.ts:143:12)
+    at AndroidUiautomator2Driver.findElOrEls (C:\Users\JPR68\.appium\node_modules\appium-uiautomator2-driver\node_modules\appium-android-driver\lib\commands\find.ts:70:5)
+    at AndroidUiautomator2Driver.findElOrElsWithProcessing (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:60:12)
+    at AndroidUiautomator2Driver.findElement (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:75:12)
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt3.2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_backup_baby_profile_dialog_with_ok</div></td>
+    <td>通过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+<tr id='ft3.3' class=''>
+    <td class='skipCase'><div class='testcase'>test_change_baby_birthday_dialog_cancel</div></td>
+    <td>跳过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+<tr id='ft3.4' class=''>
+    <td class='skipCase'><div class='testcase'>test_change_baby_birthday_dialog_ok</div></td>
+    <td>跳过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+<tr id='pt3.5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_delete_baby_profile_dialog_with_cancel</div></td>
+    <td>通过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+<tr id='pt3.6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_delete_baby_profile_page_with_cancel</div></td>
+    <td>通过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+    <tr class='errorClass'>
+        <td class="text-center">tests.pixsee_settings_tests.pixsee_profile_test.PixseeProfileTest</td>
+        <td class="text-center">12</td>
+        <td class="text-center">9</td>
+        <td class="text-center">1</td>
+        <td class="text-center">1</td>
+        <td class="text-center">1</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c4',12)">详细</button></td>
+    </tr>
+
+<tr id='pt4.1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_IQ_setting_with_changing</div></td>
+    <td>通过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+<tr id='pt4.2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_IQ_setting_with_no_changing</div></td>
+    <td>通过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+<tr id='pt4.3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_check_device_info</div></td>
+    <td>通过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+<tr id='pt4.4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_check_update</div></td>
+    <td>通过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+<tr id='pt4.5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_device_unbind_dialog_with_no</div></td>
+    <td>通过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+<tr id='pt4.6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_device_unbind_page_with_cancel</div></td>
+    <td>通过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+<tr id='pt4.7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_device_unbind_page_with_close</div></td>
+    <td>通过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+<tr id='ft4.8' class=''>
+    <td class='skipCase'><div class='testcase'>test_device_unbind_success</div></td>
+    <td>跳过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+<tr id='pt4.9' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_reboot_device</div></td>
+    <td>通过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+<tr id='ft4.10' class=''>
+    <td class='failCase'><div class='testcase'>test_rotate_screen</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_ft4.10')">
+        失败</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_ft4.10' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>ft4.10: Test failed with assertion error: False is not true : Can't go to Pixsee Profile Page
+Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\pixsee_settings_tests\pixsee_profile_test.py", line 205, in test_rotate_screen
+    raise ae
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\pixsee_settings_tests\pixsee_profile_test.py", line 185, in test_rotate_screen
+    self.assertTrue(pixsee_profile_page.is_in_pixsee_profile_page(), "Can't go to Pixsee Profile Page")
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : Can't go to Pixsee Profile Page
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft4.11' class=''>
+    <td class='errorCase'><div class='testcase'>test_select_location</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_ft4.11')">
+        错误</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_ft4.11' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>ft4.11: Test failed with exception: Message: An unknown server-side error occurred while processing the command. Original error: 'POST /element' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+Stacktrace:
+UnknownError: An unknown server-side error occurred while processing the command. Original error: 'POST /element' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+    at UIA2Proxy.command (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\jsonwp-proxy\proxy.js:359:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at AndroidUiautomator2Driver.doFindElementOrEls (C:\Users\JPR68\.appium\node_modules\appium-uiautomator2-driver\lib\commands\find.js:40:5)
+    at doFind (C:\Users\JPR68\.appium\node_modules\appium-uiautomator2-driver\node_modules\appium-android-driver\lib\commands\find.ts:47:17)
+    at wrappedCondFn (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\timeout.ts:141:14)
+    at spin (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\asyncbox\lib\asyncbox.js:219:20)
+    at waitForCondition (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\asyncbox\lib\asyncbox.js:236:10)
+    at AndroidUiautomator2Driver.implicitWaitForCondition (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\timeout.ts:143:12)
+    at AndroidUiautomator2Driver.findElOrEls (C:\Users\JPR68\.appium\node_modules\appium-uiautomator2-driver\node_modules\appium-android-driver\lib\commands\find.ts:70:5)
+    at AndroidUiautomator2Driver.findElOrElsWithProcessing (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:60:12)
+    at AndroidUiautomator2Driver.findElement (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:75:12)
+Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\pixsee_settings_tests\pixsee_profile_test.py", line 38, in setUp
+    raise e
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\pixsee_settings_tests\pixsee_profile_test.py", line 35, in setUp
+    pixsee_settings_page.click_pixsee_profile()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JPR68\Desktop\PythonProject\pages\menu_pages\pixsee_settings_pages\pixsee_settings_page.py", line 90, in click_pixsee_profile
+    WebDriverWait(self.driver, base.wait_time).until(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+    	EC.presence_of_element_located(("id", self.PixseeProfile))
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\site-packages\selenium\webdriver\support\wait.py", line 129, in until
+    value = method(self._driver)
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\site-packages\selenium\webdriver\support\expected_conditions.py", line 104, in _predicate
+    return driver.find_element(*locator)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 922, in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 454, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\site-packages\appium\webdriver\errorhandler.py", line 125, in check_response
+    raise exception_class(msg=message, stacktrace=format_stacktrace(stacktrace))
+selenium.common.exceptions.WebDriverException: Message: An unknown server-side error occurred while processing the command. Original error: 'POST /element' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+Stacktrace:
+UnknownError: An unknown server-side error occurred while processing the command. Original error: 'POST /element' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+    at UIA2Proxy.command (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\jsonwp-proxy\proxy.js:359:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at AndroidUiautomator2Driver.doFindElementOrEls (C:\Users\JPR68\.appium\node_modules\appium-uiautomator2-driver\lib\commands\find.js:40:5)
+    at doFind (C:\Users\JPR68\.appium\node_modules\appium-uiautomator2-driver\node_modules\appium-android-driver\lib\commands\find.ts:47:17)
+    at wrappedCondFn (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\timeout.ts:141:14)
+    at spin (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\asyncbox\lib\asyncbox.js:219:20)
+    at waitForCondition (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\asyncbox\lib\asyncbox.js:236:10)
+    at AndroidUiautomator2Driver.implicitWaitForCondition (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\timeout.ts:143:12)
+    at AndroidUiautomator2Driver.findElOrEls (C:\Users\JPR68\.appium\node_modules\appium-uiautomator2-driver\node_modules\appium-android-driver\lib\commands\find.ts:70:5)
+    at AndroidUiautomator2Driver.findElOrElsWithProcessing (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:60:12)
+    at AndroidUiautomator2Driver.findElement (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:75:12)
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt4.12' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_select_time_zone</div></td>
+    <td>通过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+    <tr class='passClass'>
+        <td class="text-center">tests.pixsee_settings_tests.voice_service_test.VoiceServiceTest</td>
+        <td class="text-center">8</td>
+        <td class="text-center">8</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c5',8)">详细</button></td>
+    </tr>
+
+<tr id='pt5.1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_changing_language_discard_with_no</div></td>
+    <td>通过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+<tr id='pt5.2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_changing_language_discard_with_yes</div></td>
+    <td>通过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+<tr id='pt5.3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_changing_language_save</div></td>
+    <td>通过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+<tr id='pt5.4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_changing_status_discard_with_no</div></td>
+    <td>通过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+<tr id='pt5.5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_changing_status_discard_with_yes</div></td>
+    <td>通过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+<tr id='pt5.6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_changing_status_save</div></td>
+    <td>通过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+<tr id='pt5.7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_no_changing_language</div></td>
+    <td>通过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+<tr id='pt5.8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_no_changing_status</div></td>
+    <td>通过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+    <tr class='passClass'>
+        <td class="text-center">tests.about_test.AboutTest</td>
+        <td class="text-center">3</td>
+        <td class="text-center">3</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c6',3)">详细</button></td>
+    </tr>
+
+<tr id='pt6.1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_about_pixsee</div></td>
+    <td>通过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+<tr id='pt6.2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_privacy_policy</div></td>
+    <td>通过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+<tr id='pt6.3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_terms_of_service</div></td>
+    <td>通过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+    <tr class='passClass'>
+        <td class="text-center">tests.login_test.LoginCase</td>
+        <td class="text-center">5</td>
+        <td class="text-center">5</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c7',5)">详细</button></td>
+    </tr>
+
+<tr id='pt7.1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_01_login_wrong_email_failure</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt7.1')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt7.1' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt7.1: Wrong email test success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt7.2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_02_login_wrong_password_failure</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt7.2')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt7.2' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt7.2: Wrong password test success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt7.3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_03_login_empty_email_failure</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt7.3')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt7.3' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt7.3: Empty email test success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt7.4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_04_login_empty_password_failure</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt7.4')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt7.4' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt7.4: Empty password test success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt7.5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_05_login_success</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt7.5')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt7.5' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt7.5: Login test success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td class="text-center">tests.pixsee_settings_tests.area_detection_tests.area_detection_reset_test.AreaDetectionCase1</td>
+        <td class="text-center">3</td>
+        <td class="text-center">2</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">1</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c8',3)">详细</button></td>
+    </tr>
+
+<tr id='ft8.1' class=''>
+    <td class='skipCase'><div class='testcase'>test_01_area_detection_tutor_skip_1</div></td>
+    <td>跳过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+<tr id='pt8.2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_02_area_detection_tutor_skip_2</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt8.2')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt8.2' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt8.2: second tutor  title right
+second tutor indicator displayed
+skip display right
+skip second tutor successfully
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt8.3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_03_area_detection_tutor_skip_121</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt8.3')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt8.3' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt8.3: first tutor displayed
+second tutor indicator displayed
+first tutor displayed
+skip second tutor successfully
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+    <tr class='failClass'>
+        <td class="text-center">tests.pixsee_settings_tests.area_detection_tests.area_detection_no_reset_test.AreaDetectionCase2</td>
+        <td class="text-center">8</td>
+        <td class="text-center">7</td>
+        <td class="text-center">1</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c9',8)">详细</button></td>
+    </tr>
+
+<tr id='pt9.1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_01_area_detection_back</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt9.1')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt9.1' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt9.1: Finish opening app.
+Save diable test pass
+Back to Pixsee Settings page
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt9.2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_02_area_detection_save</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt9.2')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt9.2' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt9.2: save function success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt9.3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_03_area_detection_switch</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt9.3')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt9.3' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt9.3: Area detection header right
+Area detection title right
+Area detection subtitle right
+switch on success
+switch off successfully
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt9.4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_04_area_detection_tap_checkbox_sensitivity</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt9.4')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt9.4' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt9.4: Sensitivity title is correct
+detection type is correct
+Low checkbox text is correct
+Medium checkbox text is correct
+High checkbox text is correct
+Low checkbox is clickable
+Medium checkbox is clickable
+High checkbox is clickable
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt9.5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_05_area_detection_tap_checkbox_detection_type</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt9.5')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt9.5' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt9.5: baby in text is correct
+baby out text is correct
+baby in clickable
+baby out clickable
+Pixel at (34,1164) = (9, 244, 220, 255), in range: True
+baby in color is correct
+Pixel at (34,1164) = (252, 138, 6, 255), in range: True
+baby out color is correct
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt9.6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_06_area_detection_turn_off_page</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt9.6')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt9.6' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt9.6: turn off dialog title is correct
+turn off 15 is correct
+turn off 30 is correct
+turn off text is correct
+turn off cancel text is correct
+15 min button worked
+turn off cancel worked
+30 min button worked
+turn off detection worked
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft9.7' class=''>
+    <td class='failCase'><div class='testcase'>test_07_area_detection_back_discard</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_ft9.7')">
+        失败</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_ft9.7' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>ft9.7: In discard dialog
+Discard dialog title right
+Discard dialog yes text right
+Discard dialog no text right
+Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\pixsee_settings_tests\area_detection_tests\area_detection_no_reset_test.py", line 388, in test_07_area_detection_back_discard
+    self.assertEqual(pixsee_settings_page.area_detection_status_text(),self.get_string("off_selection"))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != '關'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\pixsee_settings_tests\area_detection_tests\area_detection_no_reset_test.py", line 391, in test_07_area_detection_back_discard
+    raise AssertionError("Not in discard dialog")
+AssertionError: Not in discard dialog
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt9.8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_08_area_detection_information</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt9.8')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt9.8' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt9.8: information button worked
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+    <tr class='errorClass'>
+        <td class="text-center">tests.new_photo_check_test.NewPhotoCheckCase</td>
+        <td class="text-center">1</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">1</td>
+        <td class="text-center">0</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c10',1)">详细</button></td>
+    </tr>
+
+<tr id='ft10.1' class=''>
+    <td class='errorCase'><div class='testcase'>test_new_photo_storaged</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_ft10.1')">
+        错误</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_ft10.1' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>ft10.1: finish login photo
+Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\new_photo_check_test.py", line 44, in test_new_photo_storaged
+    photo_page.click_back_button()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JPR68\Desktop\PythonProject\pages\menu_pages\album_pages\photo_page.py", line 21, in click_back_button
+    element = self.driver.find_element(AppiumBy.XPATH, self.backButton)
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 922, in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 454, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\site-packages\appium\webdriver\errorhandler.py", line 125, in check_response
+    raise exception_class(msg=message, stacktrace=format_stacktrace(stacktrace))
+selenium.common.exceptions.NoSuchElementException: Message: An element could not be located on the page using the given search parameters.; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Stacktrace:
+NoSuchElementError: An element could not be located on the page using the given search parameters.
+    at AndroidUiautomator2Driver.findElOrEls (C:\Users\JPR68\.appium\node_modules\appium-uiautomator2-driver\node_modules\appium-android-driver\lib\commands\find.ts:86:11)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at AndroidUiautomator2Driver.findElOrElsWithProcessing (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:60:12)
+    at AndroidUiautomator2Driver.findElement (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:75:12)
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td class="text-center">tests.pixsee_settings_tests.wifi_settings_test.WifiSettingsCase</td>
+        <td class="text-center">6</td>
+        <td class="text-center">6</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c11',6)">详细</button></td>
+    </tr>
+
+<tr id='pt11.1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_01_wifi_reset_cancel</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt11.1')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt11.1' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt11.1: Finish opening app.
+popup title correct
+ok button correct
+cancel button correct
+back to settings page
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt11.2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_02_wifi_reset_ok</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt11.2')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt11.2' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt11.2: ok function success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt11.3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_03_wifi_settings_x</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt11.3')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt11.3' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt11.3: header text correct
+description text correct
+x function success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt11.4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_04_wifi_quit_dialog_no_yes</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt11.4')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt11.4' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt11.4: quit dialog text correct
+quit dialog yes text correct
+quit dialog no text correct
+quit dialog no function success
+quit dialog yes function success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt11.5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_05_wifi_settings_next_empty_password</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt11.5')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt11.5' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt11.5: empty password  alert success
+password empty dialog text correct
+password empty dialog ok text correct
+empty password dialog yes function success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt11.6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_06_wifi_settings_next</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt11.6')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt11.6' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt11.6: next function success
+wifi settings function success
+no found title text correct
+no found description text correct
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td class="text-center">tests.pixsee_settings_tests.pixsee_friends_detection_test.PixseeFriendsDetectionCase</td>
+        <td class="text-center">6</td>
+        <td class="text-center">6</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c12',6)">详细</button></td>
+    </tr>
+
+<tr id='pt12.1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_01_friends_detection_back</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt12.1')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt12.1' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt12.1: Back to Pixsee Settings page
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt12.2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_02_friends_detection_save</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt12.2')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt12.2' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt12.2: Save diable test pass
+save function success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt12.3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_03_friends_detection_back_discard</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt12.3')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt12.3' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt12.3: In discard dialog
+Discard dialog title right
+Discard dialog yes text right
+Discard dialog no text right
+Discard function success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt12.4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_04_friends_detection_switch</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt12.4')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt12.4' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt12.4: Friends detection title right
+偵測到 Pixsee Friends 時自動播放聲音內容。
+Friends detection subtitle right
+switch off success
+switch on success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt12.5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_05_friends_detection_tap_checkbox</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt12.5')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt12.5' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt12.5: Friends detection type is correct
+Friends detection all day text right
+Friends detection set time text right
+tap on Set Time success
+tap on All Day success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt12.6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_06_friends_detection_time_span</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt12.6')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt12.6' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt12.6: Friends detection time span title right
+Friends detection start time text right
+Friends detection end time text right
+In start time block
+Start time block cancel text right
+Start time block confirm text right
+timer confirm function success
+In end time block
+timer cancel function success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td class="text-center">tests.pixsee_settings_tests.covered_face_detection_tests.covered_face_detection_reset_test.CoveredFaceDetectionCase1</td>
+        <td class="text-center">1</td>
+        <td class="text-center">1</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c13',1)">详细</button></td>
+    </tr>
+
+<tr id='pt13.1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_01_covered_face_detection_tutor_skip</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt13.1')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt13.1' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt13.1: tutor title right
+skip display right
+skip tutor successfully
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+    <tr class='errorClass'>
+        <td class="text-center">tests.pixsee_settings_tests.covered_face_detection_tests.covered_face_detection_no_reset_test.CoveredFaceDetectionCase2</td>
+        <td class="text-center">7</td>
+        <td class="text-center">5</td>
+        <td class="text-center">0</td>
+        <td class="text-center">2</td>
+        <td class="text-center">0</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c14',7)">详细</button></td>
+    </tr>
+
+<tr id='pt14.1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_02_covered_face_detection_back</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt14.1')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt14.1' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt14.1: Finish opening app.
+Back to Pixsee Settings page
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt14.2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_03_covered_face_detection_save</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt14.2')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt14.2' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt14.2: Save diable test pass
+save function success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt14.3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_04_covered_face_detection_switch</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt14.3')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt14.3' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt14.3: Covered Face Detection header right
+Covered Face Detection title right
+Covered Face Detection subtitle right
+switch on success
+switch off successfully
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt14.4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_05_covered_face_detection_tap_checkbox_sensitivity</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt14.4')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt14.4' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt14.4: Sensitivity title is correct
+Low checkbox text is correct
+Medium checkbox text is correct
+High checkbox text is correct
+drag title right
+Low checkbox is clickable
+Medium checkbox is clickable
+High checkbox is clickable
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft14.5' class=''>
+    <td class='errorCase'><div class='testcase'>test_06_covered_face_detection_turn_off_page</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_ft14.5')">
+        错误</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_ft14.5' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>ft14.5: Finish opening app.
+Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\pixsee_settings_tests\covered_face_detection_tests\covered_face_detection_no_reset_test.py", line 208, in test_06_covered_face_detection_turn_off_page
+    if covered_face_detection_page.is_switch_on() :
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JPR68\Desktop\PythonProject\pages\menu_pages\pixsee_settings_pages\covered_face_detection_page.py", line 294, in is_switch_on
+    WebDriverWait(self.driver, base.wait_time).until(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+    	EC.presence_of_element_located((AppiumBy.ID, self.Switch))
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\site-packages\selenium\webdriver\support\wait.py", line 138, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+NoSuchElementError: An element could not be located on the page using the given search parameters.
+    at AndroidUiautomator2Driver.findElOrEls (C:\Users\JPR68\.appium\node_modules\appium-uiautomator2-driver\node_modules\appium-android-driver\lib\commands\find.ts:86:11)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at AndroidUiautomator2Driver.findElOrElsWithProcessing (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:60:12)
+    at AndroidUiautomator2Driver.findElement (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:75:12)
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft14.6' class=''>
+    <td class='errorCase'><div class='testcase'>test_07_covered_face_detection_back_discard</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_ft14.6')">
+        错误</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_ft14.6' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>ft14.6: Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\pixsee_settings_tests\covered_face_detection_tests\covered_face_detection_no_reset_test.py", line 300, in test_07_covered_face_detection_back_discard
+    covered_face_detection_page.click_back()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JPR68\Desktop\PythonProject\pages\menu_pages\pixsee_settings_pages\covered_face_detection_page.py", line 182, in click_back
+    WebDriverWait(self.driver, base.wait_time).until(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+    	EC.presence_of_element_located(("id", self.Back))
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\site-packages\selenium\webdriver\support\wait.py", line 138, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+NoSuchElementError: An element could not be located on the page using the given search parameters.
+    at AndroidUiautomator2Driver.findElOrEls (C:\Users\JPR68\.appium\node_modules\appium-uiautomator2-driver\node_modules\appium-android-driver\lib\commands\find.ts:86:11)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at AndroidUiautomator2Driver.findElOrElsWithProcessing (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:60:12)
+    at AndroidUiautomator2Driver.findElement (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:75:12)
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt14.7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_08_covered_face_detection_information</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt14.7')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt14.7' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt14.7: Finish opening app.
+information button worked
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+    <tr class='errorClass'>
+        <td class="text-center">tests.pixsee_settings_tests.environment_settings_test.EnvironmentSettingsCase</td>
+        <td class="text-center">8</td>
+        <td class="text-center">4</td>
+        <td class="text-center">1</td>
+        <td class="text-center">3</td>
+        <td class="text-center">0</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c15',8)">详细</button></td>
+    </tr>
+
+<tr id='ft15.1' class=''>
+    <td class='failCase'><div class='testcase'>test_01_environment_set_back</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_ft15.1')">
+        失败</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_ft15.1' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>ft15.1: Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\pixsee_settings_tests\environment_settings_test.py", line 49, in test_01_environment_set_back
+    self.assertTrue(pixsee_settings_page.is_in_settings())
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\pixsee_settings_tests\environment_settings_test.py", line 52, in test_01_environment_set_back
+    raise AssertionError("Not in Pixsee Settings page")
+AssertionError: Not in Pixsee Settings page
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft15.2' class=''>
+    <td class='errorCase'><div class='testcase'>test_02_environment_set_save</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_ft15.2')">
+        错误</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_ft15.2' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>ft15.2: Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\pixsee_settings_tests\environment_settings_test.py", line 61, in test_02_environment_set_save
+    pixsee_settings_page.click_environment_settings()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JPR68\Desktop\PythonProject\pages\menu_pages\pixsee_settings_pages\pixsee_settings_page.py", line 114, in click_environment_settings
+    WebDriverWait(self.driver, base.wait_time).until(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+    	EC.presence_of_element_located(("id", self.EnvironmentSettings))
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\site-packages\selenium\webdriver\support\wait.py", line 138, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+NoSuchElementError: An element could not be located on the page using the given search parameters.
+    at AndroidUiautomator2Driver.findElOrEls (C:\Users\JPR68\.appium\node_modules\appium-uiautomator2-driver\node_modules\appium-android-driver\lib\commands\find.ts:86:11)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at AndroidUiautomator2Driver.findElOrElsWithProcessing (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:60:12)
+    at AndroidUiautomator2Driver.findElement (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:75:12)
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft15.3' class=''>
+    <td class='errorCase'><div class='testcase'>test_03_environment_set_back_discard</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_ft15.3')">
+        错误</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_ft15.3' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>ft15.3: Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\pixsee_settings_tests\environment_settings_test.py", line 86, in test_03_environment_set_back_discard
+    pixsee_settings_page.click_environment_settings()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JPR68\Desktop\PythonProject\pages\menu_pages\pixsee_settings_pages\pixsee_settings_page.py", line 114, in click_environment_settings
+    WebDriverWait(self.driver, base.wait_time).until(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+    	EC.presence_of_element_located(("id", self.EnvironmentSettings))
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\site-packages\selenium\webdriver\support\wait.py", line 138, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+NoSuchElementError: An element could not be located on the page using the given search parameters.
+    at AndroidUiautomator2Driver.findElOrEls (C:\Users\JPR68\.appium\node_modules\appium-uiautomator2-driver\node_modules\appium-android-driver\lib\commands\find.ts:86:11)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at AndroidUiautomator2Driver.findElOrElsWithProcessing (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:60:12)
+    at AndroidUiautomator2Driver.findElement (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:75:12)
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft15.4' class=''>
+    <td class='errorCase'><div class='testcase'>test_04_environment_set_switch</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_ft15.4')">
+        错误</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_ft15.4' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>ft15.4: Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\pixsee_settings_tests\environment_settings_test.py", line 129, in test_04_environment_set_switch
+    pixsee_settings_page.click_environment_settings()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JPR68\Desktop\PythonProject\pages\menu_pages\pixsee_settings_pages\pixsee_settings_page.py", line 114, in click_environment_settings
+    WebDriverWait(self.driver, base.wait_time).until(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+    	EC.presence_of_element_located(("id", self.EnvironmentSettings))
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\site-packages\selenium\webdriver\support\wait.py", line 138, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+NoSuchElementError: An element could not be located on the page using the given search parameters.
+    at AndroidUiautomator2Driver.findElOrEls (C:\Users\JPR68\.appium\node_modules\appium-uiautomator2-driver\node_modules\appium-android-driver\lib\commands\find.ts:86:11)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at AndroidUiautomator2Driver.findElOrElsWithProcessing (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:60:12)
+    at AndroidUiautomator2Driver.findElement (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:75:12)
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt15.5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_05_environment_set_tap_checkbox</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt15.5')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt15.5' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt15.5: Sensitivity title is correct
+Temperature title is correct
+Temperature unit title is correct
+Humidity title is correct
+Low checkbox text is correct
+Medium checkbox text is correct
+High checkbox text is correct
+Low checkbox is clickable
+Medium checkbox is clickable
+High checkbox is clickable
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt15.6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_06_environment_celsius_fahrenheit</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt15.6')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt15.6' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt15.6: Celsius text right
+Celsius is clickable
+Fahrenheit is clickable
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt15.7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_07_environment_set_temperature_scrolling_bar</div></td>
+    <td>通过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+<tr id='pt15.8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_08_environment_set_humidity_scrolling_bar</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt15.8')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt15.8' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt15.8: 93 1415
+{'height': 128, 'width': 822}
+Scrolling bar works
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+    <tr class='errorClass'>
+        <td class="text-center">tests.pixsee_settings_tests.cry_detection_test.CryDetectionCase</td>
+        <td class="text-center">7</td>
+        <td class="text-center">4</td>
+        <td class="text-center">2</td>
+        <td class="text-center">1</td>
+        <td class="text-center">0</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c16',7)">详细</button></td>
+    </tr>
+
+<tr id='ft16.1' class=''>
+    <td class='failCase'><div class='testcase'>test_01_cry_detection_back</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_ft16.1')">
+        失败</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_ft16.1' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>ft16.1: Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\pixsee_settings_tests\cry_detection_test.py", line 50, in test_01_cry_detection_back
+    self.assertTrue(pixsee_settings_page.is_in_settings())
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\pixsee_settings_tests\cry_detection_test.py", line 53, in test_01_cry_detection_back
+    raise AssertionError("Not in Pixsee Settings page")
+AssertionError: Not in Pixsee Settings page
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft16.2' class=''>
+    <td class='errorCase'><div class='testcase'>test_02_cry_detection_save</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_ft16.2')">
+        错误</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_ft16.2' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>ft16.2: Finish opening app.
+Test failed with exception: Message: An element could not be located on the page using the given search parameters.; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Stacktrace:
+NoSuchElementError: An element could not be located on the page using the given search parameters.
+    at AndroidUiautomator2Driver.findElOrEls (C:\Users\JPR68\.appium\node_modules\appium-uiautomator2-driver\node_modules\appium-android-driver\lib\commands\find.ts:86:11)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at AndroidUiautomator2Driver.findElOrElsWithProcessing (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:60:12)
+    at AndroidUiautomator2Driver.findElement (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:75:12)
+Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\pixsee_settings_tests\cry_detection_test.py", line 38, in setUp
+    raise e
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\pixsee_settings_tests\cry_detection_test.py", line 35, in setUp
+    menu_page.click_settings()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\JPR68\Desktop\PythonProject\pages\menu_pages\menu_page.py", line 95, in click_settings
+    self.driver.find_element(AppiumBy.ID, self.settingsButton).click()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 922, in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 454, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\JPR68\scoop\apps\python\current\Lib\site-packages\appium\webdriver\errorhandler.py", line 125, in check_response
+    raise exception_class(msg=message, stacktrace=format_stacktrace(stacktrace))
+selenium.common.exceptions.NoSuchElementException: Message: An element could not be located on the page using the given search parameters.; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Stacktrace:
+NoSuchElementError: An element could not be located on the page using the given search parameters.
+    at AndroidUiautomator2Driver.findElOrEls (C:\Users\JPR68\.appium\node_modules\appium-uiautomator2-driver\node_modules\appium-android-driver\lib\commands\find.ts:86:11)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at AndroidUiautomator2Driver.findElOrElsWithProcessing (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:60:12)
+    at AndroidUiautomator2Driver.findElement (C:\Users\JPR68\scoop\persist\nodejs\bin\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:75:12)
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft16.3' class=''>
+    <td class='failCase'><div class='testcase'>test_03_cry_detection_back_discard</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_ft16.3')">
+        失败</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_ft16.3' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>ft16.3: Finish opening app.
+In discard dialog
+Discard dialog title right
+Discard dialog yes text right
+Discard dialog no text right
+Not in discard dialog
+Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\pixsee_settings_tests\cry_detection_test.py", line 118, in test_03_cry_detection_back_discard
+    self.assertEqual(origin_status, new_status)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '開' != None
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\pixsee_settings_tests\cry_detection_test.py", line 121, in test_03_cry_detection_back_discard
+    raise AssertionError("Discard function failed, status changed")
+AssertionError: Discard function failed, status changed
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\pixsee_settings_tests\cry_detection_test.py", line 124, in test_03_cry_detection_back_discard
+    raise AssertionError("Not in discard dialog")
+AssertionError: Not in discard dialog
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt16.4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_04_cry_detection_switch</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt16.4')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt16.4' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt16.4: Cry detection header text right
+Cry detection title right
+Cry detection subtitle right
+switch on success
+switch off success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt16.5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_05_cry_detection_tap_checkbox</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt16.5')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt16.5' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt16.5: Sensitivity title is correct
+music settings text right
+smart soothing text right
+Low checkbox text is correct
+Medium checkbox text is correct
+High checkbox text is correct
+Low checkbox is clickable
+Medium checkbox is clickable
+High checkbox is clickable
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt16.6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_06_cry_detection_smart_soothing_switch</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt16.6')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt16.6' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt16.6: switch on success
+switch off success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt16.7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_07_cry_detection_music_page</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt16.7')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt16.7' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt16.7: entered music room successfully
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td class="text-center">tests.pixsee_settings_tests.SD_card_test.SDcardCase</td>
+        <td class="text-center">3</td>
+        <td class="text-center">3</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c17',3)">详细</button></td>
+    </tr>
+
+<tr id='pt17.1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_01_check_word</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt17.1')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt17.1' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt17.1: Header text test success
+Format button text test success
+Title text test success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt17.2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_02_check_back_button</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt17.2')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt17.2' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt17.2: Back to Pixsee Settings page
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt17.3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_03_check_format_button</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt17.3')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt17.3' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt17.3: Format dialog test success
+Dialog title test success
+Go button text test success
+No button text test success
+Back to sd card page test success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td class="text-center">tests.subscription_tests.havent_subscription_test.SubscriptionCase1</td>
+        <td class="text-center">5</td>
+        <td class="text-center">5</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c18',5)">详细</button></td>
+    </tr>
+
+<tr id='pt18.1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_01_subscription_check_text_and_color</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt18.1')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt18.1' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt18.1: Finish opening app.
+In subscription page
+Subscription header text right
+Pixel at (147,379) = (255, 133, 0, 255), in range: True
+gold star plan color is correct
+Pixel at (147,379) = (124, 216, 206, 255), in range: True
+standard plan color is correct
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt18.2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_02_subscription_click_x</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt18.2')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt18.2' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt18.2: x works, back to baby monitor page
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt18.3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_03_subscription_information</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt18.3')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt18.3' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt18.3: In subscription information page
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt18.4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_04_subscription_coupon</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt18.4')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt18.4' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt18.4: In coupon dialog
+Coupon dialog title right
+Coupon dialog cancel text right
+Coupon dialog confirm text right
+Coupon code hint text right
+0 digit code test pass
+1 digit code test pass
+2 digit code test pass
+3 digit code test pass
+4 digit code test pass
+5 digit code test pass
+6 digit code test pass
+Wrong code text right
+In coupon information page
+Back to subscription page after click cancel
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt18.5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_05_subscription_page_check_gold_button</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt18.5')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt18.5' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt18.5: Gold star button text right
+gold star button works, in prize plan dialog
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+    <tr class='failClass'>
+        <td class="text-center">tests.pixsee_settings_tests.time_lapse_video_test.TimeLapseVideoCase</td>
+        <td class="text-center">11</td>
+        <td class="text-center">10</td>
+        <td class="text-center">1</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c19',11)">详细</button></td>
+    </tr>
+
+<tr id='pt19.1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_01_time_lapse_video_subscription_click_no</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt19.1')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt19.1' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt19.1: Finish opening app.
+time-lapse header text right
+time_lapse_video title right
+time_lapse_video subtitle right
+In time lapse video upgrade dialog
+Upgrade dialog title right
+Upgrade dialog subscription right
+Upgrade dialog no text right
+Back to time lapse video page
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft19.2' class=''>
+    <td class='failCase'><div class='testcase'>test_02_time_lapse_video_subscription_click_yes</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_ft19.2')">
+        失败</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_ft19.2' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>ft19.2: Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\pixsee_settings_tests\time_lapse_video_test.py", line 122, in test_02_time_lapse_video_subscription_click_yes
+    self.assertTrue(subscriptionion_page.is_in_subscription_page())
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\JPR68\Desktop\PythonProject\tests\pixsee_settings_tests\time_lapse_video_test.py", line 125, in test_02_time_lapse_video_subscription_click_yes
+    raise AssertionError("Not in subscription page")
+AssertionError: Not in subscription page
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt19.3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_03_time_lapse_video_subscription_x</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt19.3')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt19.3' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt19.3: x works, back to time lapse video page
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt19.4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_04_time_lapse_subscribe</div></td>
+    <td>通过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+<tr id='pt19.5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_05_time_lapse_video_save</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt19.5')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt19.5' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt19.5: Finish opening app.
+Save diable test pass
+save function success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt19.6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_06_time_lapse_video_back</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt19.6')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt19.6' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt19.6: Back to pixsee settings page
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt19.7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_07_time_lapse_video_discard_dialog</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt19.7')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt19.7' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt19.7: In discard dialog
+Discard dialog title right
+Discard dialog cancel text right
+Discard dialog confirm text right
+Back to pixsee settings page after discard
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt19.8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_08_time_lapse_video_switch</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt19.8')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt19.8' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt19.8: switch off success
+switch on success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt19.9' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_09_time_lapse_video_check_text</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt19.9')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt19.9' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt19.9: time_lapse_video recording mode text right
+time_lapse_video time span text right
+time_lapse_video start time text right
+time_lapse_video entire time text right
+time_lapse_video people in view text right
+time_lapse_video twelve hour text right
+time_lapse_video twenty four hour text right
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt19.10' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_10_time_lapse_video_checkbox</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt19.10')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt19.10' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt19.10: tap on Entire Time success
+tap on People in view success
+Twelve hours checkbox is checked
+Twenty four hours checkbox is checked
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt19.11' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_11_time_lapse_video_select_time</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt19.11')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt19.11' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt19.11: In time selecter
+In time selecter
+Start time block cancel text right
+Start time block confirm text right
+timer confirm function success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td class="text-center">tests.subscription_tests.already_subscription_test.SubscriptionCase2</td>
+        <td class="text-center">5</td>
+        <td class="text-center">5</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c20',5)">详细</button></td>
+    </tr>
+
+<tr id='pt20.1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_01_subscription_check_text</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt20.1')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt20.1' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt20.1: Finish opening app.
+In subscription page
+Subscription current plan text right
+Subscription payment method text right
+Subscription in app purchase text right
+Subscription expiration text right
+Subscription promotion text right
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt20.2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_02_subscription_click_back</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt20.2')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt20.2' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt20.2: x works, back to baby monitor page
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt20.3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_03_subscription_information</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt20.3')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt20.3' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt20.3: In subscription information page
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt20.4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_04_subscription_coupon</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt20.4')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt20.4' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt20.4: In coupon dialog
+Coupon dialog title right
+Coupon dialog cancel text right
+Coupon dialog confirm text right
+Coupon code hint text right
+0 digit code test pass
+1 digit code test pass
+2 digit code test pass
+3 digit code test pass
+4 digit code test pass
+5 digit code test pass
+6 digit code test pass
+Wrong code text right
+In coupon information page
+Back to subscription page after click cancel
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt20.5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_05_subscription_button</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt20.5')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt20.5' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt20.5: gold star button works, in prize plan dialog
+Checkbox is checkable
+Ok button text right
+Ok button works, back to baby monitor page
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td class="text-center">tests.pixsee_settings_test.PixseeSettingsTest</td>
+        <td class="text-center">15</td>
+        <td class="text-center">15</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c21',15)">详细</button></td>
+    </tr>
+
+<tr id='pt21.1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_01_enter_pixsee_profile</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt21.1')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt21.1' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt21.1: Finish opening app.
+successfully enter Pixsee Profile page
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt21.2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_02_enter_wifi_settings</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt21.2')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt21.2' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt21.2: Wifi settings title right
+successfully enter wifi settings page
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt21.3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_03_enter_pixsee_friends_detection</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt21.3')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt21.3' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt21.3: Friends detection title right
+successfully enter Pixsee Friends Detection page
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt21.4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_04_enter_environment_settings</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt21.4')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt21.4' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt21.4: Environment settings title right
+In Environment Settings page
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt21.5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_05_enter_cry_detection</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt21.5')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt21.5' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt21.5: Cry detection title right
+entered Cry Detection page successfully
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt21.6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_06_enter_area_detection</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt21.6')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt21.6' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt21.6: Area detection title right
+entered Area Detection page successfully
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt21.7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_07_enter_covered_face_detection</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt21.7')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt21.7' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt21.7: Covered Face detection title right
+entered Covered Face Detection page successfully
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt21.8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_08_enter_timelapse_video</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt21.8')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt21.8' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt21.8: Timelapse video title right
+entered Timelapse Video page successfully
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt21.9' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_09_enter_voice_service</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt21.9')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt21.9' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt21.9: Voice service title right
+In Voice Service page
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt21.10' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_10_pixsee_settings</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt21.10')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt21.10' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt21.10: Settings page title right
+In Pixsee Settings page
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt21.11' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_11_shutter_sound</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt21.11')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt21.11' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt21.11: Shutter sound title right
+Shutter sound switch status changed successfully
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt21.12' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_12_LED_indicator</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt21.12')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt21.12' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt21.12: LED indicator title right
+LED indicator switch status changed successfully
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt21.13' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_13_night_mode</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt21.13')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt21.13' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt21.13: Night mode title right
+Night mode description right
+Night mode switch status changed successfully
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt21.14' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_14_privacy_mode</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt21.14')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt21.14' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt21.14: Privacy mode title right
+Privacy mode description right
+Privacy mode switch status changed successfully
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt21.15' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_15_enter_SDcard_status</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt21.15')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt21.15' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt21.15: SD card status title right
+In SD card status page
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+                </tbody>
+                <tr id='total_row' class="text-center active">
+                    <td align="right">总计</td>
+                    <td>126</td>
+                    <td>101</td>
+                    <td>6</td>
+                    <td>15</td>
+                    <td>4</td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+	</fieldset>
+
+        <a href="#">
+    <ul class="layui-fixbar"><li class="layui-icon layui-fixbar-top" lay-type="top" style="display: list-item;"></li></ul>
+    </a>
+    
+        
+    <script type="text/javascript">
+        // 初始化echarts实例
+        var myChart1 = echarts.init(document.getElementById('chart1'));
+        var myChart2 = echarts.init(document.getElementById('chart2'));
+        // 指定图表的配置项和数据
+        option1 = {
+            tooltip: {
+                formatter: '{a} <br/>{b} : {c}%'
+            },
+            toolbox: {
+                feature: {
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+            series: [{
+                name: '测试结果',
+                type: 'gauge',
+                detail: {
+                    formatter: '80.16%'
+                },
+                data: [{
+                    value: '80.16',
+                    name: '用例通过率'
+                }],
+                axisLine: {
+                    lineStyle: {
+                        color: [
+                            [0.2, '#c20000'],
+                            [0.8, '#ddb518'],
+                            [1, '#00a10a']
+                        ]
+                    }
+                }
+            }]
+        };
+        option2 = {
+            color: ['#00a10a', '#ddb518', 'rgba(204,46,41,0.73)', '#85898c'],
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b}: {c} ({d}%)'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 10,
+                data: ['通过', '失败', '错误', '跳过']
+            },
+            series: [{
+                name: '测试结果',
+                type: 'pie',
+                radius: ['50%', '70%'],
+                avoidLabelOverlap: false,
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: '30',
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [{
+                        value: 101,
+                        name: '通过'
+                    },
+                    {
+                        value: 6,
+                        name: '失败'
+                    },
+                    {
+                        value: 15,
+                        name: '错误'
+                    },
+                    {
+                        value: 4,
+                        name: '跳过'
+                    }
+                ]
+            }]
+        };
+
+        myChart1.setOption(option1);
+        myChart2.setOption(option2);
+    </script>
+    
+    </div>
+</body>
+</html>

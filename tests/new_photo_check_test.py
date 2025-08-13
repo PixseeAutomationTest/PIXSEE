@@ -41,7 +41,8 @@ class NewPhotoCheckCase(BaseTestCase):
 		origin = photo_page.count_photos_today()
 
 
-		photo_page.click_back_button()
+		# photo_page.click_back_button()
+		self.go_back()
 		# self.right_wipe()
 		baby_monitor_page.click_home()
 		# get new photo

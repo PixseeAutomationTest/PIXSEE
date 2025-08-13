@@ -14,5 +14,4 @@ __pycache__/
 
 **/__pycache__/
 **/*.pyc
-/results/
 /screen.png
