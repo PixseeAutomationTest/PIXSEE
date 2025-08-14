@@ -16,27 +16,28 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 wait_time = 5
 
-class BaseTestCase(unittest.TestCase):
-    def setUp(self, no_reset=True):
-        capabilities = UiAutomator2Options()
-        capabilities.platform_name = "Android"
-        capabilities.device_name = "emulator-5554"
-        capabilities.language = "en-us text"  # Chinese (Taiwan): "tw text", English: "en-us text"
-        # capabilities.device_name = "emulator-5554"
+def start_driver(language, locale, no_reset = True):
+    capabilities = UiAutomator2Options()
+    capabilities.platform_name = "Android"
+    capabilities.device_name = "emulator-5554"
+    capabilities.language = language
+    capabilities.locale = locale
 
-        # adb devices
-        capabilities.app_package = "com.compal.bioslab.pixsee.pixm01"
-        capabilities.app_activity = "com.compal.bioslab.pixsee.pixm01.activities.SplashActivity"
-        capabilities.no_reset = no_reset
-        capabilities.auto_grant_permissions = True
-        capabilities.new_command_timeout = 300
-        # subprocess.run([
-        #     "adb", "shell", "cmd", "notification", "suspend_package",
-        #     "com.compal.bioslab.pixsee.pixm01"
-        # ])
+    capabilities.app_package = "com.compal.bioslab.pixsee.pixm01"
+    capabilities.app_activity = "com.compal.bioslab.pixsee.pixm01.activities.SplashActivity"
+    capabilities.no_reset = no_reset
+    capabilities.auto_grant_permissions = True
+    capabilities.new_command_timeout = 300
+    return webdriver.Remote("http://localhost:4723", options=capabilities)
+
+class BaseTestCase(unittest.TestCase):
+    def setUp(self, language = "zh", locale = "TW", no_reset=True):
         self.tutor_id = "com.compal.bioslab.pixsee.pixm01:id/tvDescription"
-        self.driver = webdriver.Remote("http://localhost:4723", options=capabilities)
+        self.driver = start_driver(language, locale, no_reset)
         self.driver.update_settings({"waitForIdleTimeout": 300})
+        time.sleep(wait_time)
+    def test_test(self):
+        pass
     def open_app(self):
         self.driver.activate_app(self.driver.capabilities.get("appPackage"))
         time.sleep(10)
@@ -99,7 +100,12 @@ class BaseTestCase(unittest.TestCase):
 
     def get_string(self, key="", language = None):
         if language is None:
-            language = self.driver.capabilities.get("language")
+            if self.driver.capabilities.get("language") == "zh" and self.driver.capabilities.get("locale") == "TW":
+                language = "tw text"
+            elif self.driver.capabilities.get("language") == "zh" and self.driver.capabilities.get("locale") == "CN":
+                language = "cn text"
+            else:
+                language = "en-us text"
         if not language:
             raise ValueError(f"Unsupported language code: {language}")
         base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 取得專案根目錄

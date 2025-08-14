@@ -8,13 +8,14 @@ from pages.login_page import LoginPage
 from pages.menu_pages.pixsee_settings_pages.covered_face_detection_page import CoveredFaceDetectionPage
 from appium.webdriver.common.appiumby import AppiumBy
 
-
-
-
 class CoveredFaceDetectionCase1(BaseTestCase):
-	def setUp(self):
-		super().setUp(no_reset=False)
+	def __init__(self, methodName='runTest', language="zh", locale="TW"):
+		super().__init__(methodName)
+		self.language = language
+		self.locale = locale
 
+	def setUp(self):
+		super().setUp(language=self.language, locale=self.locale, no_reset=False)
 
 	def test_01_covered_face_detection_tutor_skip(self):
 		covered_face_detection_page = CoveredFaceDetectionPage(self.driver)

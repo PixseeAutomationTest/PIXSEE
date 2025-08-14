@@ -10,8 +10,13 @@ from appium.webdriver.common.appiumby import AppiumBy
 
 
 class AreaDetectionCase2(BaseTestCase):
+	def __init__(self, methodName='runTest', language="zh", locale="TW"):
+		super().__init__(methodName)
+		self.language = language
+		self.locale = locale
+
 	def setUp(self):
-		super().setUp(no_reset=True)
+		super().setUp(language=self.language, locale=self.locale)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
@@ -198,8 +203,13 @@ class AreaDetectionCase2(BaseTestCase):
 			self.check_switch_and_content(after_status, area_detection_page.Sensitivity)
 
 class AreaDetectionCase3(BaseTestCase):
+	def __init__(self, methodName='runTest', language="zh", locale="TW"):
+		super().__init__(methodName)
+		self.language = language
+		self.locale = locale
+
 	def setUp(self):
-		super().setUp(no_reset=True)
+		super().setUp(language=self.language, locale=self.locale)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
