@@ -11,7 +11,7 @@ from pages.menu_pages.pixsee_settings_pages.pixsee_friends_detection_page import
 
 
 
-class PixseeFriendsDetectionCase(BaseTestCase):
+class PixseeFriendsDetectionCase1(BaseTestCase):
 	def setUp(self):
 		super().setUp(no_reset=True)
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -152,7 +152,30 @@ class PixseeFriendsDetectionCase(BaseTestCase):
 		time.sleep(1)
 		after_status = pixsee_friends_page.is_switch_on()
 		self.check_switch_and_content(after_status, pixsee_friends_page.DetectionType)
-	# stay
+
+class PixseeFriendsDetectionCase2(BaseTestCase):
+	def setUp(self):
+		super().setUp(no_reset=True)
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		menu_page = MenuPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
+		try:
+			while self.driver.current_package != self.driver.capabilities.get("appPackage"):
+				self.driver.terminate_app(self.driver.current_package)
+				self.open_app()
+			if pixsee_friends_page.is_in_pixsee_friends_det_page():
+				return
+			elif not baby_monitor_page.is_in_baby_monitor_page():
+				self.shutdown_app()
+				self.open_app()
+			print("Finish opening app.")
+			baby_monitor_page.click_home()
+			menu_page.click_settings()
+		except Exception as e:
+			print(f"Test failed with exception: {e}")
+			raise e
+	# start from friends detection page
 	def test_05_friends_detection_tap_checkbox(self):
 		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
 		menu_page = MenuPage(self.driver)

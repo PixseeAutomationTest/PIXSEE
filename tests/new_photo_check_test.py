@@ -10,31 +10,30 @@ import time
 
 class NewPhotoCheckCase(BaseTestCase):
 	def setUp(self):
-		super().setUp(no_reset=False)
-
+		super().setUp(no_reset=True)
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		menu_page = MenuPage(self.driver)
+		photo_page = PhotoPage(self.driver)
+		try:
+			while self.driver.current_package != self.driver.capabilities.get("appPackage"):
+				self.driver.terminate_app(self.driver.current_package)
+				self.open_app()
+			if photo_page.is_in_photo_page():
+				return
+			elif not baby_monitor_page.is_in_baby_monitor_page():
+				self.shutdown_app()
+				self.open_app()
+			print("Finish opening app.")
+			baby_monitor_page.click_home()
+			menu_page.click_album()
+		except Exception as e:
+			print(f"Test failed with exception: {e}")
+			raise e
 	def test_new_photo_storaged(self):
-		login_page = LoginPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		photo_page = PhotoPage(self.driver)
 		menu_page = MenuPage(self.driver)
 
-		login_page.login("amypixsee03@gmail.com", "@Aa12345")
-		baby_monitor_page.is_in_baby_monitor_page()
-		self.skip_first_four_tutor()
-		# ensure is connected to machine
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		if not baby_monitor_page.is_connected():
-			self.skipTest("not online，skip all test")
-
-		baby_monitor_page.click_home()
-		# skip menu tutor
-		time.sleep(1)
-
-		menu_page.click_logout()
-		menu_page.click_album()
-		photo_page.click_iknow_button()
-		self.click_middle()
-		print("finish login photo")
 		time.sleep(5)
 
 		# Get origin photo amount

@@ -34,22 +34,26 @@ class AssistantTest(BaseTestCase):
     def test_01_background_play(self):
         assistant_page = AssistantPage(self.driver)
         background_play_page = BackgroundPlayPage(self.driver)
+        if assistant_page.is_backgroud_play_able_to_click():
         # check title
-        try:
-            background_play_title = assistant_page.background_play_text()
-            hint = self.get_string("background_play")
-            self.assertEqual(background_play_title, hint)
-        except Exception as e:
-            print(f"title Test failed with exception: {e}")
-            self.fail(f"Failed to retrieve or verify the Background Play title: {e}")
-        try:
-            background_play_sub = assistant_page.background_play_sub_text()
-            hint = self.get_string("background_monitoring_subtitle")
-            self.assertEqual(background_play_sub, hint)
-        except Exception as e:
-            print(f"Sub title Test failed with exception: {e}")
-            self.fail(f"Failed to retrieve or verify the Background Play subtitle: {e}")
-        assistant_page.click_background_play()
+            try:
+                background_play_title = assistant_page.background_play_text()
+                hint = self.get_string("background_play")
+                self.assertEqual(background_play_title, hint)
+            except Exception as e:
+                print(f"title Test failed with exception: {e}")
+                self.fail(f"Failed to retrieve or verify the Background Play title: {e}")
+            try:
+                background_play_sub = assistant_page.background_play_sub_text()
+                hint = self.get_string("background_monitoring_subtitle")
+                self.assertEqual(background_play_sub, hint)
+            except Exception as e:
+                print(f"Sub title Test failed with exception: {e}")
+                self.fail(f"Failed to retrieve or verify the Background Play subtitle: {e}")
+            assistant_page.click_background_play()
+        else:
+            print("Background Play is not available, skipping test.")
+            raise AssertionError("Background Play is not available, skipping test.")
         # check if is in
         try:
             self.assertTrue(background_play_page.is_in_background_play_page())
@@ -138,7 +142,7 @@ class AssistantTest(BaseTestCase):
         # check tutorial 2 text and index
         try:
             second_tutorial_text = tutorial_page.title_text()
-            hint = self.get_string("tutorial_title_2")
+            hint = self.get_string("tutorial_title_2").replace("\\n", "\n")
             self.assertEqual(second_tutorial_text, hint)
         except Exception as e:
             print(f"Second Tutorial Text Test failed with exception: {e}")
@@ -184,7 +188,7 @@ class AssistantTest(BaseTestCase):
         self.left_wipe()
         try:
             fourth_tutorial_text = tutorial_page.title_text()
-            hint = self.get_string("tutorial_title_4")
+            hint = self.get_string("tutorial_title_4").replace("\\n", "\n")
             self.assertEqual(fourth_tutorial_text, hint)
         except Exception as e:
             print(f"Fourth Tutorial Text Test failed with exception: {e}")

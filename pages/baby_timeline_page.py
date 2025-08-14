@@ -12,6 +12,8 @@ class BabyTimelinePage():
         self.menuButton = "com.compal.bioslab.pixsee.pixm01:id/ibDailyCoverTimelineMenuButtonHome" # When no device are connected
         self.albumButton = "com.compal.bioslab.pixsee.pixm01:id/ibAlbum"
         self.frameButton = "com.compal.bioslab.pixsee.pixm01:id/ibParentingTips"
+        self.Tutor = "com.compal.bioslab.pixsee.pixm01:id/tvTitle"
+        self.TutorDescription = "com.compal.bioslab.pixsee.pixm01:id/tvDescription"
 
     def click_home(self):
         WebDriverWait(self.driver, base.wait_time).until(
@@ -50,3 +52,14 @@ class BabyTimelinePage():
             return True
         except:
             return False
+
+    def get_tutor_title(self):
+        WebDriverWait(self.driver, base.wait_time).until(
+            EC.presence_of_element_located(("id", self.Tutor))
+        )
+        return self.driver.find_element("id", self.Tutor).text
+    def get_tutor_description(self):
+        WebDriverWait(self.driver, base.wait_time).until(
+            EC.presence_of_element_located(("id", self.TutorDescription))
+        )
+        return self.driver.find_element("id", self.TutorDescription).text.replace("\n", " ")

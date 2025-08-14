@@ -10,17 +10,63 @@ from datetime import datetime
 class PhotoPage():
 	def __init__(self, driver):
 		self.driver = driver
+		self.NewFuncTitle = "com.compal.bioslab.pixsee.pixm01:id/tvTitle"
+		self.NewFuncMsg = "com.compal.bioslab.pixsee.pixm01:id/tvBottomMessage"
 		self.iknowButton = "com.compal.bioslab.pixsee.pixm01:id/btnPositive"
-		# self.plusButton =
-		self.backButton = "//android.widget.ImageButton[@content-desc=\"Navigate up\"]"
+		self.TutorTitle = "com.compal.bioslab.pixsee.pixm01:id/tvTitle"
+		self.TutorDescription = "com.compal.bioslab.pixsee.pixm01:id/tvDescription"
+		self.Calender = "com.compal.bioslab.pixsee.pixm01:id/ibDailyCoverGalleryCalendar"
+		self.Select = "com.compal.bioslab.pixsee.pixm01:id/ibSelectMode"
+		self.PlusButton = "com.compal.bioslab.pixsee.pixm01:id/fab_daily_cover_gallery_menu"
+		self.SlideButton = "com.compal.bioslab.pixsee.pixm01:id/tv_daily_cover_gallery_fab_slideshow"
+		self.SlideButtonText = "com.compal.bioslab.pixsee.pixm01:id/tv_daily_cover_gallery_fab_slideshow"
+		self.PhotoButton = "com.compal.bioslab.pixsee.pixm01:id/fab_daily_cover_gallery_menu"
+		self.PhotoButtonText = "com.compal.bioslab.pixsee.pixm01:id/tv_daily_cover_gallery_fab_photo"
 
-	def click_back_button(self):
-		# WebDriverWait(self.driver, 10).until(
-		# 	EC.presence_of_element_located((AppiumBy.XPATH, self.backButton))
-		# )
-		element = self.driver.find_element(AppiumBy.XPATH, self.backButton)
-		element.click()
-		time.sleep(1)
+
+
+	def new_function_title(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located((AppiumBy.ID, self.NewFuncTitle))
+		)
+		element = self.driver.find_element(AppiumBy.ID, self.NewFuncTitle)
+		return element.text
+	def new_function_msg(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located((AppiumBy.ID, self.NewFuncMsg))
+		)
+		element = self.driver.find_element(AppiumBy.ID, self.NewFuncMsg)
+		return element.text
+	def iknow_button_text(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located((AppiumBy.ID, self.iknowButton))
+		)
+		element = self.driver.find_element(AppiumBy.ID, self.iknowButton)
+		return element.text
+	def tutor_title(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located((AppiumBy.ID, self.TutorTitle))
+		)
+		element = self.driver.find_element(AppiumBy.ID, self.TutorTitle)
+		return element.text
+	def tutor_description(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located((AppiumBy.ID, self.TutorDescription))
+		)
+		element = self.driver.find_element(AppiumBy.ID, self.TutorDescription)
+		return element.text
+	def slide_button_text(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located((AppiumBy.ID, self.SlideButtonText))
+		)
+		element = self.driver.find_element(AppiumBy.ID, self.SlideButtonText)
+		return element.text
+	def photo_button_text(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located((AppiumBy.ID, self.PhotoButtonText))
+		)
+		element = self.driver.find_element(AppiumBy.ID, self.PhotoButtonText)
+		return element.text
 
 	def click_iknow_button(self):
 		WebDriverWait(self.driver, 10).until(
@@ -29,6 +75,50 @@ class PhotoPage():
 		element = self.driver.find_element(AppiumBy.ID, self.iknowButton)
 		element.click()
 		time.sleep(1)
+	def click_calendar_button(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located((AppiumBy.ID, self.Calender))
+		)
+		element = self.driver.find_element(AppiumBy.ID, self.Calender)
+		element.click()
+		time.sleep(1)
+	def click_select_button(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located((AppiumBy.ID, self.Select))
+		)
+		element = self.driver.find_element(AppiumBy.ID, self.Select)
+		element.click()
+		time.sleep(1)
+	def click_plus_button(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located((AppiumBy.ID, self.PlusButton))
+		)
+		element = self.driver.find_element(AppiumBy.ID, self.PlusButton)
+		element.click()
+		time.sleep(1)
+	def click_slide_button(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located((AppiumBy.ID, self.SlideButton))
+		)
+		element = self.driver.find_element(AppiumBy.ID, self.SlideButton)
+		element.click()
+		time.sleep(1)
+	def click_photo_button(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located((AppiumBy.ID, self.PhotoButton))
+		)
+		element = self.driver.find_element(AppiumBy.ID, self.PhotoButton)
+		element.click()
+		time.sleep(1)
+
+	def is_in_photo_page(self):
+		try:
+			WebDriverWait(self.driver, 10).until(
+				EC.presence_of_element_located((AppiumBy.ID, self.Calender))
+			)
+			return True
+		except:
+			return False
 
 
 	def scroll_down_photo(self):
@@ -39,9 +129,6 @@ class PhotoPage():
 
 		self.driver.swipe(x, start_y, x, end_y, 500)  # 500 毫秒完成滑動
 		time.sleep(1)
-
-
-
 
 	def find_thumbnails_between_dates(self, target_date_str):
 		target_date = datetime.strptime(target_date_str, "%Y/%m/%d")
@@ -56,15 +143,16 @@ class PhotoPage():
 			top_date = datetime.strptime(top_date_txt, "%Y/%m/%d")
 
 			if top_date != target_date:
-				print(f"今天{target_date_str}沒有照片")
+				print(f"no photo today")
 				return []
 
 		except:
-			print("畫面上找不到任何日期，可能畫面尚未載入或元素不存在")
+			print("no elements found, no photos today")
 			return []
 
 		collecting = False
 		found_new_date = False
+		current_date = None
 		current_day_num = None
 
 		while not found_new_date:
@@ -79,16 +167,19 @@ class PhotoPage():
 				try:
 					day_txt = block.find_element(AppiumBy.ID,
 												 "com.compal.bioslab.pixsee.pixm01:id/gallery_item_day_number_txt").text
-					date_txt = block.find_element(AppiumBy.ID,
-												  "com.compal.bioslab.pixsee.pixm01:id/gallery_item_date_txt").text
-					date_clean = date_txt.strip().replace(" ", "").replace("／", "/").replace(" / ",
-																							 "/")
-					current_date = datetime.strptime(date_clean, "%Y/%m/%d")
+					try:
+						date_txt = block.find_element(AppiumBy.ID,
+													  "com.compal.bioslab.pixsee.pixm01:id/gallery_item_date_txt").text
+						date_clean = date_txt.strip().replace(" ", "").replace("／", "/").replace(" / ",
+																								 "/")
+						current_date = datetime.strptime(date_clean, "%Y/%m/%d")
 
-					if current_date == target_date:
-						collecting = True
-						current_day_num = day_txt
-						continue
+						if current_date == target_date:
+							collecting = True
+							current_day_num = day_txt
+							continue
+					except:
+						pass
 
 					if collecting:
 						if current_date != target_date or day_txt != current_day_num:
@@ -109,7 +200,6 @@ class PhotoPage():
 				self.scroll_down_photo()
 
 		return collected_thumbnails
-
 
 	def count_photos_today(self):
 		today_str = datetime.today().strftime("%Y/%m/%d")

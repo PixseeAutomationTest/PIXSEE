@@ -10,7 +10,7 @@ import time
 import re
 
 
-class EnvironmentSettingsCase(BaseTestCase):
+class EnvironmentSettingsCase1(BaseTestCase):
 	def setUp(self):
 		super().setUp(no_reset=True)
 
@@ -23,8 +23,6 @@ class EnvironmentSettingsCase(BaseTestCase):
 				self.driver.terminate_app(self.driver.current_package)
 				self.open_app()
 			if pixsee_settings_page.is_in_settings():
-				return
-			elif environment_settings_page.is_in_envir_page():
 				return
 			elif not baby_monitor_page.is_in_baby_monitor_page():
 				self.shutdown_app()
@@ -150,6 +148,30 @@ class EnvironmentSettingsCase(BaseTestCase):
 		time.sleep(1)
 		after_status = environment_settings_page.is_switch_on()
 		self.check_switch_and_content(after_status, environment_settings_page.Sensitivity)
+
+class EnvironmentSettingsCase2(BaseTestCase):
+	def setUp(self):
+		super().setUp(no_reset=True)
+
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		menu_page = MenuPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+		environment_settings_page = EnvironmentSettingsPage(self.driver)
+		try:
+			while self.driver.current_package != self.driver.capabilities.get("appPackage"):
+				self.driver.terminate_app(self.driver.current_package)
+				self.open_app()
+			if environment_settings_page.is_in_envir_page():
+				return
+			elif not baby_monitor_page.is_in_baby_monitor_page():
+				self.shutdown_app()
+				self.open_app()
+			print("Finish opening app.")
+			baby_monitor_page.click_home()
+			menu_page.click_settings()
+		except Exception as e:
+			print(f"Test failed with exception: {e}")
+			raise e
 	# start from environment page
 	def test_05_environment_set_tap_checkbox(self):
 		environment_settings_page = EnvironmentSettingsPage(self.driver)
