@@ -181,42 +181,75 @@ class PixseeCloudTest2(BaseTestCase):
         else:
             raise AssertionError("voice recorder icon color is wrong")
     # start from pixsee cloud page
-    # def test_05_pixsee_cloud_page_check_upgrade_button(self):
-    #     pixsee_cloud_page = PixseeCloudPage(self.driver)
-    #     subscription_page = SubscriptionPage1(self.driver)
-    #     # Check upgrade button
-    #     pixsee_cloud_page.click_upgrade()
-    #     self.assertTrue(subscription_page.is_in_subscription_page(), "Failed to navigate to Subscription Page after clicking Upgrade button.")
-    #     subscription_page.click_x()
-    #     self.assertTrue(pixsee_cloud_page.is_in_pixsee_cloud_page(), "Failed to return to Pixsee Cloud Page after clicking X on Subscription Page.")
+    def test_05_pixsee_cloud_page_check_upgrade_button(self):
+        pixsee_cloud_page = PixseeCloudPage(self.driver)
+        subscription_page = SubscriptionPage1(self.driver)
+        # Check upgrade button
+        pixsee_cloud_page.click_upgrade()
+        self.assertTrue(subscription_page.is_in_subscription_page(), "Failed to navigate to Subscription Page after clicking Upgrade button.")
+        subscription_page.click_x()
+        self.assertTrue(pixsee_cloud_page.is_in_pixsee_cloud_page(), "Failed to return to Pixsee Cloud Page after clicking X on Subscription Page.")
     # start from pixsee cloud page
-    # def test_06_pixsee_cloud_page_check_backup_data_button(self):
-    #     pixsee_cloud_page = PixseeCloudPage(self.driver)
-    #     download_account_data_page = DownloadAccountDataPage(self.driver)
-    #     # check download dialog
-    #     pixsee_cloud_page.click_download()
-    #     self.assertEqual(pixsee_cloud_page.previous_subscription_text(), self.get_string("new_subscription_download_plan_account_data_title"), "download dialog title does not match.")
-    #     self.assertEqual(pixsee_cloud_page.remaining_text(), self.get_string("new_subscription_download_plan_account_data_subtitle"), "download dialog subtitle does not match.")
-    #     pixsee_cloud_page.click_cancel()
-    #     self.assertTrue(pixsee_cloud_page.is_in_pixsee_cloud_page(), "Failed to return to Pixsee Cloud Page after clicking Cancel on Download dialog.")
-    #
-    #     pixsee_cloud_page.click_download()
-    #     pixsee_cloud_page.click_ok()
-    #     self.assertTrue(download_account_data_page.is_in_download_account_data_page(), "Failed to navigate to Download Account Data Page after clicking OK on Download dialog.")
-    #     # check download account data page texts
-    #     self.assertEqual(download_account_data_page.get_title_text(), self.get_string("download_account_data"), "Download Account Data page title does not match.")
-    #     self.assertEqual(download_account_data_page.get_info_text(), self.get_string("download_account_data_info_link"), "Download Account Data info text does not match.")
-    #     self.assertEqual(download_account_data_page.get_cancel_button_text(), self.get_string("cancel"), "Download Account Data cancel button text does not match.")
-    #     self.assertEqual(download_account_data_page.get_submit_button_text(), self.get_string("download_account_data_btn_submit"), "Download Account Data submit button text does not match.")
-    #     download_account_data_page.click_submit()
-    #
-    #     self.assertTrue(download_account_data_page.has_dialog(), "Download Account Data dialog does not appear after clicking Submit.")
-    #     # check dialog text
-    #     def test_07_pixsee_cloud_page_check_backup_data_button(self):
-    #         pixsee_cloud_page = PixseeCloudPage(self.driver)
-    #         download_account_data_page = DownloadAccountDataPage(self.driver)
-    #         # check download dialog
-    #         pixsee_cloud_page.click_download()
+    def test_06_pixsee_cloud_page_check_backup_data_button(self):
+        pixsee_cloud_page = PixseeCloudPage(self.driver)
+        download_account_data_page = DownloadAccountDataPage(self.driver)
+        # check download dialog
+        pixsee_cloud_page.click_download()
+        self.assertEqual(pixsee_cloud_page.previous_subscription_text(), self.get_string("new_subscription_download_plan_account_data_title"), "download dialog title does not match.")
+        self.assertEqual(pixsee_cloud_page.remaining_text(), self.get_string("new_subscription_download_plan_account_data_subtitle"), "download dialog subtitle does not match.")
+        self.assertIsNotNone(pixsee_cloud_page.dialog_baby_name_text())
+        self.assertEqual(pixsee_cloud_page.ok_text(),self.get_string("ok"), "download dialog OK button text does not match.")
+        self.assertEqual(pixsee_cloud_page.cancel_text(), self.get_string("cancel"), "download dialog Cancel button text does not match.")
+        pixsee_cloud_page.click_cancel()
+        self.assertTrue(pixsee_cloud_page.is_in_pixsee_cloud_page(), "Failed to return to Pixsee Cloud Page after clicking Cancel on Download dialog.")
+
+        pixsee_cloud_page.click_download()
+        pixsee_cloud_page.click_ok()
+        self.assertTrue(download_account_data_page.is_in_download_account_data_page(), "Failed to navigate to Download Account Data Page after clicking OK on Download dialog.")
+        download_account_data_page.click_close()
+        # check if is back to pixsee cloud page
+        self.assertTrue(pixsee_cloud_page.is_in_pixsee_cloud_page(), "Failed to return to Pixsee Cloud Page after clicking Close on Download Account Data Page.")
+
+        # check download account data page texts
+        # self.assertEqual(download_account_data_page.get_title_text(), self.get_string("download_account_data"), "Download Account Data page title does not match.")
+        # self.assertEqual(download_account_data_page.get_info_text(), self.get_string("download_account_data_info_link"), "Download Account Data info text does not match.")
+        # self.assertEqual(download_account_data_page.get_cancel_button_text(), self.get_string("cancel"), "Download Account Data cancel button text does not match.")
+        # self.assertEqual(download_account_data_page.get_submit_button_text(), self.get_string("download_account_data_btn_submit"), "Download Account Data submit button text does not match.")
+        # download_account_data_page.click_submit()
+
+        # self.assertTrue(download_account_data_page.has_dialog(), "Download Account Data dialog does not appear after clicking Submit.")
+        # check dialog text
+    def test_07_pixsee_cloud_page_check_backup_data_button(self):
+        pixsee_cloud_page = PixseeCloudPage(self.driver)
+        download_account_data_page = DownloadAccountDataPage(self.driver)
+        # check download dialog
+        pixsee_cloud_page.click_backup_data()
+        self.assertEqual(pixsee_cloud_page.previous_subscription_text(), self.get_string("download_baby_dialog_title"), "backup dialog title does not match.")
+        self.assertEqual(pixsee_cloud_page.all_data_text(), self.get_string("download_baby_dialog_all_data"), "backup dialog all data does not match.")
+        self.assertIsNotNone(pixsee_cloud_page.dialog_baby_name_text())
+        self.assertEqual(pixsee_cloud_page.ok_text(), self.get_string("ok"), "backup dialog OK button text does not match.")
+        self.assertEqual(pixsee_cloud_page.cancel_text(), self.get_string("cancel"), "backup dialog Cancel button text does not match.")
+        pixsee_cloud_page.click_cancel()
+        self.assertTrue(pixsee_cloud_page.is_in_pixsee_cloud_page(), "Failed to return to Pixsee Cloud Page after clicking Cancel on Backup dialog.")
+
+        pixsee_cloud_page.click_backup_data()
+        self.assertFalse(pixsee_cloud_page.is_ok_clickable())
+        pixsee_cloud_page.click_all_data_checkbox()
+        self.assertTrue(pixsee_cloud_page.is_ok_clickable())
+        pixsee_cloud_page.click_all_data_checkbox()
+        self.assertFalse(pixsee_cloud_page.is_ok_clickable())
+        pixsee_cloud_page.click_dialog_baby_name_checkbox()
+        self.assertTrue(pixsee_cloud_page.is_ok_clickable())
+        pixsee_cloud_page.click_ok()
+        self.assertTrue(download_account_data_page.is_in_download_account_data_page(), "Failed to navigate to Download Account Data Page after clicking OK on Backup dialog.")
+        download_account_data_page.click_close()
+        # check if is back to pixsee cloud page
+        self.assertTrue(pixsee_cloud_page.is_in_pixsee_cloud_page(), "Failed to return to Pixsee Cloud Page after clicking Close on Download Account Data Page.")
+
+
+
+
+
 
 
 

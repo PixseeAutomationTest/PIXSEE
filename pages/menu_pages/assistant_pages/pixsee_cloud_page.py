@@ -32,6 +32,8 @@ class PixseeCloudPage():
         self.FreeUp = "com.compal.bioslab.pixsee.pixm01:id/tvCleanUpStorage"
         self.Ok = "com.compal.bioslab.pixsee.pixm01:id/btnOK"
         self.Cancel = "com.compal.bioslab.pixsee.pixm01:id/btnCancel"
+        self.DialogBabyName = "com.compal.bioslab.pixsee.pixm01:id/tvBabyName"
+        self.DialogBabyNameCheckbox = "com.compal.bioslab.pixsee.pixm01:id/ckBaby"
         self.AllData = "com.compal.bioslab.pixsee.pixm01:id/tvAllData"
         self.AllDataCheckbox = "com.compal.bioslab.pixsee.pixm01:id/viewCbAllData"
 
@@ -78,6 +80,20 @@ class PixseeCloudPage():
         )
         element = self.driver.find_element("id", self.Cancel)
         element.click()
+    def click_all_data_checkbox(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(("id", self.AllDataCheckbox))
+        )
+        element = self.driver.find_element("id", self.AllDataCheckbox)
+        element.click()
+    def click_dialog_baby_name_checkbox(self, number = 0):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(("id", self.DialogBabyNameCheckbox))
+        )
+        element = self.driver.find_element("id", self.DialogBabyNameCheckbox)
+        element.click()
+
+
 
     def is_in_pixsee_cloud_page(self):
         try:
@@ -196,6 +212,31 @@ class PixseeCloudPage():
         )
         element = self.driver.find_element("id", self.FreeUp)
         return element.text
+    def ok_text(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(("id", self.Ok))
+        )
+        element = self.driver.find_element("id", self.Ok)
+        return element.text
+    def cancel_text(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(("id", self.Cancel))
+        )
+        element = self.driver.find_element("id", self.Cancel)
+        return element.text
+    def all_data_text(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(("id", self.AllData))
+        )
+        element = self.driver.find_element("id", self.AllData)
+        return element.text
+    def dialog_baby_name_text(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(("id", self.DialogBabyName))
+        )
+        element = self.driver.find_element("id", self.DialogBabyName)
+        return element.text
+
 
     def parse_storage_usage(self,text):
         # find numbers in the text
@@ -270,5 +311,13 @@ class PixseeCloudPage():
         in_range = (pixel == target_color)
         print(f"Pixel at ({x},{y}) = {pixel}, match target: {in_range}")
         return in_range
+
+    def is_ok_clickable(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(("id", self.Ok))
+        )
+        button = self.driver.find_element("id", self.Ok)
+        is_clickable = button.get_attribute("enabled")
+        return is_clickable == "true"
 
 
