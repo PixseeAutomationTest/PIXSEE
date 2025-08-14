@@ -1,5 +1,5 @@
 import unittest
-
+import time
 from pages.base import BaseTestCase
 
 from pages.login_page import LoginPage
@@ -11,8 +11,13 @@ from pages.menu_pages.user_profile_pages.add_backup_email_page import AddBackupE
 from pages.menu_pages.user_profile_pages.verification_page import VerificationPage
 
 class UserProfileTest(BaseTestCase):
+    def __init__(self, methodName='runTest', language="zh", locale="TW"):
+        super().__init__(methodName)
+        self.language = language
+        self.locale = locale
+
     def setUp(self):
-        super().setUp()
+        super().setUp(language=self.language, locale=self.locale)
 
         baby_monitor_page = BabyMonitorPage(self.driver)
         menu_page = MenuPage(self.driver)
@@ -597,7 +602,6 @@ class UserProfileTest(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    # Please check the account has no backup email before run this test
     def test_add_or_change_backup_email_with_close(self):
         try:
             user_profile_page = UserProfilePage(self.driver)
@@ -684,7 +688,7 @@ class UserProfileTest(BaseTestCase):
             texts = add_backup_email_page.get_all_text()
             flag = False
             for text in texts:
-                if text == self.get_string("backup_email_screen_error_wrong_format"):
+                if text.text == self.get_string("backup_email_screen_error_wrong_format"):
                     flag = True
                     break
             self.assertTrue(flag, "Text \"Please enter a valid email address\" is not properly displayed")
@@ -738,7 +742,7 @@ class UserProfileTest(BaseTestCase):
             texts = add_backup_email_page.get_all_text()
             flag = False
             for text in texts:
-                if text == self.get_string("backup_email_screen_error_account_registered"):
+                if text.text == self.get_string("backup_email_screen_error_account_registered"):
                     flag = True
                     break
             self.assertTrue(flag, "Text \"This account has been registered.\" is not properly displayed")
@@ -796,14 +800,7 @@ class UserProfileTest(BaseTestCase):
             self.assertEqual(verification_page.get_info1_text(), self.get_string("backup_email_validation_verification_code_sent_to"), "Text \"A verification code has been sent to\" is not properly displayed")
             self.assertEqual(verification_page.get_email_text(), test_email, "Email is not properly displayed")
             self.assertEqual(verification_page.get_info2_text(), self.get_string("backup_email_validation_request"), "Text \"Please enter the code to verify.\" is not properly displayed")
-            elements = verification_page.get_all_text()
-            flag = False
-            for element in elements:
-                if element.text == self.get_string("backup_email_validation_resend_code"):
-                    flag = True
-                    break
-            if not flag:
-                self.fail("button \"Resend the code\" is properly displayed")
+            self.assertEqual(verification_page.get_resend_code_button_text(), self.get_string("backup_email_validation_resend_code"), "button \"Resend the code\" is not properly displayed")
             self.assertEqual(verification_page.get_confirm_button_text(), self.get_string("code_verification_verify_button"), "button \"Confirm\"  is properly displayed")
             self.assertEqual(verification_page.get_cancel_button_text(), self.get_string("backup_email_button_dialog_cancel"), "button \"Cancel\" is properly displayed")
 
@@ -862,26 +859,15 @@ class UserProfileTest(BaseTestCase):
             self.assertEqual(verification_page.get_info1_text(), self.get_string("backup_email_validation_verification_code_sent_to"), "Text \"A verification code has been sent to\" is not properly displayed")
             self.assertEqual(verification_page.get_email_text(), test_email, "Email is not properly displayed")
             self.assertEqual(verification_page.get_info2_text(), self.get_string("backup_email_validation_request"), "Text \"Please enter the code to verify.\" is not properly displayed")
-            elements = verification_page.get_all_text()
-            flag = False
-            for element in elements:
-                if element.text == self.get_string("backup_email_validation_resend_code"):
-                    flag = True
-                    break
-            if not flag:
-                self.fail("button \"Resend the code\" is properly displayed")
+            self.assertEqual(verification_page.get_resend_code_button_text(), self.get_string("backup_email_validation_resend_code"), "button \"Resend the code\" is not properly displayed")
             self.assertEqual(verification_page.get_confirm_button_text(), self.get_string("code_verification_verify_button"), "button \"Confirm\"  is properly displayed")
             self.assertEqual(verification_page.get_cancel_button_text(), self.get_string("backup_email_button_dialog_cancel"), "button \"Cancel\" is properly displayed")
 
             '''Input wrong verification code and click Confirm Button'''
             verification_page.input_verification_code("123456")
             verification_page.click_confirm()
-            for element in elements:
-                if element.text == self.get_string("e10030"):
-                    flag = True
-                    break
-            if not flag:
-                self.fail("Text \"Code is incorrect, Please try again.\" is properly displayed")
+            time.sleep(1)
+            self.assertEqual(verification_page.get_error_message_text(), self.get_string("e10030"), "Text \"Code is incorrect, Please try again.\" is not properly displayed")
             verification_page.click_cancel()
 
         except AssertionError as ae:
@@ -891,7 +877,6 @@ class UserProfileTest(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    #TODO
     def test_backup_email_with_resend_verification_code(self):
         try:
             user_profile_page = UserProfilePage(self.driver)
@@ -937,27 +922,21 @@ class UserProfileTest(BaseTestCase):
             self.assertEqual(verification_page.get_info1_text(), self.get_string("backup_email_validation_verification_code_sent_to"), "Text \"A verification code has been sent to\" is not properly displayed")
             self.assertEqual(verification_page.get_email_text(), test_email, "Email is not properly displayed")
             self.assertEqual(verification_page.get_info2_text(), self.get_string("backup_email_validation_request"), "Text \"Please enter the code to verify.\" is not properly displayed")
-            elements = verification_page.get_all_text()
-            flag = False
-            for element in elements:
-                if element.text == self.get_string("backup_email_validation_resend_code"):
-                    flag = True
-                    break
-            if not flag:
-                self.fail("button \"Resend the code\" is properly displayed")
+            self.assertEqual(verification_page.get_resend_code_button_text(), self.get_string("backup_email_validation_resend_code"), "button \"Resend the code\" is not properly displayed")
             self.assertEqual(verification_page.get_confirm_button_text(), self.get_string("code_verification_verify_button"), "button \"Confirm\"  is properly displayed")
             self.assertEqual(verification_page.get_cancel_button_text(), self.get_string("backup_email_button_dialog_cancel"), "button \"Cancel\" is properly displayed")
 
-            '''Input wrong verification code and click Confirm Button'''
-            verification_page.input_verification_code("123456")
-            verification_page.click_confirm()
-            for element in elements:
-                if element.text == self.get_string("e10030"):
-                    flag = True
-                    break
-            if not flag:
-                self.fail("Text \"Code is incorrect, Please try again.\" is properly displayed")
+            '''Click Resend Code Button and verify the dialog'''
+            verification_page.click_resend_code_button()
+            time.sleep(1)
+            self.assertEqual(verification_page.get_resend_code_dialog_info_text(), self.get_string("sign_up_success_resend_message"), "Text \"A verification email has been sent to you email. Please check your inbox.\" is not properly displayed")
+            self.assertEqual(verification_page.get_resend_code_dialog_ok_button_text(), self.get_string("ok"), "button \"Ok\" is not properly displayed")
+
+            '''Click Ok Button and verify that dialog is closed'''
+            verification_page.click_resend_code_dialog_ok_button()
+            self.assertEqual(verification_page.get_title_text(), self.get_string("backup_email_validation_verification"), "Can't return to Verification Page after clicking \"Ok\" button in Resend Code Dialog")
             verification_page.click_cancel()
+
 
         except AssertionError as ae:
             print(f"Test failed with assertion error: {ae}")

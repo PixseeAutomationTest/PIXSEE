@@ -65,5 +65,4 @@ class AddBackupEmailPage():
 				EC.presence_of_element_located(("xpath", self.activity_xpath))
 			)
 			elements = self.driver.find_elements("class name", self.text_classname)
-			print("Elements found:", len(elements))
 			return elements
