@@ -36,8 +36,6 @@ class BaseTestCase(unittest.TestCase):
         self.driver = start_driver(language, locale, no_reset)
         self.driver.update_settings({"waitForIdleTimeout": 300})
         time.sleep(wait_time)
-    def test_test(self):
-        pass
     def open_app(self):
         self.driver.activate_app(self.driver.capabilities.get("appPackage"))
         time.sleep(10)

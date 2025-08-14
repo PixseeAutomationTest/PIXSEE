@@ -166,8 +166,13 @@ class CryDetectionCase1(BaseTestCase):
 		self.check_switch_and_content(after_status, cry_detection_page.Sensitivity)
 
 class CryDetectionCase2(BaseTestCase):
+	def __init__(self, methodName='runTest', language="zh", locale="TW"):
+		super().__init__(methodName)
+		self.language = language
+		self.locale = locale
+
 	def setUp(self):
-		super().setUp()
+		super().setUp(language=self.language, locale=self.locale)
 
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		menu_page = MenuPage(self.driver)
