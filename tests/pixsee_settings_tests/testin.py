@@ -8,7 +8,7 @@ from pages.menu_pages.pixsee_settings_pages.area_detection_page import AreaDetec
 
 class Reset(BaseTestCase):
         def setUp(self):
-                super().setUp(no_reset=True)
+                super().setUp(no_reset=False)
 
 
         def test_wipe(self):

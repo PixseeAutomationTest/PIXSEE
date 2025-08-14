@@ -11,7 +11,8 @@ class AssistantPage():
         self.returnButton = "com.compal.bioslab.pixsee.pixm01:id/ibHelpMenuBackButton"
         self.backgroundPlayButton = "com.compal.bioslab.pixsee.pixm01:id/clBackgroundPlayContainer"
         self.backgroundPlayText = "com.compal.bioslab.pixsee.pixm01:id/background_play_label"
-        self.backgroundPlaySub = '//android.widget.TextView[@text="Audio monitoring & floating video"]'
+        self.backgroundPlaySubUp = "com.compal.bioslab.pixsee.pixm01:id/clBackgroundPlayContainer"
+        self.backgroundPlaySub ="//android.widget.TextView"
         self.pixseeCloudButton = "com.compal.bioslab.pixsee.pixm01:id/clPixseeCloudAssistant"
         self.pixseeCloudText = "com.compal.bioslab.pixsee.pixm01:id/tvPixseeCloudItemTitle"
         self.pixseeCloudSub = "com.compal.bioslab.pixsee.pixm01:id/tvCloudUsage"
@@ -115,10 +116,11 @@ class AssistantPage():
     def background_play_sub_text(self):
         try:
             WebDriverWait(self.driver, 10).until(
-                EC.presence_of_element_located(("xpath", self.backgroundPlaySub))
+                EC.presence_of_element_located(("id", self.backgroundPlaySubUp))
             )
-            element = self.driver.find_element("xpath", self.backgroundPlaySub)
-            return element.text
+            uplayer = self.driver.find_element("id", self.backgroundPlaySubUp)
+            elements = uplayer.find_elements("xpath", self.backgroundPlaySub)
+            return elements[2].text
         except:
             return None
 
@@ -192,5 +194,11 @@ class AssistantPage():
         except:
             return None
 
-
+    def is_backgroud_play_able_to_click(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(("id", self.backgroundPlayButton))
+        )
+        button = self.driver.find_element("id", self.backgroundPlayButton)
+        is_enable = button.get_attribute("enabled")
+        return is_enable == "true"
 

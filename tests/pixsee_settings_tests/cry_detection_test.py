@@ -11,7 +11,7 @@ from pages.menu_pages.pixsee_settings_pages.cry_detection_page import CryDetecti
 
 
 
-class CryDetectionCase(BaseTestCase):
+class CryDetectionCase1(BaseTestCase):
 	def setUp(self):
 		super().setUp()
 
@@ -24,8 +24,6 @@ class CryDetectionCase(BaseTestCase):
 				self.driver.terminate_app(self.driver.current_package)
 				self.open_app()
 			if pixsee_settings_page.is_in_settings():
-				return
-			elif cry_detection_page.is_in_cry_detection_page():
 				return
 			elif not baby_monitor_page.is_in_baby_monitor_page():
 				self.shutdown_app()
@@ -161,6 +159,31 @@ class CryDetectionCase(BaseTestCase):
 		time.sleep(1)
 		after_status = cry_detection_page.is_switch_on()
 		self.check_switch_and_content(after_status, cry_detection_page.Sensitivity)
+
+class CryDetectionCase2(BaseTestCase):
+	def setUp(self):
+		super().setUp()
+
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		menu_page = MenuPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+		cry_detection_page = CryDetectionPage(self.driver)
+		try:
+			while self.driver.current_package != self.driver.capabilities.get("appPackage"):
+				self.driver.terminate_app(self.driver.current_package)
+				self.open_app()
+			if cry_detection_page.is_in_cry_detection_page():
+				return
+			elif not baby_monitor_page.is_in_baby_monitor_page():
+				self.shutdown_app()
+				self.open_app()
+			print("Finish opening app.")
+			baby_monitor_page.click_home()
+			menu_page.click_settings()
+			pixsee_settings_page.click_cry_detection()
+		except Exception as e:
+			print(f"Test failed with exception: {e}")
+			raise e
 	# start from cry detection page
 	def test_05_cry_detection_tap_checkbox(self):
 		cry_detection_page = CryDetectionPage(self.driver)

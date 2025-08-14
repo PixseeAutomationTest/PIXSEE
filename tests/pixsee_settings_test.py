@@ -413,22 +413,26 @@ class PixseeSettingsTest(BaseTestCase):
         time.sleep(1)
         self.up_scroll()
         time.sleep(2)
-        # check SD card status title on settings page
-        try:
-            hint = self.get_string("sd_card_status")
-            self.assertEqual(pixsee_settings_page.sdcard_status_text(), hint)
-            print("SD card status title right")
-        except AssertionError:
-            raise AssertionError("SD card status title wrong")
-        # enter SD card status page
-        pixsee_settings_page.click_sd_card()
-        # check if is in SD card status page
-        try:
-            self.assertTrue(sd_card_page.is_in_sdcard_page())
-            print("In SD card status page")
-        except AssertionError:
-            print("Not in SD card status page")
-            raise AssertionError("Not in SD card status page")
+        if pixsee_settings_page.is_sd_card_able_to_click():
+            # check SD card status title on settings page
+            try:
+                hint = self.get_string("sd_card_status")
+                self.assertEqual(pixsee_settings_page.sdcard_status_text(), hint)
+                print("SD card status title right")
+            except AssertionError:
+                raise AssertionError("SD card status title wrong")
+            # enter SD card status page
+            pixsee_settings_page.click_sd_card()
+            # check if is in SD card status page
+            try:
+                self.assertTrue(sd_card_page.is_in_sdcard_page())
+                print("In SD card status page")
+            except AssertionError:
+                print("Not in SD card status page")
+                raise AssertionError("Not in SD card status page")
+        else:
+            print("SD card is not inserted, can't enter SD card status page")
+            raise AssertionError("SD card is not inserted, can't enter SD card status page")
 
 
 

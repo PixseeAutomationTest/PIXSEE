@@ -22,10 +22,6 @@ class SDcardCase(BaseTestCase):
 				self.open_app()
 			if pixsee_settings_page.is_in_settings():
 				return
-			elif sd_card_page.is_in_sdcard_page():
-				return
-			elif sd_card_page.is_formatting():
-				return
 			elif not baby_monitor_page.is_in_baby_monitor_page():
 				self.shutdown_app()
 				self.open_app()
@@ -36,7 +32,7 @@ class SDcardCase(BaseTestCase):
 			print(f"Test failed with exception: {e}")
 			raise e
 	# start from pixsee settings page
-	def test_01_check_word(self):
+	def test_01_check_word_back(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
@@ -81,12 +77,6 @@ class SDcardCase(BaseTestCase):
 				print("Title text test success")
 			except AssertionError:
 				raise AssertionError("Title text test failed")
-	# start from sd card page
-	def test_02_check_back_button(self):
-		menu_page = MenuPage(self.driver)
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		sd_card_page = SDcardStatusPage(self.driver)
 
 		sd_card_page.click_back()
 		# back to settings page
@@ -96,7 +86,7 @@ class SDcardCase(BaseTestCase):
 		except AssertionError:
 			raise AssertionError("Not in Pixsee Settings page")
 	# start from pixsee settings page
-	def test_03_check_format_button(self):
+	def test_02_check_format_button(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)

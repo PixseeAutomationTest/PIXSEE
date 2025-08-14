@@ -22,6 +22,7 @@ class BabyMonitorPage():
         self.muteButton = "com.compal.bioslab.pixsee.pixm01:id/bStreamOptions"
         self.homeButton = "com.compal.bioslab.pixsee.pixm01:id/ibMenuButtonHome"
         self.stream_title = "com.compal.bioslab.pixsee.pixm01:id/tvStreamTitle"
+        self.LiveStatus = "com.compal.bioslab.pixsee.pixm01:id/tvLiveStatus"
         self.tutor_id = "com.compal.bioslab.pixsee.pixm01:id/tvDescription"
         self.tutor_title = "com.compal.bioslab.pixsee.pixm01:id/tvTitle"
         self.connectingStatusText = "com.compal.bioslab.pixsee.pixm01:id/tvConnectingStatus"
@@ -59,8 +60,21 @@ class BabyMonitorPage():
         )
         element = self.driver.find_element("xpath", self.captureButton_xpath)
         element.click()
+    def click_middle(self):
+        size = self.driver.get_window_size()
+        x = size['width'] // 2
+        y = size['height'] // 2
+
+        self.driver.execute_script("mobile: clickGesture", {
+            "x": x,
+            "y": y
+        })
+        time.sleep(1)
+
+
 
     #TODO: function uncompleted 2025/07/15
+
     def change_camera_mode(self):
         # 等待按鈕出現並抓到元素
         element = WebDriverWait(self.driver, base.wait_time).until(

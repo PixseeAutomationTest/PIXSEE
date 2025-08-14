@@ -210,48 +210,48 @@ class PixseeCloudPage():
 
     def photo_color(self):
         element_color = self.driver.find_element("id", self.PhotoIndicator)
-        x = element_color.location['x'] + 17
-        y = element_color.location['y'] + 17
-        '''
+        x = element_color.location['x']
+        y = element_color.location['y']
+
         w = element_color.size['width']
         h = element_color.size['height']
         center_x = x + w // 2
         center_y = y + h // 2
-        '''
-        return x, y
+
+        return center_x, center_y
     def videos_color(self):
         element_color = self.driver.find_element("id", self.VideosIndicator)
-        x = element_color.location['x'] + 17
-        y = element_color.location['y'] + 17
-        '''
+        x = element_color.location['x']
+        y = element_color.location['y']
+
         w = element_color.size['width']
         h = element_color.size['height']
         center_x = x + w // 2
         center_y = y + h // 2
-        '''
-        return x, y
+
+        return center_x, center_y
     def story_color(self):
         element_color = self.driver.find_element("id", self.StoryIndicator)
-        x = element_color.location['x'] + 17
-        y = element_color.location['y'] + 17
-        '''
+        x = element_color.location['x']
+        y = element_color.location['y']
+
         w = element_color.size['width']
         h = element_color.size['height']
         center_x = x + w // 2
         center_y = y + h // 2
-        '''
-        return x, y
+
+        return center_x, center_y
     def voice_recorder_color(self):
         element_color = self.driver.find_element("id", self.VoiceRecorderIndicator)
-        x = element_color.location['x'] + 17
-        y = element_color.location['y'] + 17
-        '''
+        x = element_color.location['x']
+        y = element_color.location['y']
+
         w = element_color.size['width']
         h = element_color.size['height']
         center_x = x + w // 2
         center_y = y + h // 2
-        '''
-        return x, y
+
+        return center_x, center_y
     def is_pixel_color(self, x, y, target_color):
         """
         Take a screenshot and check if the pixel at coordinates (x, y) matches the given RGB color exactly.

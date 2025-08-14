@@ -15,14 +15,11 @@ class AreaDetectionCase2(BaseTestCase):
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
-		area_detection_page = AreaDetectionPage(self.driver)
 		try:
 			while self.driver.current_package != self.driver.capabilities.get("appPackage"):
 				self.driver.terminate_app(self.driver.current_package)
 				self.open_app()
 			if pixsee_settings_page.is_in_settings():
-				return
-			elif area_detection_page.is_in_area_detection_page():
 				return
 			elif not baby_monitor_page.is_in_baby_monitor_page():
 				self.shutdown_app()
@@ -76,7 +73,76 @@ class AreaDetectionCase2(BaseTestCase):
 		else:
 			raise AssertionError("save function failed, status not changed")
 	# start from pixsee settings page
-	def test_03_area_detection_switch(self):
+	def test_03_area_detection_back_discard(self):
+		area_detection_page = AreaDetectionPage(self.driver)
+		menu_page = MenuPage(self.driver)
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+
+		pixsee_settings_page.click_area_detection()
+		# check if is in discard dialog
+		if area_detection_page.is_switch_on():
+			area_detection_page.click_switch()
+			area_detection_page.click_turn_off()
+			pixsee_settings_page.click_area_detection()
+			area_detection_page.click_switch()
+		else:
+			area_detection_page.click_switch()
+		area_detection_page.click_back()
+		try:
+			self.assertTrue(area_detection_page.is_in_discard_dialog())
+			print("In discard dialog")
+			# check discard dialog text
+			try:
+				discard = area_detection_page.discard_message_text()
+				hint = self.get_string("efence_confirmation_message")
+				self.assertEqual(discard, hint)
+				print("Discard dialog title right")
+			except AssertionError:
+				raise AssertionError("Discard dialog title wrong")
+			try:
+				yes = area_detection_page.discard_yes_text()
+				hint = self.get_string("yes")
+				self.assertEqual(yes, hint)
+				print("Discard dialog yes text right")
+			except AssertionError:
+				raise AssertionError("Discard dialog yes text wrong")
+			try:
+				no = area_detection_page.discard_no_text()
+				hint = self.get_string("no")
+				self.assertEqual(no, hint)
+				print("Discard dialog no text right")
+			except AssertionError:
+				raise AssertionError("Discard dialog no text wrong")
+			# click yes
+			area_detection_page.click_discard_yes()
+			# check status = false
+			self.assertEqual(pixsee_settings_page.area_detection_status_text(), self.get_string("off_selection"))
+			print("back button worked")
+		except AssertionError:
+			raise AssertionError("Not in discard dialog")
+	# start from pixsee settings page
+	def test_04_area_detection_information(self):
+		area_detection_page = AreaDetectionPage(self.driver)
+		menu_page = MenuPage(self.driver)
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+
+		pixsee_settings_page.click_area_detection()
+		area_detection_page.click_information()
+		# check if is in information page
+		try:
+			self.assertTrue(area_detection_page.is_in_tutor_first_page())
+			print("information button worked")
+		except AssertionError:
+			raise AssertionError("Not in information page")
+		area_detection_page.click_skip()
+		if area_detection_page.is_save_enable():
+			area_detection_page.click_save()
+		else:
+			area_detection_page.click_back()
+	# start from pixsee settings page
+	def test_05_area_detection_switch(self):
 		area_detection_page = AreaDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -130,8 +196,32 @@ class AreaDetectionCase2(BaseTestCase):
 			time.sleep(1)
 			after_status = area_detection_page.is_switch_on()
 			self.check_switch_and_content(after_status, area_detection_page.Sensitivity)
+
+class AreaDetectionCase3(BaseTestCase):
+	def setUp(self):
+		super().setUp(no_reset=True)
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		menu_page = MenuPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+		area_detection_page = AreaDetectionPage(self.driver)
+		try:
+			while self.driver.current_package != self.driver.capabilities.get("appPackage"):
+				self.driver.terminate_app(self.driver.current_package)
+				self.open_app()
+			if area_detection_page.is_in_area_detection_page():
+				return
+			elif not baby_monitor_page.is_in_baby_monitor_page():
+				self.shutdown_app()
+				self.open_app()
+			print("Finish opening app.")
+			baby_monitor_page.click_home()
+			menu_page.click_settings()
+			pixsee_settings_page.click_area_detection()
+		except Exception as e:
+			print(f"Test failed with exception: {e}")
+			raise e
 	# start from area detection page
-	def test_04_area_detection_tap_checkbox_sensitivity(self):
+	def test_01_area_detection_tap_checkbox_sensitivity(self):
 		area_detection_page = AreaDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -195,7 +285,7 @@ class AreaDetectionCase2(BaseTestCase):
 		except AssertionError :
 			raise AssertionError("High checkbox is not clickable")
 	# start from area detection page
-	def test_05_area_detection_tap_checkbox_detection_type(self):
+	def test_02_area_detection_tap_checkbox_detection_type(self):
 		area_detection_page = AreaDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -259,7 +349,7 @@ class AreaDetectionCase2(BaseTestCase):
 		else:
 			print("baby out color is wrong")
 	# start from area detection page
-	def test_06_area_detection_turn_off_page(self):
+	def test_03_area_detection_turn_off_page(self):
 		area_detection_page = AreaDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -340,76 +430,6 @@ class AreaDetectionCase2(BaseTestCase):
 			print("turn off detection worked")
 		except AssertionError:
 			raise AssertionError("turn off detection failed")
-	# start from pixsee settings page
-	def test_07_area_detection_back_discard(self):
-		area_detection_page = AreaDetectionPage(self.driver)
-		menu_page = MenuPage(self.driver)
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		pixsee_settings_page = PixseeSettingsPage(self.driver)
-
-		pixsee_settings_page.click_area_detection()
-		# check if is in discard dialog
-		if area_detection_page.is_switch_on():
-			area_detection_page.click_switch()
-			area_detection_page.click_turn_off()
-			pixsee_settings_page.click_area_detection()
-			area_detection_page.click_switch()
-		else:
-			area_detection_page.click_switch()
-		area_detection_page.click_back()
-		try:
-			self.assertTrue(area_detection_page.is_in_discard_dialog())
-			print("In discard dialog")
-			# check discard dialog text
-			try:
-				discard = area_detection_page.discard_message_text()
-				hint = self.get_string("efence_confirmation_message")
-				self.assertEqual(discard, hint)
-				print("Discard dialog title right")
-			except AssertionError :
-				raise AssertionError("Discard dialog title wrong")
-			try:
-				yes = area_detection_page.discard_yes_text()
-				hint = self.get_string("yes")
-				self.assertEqual(yes, hint)
-				print("Discard dialog yes text right")
-			except AssertionError :
-				raise AssertionError("Discard dialog yes text wrong")
-			try:
-				no = area_detection_page.discard_no_text()
-				hint = self.get_string("no")
-				self.assertEqual(no, hint)
-				print("Discard dialog no text right")
-			except AssertionError :
-				raise AssertionError("Discard dialog no text wrong")
-			# click yes
-			area_detection_page.click_discard_yes()
-			# check status = false
-			self.assertEqual(pixsee_settings_page.area_detection_status_text(),self.get_string("off_selection"))
-			print("back button worked")
-		except AssertionError :
-			raise AssertionError("Not in discard dialog")
-	# start from pixsee settings page
-	def test_08_area_detection_information(self):
-		area_detection_page = AreaDetectionPage(self.driver)
-		menu_page = MenuPage(self.driver)
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		pixsee_settings_page = PixseeSettingsPage(self.driver)
-
-		pixsee_settings_page.click_area_detection()
-		area_detection_page.click_information()
-		# check if is in information page
-		try:
-			self.assertTrue(area_detection_page.is_in_tutor_first_page())
-			print("information button worked")
-		except AssertionError :
-			raise AssertionError("Not in information page")
-		area_detection_page.click_skip()
-		if area_detection_page.is_save_enable():
-			area_detection_page.click_save()
-		else:
-			area_detection_page.click_back()
-	# back to pixsee settings page
 
 
 

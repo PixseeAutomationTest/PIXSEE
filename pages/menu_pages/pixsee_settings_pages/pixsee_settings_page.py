@@ -502,4 +502,12 @@ class PixseeSettingsPage():
 		is_enable = button.get_attribute("enabled")
 		return is_enable == "true"
 
+	def is_sd_card_able_to_click(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located(("id", self.SDcard))
+		)
+		button = self.driver.find_element("id", self.SDcard)
+		is_enable = button.get_attribute("enabled")
+		return is_enable == "true"
+
 

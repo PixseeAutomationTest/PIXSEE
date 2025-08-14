@@ -25,8 +25,6 @@ class CoveredFaceDetectionCase2(BaseTestCase):
 				self.open_app()
 			if pixsee_settings_page.is_in_settings():
 				return
-			elif covered_face_detection_page.is_in_covered_face_detection_page():
-				return
 			elif not baby_monitor_page.is_in_baby_monitor_page():
 				self.shutdown_app()
 				self.open_app()
@@ -80,7 +78,78 @@ class CoveredFaceDetectionCase2(BaseTestCase):
 		else:
 			raise AssertionError("save function failed, status not changed")
 	# start from pixsee settings page
-	def test_04_covered_face_detection_switch(self):
+	def test_04_covered_face_detection_back_discard(self):
+		covered_face_detection_page = CoveredFaceDetectionPage(self.driver)
+		menu_page = MenuPage(self.driver)
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+
+		pixsee_settings_page.click_covered_face_detection()
+		# check if is in discard dialog
+		if covered_face_detection_page.is_switch_on() == "true":
+			covered_face_detection_page.click_switch()
+			covered_face_detection_page.click_turn_off()
+			pixsee_settings_page.click_covered_face_detection()
+			covered_face_detection_page.click_switch()
+		else:
+			covered_face_detection_page.click_switch()
+		time.sleep(2)
+		covered_face_detection_page.click_back()
+		try:
+			self.assertTrue(covered_face_detection_page.is_in_discard_dialog())
+			print("In discard dialog")
+			# check discard dialog text
+			try:
+				discard = covered_face_detection_page.discard_message_text()
+				hint = self.get_string("covered_face_detection_confirmation_message")
+				self.assertEqual(discard, hint)
+				print("Discard dialog title right")
+			except AssertionError:
+				raise AssertionError("Discard dialog title wrong")
+			try:
+				yes = covered_face_detection_page.discard_yes_text()
+				hint = self.get_string("yes")
+				self.assertEqual(yes, hint)
+				print("Discard dialog yes text right")
+			except AssertionError:
+				raise AssertionError("Discard dialog yes text wrong")
+			try:
+				no = covered_face_detection_page.discard_no_text()
+				hint = self.get_string("no")
+				self.assertEqual(no, hint)
+				print("Discard dialog no text right")
+			except AssertionError:
+				raise AssertionError("Discard dialog no text wrong")
+			# click yes
+			covered_face_detection_page.click_discard_yes()
+			# check status = false
+			self.assertEqual(pixsee_settings_page.covered_face_detection_status_text(),
+							 self.get_string("off_selection"))
+			print("back button worked")
+		except AssertionError:
+			raise AssertionError("Not in discard dialog")
+	# start from pixsee settings page
+	def test_05_covered_face_detection_information(self):
+		covered_face_detection_page = CoveredFaceDetectionPage(self.driver)
+		menu_page = MenuPage(self.driver)
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+
+		pixsee_settings_page.click_covered_face_detection()
+		# check if is in information page
+		covered_face_detection_page.click_information()
+		try:
+			self.assertTrue(covered_face_detection_page.is_in_covered_face_detection_tutor_page())
+			print("information button worked")
+		except AssertionError:
+			raise AssertionError("Not in information page")
+		covered_face_detection_page.click_skip()
+		if covered_face_detection_page.is_save_enable():
+			covered_face_detection_page.click_save()
+		else:
+			covered_face_detection_page.click_back()
+	# start from pixsee settings page
+	def test_06_covered_face_detection_switch(self):
 		covered_face_detection_page = CoveredFaceDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -93,7 +162,7 @@ class CoveredFaceDetectionCase2(BaseTestCase):
 			hint = self.get_string("covered_face")
 			self.assertEqual(header, hint)
 			print("Covered Face Detection header right")
-		except AssertionError :
+		except AssertionError:
 			raise AssertionError("Covered Face Detection header wrong")
 		# check Covered Face Detection title
 		try:
@@ -101,7 +170,7 @@ class CoveredFaceDetectionCase2(BaseTestCase):
 			hint = self.get_string("detection")
 			self.assertEqual(title, hint)
 			print("Covered Face Detection title right")
-		except AssertionError :
+		except AssertionError:
 			raise AssertionError("Covered Face Detection title wrong")
 		# check Covered Face Detection description
 		try:
@@ -109,16 +178,17 @@ class CoveredFaceDetectionCase2(BaseTestCase):
 			hint = self.get_string("covered_face_detection_status_description")
 			self.assertEqual(subtitle, hint)
 			print("Covered Face Detection subtitle right")
-		except AssertionError :
+		except AssertionError:
 			raise AssertionError("Covered Face Detection subtitle wrong")
 		# switch status
 		current_status = covered_face_detection_page.is_switch_on()
 		if current_status:
 			try:
-				is_visible = len(self.driver.find_elements(AppiumBy.ID, covered_face_detection_page.Sensitivity)) > 0
+				is_visible = len(
+					self.driver.find_elements(AppiumBy.ID, covered_face_detection_page.Sensitivity)) > 0
 				assert is_visible, "switch on failed"
 				print("switch on success")
-			except AssertionError :
+			except AssertionError:
 				raise AssertionError("switch on failed")
 			covered_face_detection_page.click_switch()
 			# check in dialog
@@ -126,7 +196,7 @@ class CoveredFaceDetectionCase2(BaseTestCase):
 				self.assertTrue(covered_face_detection_page.is_in_turn_off_dialog())
 				print("switch off successfully")
 				covered_face_detection_page.click_turn_off_cancel()
-			except AssertionError :
+			except AssertionError:
 				raise AssertionError("switch off unsuccessfully")
 		else:
 			self.check_switch_and_content(current_status, covered_face_detection_page.Sensitivity)
@@ -134,8 +204,32 @@ class CoveredFaceDetectionCase2(BaseTestCase):
 			time.sleep(1)
 			after_status = covered_face_detection_page.is_switch_on()
 			self.check_switch_and_content(after_status, covered_face_detection_page.Sensitivity)
+
+class CoveredFaceDetectionCase3(BaseTestCase):
+	def setUp(self):
+		super().setUp(no_reset=True)
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		menu_page = MenuPage(self.driver)
+		pixsee_settings_page = PixseeSettingsPage(self.driver)
+		covered_face_detection_page = CoveredFaceDetectionPage(self.driver)
+		try:
+			while self.driver.current_package != self.driver.capabilities.get("appPackage"):
+				self.driver.terminate_app(self.driver.current_package)
+				self.open_app()
+			if covered_face_detection_page.is_in_covered_face_detection_page():
+				return
+			elif not baby_monitor_page.is_in_baby_monitor_page():
+				self.shutdown_app()
+				self.open_app()
+			print("Finish opening app.")
+			baby_monitor_page.click_home()
+			menu_page.click_settings()
+			pixsee_settings_page.click_covered_face_detection()
+		except Exception as e:
+			print(f"Test failed with exception: {e}")
+			raise e
 	# start from covered face detection page
-	def test_05_covered_face_detection_tap_checkbox_sensitivity(self):
+	def test_01_covered_face_detection_tap_checkbox_sensitivity(self):
 		covered_face_detection_page = CoveredFaceDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -199,7 +293,7 @@ class CoveredFaceDetectionCase2(BaseTestCase):
 		except AssertionError :
 			raise AssertionError("High checkbox is not clickable")
 	# start from covered face detection page
-	def test_06_covered_face_detection_turn_off_page(self):
+	def test_02_covered_face_detection_turn_off_page(self):
 		covered_face_detection_page = CoveredFaceDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -281,76 +375,6 @@ class CoveredFaceDetectionCase2(BaseTestCase):
 			print("turn off detection worked")
 		except AssertionError:
 			raise AssertionError("turn off detection failed")
-	# start from pixsee settings page
-	def test_07_covered_face_detection_back_discard(self):
-		covered_face_detection_page = CoveredFaceDetectionPage(self.driver)
-		menu_page = MenuPage(self.driver)
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		pixsee_settings_page = PixseeSettingsPage(self.driver)
-
-		pixsee_settings_page.click_covered_face_detection()
-		# check if is in discard dialog
-		if covered_face_detection_page.is_switch_on() == "true":
-			covered_face_detection_page.click_switch()
-			covered_face_detection_page.click_turn_off()
-			pixsee_settings_page.click_covered_face_detection()
-			covered_face_detection_page.click_switch()
-		else:
-			covered_face_detection_page.click_switch()
-		covered_face_detection_page.click_back()
-		try:
-			self.assertTrue(covered_face_detection_page.is_in_discard_dialog())
-			print("In discard dialog")
-			# check discard dialog text
-			try:
-				discard = covered_face_detection_page.discard_message_text()
-				hint = self.get_string("covered_face_detection_confirmation_message")
-				self.assertEqual(discard, hint)
-				print("Discard dialog title right")
-			except AssertionError :
-				raise AssertionError("Discard dialog title wrong")
-			try:
-				yes = covered_face_detection_page.discard_yes_text()
-				hint = self.get_string("yes")
-				self.assertEqual(yes, hint)
-				print("Discard dialog yes text right")
-			except AssertionError :
-				raise AssertionError("Discard dialog yes text wrong")
-			try:
-				no = covered_face_detection_page.discard_no_text()
-				hint = self.get_string("no")
-				self.assertEqual(no, hint)
-				print("Discard dialog no text right")
-			except AssertionError :
-				raise AssertionError("Discard dialog no text wrong")
-			# click yes
-			covered_face_detection_page.click_discard_yes()
-			# check status = false
-			self.assertEqual(pixsee_settings_page.covered_face_detection_status_text(),"Off")
-			print("back button worked")
-		except AssertionError :
-			raise AssertionError("Not in discard dialog")
-	# start from pixsee settings page
-	def test_08_covered_face_detection_information(self):
-		covered_face_detection_page = CoveredFaceDetectionPage(self.driver)
-		menu_page = MenuPage(self.driver)
-		baby_monitor_page = BabyMonitorPage(self.driver)
-		pixsee_settings_page = PixseeSettingsPage(self.driver)
-
-		pixsee_settings_page.click_covered_face_detection()
-		# check if is in information page
-		covered_face_detection_page.click_information()
-		try:
-			self.assertTrue(covered_face_detection_page.is_in_covered_face_detection_tutor_page())
-			print("information button worked")
-		except AssertionError :
-			raise AssertionError("Not in information page")
-		covered_face_detection_page.click_skip()
-		if covered_face_detection_page.is_save_enable():
-			covered_face_detection_page.click_save()
-		else:
-			covered_face_detection_page.click_back()
-		# back to pixsee settings page
 
 
 
