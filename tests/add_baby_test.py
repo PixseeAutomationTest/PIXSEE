@@ -10,8 +10,12 @@ import random
 import time
 
 class AddBabyTest(BaseTestCase):
+    def __init__(self, methodName='runTest', language = "zh", locale = "TW"):
+        super().__init__(methodName)
+        self.language = language
+        self.locale = locale
     def setUp(self):
-        super().setUp()
+        super().setUp(language=self.language, locale=self.locale)
 
         baby_monitor_page = BabyMonitorPage(self.driver)
         menu_page = MenuPage(self.driver)
@@ -30,6 +34,7 @@ class AddBabyTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
+
     def test_add_baby_profile_success(self):
         try:
             baby_timeline_page = BabyTimelinePage(self.driver)

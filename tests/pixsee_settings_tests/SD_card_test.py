@@ -10,8 +10,13 @@ from pages.menu_pages.pixsee_settings_pages.SD_card_stat_page import SDcardStatu
 
 
 class SDcardCase(BaseTestCase):
+	def __init__(self, methodName='runTest', language="zh", locale="TW"):
+		super().__init__(methodName)
+		self.language = language
+		self.locale = locale
+
 	def setUp(self):
-		super().setUp(no_reset=True)
+		super().setUp(language=self.language, locale=self.locale)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)

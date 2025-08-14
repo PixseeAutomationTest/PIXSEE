@@ -5,8 +5,13 @@ from pages.baby_monitor_page import BabyMonitorPage
 
 
 class LoginCase(BaseTestCase):
+        def __init__(self, methodName='runTest', language="zh", locale="TW"):
+                super().__init__(methodName)
+                self.language = language
+                self.locale = locale
+
         def setUp(self):
-                super().setUp(no_reset=False)
+                super().setUp(language=self.language, locale=self.locale, no_reset=False)
 
 
         def test_01_login_wrong_email_failure(self):
