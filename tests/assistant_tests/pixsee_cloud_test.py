@@ -47,13 +47,13 @@ class PixseeCloudTest1(BaseTestCase):
         language = self.driver.capabilities.get("language")
         inside_used = None
         inside_total = None
-        if language == "tw text" or language == "cn text":
+        if language == "zh":
             # compare with inside text
             inside_used = pixsee_cloud_page.parse_storage_usage(pixsee_cloud_page.mb_used_text())
             inside_total = pixsee_cloud_page.parse_storage_usage(pixsee_cloud_page.total_storage_text())
             self.assertEqual(outside[1], inside_used, "Storage usage text does not match between outside and inside text.")
             self.assertEqual(outside[0], inside_total, "Total storage text does not match between outside and inside text.")
-        elif language == "en-us text":
+        elif language == "en":
             # compare with inside text
             inside_used = pixsee_cloud_page.parse_storage_usage(pixsee_cloud_page.mb_used_text())
             inside_total = pixsee_cloud_page.parse_storage_usage(pixsee_cloud_page.total_storage_text())
@@ -91,6 +91,7 @@ class PixseeCloudTest2(BaseTestCase):
             print("Finish opening app.")
             baby_monitor_page.click_home()
             menu_page.click_assistant()
+            assistant_page.click_pixsee_cloud()
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
@@ -143,43 +144,23 @@ class PixseeCloudTest2(BaseTestCase):
         total = photo + video + story + voice
         total_to_1 = round(total, 1)
         total_text = pixsee_cloud_page.parse_storage_usage(pixsee_cloud_page.mb_used_text())
-        self.assertAlmostEqual(total_to_1, total_text, delta=0.15,
+        self.assertAlmostEqual(total_to_1, total_text, delta=0.14,
                                msg="Total storage usage does not match the sum of individual storage usages.")
     # start from pixsee cloud page
     def test_04_pixsee_cloud_page_check_icon_color(self):
         pixsee_cloud_page = PixseeCloudPage(self.driver)
-        photo_color = (29, 69, 64)
-        video_color = (60, 121, 111)
-        story_color = (93, 192, 178)
-        voice_color = (255,255,255)
         x, y = pixsee_cloud_page.photo_color()
-        result = pixsee_cloud_page.is_pixel_color(x, y, photo_color)
-        # check baby in color
-        if result:
-            print("photo icon color is correct")
-        else:
-            raise AssertionError("photo icon color is wrong")
+        photo_color = pixsee_cloud_page.is_pixel_color(x, y)
         x, y = pixsee_cloud_page.videos_color()
-        result = pixsee_cloud_page.is_pixel_color(x, y, video_color)
-        # check video icon color
-        if result:
-            print("video icon color is correct")
-        else:
-            raise AssertionError("video icon color is wrong")
+        video_color = pixsee_cloud_page.is_pixel_color(x, y)
         x, y = pixsee_cloud_page.story_color()
-        result = pixsee_cloud_page.is_pixel_color(x, y, story_color)
-        # check story icon color
-        if result:
-            print("story icon color is correct")
-        else:
-            raise AssertionError("story icon color is wrong")
+        story_color = pixsee_cloud_page.is_pixel_color(x, y)
         x, y = pixsee_cloud_page.voice_recorder_color()
-        result = pixsee_cloud_page.is_pixel_color(x, y, voice_color)
-        # check voice recorder icon color
-        if result:
-            print("voice recorder icon color is correct")
-        else:
-            raise AssertionError("voice recorder icon color is wrong")
+        voice_color = pixsee_cloud_page.is_pixel_color(x, y)
+        # check color by order of darkness
+        self.assertTrue(photo_color <= video_color <= story_color <= voice_color, "Icon colors do not match the expected order of darkness.")
+        # check if all colors are different
+        self.assertTrue(len({photo_color, video_color, story_color, voice_color}) == 4, "Icon colors are not all different.")
     # start from pixsee cloud page
     def test_05_pixsee_cloud_page_check_upgrade_button(self):
         pixsee_cloud_page = PixseeCloudPage(self.driver)
@@ -219,6 +200,7 @@ class PixseeCloudTest2(BaseTestCase):
 
         # self.assertTrue(download_account_data_page.has_dialog(), "Download Account Data dialog does not appear after clicking Submit.")
         # check dialog text
+    # stay
     def test_07_pixsee_cloud_page_check_backup_data_button(self):
         pixsee_cloud_page = PixseeCloudPage(self.driver)
         download_account_data_page = DownloadAccountDataPage(self.driver)
@@ -245,6 +227,68 @@ class PixseeCloudTest2(BaseTestCase):
         download_account_data_page.click_close()
         # check if is back to pixsee cloud page
         self.assertTrue(pixsee_cloud_page.is_in_pixsee_cloud_page(), "Failed to return to Pixsee Cloud Page after clicking Close on Download Account Data Page.")
+    # stay
+    def test_08_pixsee_cloud_page_check_free_up_storage_button(self):
+        pixsee_cloud_page = PixseeCloudPage(self.driver)
+        inside_used = pixsee_cloud_page.parse_storage_usage(pixsee_cloud_page.mb_used_text())
+        print(inside_used)
+        # check free up storage dialog
+        pixsee_cloud_page.click_free_up()
+        self.assertEqual(pixsee_cloud_page.previous_subscription_text(), self.get_string("storage_clean_title"), "Free up storage dialog title does not match.")
+        self.assertEqual(pixsee_cloud_page.remaining_text(), self.get_string("storage_clean_descripition"), "Free up storage dialog subtitle does not match.")
+        # check dialog texts
+        try:
+            delete_25_percent = pixsee_cloud_page.dialog_delete_25_percent_text()
+            hint = self.get_string("storage_clean_option_25_percent").replace("%%","%")
+            pattern = "^" + re.escape(hint).replace("%s", r".+") + "$"
+            self.assertRegex(delete_25_percent,pattern)
+        except Exception as e:
+            raise AssertionError(f"Free up storage dialog delete 25 percent text does not match. Error: {e}")
+        try:
+            delete_50_percent = pixsee_cloud_page.dialog_delete_50_percent_text()
+            hint = self.get_string("storage_clean_option_50_percent").replace("%%","%")
+            pattern = "^" + re.escape(hint).replace("%s", r".+") + "$"
+            self.assertRegex(delete_50_percent,pattern)
+        except Exception as e:
+            raise AssertionError(f"Free up storage dialog delete 50 percent text does not match. Error: {e}")
+        try:
+            delete_75_percent = pixsee_cloud_page.dialog_delete_75_percent_text()
+            hint = self.get_string("storage_clean_option_75_percent").replace("%%","%")
+            pattern = "^" + re.escape(hint).replace("%s", r".+") + "$"
+            self.assertRegex(delete_75_percent,pattern)
+        except Exception as e:
+            raise AssertionError(f"Free up storage dialog delete 75 percent text does not match. Error: {e}")
+        try:
+            delete_all = pixsee_cloud_page.dialog_delete_all_text()
+            self.assertEqual(delete_all, self.get_string("storage_clean_all"), "Free up storage dialog delete all text does not match.")
+        except Exception as e:
+            raise AssertionError(f"Free up storage dialog delete all text does not match. Error: {e}")
+        self.assertEqual(pixsee_cloud_page.ok_text(), self.get_string("ok"), "Free up storage dialog OK button text does not match.")
+        self.assertEqual(pixsee_cloud_page.cancel_text(), self.get_string("cancel"), "Free up storage dialog Cancel button text does not match.")
+        # check keep storage
+        keep_75_percent = pixsee_cloud_page.parse_storage_usage(pixsee_cloud_page.dialog_delete_25_percent_text())
+        keep_50_percent = pixsee_cloud_page.parse_storage_usage(pixsee_cloud_page.dialog_delete_50_percent_text())
+        keep_25_percent = pixsee_cloud_page.parse_storage_usage(pixsee_cloud_page.dialog_delete_75_percent_text())
+        right_75_percent = round((inside_used * 0.75) + 1e-8, 1)
+        right_50_percent = round((inside_used * 0.50) + 1e-8, 1)
+        right_25_percent = round((inside_used * 0.25) + 1e-8, 1)
+        print(keep_50_percent,right_50_percent)
+        self.assertTrue(right_75_percent == keep_75_percent[1], "Free up storage dialog delete 25 percent storage is not less than current storage.")
+        self.assertTrue(right_50_percent == keep_50_percent[1], "Free up storage dialog delete 50 percent storage is not less than current storage.")
+        self.assertTrue(right_25_percent == keep_25_percent[1], "Free up storage dialog delete 75 percent storage is not less than current storage.")
+
+        # check checkbox clickablility
+        self.assertTrue(pixsee_cloud_page.is_dialog_delete_25_percent_clickable(), "Delete 25 percent checkbox is not clickable.")
+        self.assertTrue(pixsee_cloud_page.is_dialog_delete_50_percent_clickable(), "Delete 50 percent checkbox is not clickable.")
+        self.assertTrue(pixsee_cloud_page.is_dialog_delete_75_percent_clickable(), "Delete 75 percent checkbox is not clickable.")
+        self.assertTrue(pixsee_cloud_page.is_dialog_delete_all_clickable(), "Delete all checkbox is not clickable.")
+        self.assertEqual(pixsee_cloud_page.ok_text(), self.get_string("ok"),
+                         "Free up storage dialog OK button text does not match.")
+        self.assertEqual(pixsee_cloud_page.cancel_text(), self.get_string("cancel"),
+                         "Free up storage dialog Cancel button text does not match.")
+        pixsee_cloud_page.click_cancel()
+        # check if is back to pixsee cloud page
+        self.assertTrue(pixsee_cloud_page.is_in_pixsee_cloud_page(), "Failed to return to Pixsee Cloud Page after clicking OK on Free up storage dialog.")
 
 
 

@@ -99,6 +99,7 @@ class AssistantTest(BaseTestCase):
     def test_03_tutorial(self):
         assistant_page = AssistantPage(self.driver)
         tutorial_page = TutorialPage(self.driver)
+        baby_monitor_page = BabyMonitorPage(self.driver)
         menu_page = MenuPage(self.driver)
         # check title
         try:
@@ -136,7 +137,7 @@ class AssistantTest(BaseTestCase):
         tutorial_page.click_skip()
         # check if is in menu page
         try:
-            self.assertTrue(menu_page.is_in_menu_page())
+            self.assertTrue(baby_monitor_page.is_in_baby_monitor_page())
             print("skip first tutor successfully")
         except AssertionError:
             raise AssertionError("skip first tutor unsuccessfully")
@@ -239,7 +240,7 @@ class AssistantTest(BaseTestCase):
         tutorial_page.click_skip()
         # check if is in menu page
         try:
-            self.assertTrue(menu_page.is_in_menu_page())
+            self.assertTrue(baby_monitor_page.is_in_baby_monitor_page())
             print("skip fifth tutor successfully")
         except AssertionError:
             raise AssertionError("skip fifth tutor unsuccessfully")
