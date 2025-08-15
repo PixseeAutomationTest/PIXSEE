@@ -1,3 +1,5 @@
+from linecache import checkcache
+
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import re
@@ -36,6 +38,10 @@ class PixseeCloudPage():
         self.DialogBabyNameCheckbox = "com.compal.bioslab.pixsee.pixm01:id/ckBaby"
         self.AllData = "com.compal.bioslab.pixsee.pixm01:id/tvAllData"
         self.AllDataCheckbox = "com.compal.bioslab.pixsee.pixm01:id/viewCbAllData"
+        self.ListUpLayer = "com.compal.bioslab.pixsee.pixm01:id/rvList"
+        self.List = '//android.widget.TextView'
+        self.ListCheckbox = "//android.widget.CheckBox"
+
 
 
     def click_back(self):
@@ -236,6 +242,39 @@ class PixseeCloudPage():
         )
         element = self.driver.find_element("id", self.DialogBabyName)
         return element.text
+    def dialog_delete_25_percent_text(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(("id", self.ListUpLayer))
+        )
+        uplayer = self.driver.find_element("id", self.ListUpLayer)
+        elements = uplayer.find_elements("xpath", self.List)
+
+        return elements[0].text
+    def dialog_delete_50_percent_text(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(("id", self.ListUpLayer))
+        )
+        uplayer = self.driver.find_element("id", self.ListUpLayer)
+        elements = uplayer.find_elements("xpath", self.List)
+
+        return elements[1].text
+    def dialog_delete_75_percent_text(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(("id", self.ListUpLayer))
+        )
+        uplayer = self.driver.find_element("id", self.ListUpLayer)
+        elements = uplayer.find_elements("xpath", self.List)
+
+        return elements[2].text
+    def dialog_delete_all_text(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(("id", self.ListUpLayer))
+        )
+        uplayer = self.driver.find_element("id", self.ListUpLayer)
+        elements = uplayer.find_elements("xpath", self.List)
+
+        return elements[3].text
+
 
 
     def parse_storage_usage(self,text):
@@ -244,10 +283,10 @@ class PixseeCloudPage():
         if len(numbers) >= 2:
             used = float(numbers[0])  # first number
             total = float(numbers[1])  # second number
-            return used, total
+            return round(used, 1), round(total, 1)
         else:
-            num = float(numbers[0])
-            return num
+            num = float(numbers[0]) # if only one number is found
+            return round(num, 1)
 
     def photo_color(self):
         element_color = self.driver.find_element("id", self.PhotoIndicator)
@@ -258,7 +297,7 @@ class PixseeCloudPage():
         h = element_color.size['height']
         center_x = x + w // 2
         center_y = y + h // 2
-
+        print(h)
         return center_x, center_y
     def videos_color(self):
         element_color = self.driver.find_element("id", self.VideosIndicator)
@@ -293,7 +332,7 @@ class PixseeCloudPage():
         center_y = y + h // 2
 
         return center_x, center_y
-    def is_pixel_color(self, x, y, target_color):
+    def is_pixel_color(self, x, y):
         """
         Take a screenshot and check if the pixel at coordinates (x, y) matches the given RGB color exactly.
 
@@ -307,10 +346,8 @@ class PixseeCloudPage():
 
         img = Image.open(screenshot_path)
         pixel = img.getpixel((x, y))[:3]  # 只取 R, G, B
-
-        in_range = (pixel == target_color)
-        print(f"Pixel at ({x},{y}) = {pixel}, match target: {in_range}")
-        return in_range
+        average = sum(pixel) / 3
+        return average
 
     def is_ok_clickable(self):
         WebDriverWait(self.driver, 10).until(
@@ -318,6 +355,38 @@ class PixseeCloudPage():
         )
         button = self.driver.find_element("id", self.Ok)
         is_clickable = button.get_attribute("enabled")
+        return is_clickable == "true"
+    def is_dialog_delete_25_percent_clickable(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(("id", self.ListUpLayer))
+        )
+        uplayer = self.driver.find_element("id", self.ListUpLayer)
+        checkbox = uplayer.find_elements("xpath", self.ListCheckbox)
+        is_clickable = checkbox[0].get_attribute("clickable")
+        return is_clickable == "true"
+    def is_dialog_delete_50_percent_clickable(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(("id", self.ListUpLayer))
+        )
+        uplayer = self.driver.find_element("id", self.ListUpLayer)
+        checkbox = uplayer.find_elements("xpath", self.ListCheckbox)
+        is_clickable = checkbox[1].get_attribute("clickable")
+        return is_clickable == "true"
+    def is_dialog_delete_75_percent_clickable(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(("id", self.ListUpLayer))
+        )
+        uplayer = self.driver.find_element("id", self.ListUpLayer)
+        checkbox = uplayer.find_elements("xpath", self.ListCheckbox)
+        is_clickable = checkbox[2].get_attribute("clickable")
+        return is_clickable == "true"
+    def is_dialog_delete_all_clickable(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(("id", self.ListUpLayer))
+        )
+        uplayer = self.driver.find_element("id", self.ListUpLayer)
+        checkbox = uplayer.find_elements("xpath", self.ListCheckbox)
+        is_clickable = checkbox[3].get_attribute("clickable")
         return is_clickable == "true"
 
 

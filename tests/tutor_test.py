@@ -9,7 +9,7 @@ import time
 
 
 class TutorCase(BaseTestCase):
-        def __init__(self, methodName='runTest', language="zh", locale="TW"):
+        def __init__(self, methodName='runTest', language="en", locale="US"):
                 super().__init__(methodName)
                 self.language = language
                 self.locale = locale
@@ -130,7 +130,7 @@ class TutorCase(BaseTestCase):
                         raise AssertionError("Tree tutor title FAIL: text mismatch")
                 try:
                         tree_description = baby_timeline_page.get_tutor_description()
-                        hint = self.get_string("special_card_description")
+                        hint = self.get_string("special_card_description").replace("\\n"," ")
                         self.assertEqual(tree_description, hint)
                         print("Tree tutor description success")
                 except AssertionError:
@@ -147,7 +147,7 @@ class TutorCase(BaseTestCase):
                 menu_page.click_album()
                 try:
                         album_title = photo_page.new_function_title()
-                        hint = self.get_string("slideshow_whats_new")
+                        hint = self.get_string("slideshow_whats_new").replace("\\", "")
                         self.assertEqual(album_title, hint)
                         print("new function title success")
                 except AssertionError:
