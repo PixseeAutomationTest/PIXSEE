@@ -70,7 +70,7 @@ class DeleteProfilePage():
         element = self.driver.find_element("id", self.cancelButton)
         return element.text
 
-    def is_in_delete_baby_profile_page(self):
+    def is_in_delete_profile_page(self):
         try:
             WebDriverWait(self.driver, 20).until(
                 EC.presence_of_element_located(("id", self.pageTitleText))

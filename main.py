@@ -32,6 +32,9 @@ def make_test_class(testcase, language, locale):
     class CustomTestCase(testcase):
         def __init__(self, methodName='runTest'):
             super().__init__(methodName, language=language, locale=locale)
+
+    CustomTestCase.__name__ = testcase.__name__
+    CustomTestCase.__qualname__ = testcase.__qualname__
     return CustomTestCase
 
 if __name__ == '__main__':

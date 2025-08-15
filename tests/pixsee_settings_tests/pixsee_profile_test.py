@@ -153,6 +153,7 @@ class PixseeProfileTest(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
+    @unittest.skip("Important: This test reboot the device. If you want to run other tests after this. Please check your network signal.")
     def test_reboot_device(self):
         try:
             baby_monitor_page = BabyMonitorPage(self.driver)

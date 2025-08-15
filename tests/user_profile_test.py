@@ -9,6 +9,8 @@ from pages.menu_pages.user_profile_pages.user_profile_page import UserProfilePag
 from pages.menu_pages.user_profile_pages.change_password_page import ChangePasswordPage
 from pages.menu_pages.user_profile_pages.add_backup_email_page import AddBackupEmailPage
 from pages.menu_pages.user_profile_pages.verification_page import VerificationPage
+from pages.download_account_data_page import DownloadAccountDataPage
+from pages.delete_profile_page import DeleteProfilePage
 
 class UserProfileTest(BaseTestCase):
     def __init__(self, methodName='runTest', language="zh", locale="TW"):
@@ -662,7 +664,6 @@ class UserProfileTest(BaseTestCase):
                 self.assertEqual(user_profile_page.get_change_backup_email_button_text(), self.get_string("backup_email_change_backup_email"), "Button \"Change backup email\" is properly displayed")
             else:
                 self.assertEqual(user_profile_page.get_add_backup_email_button_text(), self.get_string("add_backup_email_button_title"), "Button \"Add backup mail\" is properly displayed")
-                self.skipTest("Backup email doesn't exist, skipping this test")
             self.assertEqual(user_profile_page.get_delete_account_button_text(), self.get_string("account_profile_btn_delete"), "Button \"Delete account\" is properly displayed")
 
             '''Go to Add Backup Email page'''
@@ -717,7 +718,6 @@ class UserProfileTest(BaseTestCase):
                 self.assertEqual(user_profile_page.get_change_backup_email_button_text(), self.get_string("backup_email_change_backup_email"), "Button \"Change backup email\" is properly displayed")
             else:
                 self.assertEqual(user_profile_page.get_add_backup_email_button_text(), self.get_string("add_backup_email_button_title"), "Button \"Add backup mail\" is properly displayed")
-                self.skipTest("Backup email doesn't exist, skipping this test")
             self.assertEqual(user_profile_page.get_delete_account_button_text(), self.get_string("account_profile_btn_delete"), "Button \"Delete account\" is properly displayed")
 
             '''Go to Add Backup Email page'''
@@ -771,7 +771,6 @@ class UserProfileTest(BaseTestCase):
                 self.assertEqual(user_profile_page.get_change_backup_email_button_text(), self.get_string("backup_email_change_backup_email"), "Button \"Change backup email\" is properly displayed")
             else:
                 self.assertEqual(user_profile_page.get_add_backup_email_button_text(), self.get_string("add_backup_email_button_title"), "Button \"Add backup mail\" is properly displayed")
-                self.skipTest("Backup email doesn't exist, skipping this test")
             self.assertEqual(user_profile_page.get_delete_account_button_text(), self.get_string("account_profile_btn_delete"), "Button \"Delete account\" is properly displayed")
 
             '''Go to Add Backup Email page'''
@@ -830,7 +829,6 @@ class UserProfileTest(BaseTestCase):
                 self.assertEqual(user_profile_page.get_change_backup_email_button_text(), self.get_string("backup_email_change_backup_email"), "Button \"Change backup email\" is properly displayed")
             else:
                 self.assertEqual(user_profile_page.get_add_backup_email_button_text(), self.get_string("add_backup_email_button_title"), "Button \"Add backup mail\" is properly displayed")
-                self.skipTest("Backup email doesn't exist, skipping this test")
             self.assertEqual(user_profile_page.get_delete_account_button_text(), self.get_string("account_profile_btn_delete"), "Button \"Delete account\" is properly displayed")
 
             '''Go to Add Backup Email page'''
@@ -893,7 +891,6 @@ class UserProfileTest(BaseTestCase):
                 self.assertEqual(user_profile_page.get_change_backup_email_button_text(), self.get_string("backup_email_change_backup_email"), "Button \"Change backup email\" is properly displayed")
             else:
                 self.assertEqual(user_profile_page.get_add_backup_email_button_text(), self.get_string("add_backup_email_button_title"), "Button \"Add backup mail\" is properly displayed")
-                self.skipTest("Backup email doesn't exist, skipping this test")
             self.assertEqual(user_profile_page.get_delete_account_button_text(), self.get_string("account_profile_btn_delete"), "Button \"Delete account\" is properly displayed")
 
             '''Go to Add Backup Email page'''
@@ -937,6 +934,225 @@ class UserProfileTest(BaseTestCase):
             self.assertEqual(verification_page.get_title_text(), self.get_string("backup_email_validation_verification"), "Can't return to Verification Page after clicking \"Ok\" button in Resend Code Dialog")
             verification_page.click_cancel()
 
+
+        except AssertionError as ae:
+            print(f"Test failed with assertion error: {ae}")
+            raise ae
+        except Exception as e:
+            print(f"Test failed with exception: {e}")
+            raise e
+
+    def test_delete_account_dialog_with_cancel(self):
+        try:
+            user_profile_page = UserProfilePage(self.driver)
+
+            self.assertTrue(user_profile_page.is_in_user_profile_page(), "Can't go to User Profile Page")
+
+            '''Verify User Profile Page'''
+            self.assertEqual(user_profile_page.get_page_title(), self.get_string("user_profile_title"), "Text \"User Profile\" is not properly displayed")
+            self.assertEqual(user_profile_page.get_done_button_text(), self.get_string("done"), "Button \"Done\" is not properly displayed")
+            self.assertEqual(user_profile_page.get_change_password_button_text(), self.get_string("user_profile_change_password_button"), "Button \"Change password\" is properly displayed")
+            if user_profile_page.has_backup_email():
+                self.assertEqual(user_profile_page.get_change_backup_email_button_text(), self.get_string("backup_email_change_backup_email"), "Button \"Change backup email\" is properly displayed")
+            else:
+                self.assertEqual(user_profile_page.get_add_backup_email_button_text(), self.get_string("add_backup_email_button_title"), "Button \"Add backup mail\" is properly displayed")
+            self.assertEqual(user_profile_page.get_delete_account_button_text(), self.get_string("account_profile_btn_delete"), "Button \"Delete account\" is properly displayed")
+
+            '''Click Delete Account Button and verify the dialog'''
+            user_profile_page.click_delete_account()
+            self.assertTrue(user_profile_page.has_delete_account_dialog(), "\"Delete confirmation window\" is not displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_title(), self.get_string("delete_baby_dialog_account_title"), "Text \"Are you sure you want to delete this account?\" is not properly displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_message(), self.get_string("delete_baby_dialog_info"), "Hint is not properly displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_warning_message(), self.get_string("delete_baby_dialog_warning"), "Warning hint is not properly displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_no_button_text(), self.get_string("delete_baby_dialog_btn_backup"), "\"Go to backup\" Button is not properly displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_yes_button_text(), self.get_string("delete_baby_dialog_btn_delete_account"), "\"Yes, delete account\" Button is not properly displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_cancel_button_text(), self.get_string("cancel"), "\"Cancel\" Button is not properly displayed")
+
+            '''Click Cancel Button and verify that dialog is closed'''
+            user_profile_page.click_delete_dialog_cancel()
+            self.assertTrue(user_profile_page.is_in_user_profile_page(), "Can't return to User Profile Page after clicking \"Cancel\" button in Delete Account Dialog")
+
+        except AssertionError as ae:
+            print(f"Test failed with assertion error: {ae}")
+            raise ae
+        except Exception as e:
+            print(f"Test failed with exception: {e}")
+            raise e
+
+    def test_backup_baby_profile_dialog_with_ok(self):
+        try:
+            user_profile_page = UserProfilePage(self.driver)
+            download_account_data_page = DownloadAccountDataPage(self.driver)
+
+            self.assertTrue(user_profile_page.is_in_user_profile_page(), "Can't go to User Profile Page")
+
+            '''Verify User Profile Page'''
+            self.assertEqual(user_profile_page.get_page_title(), self.get_string("user_profile_title"), "Text \"User Profile\" is not properly displayed")
+            self.assertEqual(user_profile_page.get_done_button_text(), self.get_string("done"), "Button \"Done\" is not properly displayed")
+            self.assertEqual(user_profile_page.get_change_password_button_text(), self.get_string("user_profile_change_password_button"), "Button \"Change password\" is properly displayed")
+            if user_profile_page.has_backup_email():
+                self.assertEqual(user_profile_page.get_change_backup_email_button_text(), self.get_string("backup_email_change_backup_email"), "Button \"Change backup email\" is properly displayed")
+            else:
+                self.assertEqual(user_profile_page.get_add_backup_email_button_text(), self.get_string("add_backup_email_button_title"), "Button \"Add backup mail\" is properly displayed")
+            self.assertEqual(user_profile_page.get_delete_account_button_text(), self.get_string("account_profile_btn_delete"), "Button \"Delete account\" is properly displayed")
+
+            '''Click Delete Account Button and verify the dialog'''
+            user_profile_page.click_delete_account()
+            self.assertTrue(user_profile_page.has_delete_account_dialog(), "\"Delete confirmation window\" is not displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_title(), self.get_string("delete_baby_dialog_account_title"), "Text \"Are you sure you want to delete this account?\" is not properly displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_message(), self.get_string("delete_baby_dialog_info"), "Hint is not properly displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_warning_message(), self.get_string("delete_baby_dialog_warning"), "Warning hint is not properly displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_no_button_text(), self.get_string("delete_baby_dialog_btn_backup"), "\"Go to backup\" Button is not properly displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_yes_button_text(), self.get_string("delete_baby_dialog_btn_delete_account"), "\"Yes, delete account\" Button is not properly displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_cancel_button_text(), self.get_string("cancel"), "\"Cancel\" Button is not properly displayed")
+
+            '''Go to Download Account Data Page'''
+            user_profile_page.click_delete_dialog_no()
+            self.assertTrue(download_account_data_page.has_dialog(), "\"Download data list window\" is not displayed")
+            download_account_data_page.click_all_data()
+            download_account_data_page.click_dialog_ok()
+            self.assertTrue(download_account_data_page.is_in_download_account_data_page(), "Can't go to Download Account Data Page from Edit Baby Profile Page")
+            self.go_back()
+
+
+        except AssertionError as ae:
+            print(f"Test failed with assertion error: {ae}")
+            raise ae
+        except Exception as e:
+            print(f"Test failed with exception: {e}")
+            raise e
+
+    def test_backup_baby_profile_dialog_with_cancel(self):
+        try:
+            user_profile_page = UserProfilePage(self.driver)
+            download_account_data_page = DownloadAccountDataPage(self.driver)
+
+            self.assertTrue(user_profile_page.is_in_user_profile_page(), "Can't go to User Profile Page")
+
+            '''Verify User Profile Page'''
+            self.assertEqual(user_profile_page.get_page_title(), self.get_string("user_profile_title"), "Text \"User Profile\" is not properly displayed")
+            self.assertEqual(user_profile_page.get_done_button_text(), self.get_string("done"), "Button \"Done\" is not properly displayed")
+            self.assertEqual(user_profile_page.get_change_password_button_text(), self.get_string("user_profile_change_password_button"), "Button \"Change password\" is properly displayed")
+            if user_profile_page.has_backup_email():
+                self.assertEqual(user_profile_page.get_change_backup_email_button_text(), self.get_string("backup_email_change_backup_email"), "Button \"Change backup email\" is properly displayed")
+            else:
+                self.assertEqual(user_profile_page.get_add_backup_email_button_text(), self.get_string("add_backup_email_button_title"), "Button \"Add backup mail\" is properly displayed")
+            self.assertEqual(user_profile_page.get_delete_account_button_text(), self.get_string("account_profile_btn_delete"), "Button \"Delete account\" is properly displayed")
+
+            '''Click Delete Account Button and verify the dialog'''
+            user_profile_page.click_delete_account()
+            self.assertTrue(user_profile_page.has_delete_account_dialog(), "\"Delete confirmation window\" is not displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_title(), self.get_string("delete_baby_dialog_account_title"), "Text \"Are you sure you want to delete this account?\" is not properly displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_message(), self.get_string("delete_baby_dialog_info"), "Hint is not properly displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_warning_message(), self.get_string("delete_baby_dialog_warning"), "Warning hint is not properly displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_no_button_text(), self.get_string("delete_baby_dialog_btn_backup"), "\"Go to backup\" Button is not properly displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_yes_button_text(), self.get_string("delete_baby_dialog_btn_delete_account"), "\"Yes, delete account\" Button is not properly displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_cancel_button_text(), self.get_string("cancel"), "\"Cancel\" Button is not properly displayed")
+
+            '''Go to Download Account Data Page'''
+            user_profile_page.click_delete_dialog_no()
+            self.assertTrue(download_account_data_page.has_dialog(), "\"Download data list window\" is not displayed")
+            download_account_data_page.click_dialog_cancel()
+            self.assertTrue(user_profile_page.is_in_user_profile_page(), "Can't return to User Profile Page after clicking cancel in Download Account Data dialog")
+
+
+        except AssertionError as ae:
+            print(f"Test failed with assertion error: {ae}")
+            raise ae
+        except Exception as e:
+            print(f"Test failed with exception: {e}")
+            raise e
+
+    @unittest.skip("Important: This test will delete the account. Please create an account first before run this test.")
+    def test_delete_account_success(self):
+        try:
+            user_profile_page = UserProfilePage(self.driver)
+            delete_profile_page = DeleteProfilePage(self.driver)
+            login_page = LoginPage(self.driver)
+
+            self.assertTrue(user_profile_page.is_in_user_profile_page(), "Can't go to User Profile Page")
+
+            '''Verify User Profile Page'''
+            self.assertEqual(user_profile_page.get_page_title(), self.get_string("user_profile_title"), "Text \"User Profile\" is not properly displayed")
+            self.assertEqual(user_profile_page.get_done_button_text(), self.get_string("done"), "Button \"Done\" is not properly displayed")
+            self.assertEqual(user_profile_page.get_change_password_button_text(), self.get_string("user_profile_change_password_button"), "Button \"Change password\" is properly displayed")
+            if user_profile_page.has_backup_email():
+                self.assertEqual(user_profile_page.get_change_backup_email_button_text(), self.get_string("backup_email_change_backup_email"), "Button \"Change backup email\" is properly displayed")
+            else:
+                self.assertEqual(user_profile_page.get_add_backup_email_button_text(), self.get_string("add_backup_email_button_title"), "Button \"Add backup mail\" is properly displayed")
+            self.assertEqual(user_profile_page.get_delete_account_button_text(), self.get_string("account_profile_btn_delete"), "Button \"Delete account\" is properly displayed")
+
+            '''Click Delete Account Button and verify the dialog'''
+            user_profile_page.click_delete_account()
+            self.assertTrue(user_profile_page.has_delete_account_dialog(), "\"Delete confirmation window\" is not displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_title(), self.get_string("delete_baby_dialog_account_title"), "Text \"Are you sure you want to delete this account?\" is not properly displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_message(), self.get_string("delete_baby_dialog_info"), "Hint is not properly displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_warning_message(), self.get_string("delete_baby_dialog_warning"), "Warning hint is not properly displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_no_button_text(), self.get_string("delete_baby_dialog_btn_backup"), "\"Go to backup\" Button is not properly displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_yes_button_text(), self.get_string("delete_baby_dialog_btn_delete_account"), "\"Yes, delete account\" Button is not properly displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_cancel_button_text(), self.get_string("cancel"), "\"Cancel\" Button is not properly displayed")
+
+            '''Go to Delete Profile and verify content'''
+            user_profile_page.click_delete_dialog_yes()
+            self.assertTrue(delete_profile_page.is_in_delete_profile_page(), "Can't automatically go to Delete Baby Profile Page from User Profile Page")
+            self.assertEqual(delete_profile_page.get_page_title(), self.get_string("delete_account_title"), "Text \"Delete account\" is not properly displayed")
+            self.assertEqual(delete_profile_page.get_warning_text().replace("\n", "\\n"), self.get_string("delete_account_warning") + " " + self.get_string("delete_warning_instruction"), "Warning Hint is not properly displayed")
+            self.assertEqual(delete_profile_page.get_check_info_text(), self.get_string("delete_account_check"), "Text \"Your account will be gone forever and cannot be recovered.\" is not properly displayed")
+            self.assertEqual(delete_profile_page.get_delete_profile_button_text(), self.get_string("account_profile_btn_delete"), "\"Delete account\" Button is not properly displayed")
+            self.assertEqual(delete_profile_page.get_cancel_button_text(), self.get_string("cancel"), "\"Cancel\" Button is not properly displayed")
+
+            '''Delete account'''
+            delete_profile_page.click_check()
+            delete_profile_page.click_delete_profile()
+            time.sleep(5)
+            self.assertTrue(login_page.is_in_login_page(), "Can't return to Login Page after deleting account")
+
+        except AssertionError as ae:
+            print(f"Test failed with assertion error: {ae}")
+            raise ae
+        except Exception as e:
+            print(f"Test failed with exception: {e}")
+            raise e
+
+    def test_delete_account_page_with_cancel(self):
+        try:
+            user_profile_page = UserProfilePage(self.driver)
+            delete_profile_page = DeleteProfilePage(self.driver)
+
+            self.assertTrue(user_profile_page.is_in_user_profile_page(), "Can't go to User Profile Page")
+
+            '''Verify User Profile Page'''
+            self.assertEqual(user_profile_page.get_page_title(), self.get_string("user_profile_title"), "Text \"User Profile\" is not properly displayed")
+            self.assertEqual(user_profile_page.get_done_button_text(), self.get_string("done"), "Button \"Done\" is not properly displayed")
+            self.assertEqual(user_profile_page.get_change_password_button_text(), self.get_string("user_profile_change_password_button"), "Button \"Change password\" is properly displayed")
+            if user_profile_page.has_backup_email():
+                self.assertEqual(user_profile_page.get_change_backup_email_button_text(), self.get_string("backup_email_change_backup_email"), "Button \"Change backup email\" is properly displayed")
+            else:
+                self.assertEqual(user_profile_page.get_add_backup_email_button_text(), self.get_string("add_backup_email_button_title"), "Button \"Add backup mail\" is properly displayed")
+            self.assertEqual(user_profile_page.get_delete_account_button_text(), self.get_string("account_profile_btn_delete"), "Button \"Delete account\" is properly displayed")
+
+            '''Click Delete Account Button and verify the dialog'''
+            user_profile_page.click_delete_account()
+            self.assertTrue(user_profile_page.has_delete_account_dialog(), "\"Delete confirmation window\" is not displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_title(), self.get_string("delete_baby_dialog_account_title"), "Text \"Are you sure you want to delete this account?\" is not properly displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_message(), self.get_string("delete_baby_dialog_info"), "Hint is not properly displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_warning_message(), self.get_string("delete_baby_dialog_warning"), "Warning hint is not properly displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_no_button_text(), self.get_string("delete_baby_dialog_btn_backup"), "\"Go to backup\" Button is not properly displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_yes_button_text(), self.get_string("delete_baby_dialog_btn_delete_account"), "\"Yes, delete account\" Button is not properly displayed")
+            self.assertEqual(user_profile_page.get_delete_dialog_cancel_button_text(), self.get_string("cancel"), "\"Cancel\" Button is not properly displayed")
+
+            '''Go to Delete Profile and verify content'''
+            user_profile_page.click_delete_dialog_yes()
+            self.assertTrue(delete_profile_page.is_in_delete_profile_page(), "Can't automatically go to Delete Baby Profile Page from User Profile Page")
+            self.assertEqual(delete_profile_page.get_page_title(), self.get_string("delete_account_title"), "Text \"Delete account\" is not properly displayed")
+            self.assertEqual(delete_profile_page.get_warning_text().replace("\n", "\\n"), self.get_string("delete_account_warning") + " " + self.get_string("delete_warning_instruction"), "Warning Hint is not properly displayed")
+            self.assertEqual(delete_profile_page.get_check_info_text(), self.get_string("delete_account_check"), "Text \"Your account will be gone forever and cannot be recovered.\" is not properly displayed")
+            self.assertEqual(delete_profile_page.get_delete_profile_button_text(), self.get_string("account_profile_btn_delete"), "\"Delete account\" Button is not properly displayed")
+            self.assertEqual(delete_profile_page.get_cancel_button_text(), self.get_string("cancel"), "\"Cancel\" Button is not properly displayed")
+
+            '''Verify Delete Profile Page and delete account'''
+            delete_profile_page.click_cancel()
+            self.assertTrue(user_profile_page.is_in_user_profile_page(), "Can't return to User Profile Page after clicking \"Cancel\" button in Delete Account Page")
 
         except AssertionError as ae:
             print(f"Test failed with assertion error: {ae}")
