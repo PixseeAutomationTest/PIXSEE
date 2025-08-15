@@ -85,5 +85,5 @@ if __name__ == '__main__':
 
         # Run the test suite
         date_str = datetime.now().strftime("%Y%m%d")
-        runner = HTMLTestReport(f"./results/{language[i]}-{locale[i]}/{date_str}.html", title=f"Pixsee Test Results ({language[i]}-{locale[i]})")
+        runner = HTMLTestReport(f"./results/{language[i]}-{locale[i]}/{date_str}-1.html", title=f"Pixsee Test Results ({language[i]}-{locale[i]})")
         runner.run(suite)

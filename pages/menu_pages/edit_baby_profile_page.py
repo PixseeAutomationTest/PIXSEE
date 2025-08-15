@@ -284,12 +284,13 @@ class EditBabyProfilePage():
         time.sleep(1)
         self.click_edit_photo_done()
 
-    def select_baby_birthday(self, year = datetime.date.today().year, month = datetime.date.today().month, day = datetime.date.today().day):
+    def select_baby_birthday(self, year=datetime.date.today().year, month=datetime.date.today().month, day=datetime.date.today().day):
         # Validate the input date
         try:
             target_date = datetime.date(year, month, day)
             if year < 1900 or target_date > datetime.date.today():
-                raise ValueError("Year must be between 1900 and the current year, and the date must not be in the future.")
+                raise ValueError(
+                    "Year must be between 1900 and the current year, and the date must not be in the future.")
         except ValueError as e:
             raise ValueError(f"Invalid date: {e}")
 
@@ -297,10 +298,12 @@ class EditBabyProfilePage():
         time.sleep(1)
         if not self.has_calendar():
             raise AssertionError("Can't find calendar for birthday selection")
-        # Jump to the selected year
+
+        # Year / Month / Day pickers
         year_picker = self.driver.find_element("id", self.calendarYearPicker)
         month_picker = self.driver.find_element("id", self.calendarMonthPicker)
         day_picker = self.driver.find_element("id", self.calendarDayPicker)
+
         if year != int(year_picker.text):
             year_picker.click()
             while True:
@@ -320,12 +323,28 @@ class EditBabyProfilePage():
                             f'new UiScrollable(new UiSelector().className({self.calendarScrollableList_classname})).setAsVerticalList().scrollForward()'
                         )
                     time.sleep(0.2)
-        # Find the date and click it. Need to swipe up if the date is not visible
-        target_date_str = target_date.strftime("%d %B %Y")
+
+        month_text = month_picker.text.strip()
+        try:
+            current_month_num = datetime.datetime.strptime(month_text, "%b").month  # e.g. Aug
+        except ValueError:
+            if month_text.startswith("M") and month_text[1:].isdigit():
+                current_month_num = int(month_text[1:])  # e.g. M08
+            else:
+                raise ValueError(f"Unsupported month format: {month_text}")
+
+        first_day_elem = self.driver.find_element("xpath", self.calendarOneMonth_xpath).find_element("class name", self.calendarOneDay_classname)
+        first_date_str = first_day_elem.get_attribute("content-desc").split("selected")[0].strip()
+        month_part = first_date_str.split()[1]
+        if month_part.startswith("M") and month_part[1:].isdigit():
+            target_date_str = f"{day:02d} M{month:02d} {year}"
+        else:
+            target_date_str = target_date.strftime("%d %B %Y")
+
         first_days = set()
         while True:
             try:
-                if month == datetime.datetime.strptime(month_picker.text, "%b").month and day == int(day_picker.text):
+                if month == current_month_num and day == int(day_picker.text):
                     element = self.driver.find_element("accessibility id", target_date_str + " selected")
                     element.click()
                 else:
@@ -338,10 +357,16 @@ class EditBabyProfilePage():
                 calendar_current_month = self.driver.find_element("xpath", self.calendarOneMonth_xpath)
                 element = calendar_current_month.find_element("class name", self.calendarOneDay_classname)
                 first_date_str = element.get_attribute("content-desc").split("selected")[0].strip()
-                first_date = datetime.datetime.strptime(first_date_str, "%d %B %Y").date()
+                month_part = first_date_str.split()[1]
+                if month_part.startswith("M") and month_part[1:].isdigit():
+                    first_date = datetime.datetime.strptime(first_date_str.replace("M", ""), "%d %m %Y").date()
+                else:
+                    first_date = datetime.datetime.strptime(first_date_str, "%d %B %Y").date()
+
                 if first_date_str in first_days:
                     raise ValueError(f"{year}-{month}-{day} is not found in the calendar. Please check the date and try again.")
                 first_days.add(first_date_str)
+
                 if month < first_date.month:
                     self.driver.find_element(
                         AppiumBy.ANDROID_UIAUTOMATOR,
@@ -449,9 +474,9 @@ class EditBabyProfilePage():
     def is_in_edit_baby_profile_page(self):
         try:
             WebDriverWait(self.driver, base.wait_time).until(
-                EC.presence_of_element_located(("id", self.babyPhoto))
+                EC.presence_of_element_located(("id", self.deleteBabyProfileButton))
             )
-            self.driver.find_element("id", self.babyPhoto)
+            self.driver.find_element("id", self.deleteBabyProfileButton)
             return True
         except:
             return False
