@@ -88,7 +88,7 @@ class CoveredFaceDetectionCase2(BaseTestCase):
 
 		pixsee_settings_page.click_covered_face_detection()
 		# check if is in discard dialog
-		if covered_face_detection_page.is_switch_on() == "true":
+		if covered_face_detection_page.is_switch_on() :
 			covered_face_detection_page.click_switch()
 			covered_face_detection_page.click_turn_off()
 			pixsee_settings_page.click_covered_face_detection()

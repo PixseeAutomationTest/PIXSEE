@@ -112,9 +112,9 @@ class BabyMonitorPage():
     def is_in_baby_monitor_page(self):
         try:
             WebDriverWait(self.driver, base.wait_time).until(
-                EC.presence_of_element_located((AppiumBy.ID, self.liveStreamScreen))
+                EC.presence_of_element_located((AppiumBy.ID, self.musicButton))
             )
-            self.driver.find_element(AppiumBy.ID, self.liveStreamScreen)
+            self.driver.find_element(AppiumBy.ID, self.musicButton)
             return True
 
         except:
