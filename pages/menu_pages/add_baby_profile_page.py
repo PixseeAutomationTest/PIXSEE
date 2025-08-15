@@ -457,3 +457,4 @@ class AddBabyProfilePage():
         self.select_nation(random.randint(1, 58))
         self.select_relative(random.randint(1, 10))
         self.click_finish()
+        time.sleep(5)

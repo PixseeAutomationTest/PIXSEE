@@ -159,7 +159,7 @@ class WifiSettingsCase2(BaseTestCase):
 		# check header text
 		try:
 			header_text = wifi_settings_page.header_text()
-			hint = self.get_string("wifi_settings")
+			hint = self.get_string("connect_wifi")
 			self.assertEqual(header_text, hint)
 			print("header text correct")
 		except AssertionError:

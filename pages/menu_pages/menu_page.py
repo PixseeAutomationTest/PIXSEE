@@ -150,7 +150,7 @@ class MenuPage():
 			EC.presence_of_element_located(("id", self.logoutButton))
 		)
 		self.driver.find_element(AppiumBy.ID, self.logoutButton).click()
-		time.sleep(1)
+		time.sleep(5)
 
 	def get_members_button_text(self):
 		WebDriverWait(self.driver, base.wait_time).until(

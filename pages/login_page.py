@@ -7,6 +7,7 @@ class LoginPage():
     def __init__(self, driver):
         self.driver = driver
 
+        self.title = "com.compal.bioslab.pixsee.pixm01:id/sign_in_title"
         self.emailField = "com.compal.bioslab.pixsee.pixm01:id/signInEmailField"
         self.passwordField = "com.compal.bioslab.pixsee.pixm01:id/signInPasswordField"
         self.signInButton = "com.compal.bioslab.pixsee.pixm01:id/btSignIn"
@@ -56,7 +57,7 @@ class LoginPage():
             )
             element = self.driver.find_element("id", self.emailErrorText)
             return element.text
-        except AssertionError :
+        except :
             return None
 
     def get_password_error_text(self):
@@ -66,5 +67,14 @@ class LoginPage():
             )
             element = self.driver.find_element("id", self.passwordErrorText)
             return element.text
-        except AssertionError:
+        except:
             return None
+
+    def is_in_login_page(self):
+        try:
+            WebDriverWait(self.driver, base.wait_time).until(
+                EC.presence_of_element_located(("id", self.title))
+            )
+            return True
+        except:
+            return False

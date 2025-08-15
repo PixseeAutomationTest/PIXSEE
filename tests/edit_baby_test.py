@@ -10,7 +10,7 @@ from pages.download_account_data_page import DownloadAccountDataPage
 
 import time
 import random
-
+import unittest
 # The tests in this TestCase will add a new baby profile first..
 class EditBabyTestWithAdding(BaseTestCase):
     def __init__(self, methodName='runTest', language="zh", locale="TW"):
@@ -36,6 +36,8 @@ class EditBabyTestWithAdding(BaseTestCase):
             baby_monitor_page.click_home()
             menu_page.click_baby_add()
             add_baby_profile_page.add_new_baby()
+            if baby_timeline_page.has_frame_tutor():
+                self.click_middle()
             baby_timeline_page.click_menu()
             menu_page.click_baby_edit()
         except Exception as e:
@@ -45,7 +47,7 @@ class EditBabyTestWithAdding(BaseTestCase):
         try:
             baby_monitor_page = BabyMonitorPage(self.driver)
             edit_baby_profile_page = EditBabyProfilePage(self.driver)
-            delete_baby_profile_page = DeleteProfilePage(self.driver)
+            delete_profile_page = DeleteProfilePage(self.driver)
 
             self.assertTrue(edit_baby_profile_page.is_in_edit_baby_profile_page(), "Can't go to Edit Baby Profile Page")
 
@@ -64,18 +66,18 @@ class EditBabyTestWithAdding(BaseTestCase):
             self.assertEqual(edit_baby_profile_page.get_dialog_yes_button_text(), self.get_string("delete_baby_dialog_btn_delete_baby"), "\"Yes, delete baby's profile\" Button is not properly displayed")
             self.assertEqual(edit_baby_profile_page.get_dialog_cancel_button_text(), self.get_string("cancel"), "\"Cancel\" Button is not properly displayed")
 
-            '''Go to Delete Baby Profile and verify content'''
+            '''Go to Delete Profile and verify content'''
             edit_baby_profile_page.click_dialog_yes()
-            self.assertTrue(delete_baby_profile_page.is_in_delete_baby_profile_page(), "Can't automatically go to Delete Baby Profile Page from Edit Baby Profile Page")
-            self.assertEqual(delete_baby_profile_page.get_page_title(), self.get_string("delete_baby_title"), "Text \"Delete baby’s profile\" is not properly displayed")
-            self.assertEqual(delete_baby_profile_page.get_warning_text(), (self.get_string("delete_baby_warning") + " " + self.get_string("delete_warning_instruction")).replace("\\n", "\n"), "Warning Hint is not properly displayed")
-            self.assertEqual(delete_baby_profile_page.get_check_info_text(), self.get_string("delete_baby_check"), "Text \"Your baby’s data will be gone forever and cannot be recovered.\" is not properly displayed")
-            self.assertEqual(delete_baby_profile_page.get_delete_profile_button_text(), self.get_string("delete_baby_btn_delete"), "\"Delete baby's profile\" Button is not properly displayed")
-            self.assertEqual(delete_baby_profile_page.get_cancel_button_text(), self.get_string("cancel"), "\"Cancel\" Button is not properly displayed")
+            self.assertTrue(delete_profile_page.is_in_delete_profile_page(), "Can't automatically go to Delete Baby Profile Page from Edit Baby Profile Page")
+            self.assertEqual(delete_profile_page.get_page_title(), self.get_string("delete_baby_title"), "Text \"Delete baby’s profile\" is not properly displayed")
+            self.assertEqual(delete_profile_page.get_warning_text().replace("\n", "\\n"), self.get_string("delete_baby_warning") + " " + self.get_string("delete_warning_instruction"), "Warning Hint is not properly displayed")
+            self.assertEqual(delete_profile_page.get_check_info_text(), self.get_string("delete_baby_check"), "Text \"Your baby’s data will be gone forever and cannot be recovered.\" is not properly displayed")
+            self.assertEqual(delete_profile_page.get_delete_profile_button_text(), self.get_string("delete_baby_btn_delete"), "\"Delete baby's profile\" Button is not properly displayed")
+            self.assertEqual(delete_profile_page.get_cancel_button_text(), self.get_string("cancel"), "\"Cancel\" Button is not properly displayed")
 
             '''Click Delete Baby Profile Button'''
-            delete_baby_profile_page.click_check()
-            delete_baby_profile_page.click_delete_profile()
+            delete_profile_page.click_check()
+            delete_profile_page.click_delete_profile()
 
             '''Go to Baby monitor page'''
             self.assertTrue(baby_monitor_page.is_in_baby_monitor_page(), "Can't automatically go to Baby Monitor Page after deleting a baby profile")
@@ -92,7 +94,7 @@ class EditBabyTestWithAdding(BaseTestCase):
             menu_page = MenuPage(self.driver)
             add_baby_profile_page = AddBabyProfilePage(self.driver)
             edit_baby_profile_page = EditBabyProfilePage(self.driver)
-            delete_baby_profile_page = DeleteProfilePage(self.driver)
+            delete_profile_page = DeleteProfilePage(self.driver)
 
             self.assertTrue(edit_baby_profile_page.is_in_edit_baby_profile_page(), "Can't go to Edit Baby Profile Page")
 
@@ -142,8 +144,8 @@ class EditBabyTestWithAdding(BaseTestCase):
             '''Delete the baby profile to let the next test can run properly'''
             edit_baby_profile_page.click_delete_baby_profile()
             edit_baby_profile_page.click_dialog_yes()
-            delete_baby_profile_page.click_check()
-            delete_baby_profile_page.click_delete_profile()
+            delete_profile_page.click_check()
+            delete_profile_page.click_delete_profile()
             time.sleep(5)
 
         except AssertionError as ae:
@@ -158,7 +160,7 @@ class EditBabyTestWithAdding(BaseTestCase):
             menu_page = MenuPage(self.driver)
             add_baby_profile_page = AddBabyProfilePage(self.driver)
             edit_baby_profile_page = EditBabyProfilePage(self.driver)
-            delete_baby_profile_page = DeleteProfilePage(self.driver)
+            delete_profile_page = DeleteProfilePage(self.driver)
 
             self.assertTrue(edit_baby_profile_page.is_in_edit_baby_profile_page(), "Can't go to Edit Baby Profile Page")
 
@@ -208,8 +210,8 @@ class EditBabyTestWithAdding(BaseTestCase):
             '''Delete the baby profile to let the next test can run properly'''
             edit_baby_profile_page.click_delete_baby_profile()
             edit_baby_profile_page.click_dialog_yes()
-            delete_baby_profile_page.click_check()
-            delete_baby_profile_page.click_delete_profile()
+            delete_profile_page.click_check()
+            delete_profile_page.click_delete_profile()
             time.sleep(5)
 
         except AssertionError as ae:
@@ -281,7 +283,7 @@ class EditBabyTestWithoutAdding(BaseTestCase):
     def test_delete_baby_profile_page_with_cancel(self):
         try:
             edit_baby_profile_page = EditBabyProfilePage(self.driver)
-            delete_baby_profile_page = DeleteProfilePage(self.driver)
+            delete_profile_page = DeleteProfilePage(self.driver)
 
             self.assertTrue(edit_baby_profile_page.is_in_edit_baby_profile_page(), "Can't go to Edit Baby Profile Page")
 
@@ -302,15 +304,15 @@ class EditBabyTestWithoutAdding(BaseTestCase):
 
             '''Go to Delete Baby Profile and verify content'''
             edit_baby_profile_page.click_dialog_yes()
-            self.assertTrue(delete_baby_profile_page.is_in_delete_baby_profile_page(), "Can't automatically go to Delete Baby Profile Page from Edit Baby Profile Page")
-            self.assertEqual(delete_baby_profile_page.get_page_title(), self.get_string("delete_baby_title"), "Text \"Delete baby’s profile\" is not properly displayed")
-            self.assertEqual(delete_baby_profile_page.get_warning_text(), (self.get_string("delete_baby_warning") + " " + self.get_string("delete_warning_instruction")).replace("\\n", "\n"), "Warning Hint is not properly displayed")
-            self.assertEqual(delete_baby_profile_page.get_check_info_text(), self.get_string("delete_baby_check"), "Text \"Your baby’s data will be gone forever and cannot be recovered.\" is not properly displayed")
-            self.assertEqual(delete_baby_profile_page.get_delete_profile_button_text(), self.get_string("delete_baby_btn_delete"), "\"Delete baby's profile\" Button is not properly displayed")
-            self.assertEqual(delete_baby_profile_page.get_cancel_button_text(), self.get_string("cancel"), "\"Cancel\" Button is not properly displayed")
+            self.assertTrue(delete_profile_page.is_in_delete_profile_page(), "Can't automatically go to Delete Baby Profile Page from Edit Baby Profile Page")
+            self.assertEqual(delete_profile_page.get_page_title(), self.get_string("delete_baby_title"), "Text \"Delete baby’s profile\" is not properly displayed")
+            self.assertEqual(delete_profile_page.get_warning_text().replace("\n", "\\n"), self.get_string("delete_baby_warning") + " " + self.get_string("delete_warning_instruction"), "Warning Hint is not properly displayed")
+            self.assertEqual(delete_profile_page.get_check_info_text(), self.get_string("delete_baby_check"), "Text \"Your baby’s data will be gone forever and cannot be recovered.\" is not properly displayed")
+            self.assertEqual(delete_profile_page.get_delete_profile_button_text(), self.get_string("delete_baby_btn_delete"), "\"Delete baby's profile\" Button is not properly displayed")
+            self.assertEqual(delete_profile_page.get_cancel_button_text(), self.get_string("cancel"), "\"Cancel\" Button is not properly displayed")
 
             '''Click Cancel Button'''
-            delete_baby_profile_page.click_cancel()
+            delete_profile_page.click_cancel()
             self.assertTrue(edit_baby_profile_page.is_in_edit_baby_profile_page(), "Can't return to Edit Baby Profile Page after clicking cancel in Delete Baby Profile Page")
 
         except AssertionError as ae:
@@ -393,12 +395,12 @@ class EditBabyTestWithoutAdding(BaseTestCase):
             raise e
 
     # Please confirm the baby profile has photos from over 280 days ago before running this test.
-    # TODO: Uncompleted function. Wait App bug to be fixed.
+    @unittest.skip("Incomplete test: Because the app bug found (2025/7/30).")
     def test_change_baby_birthday_dialog_cancel(self):
         pass
 
     # Please confirm the baby profile has photos from over 280 days ago before running this test.
-    # TODO: Uncompleted function. Wait App bug to be fixed.
+    @unittest.skip("Incomplete test: Because the app bug found (2025/7/30).")
     def test_change_baby_birthday_dialog_ok(self):
         pass
 

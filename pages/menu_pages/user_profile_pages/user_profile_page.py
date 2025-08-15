@@ -19,7 +19,7 @@ class UserProfilePage():
         self.changePasswordButton = "com.compal.bioslab.pixsee.pixm01:id/tvForgotPasswordUserProfileEditAct"
         self.birthdayButton = "com.compal.bioslab.pixsee.pixm01:id/etBirthdayUserProfileEditAct"
         self.addBackupEmailButton = "com.compal.bioslab.pixsee.pixm01:id/btAddBackupEmail"
-        self.changeBackupEmailButton = "com.compal.bioslab.pixsee.pixm01:id/etBackupEmail"
+        self.changeBackupEmailButton = "com.compal.bioslab.pixsee.pixm01:id/tvChangeBackupEmail"
         self.deleteAccountButton = "com.compal.bioslab.pixsee.pixm01:id/btDeleteAccountProfileEditAct"
 
         '''Calendar'''
@@ -135,6 +135,27 @@ class UserProfilePage():
         buttons = dialog.find_elements("class name", self.addBackupEmailDialogButton_classname)
         buttons[1].click()
 
+    def click_delete_dialog_no(self):
+        WebDriverWait(self.driver, base.wait_time).until(
+            EC.presence_of_element_located(("id", self.deleteAccountDialogNoButton))
+        )
+        element = self.driver.find_element("id", self.deleteAccountDialogNoButton)
+        element.click()
+
+    def click_delete_dialog_yes(self):
+        WebDriverWait(self.driver, base.wait_time).until(
+            EC.presence_of_element_located(("id", self.deleteAccountDialogYesButton))
+        )
+        element = self.driver.find_element("id", self.deleteAccountDialogYesButton)
+        element.click()
+
+    def click_delete_dialog_cancel(self):
+        WebDriverWait(self.driver, base.wait_time).until(
+            EC.presence_of_element_located(("id", self.deleteAccountDialogCancelButton))
+        )
+        element = self.driver.find_element("id", self.deleteAccountDialogCancelButton)
+        element.click()
+
     def click_photos_category(self):
         WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("xpath", self.photosCategory_xpath))
@@ -244,6 +265,48 @@ class UserProfilePage():
         dialog = self.driver.find_element("xpath", self.addBackupEmailDialog_xpath)
         buttons = dialog.find_elements("class name", self.addBackupEmailDialogButton_classname)
         element = buttons[1].find_element("class name", self.addBackupEmailDialogText_classname)
+        return element.text
+
+    def get_delete_dialog_title(self):
+        WebDriverWait(self.driver, base.wait_time).until(
+            EC.presence_of_element_located(("id", self.deleteAccountDialogTitle))
+        )
+        element = self.driver.find_element("id", self.deleteAccountDialogTitle)
+        return element.text
+
+    def get_delete_dialog_message(self):
+        WebDriverWait(self.driver, base.wait_time).until(
+            EC.presence_of_element_located(("id", self.deleteAccountDialogMessage))
+        )
+        element = self.driver.find_element("id", self.deleteAccountDialogMessage)
+        return element.text
+
+    def get_delete_dialog_warning_message(self):
+        WebDriverWait(self.driver, base.wait_time).until(
+            EC.presence_of_element_located(("id", self.deleteAccountDialogWarningMessage))
+        )
+        element = self.driver.find_element("id", self.deleteAccountDialogWarningMessage)
+        return element.text.removeprefix("ICON_WARNING").strip() # Warning message has an icon prefix needs to remove it
+
+    def get_delete_dialog_no_button_text(self):
+        WebDriverWait(self.driver, base.wait_time).until(
+            EC.presence_of_element_located(("id", self.deleteAccountDialogNoButton))
+        )
+        element = self.driver.find_element("id", self.deleteAccountDialogNoButton)
+        return element.text
+
+    def get_delete_dialog_yes_button_text(self):
+        WebDriverWait(self.driver, base.wait_time).until(
+            EC.presence_of_element_located(("id", self.deleteAccountDialogYesButton))
+        )
+        element = self.driver.find_element("id", self.deleteAccountDialogYesButton)
+        return element.text
+
+    def get_delete_dialog_cancel_button_text(self):
+        WebDriverWait(self.driver, base.wait_time).until(
+            EC.presence_of_element_located(("id", self.deleteAccountDialogCancelButton))
+        )
+        element = self.driver.find_element("id", self.deleteAccountDialogCancelButton)
         return element.text
 
     def select_avatar(self, number=0):

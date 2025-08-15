@@ -2,6 +2,7 @@ import unittest
 from htmltestreport import HTMLTestReport
 
 from tests.login_test import LoginCase
+from tests.user_profile_test import UserProfileTest
 from tests.add_baby_test import AddBabyTest
 from tests.edit_baby_test import EditBabyTestWithAdding, EditBabyTestWithoutAdding
 from tests.pixsee_settings_test import PixseeSettingsTest
@@ -31,6 +32,9 @@ def make_test_class(testcase, language, locale):
     class CustomTestCase(testcase):
         def __init__(self, methodName='runTest'):
             super().__init__(methodName, language=language, locale=locale)
+
+    CustomTestCase.__name__ = testcase.__name__
+    CustomTestCase.__qualname__ = testcase.__qualname__
     return CustomTestCase
 
 if __name__ == '__main__':
@@ -40,6 +44,7 @@ if __name__ == '__main__':
         loader = unittest.TestLoader()
         suite = unittest.TestSuite()
         # Include all test cases in the suite
+        suite.addTest(loader.loadTestsFromTestCase(make_test_class(UserProfileTest, language[i], locale[i])))
         suite.addTests(loader.loadTestsFromTestCase(make_test_class(AddBabyTest, language[i], locale[i])))
         suite.addTests(loader.loadTestsFromTestCase(make_test_class(EditBabyTestWithAdding, language[i], locale[i])))
         suite.addTests(loader.loadTestsFromTestCase(make_test_class(EditBabyTestWithoutAdding, language[i], locale[i])))
