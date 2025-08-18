@@ -76,7 +76,7 @@ class AddBabyTest(BaseTestCase):
             new_baby_name = add_baby_profile_page.get_baby_name_text()
 
             '''Edit birthday'''
-            add_baby_profile_page.select_baby_birthday(2020, 5, 31) # enter a random date
+            add_baby_profile_page.select_baby_birthday(self.locale, 2020, 5, 31) # enter a random date
             new_baby_birthday = add_baby_profile_page.get_baby_birthday_text()
 
             '''Select nation'''
@@ -155,7 +155,7 @@ class AddBabyTest(BaseTestCase):
             add_baby_profile_page.input_baby_name()
 
             '''Edit birthday'''
-            add_baby_profile_page.select_baby_birthday(2020, 5, 31) # enter a random date
+            add_baby_profile_page.select_baby_birthday(self.locale, 2020, 5, 31) # enter a random date
 
             '''Select nation'''
             add_baby_profile_page.select_nation(random.randint(1, 58))
@@ -221,7 +221,7 @@ class AddBabyTest(BaseTestCase):
             new_baby_name = add_baby_profile_page.get_baby_name_text()
 
             '''Edit birthday'''
-            add_baby_profile_page.select_baby_birthday(2020, 5, 31) # enter a random date
+            add_baby_profile_page.select_baby_birthday(self.locale, 2020, 5, 31) # enter a random date
             new_baby_birthday = add_baby_profile_page.get_baby_birthday_text()
 
             '''Select nation'''

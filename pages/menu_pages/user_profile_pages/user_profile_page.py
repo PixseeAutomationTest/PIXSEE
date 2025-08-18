@@ -316,7 +316,7 @@ class UserProfilePage():
         time.sleep(1)
         self.click_edit_photo_done()
 
-    def select_birthday(self, year=datetime.date.today().year, month=datetime.date.today().month, day=datetime.date.today().day):
+    def select_birthday(self, locale, year=datetime.date.today().year, month=datetime.date.today().month, day=datetime.date.today().day):
         # Validate the input date
         try:
             target_date = datetime.date(year, month, day)
@@ -366,7 +366,10 @@ class UserProfilePage():
                 raise ValueError(f"Unsupported month format: {month_text}")
 
         first_day_elem = self.driver.find_element("xpath", self.calendarOneMonth_xpath).find_element("class name", self.calendarOneDay_classname)
-        first_date_str = first_day_elem.get_attribute("content-desc").split("selected")[0].strip()
+        if locale != "CN":
+            first_date_str = first_day_elem.get_attribute("content-desc").split("selected")[0].strip()
+        else:
+            first_date_str = first_day_elem.get_attribute("content-desc").split("已选")[0].strip()
         month_part = first_date_str.split()[1]
         if month_part.startswith("M") and month_part[1:].isdigit():
             target_date_str = f"{day:02d} M{month:02d} {year}"
@@ -377,7 +380,10 @@ class UserProfilePage():
         while True:
             try:
                 if month == current_month_num and day == int(day_picker.text):
-                    element = self.driver.find_element("accessibility id", target_date_str + " selected")
+                    if locale != "CN":
+                        element = self.driver.find_element("accessibility id", target_date_str + " selected")
+                    else:
+                        element = self.driver.find_element("accessibility id", target_date_str + "已选")
                     element.click()
                 else:
                     element = self.driver.find_element("accessibility id", target_date_str)
@@ -388,7 +394,10 @@ class UserProfilePage():
             except:
                 calendar_current_month = self.driver.find_element("xpath", self.calendarOneMonth_xpath)
                 element = calendar_current_month.find_element("class name", self.calendarOneDay_classname)
-                first_date_str = element.get_attribute("content-desc").split("selected")[0].strip()
+                if locale != "CN":
+                    first_date_str = element.get_attribute("content-desc").split("selected")[0].strip()
+                else:
+                    first_date_str = element.get_attribute("content-desc").split("已选")[0].strip()
                 month_part = first_date_str.split()[1]
                 if month_part.startswith("M") and month_part[1:].isdigit():
                     first_date = datetime.datetime.strptime(first_date_str.replace("M", ""), "%d %m %Y").date()

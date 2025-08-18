@@ -4,7 +4,7 @@ from pages.baby_monitor_page import BabyMonitorPage
 from pages.baby_timeline_page import BabyTimelinePage
 from pages.menu_pages.menu_page import MenuPage
 from pages.menu_pages.add_baby_profile_page import AddBabyProfilePage
-from pages.menu_pages.edit_baby_profile_pages.edit_baby_profile_page import EditBabyProfilePage
+from pages.menu_pages.edit_baby_profile_page import EditBabyProfilePage
 from pages.delete_profile_page import DeleteProfilePage
 from pages.download_account_data_page import DownloadAccountDataPage
 
@@ -25,7 +25,6 @@ class EditBabyTestWithAdding(BaseTestCase):
         menu_page = MenuPage(self.driver)
         add_baby_profile_page = AddBabyProfilePage(self.driver)
         baby_timeline_page = BabyTimelinePage(self.driver)
-        edit_baby_profile_page = EditBabyProfilePage(self.driver)
         try:
             while self.driver.current_package != self.driver.capabilities.get("appPackage"):
                 self.driver.terminate_app(self.driver.current_package)
@@ -35,7 +34,7 @@ class EditBabyTestWithAdding(BaseTestCase):
                 self.open_app()
             baby_monitor_page.click_home()
             menu_page.click_baby_add()
-            add_baby_profile_page.add_new_baby()
+            add_baby_profile_page.add_new_baby(self.locale)
             if baby_timeline_page.has_frame_tutor():
                 self.click_middle()
             baby_timeline_page.click_menu()
@@ -125,7 +124,7 @@ class EditBabyTestWithAdding(BaseTestCase):
             else:
                 edit_baby_profile_page.click_gender_girl()
             edit_baby_profile_page.input_baby_name()
-            edit_baby_profile_page.select_baby_birthday(2024, 6, 30)
+            edit_baby_profile_page.select_baby_birthday(self.locale, 2024, 6, 30)
             edit_baby_profile_page.select_nation(random.randint(1, 58))
             edit_baby_profile_page.select_relative(random.randint(1, 10))
 
@@ -184,7 +183,7 @@ class EditBabyTestWithAdding(BaseTestCase):
             else:
                 edit_baby_profile_page.click_gender_girl()
             edit_baby_profile_page.input_baby_name()
-            edit_baby_profile_page.select_baby_birthday(2024, 6, 30)
+            edit_baby_profile_page.select_baby_birthday(self.locale, 2024, 6, 30)
             edit_baby_profile_page.select_nation(random.randint(1, 58))
             edit_baby_profile_page.select_relative(random.randint(1, 10))
 

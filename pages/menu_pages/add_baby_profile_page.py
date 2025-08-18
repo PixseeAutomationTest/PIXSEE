@@ -273,8 +273,7 @@ class AddBabyProfilePage():
         time.sleep(1)
         self.click_edit_photo_done()
 
-    def select_baby_birthday(self, year=datetime.date.today().year, month=datetime.date.today().month,
-                             day=datetime.date.today().day):
+    def select_baby_birthday(self, locale, year=datetime.date.today().year, month=datetime.date.today().month, day=datetime.date.today().day):
         # Validate the input date
         try:
             target_date = datetime.date(year, month, day)
@@ -323,9 +322,11 @@ class AddBabyProfilePage():
             else:
                 raise ValueError(f"Unsupported month format: {month_text}")
 
-        first_day_elem = self.driver.find_element("xpath", self.calendarOneMonth_xpath).find_element("class name",
-                                                                                                     self.calendarOneDay_classname)
-        first_date_str = first_day_elem.get_attribute("content-desc").split("selected")[0].strip()
+        first_day_elem = self.driver.find_element("xpath", self.calendarOneMonth_xpath).find_element("class name", self.calendarOneDay_classname)
+        if locale != "CN":
+            first_date_str = first_day_elem.get_attribute("content-desc").split("selected")[0].strip()
+        else:
+            first_date_str = first_day_elem.get_attribute("content-desc").split("已选")[0].strip()
         month_part = first_date_str.split()[1]
         if month_part.startswith("M") and month_part[1:].isdigit():
             target_date_str = f"{day:02d} M{month:02d} {year}"
@@ -336,7 +337,10 @@ class AddBabyProfilePage():
         while True:
             try:
                 if month == current_month_num and day == int(day_picker.text):
-                    element = self.driver.find_element("accessibility id", target_date_str + " selected")
+                    if locale != "CN":
+                        element = self.driver.find_element("accessibility id", target_date_str + " selected")
+                    else:
+                        element = self.driver.find_element("accessibility id", target_date_str + "已选")
                     element.click()
                 else:
                     element = self.driver.find_element("accessibility id", target_date_str)
@@ -347,7 +351,10 @@ class AddBabyProfilePage():
             except:
                 calendar_current_month = self.driver.find_element("xpath", self.calendarOneMonth_xpath)
                 element = calendar_current_month.find_element("class name", self.calendarOneDay_classname)
-                first_date_str = element.get_attribute("content-desc").split("selected")[0].strip()
+                if locale != "CN":
+                    first_date_str = element.get_attribute("content-desc").split("selected")[0].strip()
+                else:
+                    first_date_str = element.get_attribute("content-desc").split("已选")[0].strip()
                 month_part = first_date_str.split()[1]
                 if month_part.startswith("M") and month_part[1:].isdigit():
                     first_date = datetime.datetime.strptime(first_date_str.replace("M", ""), "%d %m %Y").date()
@@ -473,14 +480,14 @@ class AddBabyProfilePage():
         except:
             return False
 
-    def add_new_baby(self, baby_name = "Test_Baby 01"):
+    def add_new_baby(self, locale, baby_name = "Test_Baby 01"):
         self.select_avatar()
         if random.choice([True, False]):
             self.click_gender_boy()
         else:
             self.click_gender_girl()
         self.input_baby_name(baby_name)
-        self.select_baby_birthday()
+        self.select_baby_birthday(locale)
         time.sleep(3)
         self.select_nation(random.randint(1, 58))
         self.select_relative(random.randint(1, 10))
