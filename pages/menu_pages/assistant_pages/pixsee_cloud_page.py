@@ -104,7 +104,7 @@ class PixseeCloudPage():
     def is_in_pixsee_cloud_page(self):
         try:
             WebDriverWait(self.driver, 10).until(
-                EC.presence_of_element_located(("id", self.Story))
+                EC.presence_of_element_located(("id", self.MBused))
             )
             return True
         except :
@@ -286,7 +286,7 @@ class PixseeCloudPage():
             return round(used, 1), round(total, 1)
         else:
             num = float(numbers[0]) # if only one number is found
-            return round(num, 1)
+            return round(num, 3)
 
     def photo_color(self):
         element_color = self.driver.find_element("id", self.PhotoIndicator)
