@@ -19,7 +19,7 @@ wait_time = 5
 def start_driver(language, locale, no_reset = True):
     capabilities = UiAutomator2Options()
     capabilities.platform_name = "Android"
-    capabilities.device_name = "emulator-5554"
+    capabilities.device_name = "38161FDJG00DXJ"
     capabilities.language = language
     capabilities.locale = locale
 

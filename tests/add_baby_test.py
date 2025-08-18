@@ -4,7 +4,7 @@ from pages.baby_monitor_page import BabyMonitorPage
 from pages.baby_timeline_page import BabyTimelinePage
 from pages.menu_pages.menu_page import MenuPage
 from pages.menu_pages.add_baby_profile_page import AddBabyProfilePage
-from pages.menu_pages.edit_baby_profile_pages.edit_baby_profile_page import EditBabyProfilePage
+from pages.menu_pages.edit_baby_profile_page import EditBabyProfilePage
 from pages.delete_profile_page import DeleteProfilePage
 import random
 import time
@@ -76,7 +76,7 @@ class AddBabyTest(BaseTestCase):
             new_baby_name = add_baby_profile_page.get_baby_name_text()
 
             '''Edit birthday'''
-            add_baby_profile_page.select_baby_birthday(2020, 5, 31) # enter a random date
+            add_baby_profile_page.select_baby_birthday(self.locale, 2020, 5, 31) # enter a random date
             new_baby_birthday = add_baby_profile_page.get_baby_birthday_text()
 
             '''Select nation'''
@@ -155,7 +155,7 @@ class AddBabyTest(BaseTestCase):
             add_baby_profile_page.input_baby_name()
 
             '''Edit birthday'''
-            add_baby_profile_page.select_baby_birthday(2020, 5, 31) # enter a random date
+            add_baby_profile_page.select_baby_birthday(self.locale, 2020, 5, 31) # enter a random date
 
             '''Select nation'''
             add_baby_profile_page.select_nation(random.randint(1, 58))
@@ -221,7 +221,7 @@ class AddBabyTest(BaseTestCase):
             new_baby_name = add_baby_profile_page.get_baby_name_text()
 
             '''Edit birthday'''
-            add_baby_profile_page.select_baby_birthday(2020, 5, 31) # enter a random date
+            add_baby_profile_page.select_baby_birthday(self.locale, 2020, 5, 31) # enter a random date
             new_baby_birthday = add_baby_profile_page.get_baby_birthday_text()
 
             '''Select nation'''

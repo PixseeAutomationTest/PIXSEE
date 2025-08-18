@@ -508,7 +508,7 @@ class UserProfileTest(BaseTestCase):
             '''Change user avatar, name and birthday'''
             user_profile_page.select_avatar()
             user_profile_page.input_user_name()
-            user_profile_page.select_birthday()
+            user_profile_page.select_birthday(self.locale)
             new_user_name = user_profile_page.get_user_name_text()
             new_user_birthday = user_profile_page.get_user_birthday_text()
 
@@ -550,7 +550,7 @@ class UserProfileTest(BaseTestCase):
             '''Change user avatar, name and birthday'''
             user_profile_page.select_avatar()
             user_profile_page.input_user_name()
-            user_profile_page.select_birthday()
+            user_profile_page.select_birthday(self.locale)
 
             '''Save changes and verify that changes are saved'''
             user_profile_page.click_return()

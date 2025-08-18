@@ -7,7 +7,7 @@ from pages.menu_pages.pixsee_settings_pages.voice_service_pages.voice_service_pa
 from pages.menu_pages.pixsee_settings_pages.voice_service_pages.voice_command_page import VoiceCommandPage
 
 class VoiceServiceTest(BaseTestCase):
-    def __init__(self, methodName='runTest', language="zh", locale="TW"):
+    def __init__(self, methodName='runTest', language="en", locale="US"):
         super().__init__(methodName)
         self.language = language
         self.locale = locale
@@ -221,7 +221,13 @@ class VoiceServiceTest(BaseTestCase):
             self.assertNotEqual(before_english_checkbox_status, before_chinese_checkbox_status, "English and Chinese checkboxes can't be in the same status")
 
             '''Click English checkbox or Chinese checkbox'''
-            now_language = "tw text" if before_english_checkbox_status else "en-us text"
+            if before_english_checkbox_status:
+                if self.locale == "CN":
+                    now_language = "cn text"
+                else:
+                    now_language = "tw text"
+            else:
+                now_language = "en-us text"
             if before_english_checkbox_status:
                 voice_command_page.click_chinese_checkbox()
             else:
@@ -285,7 +291,13 @@ class VoiceServiceTest(BaseTestCase):
             self.assertNotEqual(before_english_checkbox_status, before_chinese_checkbox_status, "English and Chinese checkboxes can't be in the same status")
 
             '''Click English checkbox or Chinese checkbox'''
-            now_language = "tw text" if before_english_checkbox_status else "en-us text"
+            if before_english_checkbox_status:
+                if self.locale == "CN":
+                    now_language = "cn text"
+                else:
+                    now_language = "tw text"
+            else:
+                now_language = "en-us text"
             if before_english_checkbox_status:
                 voice_command_page.click_chinese_checkbox()
             else:
@@ -348,7 +360,13 @@ class VoiceServiceTest(BaseTestCase):
             self.assertNotEqual(before_english_checkbox_status, before_chinese_checkbox_status, "English and Chinese checkboxes can't be in the same status")
 
             '''Click English checkbox or Chinese checkbox'''
-            now_language = "tw text" if before_english_checkbox_status else "en-us text"
+            if before_english_checkbox_status:
+                if self.locale == "CN":
+                    now_language = "cn text"
+                else:
+                    now_language = "tw text"
+            else:
+                now_language = "en-us text"
             if before_english_checkbox_status:
                 voice_command_page.click_chinese_checkbox()
             else:
@@ -387,7 +405,6 @@ class VoiceServiceTest(BaseTestCase):
             self.assertTrue(voice_service_page.is_in_voice_service_page(), "Can't go to Voice Service Page")
 
             '''Go to Voice Command Page'''
-            before_detection_switch_status = voice_service_page.get_detection_switch_status()
             if not voice_service_page.get_detection_switch_status():
                 voice_service_page.click_detection_switch()
             voice_service_page.click_voice_command_button()
@@ -405,7 +422,13 @@ class VoiceServiceTest(BaseTestCase):
             self.assertNotEqual(english_checkbox_status, chinese_checkbox_status, "English and Chinese checkboxes can't be in the same status")
 
             '''Click English checkbox or Chinese checkbox'''
-            now_language = "tw text" if chinese_checkbox_status else "en-us text"
+            if chinese_checkbox_status:
+                if self.locale == "CN":
+                    now_language = "cn text"
+                else:
+                    now_language = "tw text"
+            else:
+                now_language = "en-us text"
             self.assertFalse(voice_command_page.get_save_button_enabled(), "button \"Save\" is enable before changing language checkbox")
 
             self.assertEqual(voice_command_page.get_voice_assistant_text(), self.get_string("voice_command_tip", now_language), "Text \"Voice assistant (we provide 5 commands\" is not properly displayed")

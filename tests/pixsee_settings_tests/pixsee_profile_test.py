@@ -14,7 +14,7 @@ import time
 import re
 
 class PixseeProfileTest(BaseTestCase):
-    def __init__(self, methodName='runTest', language="zh", locale="TW"):
+    def __init__(self, methodName='runTest', language="zh", locale="CN"):
         super().__init__(methodName)
         self.language = language
         self.locale = locale
