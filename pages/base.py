@@ -32,10 +32,22 @@ def start_driver(language, locale, no_reset = True):
 
 class BaseTestCase(unittest.TestCase):
     def setUp(self, language = "zh", locale = "TW", no_reset=True):
+        wait_time_for_change_language = False
+        current_locale = subprocess.check_output(
+            ["adb", "shell", "getprop", "persist.sys.locale"],
+            encoding="utf-8"
+        ).strip()
+        if current_locale:
+            parts = current_locale.split("-")
+            if parts[0] != language:
+                wait_time_for_change_language = True
+            elif len(parts) == 3 and parts[2] != locale:
+                wait_time_for_change_language = True
         self.tutor_id = "com.compal.bioslab.pixsee.pixm01:id/tvDescription"
         self.driver = start_driver(language, locale, no_reset)
         self.driver.update_settings({"waitForIdleTimeout": 300})
-        time.sleep(wait_time)
+        if wait_time_for_change_language:
+            time.sleep(wait_time)
     def open_app(self):
         self.driver.activate_app(self.driver.capabilities.get("appPackage"))
         time.sleep(10)
