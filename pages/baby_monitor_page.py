@@ -28,8 +28,10 @@ class BabyMonitorPage():
         self.connectingStatusText = "com.compal.bioslab.pixsee.pixm01:id/tvConnectingStatus"
         self.photoUploadDialog = "com.compal.bioslab.pixsee.pixm01:id/tvSnackbarToastLabel"
 
+        self.finishupload = "com.compal.bioslab.pixsee.pixm01:id/bUploadedImageView"
+        # com.compal.bioslab.pixsee.pixm01: id / tvUploadedLabel
         self.captureButton_xpath = '//android.widget.RelativeLayout[@resource-id="com.compal.bioslab.pixsee.pixm01:id/btnSwipeCapture"]/android.widget.ImageView[2]'
-
+        self.FriendDetectionOff = "com.compal.bioslab.pixsee.pixm01:id/tvPixseeFriendsDetectionStreamStatusHome"
     def click_sleep(self):
         WebDriverWait(self.driver, base.wait_time).until(
             EC.presence_of_element_located(("id", self.sleepButton))
@@ -171,6 +173,27 @@ class BabyMonitorPage():
         button = self.driver.find_element(AppiumBy.ID, self.twoWayTalkButton)
         is_connected = button.get_attribute("enabled")
         return is_connected == "true"
+    def is_friend_detection_off(self):
+        try:
+            WebDriverWait(self.driver, base.wait_time).until(
+                EC.presence_of_element_located((AppiumBy.ID, self.FriendDetectionOff))
+            )
+            self.driver.find_element(AppiumBy.ID, self.FriendDetectionOff)
+            return True
+        except:
+            return False
+
+    def finish_uploading(self):
+        try:
+            WebDriverWait(self.driver, 30).until(
+                EC.presence_of_element_located((AppiumBy.ID, self.finishupload))
+            )
+            self.driver.find_element(AppiumBy.ID, self.finishupload)
+            return True
+        except:
+            return False
+
+
 
 
 

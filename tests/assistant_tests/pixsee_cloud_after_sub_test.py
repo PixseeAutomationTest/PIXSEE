@@ -12,13 +12,14 @@ import re
 
 
 class PixseeCloudTest3(BaseTestCase):
-    def __init__(self, methodName='runTest', language="en", locale="US"):
-        super().__init__(methodName)
-        self.language = language
-        self.locale = locale
+    @classmethod
+    def setUpClass(cls):
+        cls.language = getattr(cls, "language", "zh")
+        cls.locale = getattr(cls, "locale", "TW")
+        super().setUpClass()
 
     def setUp(self):
-        super().setUp(language=self.language, locale=self.locale)
+        super().setUp()
         baby_monitor_page = BabyMonitorPage(self.driver)
         menu_page = MenuPage(self.driver)
         assistant_page = AssistantPage(self.driver)
@@ -76,14 +77,15 @@ class PixseeCloudTest3(BaseTestCase):
             self.assertEqual(str(used_percent),pixsee_cloud_page.percent_text())
         else:
             raise AssertionError("Total storage is not 30 GB, cannot calculate used percent.")
-class PixseeCloudTest2(BaseTestCase):
-    def __init__(self, methodName='runTest', language="en", locale="US"):
-        super().__init__(methodName)
-        self.language = language
-        self.locale = locale
+class PixseeCloudTest4(BaseTestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.language = getattr(cls, "language", "zh")
+        cls.locale = getattr(cls, "locale", "TW")
+        super().setUpClass()
 
     def setUp(self):
-        super().setUp(language=self.language, locale=self.locale)
+        super().setUp()
         baby_monitor_page = BabyMonitorPage(self.driver)
         menu_page = MenuPage(self.driver)
         assistant_page = AssistantPage(self.driver)

@@ -8,13 +8,14 @@ from pages.login_page import LoginPage
 from pages.menu_pages.pixsee_settings_pages.pixsee_friends_detection_page import PixseeFriendsDetPage
 
 class PixseeFriendsDetectionCase1(BaseTestCase):
-	def __init__(self, methodName='runTest', language="zh", locale="TW"):
-		super().__init__(methodName)
-		self.language = language
-		self.locale = locale
+	@classmethod
+	def setUpClass(cls):
+		cls.language = getattr(cls, "language", "zh")
+		cls.locale = getattr(cls, "locale", "TW")
+		super().setUpClass()
 
 	def setUp(self):
-		super().setUp(language=self.language, locale=self.locale)
+		super().setUp()
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
@@ -155,13 +156,14 @@ class PixseeFriendsDetectionCase1(BaseTestCase):
 		self.check_switch_and_content(after_status, pixsee_friends_page.DetectionType)
 
 class PixseeFriendsDetectionCase2(BaseTestCase):
-	def __init__(self, methodName='runTest', language="zh", locale="TW"):
-		super().__init__(methodName)
-		self.language = language
-		self.locale = locale
+	@classmethod
+	def setUpClass(cls):
+		cls.language = getattr(cls, "language", "zh")
+		cls.locale = getattr(cls, "locale", "TW")
+		super().setUpClass()
 
 	def setUp(self):
-		super().setUp(language=self.language, locale=self.locale)
+		super().setUp()
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
