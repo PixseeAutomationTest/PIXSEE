@@ -7,13 +7,14 @@ from pages.menu_pages.pixsee_settings_pages.voice_service_pages.voice_service_pa
 from pages.menu_pages.pixsee_settings_pages.voice_service_pages.voice_command_page import VoiceCommandPage
 
 class VoiceServiceTest(BaseTestCase):
-    def __init__(self, methodName='runTest', language="en", locale="US"):
-        super().__init__(methodName)
-        self.language = language
-        self.locale = locale
+    @classmethod
+    def setUpClass(cls):
+        cls.language = getattr(cls, "language", "zh")
+        cls.locale = getattr(cls, "locale", "TW")
+        super().setUpClass()
 
     def setUp(self):
-        super().setUp(language=self.language, locale=self.locale)
+        super().setUp()
 
         baby_monitor_page = BabyMonitorPage(self.driver)
         menu_page = MenuPage(self.driver)

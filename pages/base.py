@@ -44,9 +44,21 @@ class BaseTestCase(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         if cls.driver is None:
+            wait_time_for_change_language = False
+            current_locale = subprocess.check_output(
+                ["adb", "shell", "getprop", "persist.sys.locale"],
+                encoding="utf-8"
+            ).strip()
+            if current_locale:
+                parts = current_locale.split("-")
+                if parts[0] != cls.language:
+                    wait_time_for_change_language = True
+                elif len(parts) == 3 and parts[2] != cls.locale:
+                    wait_time_for_change_language = True
             cls.driver = start_driver(language=cls.language, locale=cls.locale, no_reset=cls.no_reset)
             cls.driver.update_settings({"waitForIdleTimeout": 300})
-            time.sleep(wait_time)
+            if wait_time_for_change_language:
+                time.sleep(wait_time)
             cls.tutor_id = "com.compal.bioslab.pixsee.pixm01:id/tvDescription"
 
     # def setUp(self):
@@ -54,10 +66,21 @@ class BaseTestCase(unittest.TestCase):
     def setUp(self):
         # 如果前一個 test 把 driver 弄壞了，這裡會自動重建
         if not self.driver:
+            wait_time_for_change_language = False
+            current_locale = subprocess.check_output(
+                ["adb", "shell", "getprop", "persist.sys.locale"],
+                encoding="utf-8"
+            ).strip()
+            if current_locale:
+                parts = current_locale.split("-")
+                if parts[0] != self.language:
+                    wait_time_for_change_language = True
+                elif len(parts) == 3 and parts[2] != self.locale:
+                    wait_time_for_change_language = True
             type(self).driver = start_driver(language=self.language, locale=self.locale, no_reset=self.no_reset)
             self.driver = type(self).driver
             self.driver.update_settings({"waitForIdleTimeout": 300})
-            time.sleep(wait_time)
+            self.tutor_id = "com.compal.bioslab.pixsee.pixm01:id/tvDescription"
     def open_app(self):
         self.driver.activate_app(self.driver.capabilities.get("appPackage"))
         time.sleep(10)

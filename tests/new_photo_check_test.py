@@ -78,6 +78,9 @@ class NewPhotoCheckCase(BaseTestCase):
 		self.assertEqual(self.get_string("no_thanks_action"), photo_page.dialog_no_text(), "dialog no text is wrong")
 		# click no
 		photo_page.click_dialog_no()
+		self.go_back()
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		baby_monitor_page.click_home()
 		# time.sleep(1)
 		# self.assertFalse(photo_page.is_in_photo_page(), "photo button click failed, still in photo page")
 

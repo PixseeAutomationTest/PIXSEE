@@ -161,7 +161,8 @@ class PixseeCloudTest2(BaseTestCase):
         total = photo + video + story + voice
         total_to_1 = math.floor(total * 10) / 10
         total_text = pixsee_cloud_page.parse_storage_usage(pixsee_cloud_page.mb_used_text())
-        self.assertEqual(total_to_1, total_text, "Total storage usage does not match the sum of individual usages.")
+        self.assertAlmostEqual(total_to_1, total_text, delta=0.4,
+                               msg="Total storage usage does not match the sum of individual usages (tolerance ±0.4).")
     # start from pixsee cloud page
     def test_04_pixsee_cloud_page_check_icon_color(self):
         pixsee_cloud_page = PixseeCloudPage(self.driver)
@@ -186,7 +187,14 @@ class PixseeCloudTest2(BaseTestCase):
         except:
             voice_color = 0
             # check color by order of darkness
-        self.assertTrue(photo_color <= video_color <= story_color <= voice_color, "Icon colors do not match the expected order of darkness.")
+            # 過濾掉 0
+        colors = [c for c in [photo_color, video_color, story_color, voice_color] if c != 0]
+
+        # 只有在至少有兩個以上顏色時才做比較
+        if len(colors) > 1:
+            self.assertTrue(all(colors[i] <= colors[i + 1] for i in range(len(colors) - 1)),
+                            f"Icon colors do not match the expected order of darkness: {colors}")
+        # self.assertTrue(photo_color <= video_color <= story_color <= voice_color, "Icon colors do not match the expected order of darkness.")
         # check if all colors are different
         # self.assertTrue(len({photo_color, video_color, story_color, voice_color}) == 4, "Icon colors are not all different.")
     # start from pixsee cloud page

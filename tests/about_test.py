@@ -7,13 +7,14 @@ from pages.menu_pages.about_page import AboutPage
 import time
 
 class AboutTest(BaseTestCase):
-    def __init__(self, methodName='runTest', language="zh", locale="TW"):
-        super().__init__(methodName)
-        self.language = language
-        self.locale = locale
+    @classmethod
+    def setUpClass(cls):
+        cls.language = getattr(cls, "language", "zh")
+        cls.locale = getattr(cls, "locale", "TW")
+        super().setUpClass()
 
     def setUp(self):
-        super().setUp(language=self.language, locale=self.locale)
+        super().setUp()
 
         baby_monitor_page = BabyMonitorPage(self.driver)
         menu_page = MenuPage(self.driver)

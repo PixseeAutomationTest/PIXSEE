@@ -113,7 +113,7 @@ class BabyMonitorPage():
         element.click()
     def is_in_baby_monitor_page(self):
         try:
-            WebDriverWait(self.driver, base.wait_time).until(
+            WebDriverWait(self.driver,15).until(
                 EC.presence_of_element_located((AppiumBy.ID, self.musicButton))
             )
             self.driver.find_element(AppiumBy.ID, self.musicButton)

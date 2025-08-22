@@ -56,7 +56,7 @@ class BabyTimelinePage():
 
     def is_in_baby_timeline_page(self):
         try:
-            WebDriverWait(self.driver, base.wait_time).until(
+            WebDriverWait(self.driver, 20).until(
                 EC.presence_of_element_located(("id", self.timeline))
             )
             self.driver.find_element("id", self.timeline)
