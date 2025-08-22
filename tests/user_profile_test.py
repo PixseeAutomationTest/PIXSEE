@@ -13,13 +13,14 @@ from pages.download_account_data_page import DownloadAccountDataPage
 from pages.delete_profile_page import DeleteProfilePage
 
 class UserProfileTest(BaseTestCase):
-    def __init__(self, methodName='runTest', language="zh", locale="TW"):
-        super().__init__(methodName)
-        self.language = language
-        self.locale = locale
+    @classmethod
+    def setUpClass(cls):
+        cls.language = getattr(cls, "language", "zh")
+        cls.locale = getattr(cls, "locale", "TW")
+        super().setUpClass()
 
     def setUp(self):
-        super().setUp(language=self.language, locale=self.locale)
+        super().setUp()
 
         baby_monitor_page = BabyMonitorPage(self.driver)
         menu_page = MenuPage(self.driver)
@@ -78,7 +79,7 @@ class UserProfileTest(BaseTestCase):
             '''Log out to verify the change password'''
             user_profile_page.click_return()
             menu_page.click_logout()
-            login_page.login("amypixsee03@gmail.com", "@Aa123456")
+            login_page.login(self.account(), "@Aa123456")
             self.assertTrue(baby_monitor_page.is_in_baby_monitor_page(), "Can't go to Baby Monitor Page after logging in with new password")
 
             '''Change Password back to original password to avoid affecting other tests'''

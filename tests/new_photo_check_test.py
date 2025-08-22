@@ -9,13 +9,14 @@ import time
 
 
 class NewPhotoCheckCase(BaseTestCase):
-	def __init__(self, methodName='runTest', language="zh", locale="TW"):
-		super().__init__(methodName)
-		self.language = language
-		self.locale = locale
+	@classmethod
+	def setUpClass(cls):
+		cls.language = getattr(cls, "language", "zh")
+		cls.locale = getattr(cls, "locale", "TW")
+		super().setUpClass()
 
 	def setUp(self):
-		super().setUp(language=self.language, locale=self.locale)
+		super().setUp()
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		photo_page = PhotoPage(self.driver)
@@ -34,12 +35,11 @@ class NewPhotoCheckCase(BaseTestCase):
 		except Exception as e:
 			print(f"Test failed with exception: {e}")
 			raise e
-	def test_new_photo_storaged(self):
+	def test_01_new_photo_storaged(self):
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		photo_page = PhotoPage(self.driver)
 		menu_page = MenuPage(self.driver)
 
-		time.sleep(5)
 
 		# Get origin photo amount
 		origin = photo_page.count_photos_today()
@@ -51,10 +51,12 @@ class NewPhotoCheckCase(BaseTestCase):
 		baby_monitor_page.click_home()
 		# get new photo
 		baby_monitor_page.click_capture()
-		print("filming new photo")
+		self.assertTrue(baby_monitor_page.finish_uploading()," photo upload failed")
+
+
+
 
 		# get new amount of photo
-		time.sleep(5)
 		baby_monitor_page.click_home()
 		menu_page.click_album()
 		time.sleep(9)
@@ -63,6 +65,24 @@ class NewPhotoCheckCase(BaseTestCase):
 			print(f"new photo storage success origin amount: {origin}, current amount: {after}")
 		else:
 			raise AssertionError(f"failed origin amount: {origin}, current amount: {after}")
+	def test_02_photo_button(self):
+		photo_page = PhotoPage(self.driver)
+		# click photo button
+		photo_page.click_plus_button()
+		photo_page.click_slide_button()
+		time.sleep(1)
+		self.assertTrue(photo_page.is_in_dialog(), "photo button click failed, not in dialog")
+		# check text
+		self.assertEqual(self.get_string("slideshow_subscription_info"),photo_page.dialog_text(), "dialog text is wrong")
+		self.assertEqual(self.get_string("subscription_go_to_subscription"), photo_page.dialog_yes_text(), "dialog yes text is wrong")
+		self.assertEqual(self.get_string("no_thanks_action"), photo_page.dialog_no_text(), "dialog no text is wrong")
+		# click no
+		photo_page.click_dialog_no()
+		self.go_back()
+		baby_monitor_page = BabyMonitorPage(self.driver)
+		baby_monitor_page.click_home()
+		# time.sleep(1)
+		# self.assertFalse(photo_page.is_in_photo_page(), "photo button click failed, still in photo page")
 
 
 

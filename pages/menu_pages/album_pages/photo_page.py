@@ -18,10 +18,13 @@ class PhotoPage():
 		self.Calender = "com.compal.bioslab.pixsee.pixm01:id/ibDailyCoverGalleryCalendar"
 		self.Select = "com.compal.bioslab.pixsee.pixm01:id/ibSelectMode"
 		self.PlusButton = "com.compal.bioslab.pixsee.pixm01:id/fab_daily_cover_gallery_menu"
-		self.SlideButton = "com.compal.bioslab.pixsee.pixm01:id/tv_daily_cover_gallery_fab_slideshow"
+		self.SlideButton = "com.compal.bioslab.pixsee.pixm01:id/fab_daily_cover_gallery_slideshow"
 		self.SlideButtonText = "com.compal.bioslab.pixsee.pixm01:id/tv_daily_cover_gallery_fab_slideshow"
 		self.PhotoButton = "com.compal.bioslab.pixsee.pixm01:id/fab_daily_cover_gallery_menu"
 		self.PhotoButtonText = "com.compal.bioslab.pixsee.pixm01:id/tv_daily_cover_gallery_fab_photo"
+		self.Dialog ="com.compal.bioslab.pixsee.pixm01:id/tvtitleAlertDialog"
+		self.DialogYes = "com.compal.bioslab.pixsee.pixm01:id/btnPositiveAlertDialog"
+		self.DialogNo = "com.compal.bioslab.pixsee.pixm01:id/btnNegativeAlertDialog"
 
 
 
@@ -67,6 +70,24 @@ class PhotoPage():
 		)
 		element = self.driver.find_element(AppiumBy.ID, self.PhotoButtonText)
 		return element.text
+	def dialog_text(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located((AppiumBy.ID, self.Dialog))
+		)
+		element = self.driver.find_element(AppiumBy.ID, self.Dialog)
+		return element.text
+	def dialog_yes_text(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located((AppiumBy.ID, self.DialogYes))
+		)
+		element = self.driver.find_element(AppiumBy.ID, self.DialogYes)
+		return element.text
+	def dialog_no_text(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located((AppiumBy.ID, self.DialogNo))
+		)
+		element = self.driver.find_element(AppiumBy.ID, self.DialogNo)
+		return element.text
 
 	def click_iknow_button(self):
 		WebDriverWait(self.driver, 10).until(
@@ -110,11 +131,33 @@ class PhotoPage():
 		element = self.driver.find_element(AppiumBy.ID, self.PhotoButton)
 		element.click()
 		time.sleep(1)
+	def click_dialog_yes(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located((AppiumBy.ID, self.DialogYes))
+		)
+		element = self.driver.find_element(AppiumBy.ID, self.DialogYes)
+		element.click()
+		time.sleep(1)
+	def click_dialog_no(self):
+		WebDriverWait(self.driver, 10).until(
+			EC.presence_of_element_located((AppiumBy.ID, self.DialogNo))
+		)
+		element = self.driver.find_element(AppiumBy.ID, self.DialogNo)
+		element.click()
+		time.sleep(1)
 
 	def is_in_photo_page(self):
 		try:
 			WebDriverWait(self.driver, 10).until(
 				EC.presence_of_element_located((AppiumBy.ID, self.Calender))
+			)
+			return True
+		except:
+			return False
+	def is_in_dialog(self):
+		try:
+			WebDriverWait(self.driver, 10).until(
+				EC.presence_of_element_located((AppiumBy.ID, self.Dialog))
 			)
 			return True
 		except:

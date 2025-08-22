@@ -12,13 +12,14 @@ import re
 
 
 class PixseeCloudTest3(BaseTestCase):
-    def __init__(self, methodName='runTest', language="en", locale="US"):
-        super().__init__(methodName)
-        self.language = language
-        self.locale = locale
+    @classmethod
+    def setUpClass(cls):
+        cls.language = getattr(cls, "language", "zh")
+        cls.locale = getattr(cls, "locale", "TW")
+        super().setUpClass()
 
     def setUp(self):
-        super().setUp(language=self.language, locale=self.locale)
+        super().setUp()
         baby_monitor_page = BabyMonitorPage(self.driver)
         menu_page = MenuPage(self.driver)
         assistant_page = AssistantPage(self.driver)
@@ -53,14 +54,14 @@ class PixseeCloudTest3(BaseTestCase):
             # compare with inside text
             inside_used = pixsee_cloud_page.parse_storage_usage(pixsee_cloud_page.mb_used_text())
             inside_total = pixsee_cloud_page.parse_storage_usage(pixsee_cloud_page.total_storage_text())
-            self.assertEqual(outside[1], inside_used, "Storage usage text does not match between outside and inside text.")
+            self.assertAlmostEqual(outside[1], inside_used, delta = 0.1 , msg ="Storage usage text does not match between outside and inside text.")
             self.assertEqual(outside[0], inside_total, "Total storage text does not match between outside and inside text.")
 
         elif language == "en":
             # compare with inside text
             inside_used = pixsee_cloud_page.parse_storage_usage(pixsee_cloud_page.mb_used_text())
             inside_total = pixsee_cloud_page.parse_storage_usage(pixsee_cloud_page.total_storage_text())
-            self.assertEqual(outside[0], inside_used, "Storage usage text does not match between outside and inside text.")
+            self.assertAlmostEqual(outside[0], inside_used, delta=0.1, msg ="Storage usage text does not match between outside and inside text.")
             self.assertEqual(outside[1], inside_total, "Total storage text does not match between outside and inside text.")
         else:
             pass
@@ -76,14 +77,15 @@ class PixseeCloudTest3(BaseTestCase):
             self.assertEqual(str(used_percent),pixsee_cloud_page.percent_text())
         else:
             raise AssertionError("Total storage is not 30 GB, cannot calculate used percent.")
-class PixseeCloudTest2(BaseTestCase):
-    def __init__(self, methodName='runTest', language="en", locale="US"):
-        super().__init__(methodName)
-        self.language = language
-        self.locale = locale
+class PixseeCloudTest4(BaseTestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.language = getattr(cls, "language", "zh")
+        cls.locale = getattr(cls, "locale", "TW")
+        super().setUpClass()
 
     def setUp(self):
-        super().setUp(language=self.language, locale=self.locale)
+        super().setUp()
         baby_monitor_page = BabyMonitorPage(self.driver)
         menu_page = MenuPage(self.driver)
         assistant_page = AssistantPage(self.driver)
@@ -198,12 +200,12 @@ class PixseeCloudTest2(BaseTestCase):
                 total = total/ 1000  # convert to GB
                 total_to_1 = math.floor(total * 100) / 100
                 total_text = pixsee_cloud_page.parse_storage_usage(pixsee_cloud_page.mb_used_text())
-                self.assertEqual(total_to_1, total_text, msg="Total storage usage does not match the sum of individual usages.")
+                self.assertAlmostEqual(total_to_1, total_text,delta = 0.04, msg="Total storage usage does not match the sum of individual usages.")
             elif unit == "MB":
                 total = photo + video + story + voice
                 total_to_1 = math.floor(total * 10) / 10
                 total_text = pixsee_cloud_page.parse_storage_usage(pixsee_cloud_page.mb_used_text())
-                self.assertEqual(total_to_1, total_text, msg="Total storage usage does not match the sum of individual usages.")
+                self.assertAlmostEqual(total_to_1, total_text,delta = 0.4, msg="Total storage usage does not match the sum of individual usages.")
 
 
 

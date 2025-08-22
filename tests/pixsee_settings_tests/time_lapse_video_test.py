@@ -9,13 +9,14 @@ from pages.menu_pages.pixsee_settings_pages.time_lapse_video_page import TimeLap
 from pages.menu_pages.subscription_pages.havent_subscription_page import SubscriptionPage1
 
 class TimeLapseVideoCase1(BaseTestCase):
-    def __init__(self, methodName='runTest', language="zh", locale="TW"):
-        super().__init__(methodName)
-        self.language = language
-        self.locale = locale
+    @classmethod
+    def setUpClass(cls):
+        cls.language = getattr(cls, "language", "zh")
+        cls.locale = getattr(cls, "locale", "TW")
+        super().setUpClass()
 
     def setUp(self):
-        super().setUp(language=self.language, locale=self.locale)
+        super().setUp()
 
         baby_monitor_page = BabyMonitorPage(self.driver)
         menu_page = MenuPage(self.driver)
@@ -158,13 +159,14 @@ class TimeLapseVideoCase1(BaseTestCase):
     # already subscribed
 
 class TimeLapseVideoCase2(BaseTestCase):
-    def __init__(self, methodName='runTest', language="zh", locale="TW"):
-        super().__init__(methodName)
-        self.language = language
-        self.locale = locale
+    @classmethod
+    def setUpClass(cls):
+        cls.language = getattr(cls, "language", "zh")
+        cls.locale = getattr(cls, "locale", "TW")
+        super().setUpClass()
 
     def setUp(self):
-        super().setUp(language=self.language, locale=self.locale)
+        super().setUp()
 
         baby_monitor_page = BabyMonitorPage(self.driver)
         menu_page = MenuPage(self.driver)
@@ -291,13 +293,14 @@ class TimeLapseVideoCase2(BaseTestCase):
         self.check_switch_and_content(after_status, time_lapse_video.RecordingMode)
 
 class TimeLapseVideoCase3(BaseTestCase):
-    def __init__(self, methodName='runTest', language="zh", locale="TW"):
-        super().__init__(methodName)
-        self.language = language
-        self.locale = locale
+    @classmethod
+    def setUpClass(cls):
+        cls.language = getattr(cls, "language", "zh")
+        cls.locale = getattr(cls, "locale", "TW")
+        super().setUpClass()
 
     def setUp(self):
-        super().setUp(language=self.language, locale=self.locale)
+        super().setUp()
 
         baby_monitor_page = BabyMonitorPage(self.driver)
         menu_page = MenuPage(self.driver)

@@ -11,13 +11,14 @@ import re
 
 
 class EnvironmentSettingsCase1(BaseTestCase):
-	def __init__(self, methodName='runTest', language="zh", locale="TW"):
-		super().__init__(methodName)
-		self.language = language
-		self.locale = locale
+	@classmethod
+	def setUpClass(cls):
+		cls.language = getattr(cls, "language", "zh")
+		cls.locale = getattr(cls, "locale", "TW")
+		super().setUpClass()
 
 	def setUp(self):
-		super().setUp(language=self.language, locale=self.locale)
+		super().setUp()
 
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		menu_page = MenuPage(self.driver)
@@ -155,13 +156,14 @@ class EnvironmentSettingsCase1(BaseTestCase):
 		self.check_switch_and_content(after_status, environment_settings_page.Sensitivity)
 
 class EnvironmentSettingsCase2(BaseTestCase):
-	def __init__(self, methodName='runTest', language="zh", locale="TW"):
-		super().__init__(methodName)
-		self.language = language
-		self.locale = locale
+	@classmethod
+	def setUpClass(cls):
+		cls.language = getattr(cls, "language", "zh")
+		cls.locale = getattr(cls, "locale", "TW")
+		super().setUpClass()
 
 	def setUp(self):
-		super().setUp(language=self.language, locale=self.locale)
+		super().setUp()
 
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		menu_page = MenuPage(self.driver)

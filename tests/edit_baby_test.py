@@ -13,13 +13,14 @@ import random
 import unittest
 # The tests in this TestCase will add a new baby profile first..
 class EditBabyTestWithAdding(BaseTestCase):
-    def __init__(self, methodName='runTest', language="zh", locale="TW"):
-        super().__init__(methodName)
-        self.language = language
-        self.locale = locale
+    @classmethod
+    def setUpClass(cls):
+        cls.language = getattr(cls, "language", "zh")
+        cls.locale = getattr(cls, "locale", "TW")
+        super().setUpClass()
 
     def setUp(self):
-        super().setUp(language=self.language, locale=self.locale)
+        super().setUp()
 
         baby_monitor_page = BabyMonitorPage(self.driver)
         menu_page = MenuPage(self.driver)
@@ -222,13 +223,14 @@ class EditBabyTestWithAdding(BaseTestCase):
 
     # The tests in this TestCase will edit baby profile directly.
 class EditBabyTestWithoutAdding(BaseTestCase):
-    def __init__(self, methodName='runTest', language="zh", locale="TW"):
-        super().__init__(methodName)
-        self.language = language
-        self.locale = locale
+    @classmethod
+    def setUpClass(cls):
+        cls.language = getattr(cls, "language", "zh")
+        cls.locale = getattr(cls, "locale", "TW")
+        super().setUpClass()
 
     def setUp(self):
-        super().setUp(language=self.language, locale=self.locale)
+        super().setUp()
 
         baby_monitor_page = BabyMonitorPage(self.driver)
         menu_page = MenuPage(self.driver)
