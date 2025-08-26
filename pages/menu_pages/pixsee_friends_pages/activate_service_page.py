@@ -19,20 +19,20 @@ class ActivateServicePage:
 		'''Code Tip Dialog'''
 		self.dialog = "com.compal.bioslab.pixsee.pixm01:id/llLayoutAlertDialog"
 		self.dialogMessageText = "com.compal.bioslab.pixsee.pixm01:id/tvtitleAlertDialog"
-		self.dialogIKnowButton = "com.compal.bioslab.pixsee.pixm01:id/btnPositiveAlertDialog"
+		self.dialogIGotItButton = "com.compal.bioslab.pixsee.pixm01:id/btnPositiveAlertDialog"
 
 	def click_close_button(self):
 		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.closeButton))
 		)
-		element = self.driver.find_element_by_id(self.closeButton)
+		element = self.driver.find_element("id", self.closeButton)
 		element.click()
 
 	def input_doll_sn_code(self, sn_code):
 		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.dollSNCodeEditText))
 		)
-		element = self.driver.find_element_by_id(self.dollSNCodeEditText)
+		element = self.driver.find_element("id", self.dollSNCodeEditText)
 		element.clear()
 		element.send_keys(sn_code)
 
@@ -40,49 +40,49 @@ class ActivateServicePage:
 		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.codeTipButton))
 		)
-		element = self.driver.find_element_by_id(self.codeTipButton)
+		element = self.driver.find_element("id", self.codeTipButton)
 		element.click()
 
 	def click_OK_button(self):
 		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.OKButton))
 		)
-		element = self.driver.find_element_by_id(self.OKButton)
+		element = self.driver.find_element("id", self.OKButton)
 		element.click()
 
-	def click_dialog_i_know_button(self):
+	def click_dialog_i_got_it_button(self):
 		WebDriverWait(self.driver, base.wait_time).until(
-			EC.presence_of_element_located(("id", self.dialogIKnowButton))
+			EC.presence_of_element_located(("id", self.dialogIGotItButton))
 		)
-		element = self.driver.find_element_by_id(self.dialogIKnowButton)
+		element = self.driver.find_element("id", self.dialogIGotItButton)
 		element.click()
 
 	def get_page_title_text(self):
 		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.pageTitleText))
 		)
-		element = self.driver.find_element_by_id(self.pageTitleText)
+		element = self.driver.find_element("id", self.pageTitleText)
 		return element.text
 
 	def get_label_text(self):
 		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.labelText))
 		)
-		element = self.driver.find_element_by_id(self.labelText)
+		element = self.driver.find_element("id", self.labelText)
 		return element.text
 
 	def get_message_text(self):
 		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.messageText))
 		)
-		element = self.driver.find_element_by_id(self.messageText)
+		element = self.driver.find_element("id", self.messageText)
 		return element.text
 
 	def get_doll_sn_code_hint(self):
 		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.dollSNCodeEditText))
 		)
-		element = self.driver.find_element_by_id(self.dollSNCodeEditText)
+		element = self.driver.find_element("id", self.dollSNCodeEditText)
 		return element.get_attribute("hint")
 
 	def get_error_message_text(self):
@@ -91,35 +91,35 @@ class ActivateServicePage:
 		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("class name", self.text_classname))
 		)
-		elements = self.driver.find_elements_by_class_name(self.text_classname)
+		elements = self.driver.find_elements("class name", self.text_classname)
 		return elements[-1].text
 
 	def get_OK_button_text(self):
 		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.OKButton))
 		)
-		element = self.driver.find_element_by_id(self.OKButton)
+		element = self.driver.find_element("id", self.OKButton)
 		return element.text
 
 	def get_dialog_message_text(self):
 		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("id", self.dialogMessageText))
 		)
-		element = self.driver.find_element_by_id(self.dialogMessageText)
+		element = self.driver.find_element("id", self.dialogMessageText)
 		return element.text
 
-	def get_dialog_i_know_button_text(self):
+	def get_dialog_i_got_it_button_text(self):
 		WebDriverWait(self.driver, base.wait_time).until(
-			EC.presence_of_element_located(("id", self.dialogIKnowButton))
+			EC.presence_of_element_located(("id", self.dialogIGotItButton))
 		)
-		element = self.driver.find_element_by_id(self.dialogIKnowButton)
+		element = self.driver.find_element("id", self.dialogIGotItButton)
 		return element.text
 
 	def has_error_message(self):
 		WebDriverWait(self.driver, base.wait_time).until(
 			EC.presence_of_element_located(("class name", self.text_classname))
 		)
-		elements = self.driver.find_elements_by_class_name(self.text_classname)
+		elements = self.driver.find_elements("class name", self.text_classname)
 		if len(elements) > 3:
 			return True
 		return False
@@ -138,7 +138,7 @@ class ActivateServicePage:
 			WebDriverWait(self.driver, base.wait_time).until(
 				EC.presence_of_element_located(("id", self.labelText))
 			)
-			self.driver.find_element_by_id(self.labelText)
+			self.driver.find_element("id", self.labelText)
 			return True
 		except:
 			return False

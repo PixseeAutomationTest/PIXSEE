@@ -2,10 +2,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import pages.base as base
 
-class PixseeFriendsPage:
+class DollBoxPage:
 	def __init__(self, driver):
 		self.driver = driver
-		self.
 
 		self.backButton = "com.compal.bioslab.pixsee.pixm01:id/ibBack"
 		self.dollTypeButton = "com.compal.bioslab.pixsee.pixm01:id/sDollType"
