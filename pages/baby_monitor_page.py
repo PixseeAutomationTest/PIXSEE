@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.actions.pointer_input import PointerInput
 from selenium.webdriver.common.action_chains import ActionChains
-import pages.base as base
+import base
 import time
 from selenium.webdriver.common.actions.interaction import Interaction
 
@@ -192,7 +192,6 @@ class BabyMonitorPage():
             return True
         except:
             return False
-
 
 
 

@@ -63,4 +63,3 @@ class CameraMainPage():
 			EC.presence_of_element_located((AppiumBy.ID, self.PlayBackButton))
 		)
 		self.driver.find_element(AppiumBy.ID, self.PlayBackButton).click()
-

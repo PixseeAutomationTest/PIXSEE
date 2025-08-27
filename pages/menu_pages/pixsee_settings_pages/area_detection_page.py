@@ -3,7 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from PIL import Image
 import os
-import pages.base as base
+import base as base
 
 
 class AreaDetectionPage():
@@ -324,7 +324,7 @@ class AreaDetectionPage():
 	def is_in_area_detection_page(self):
 		try:
 			WebDriverWait(self.driver, base.wait_time).until(
-				EC.presence_of_element_located(("id", self.Header))
+				EC.presence_of_element_located(("id", self.Switch))
 			)
 			return True
 		except :

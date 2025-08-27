@@ -1,10 +1,9 @@
-from pages.base import BaseTestCase
+from base import BaseTestCase
 
 from pages.baby_monitor_page import BabyMonitorPage
 from pages.menu_pages.menu_page import MenuPage
 from pages.menu_pages.about_page import AboutPage
 
-import time
 
 class AboutTest(BaseTestCase):
     @classmethod

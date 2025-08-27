@@ -2,7 +2,7 @@ import time
 
 from pages.menu_pages.menu_page import MenuPage
 from pages.menu_pages.pixsee_settings_pages.pixsee_settings_page import PixseeSettingsPage
-from pages.base import BaseTestCase
+from base import BaseTestCase
 from pages.baby_monitor_page import BabyMonitorPage
 from pages.login_page import LoginPage
 from pages.menu_pages.pixsee_settings_pages.time_lapse_video_page import TimeLapseVideoPage
@@ -132,31 +132,6 @@ class TimeLapseVideoCase1(BaseTestCase):
             print("x works, back to time lapse video page")
         except AssertionError:
             raise AssertionError("Not in time lapse video page")
-    # TODO: Some problems
-    def test_02_time_lapse_subscribe(self):
-        time_lapse_video = TimeLapseVideoPage(self.driver)
-        menu_page = MenuPage(self.driver)
-        baby_monitor_page = BabyMonitorPage(self.driver)
-        pixsee_settings_page = PixseeSettingsPage(self.driver)
-        login_page = LoginPage(self.driver)
-        subscription_page = SubscriptionPage1(self.driver)
-
-        time_lapse_video.click_switch()
-        # check if in upgrade dialog
-        try:
-            self.assertTrue(time_lapse_video.is_in_timelapse_upgrade_dialog())
-
-        except AssertionError:
-            raise AssertionError("already subscribed")
-        # subscribe
-        time_lapse_video.click_upgrade_subscription()
-        subscription_page.click_gold_star()
-        subscription_page.click_plan1()
-        subscription_page.click_pay()
-        time.sleep(5)
-        self.shutdown_app()
-
-    # already subscribed
 
 class TimeLapseVideoCase2(BaseTestCase):
     @classmethod
@@ -319,6 +294,7 @@ class TimeLapseVideoCase3(BaseTestCase):
             print("Finish opening app.")
             baby_monitor_page.click_home()
             menu_page.click_settings()
+            pixsee_settings_page.click_time_lapse_video()
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e

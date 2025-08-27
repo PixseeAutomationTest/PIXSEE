@@ -2,7 +2,7 @@ from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
-import pages.base as base
+import base as base
 
 class MenuPage():
 	def __init__(self, driver):
@@ -17,7 +17,7 @@ class MenuPage():
 		self.membersButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsMembers"
 		self.settingsButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsDevice"
 		self.pixseesettingstxt = "com.compal.bioslab.pixsee.pixm01:id/tvPixseeSettings"
-		self.friendsButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsFriends"
+		self.friendsButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsDoll"
 		self.albumButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsGallery"
 		self.facesButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsFamilyFace"
 		self.framesButton = "com.compal.bioslab.pixsee.pixm01:id/llNvSettingsSpecialCards"

@@ -151,7 +151,7 @@ class BaseTestCase(unittest.TestCase):
                 language = "en-us text"
         if not language:
             raise ValueError(f"Unsupported language code: {language}")
-        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 取得專案根目錄
+        base_dir = os.path.dirname(os.path.abspath(__file__))  # 取得專案根目錄
         csv_path = os.path.join(base_dir, "Pixsee App translations - master_202403.csv")
         with open(csv_path, newline='', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile)

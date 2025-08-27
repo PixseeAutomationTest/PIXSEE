@@ -1,5 +1,5 @@
 from pages.menu_pages.menu_page import MenuPage
-from pages.base import BaseTestCase
+from base import BaseTestCase
 from pages.baby_monitor_page import BabyMonitorPage
 from pages.menu_pages.assistant_pages.assistant_page import AssistantPage
 from pages.menu_pages.assistant_pages.send_error_dialog_page import SendErrorPage

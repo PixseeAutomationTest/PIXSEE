@@ -1,4 +1,4 @@
-from pages.base import BaseTestCase
+from base import BaseTestCase
 
 from pages.login_page import LoginPage
 from pages.baby_monitor_page import BabyMonitorPage

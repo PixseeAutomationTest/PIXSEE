@@ -249,4 +249,3 @@ class PhotoPage():
 		# print("今天是" + today_str)
 		thumbnails = self.find_thumbnails_between_dates(today_str)
 		return int(len(thumbnails))
-

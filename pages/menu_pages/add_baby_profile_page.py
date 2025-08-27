@@ -4,7 +4,7 @@ from appium.webdriver.common.appiumby import AppiumBy
 import time
 import random
 import datetime
-import pages.base as base
+import base as base
 
 class AddBabyProfilePage():
     def __init__(self, driver):
