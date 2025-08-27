@@ -2,7 +2,7 @@ from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
-import pages.base as base
+import base as base
 
 class PixseeFriendsDetPage():
 	def __init__(self, driver):
@@ -43,7 +43,7 @@ class PixseeFriendsDetPage():
 	def is_in_pixsee_friends_det_page(self):
 		try:
 			WebDriverWait(self.driver, base.wait_time).until(
-				EC.presence_of_element_located((AppiumBy.ID, self.Header))
+				EC.presence_of_element_located((AppiumBy.ID, self.Switch))
 			)
 			return True
 		except :

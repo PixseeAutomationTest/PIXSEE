@@ -1,4 +1,4 @@
-from pages.base import BaseTestCase
+from base import BaseTestCase
 
 from pages.baby_monitor_page import BabyMonitorPage
 from pages.baby_timeline_page import BabyTimelinePage

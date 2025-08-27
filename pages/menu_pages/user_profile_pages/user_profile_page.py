@@ -3,7 +3,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from appium.webdriver.common.appiumby import AppiumBy
 import datetime
 import time
-import pages.base as base
+import base as base
 
 class UserProfilePage():
     def __init__(self, driver):

@@ -1,9 +1,4 @@
-from appium.options.android import UiAutomator2Options
-from appium import webdriver
-import unittest
-import time
-
-from pages.base import BaseTestCase
+from base import BaseTestCase
 from pages.menu_pages.edit_baby_profile_page import EditBabyProfilePage
 
 

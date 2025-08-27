@@ -2,9 +2,8 @@ from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.actions.pointer_input import PointerInput
 from pages.menu_pages.menu_page import MenuPage
 from pages.menu_pages.pixsee_settings_pages.pixsee_settings_page import PixseeSettingsPage
-from pages.base import BaseTestCase
+from base import BaseTestCase
 from pages.baby_monitor_page import BabyMonitorPage
-from pages.login_page import LoginPage
 from pages.menu_pages.pixsee_settings_pages.enviroment_settings_page import EnvironmentSettingsPage
 import time
 import re
@@ -181,6 +180,7 @@ class EnvironmentSettingsCase2(BaseTestCase):
 			print("Finish opening app.")
 			baby_monitor_page.click_home()
 			menu_page.click_settings()
+			pixsee_settings_page.click_environment_settings()
 		except Exception as e:
 			print(f"Test failed with exception: {e}")
 			raise e

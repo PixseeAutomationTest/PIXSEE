@@ -2,7 +2,7 @@ from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from PIL import Image
-import pages.base as base
+import base as base
 
 
 class SubscriptionPage1():
