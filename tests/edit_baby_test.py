@@ -13,14 +13,13 @@ import random
 import unittest
 # The tests in this TestCase will add a new baby profile first..
 class EditBabyTestWithAdding(BaseTestCase):
-    @classmethod
-    def setUpClass(cls):
-        cls.language = getattr(cls, "language", "zh")
-        cls.locale = getattr(cls, "locale", "TW")
-        super().setUpClass()
+    def __init__(self, methodName='runTest', language="zh", locale="TW"):
+        super().__init__(methodName)
+        self.language = language
+        self.locale = locale
 
     def setUp(self):
-        super().setUp()
+        super().setUp(language=self.language, locale=self.locale)
 
         baby_monitor_page = BabyMonitorPage(self.driver)
         menu_page = MenuPage(self.driver)
@@ -78,6 +77,7 @@ class EditBabyTestWithAdding(BaseTestCase):
             '''Click Delete Baby Profile Button'''
             delete_profile_page.click_check()
             delete_profile_page.click_delete_profile()
+            time.sleep(5)
 
             '''Go to Baby monitor page'''
             self.assertTrue(baby_monitor_page.is_in_baby_monitor_page(), "Can't automatically go to Baby Monitor Page after deleting a baby profile")
@@ -223,14 +223,13 @@ class EditBabyTestWithAdding(BaseTestCase):
 
     # The tests in this TestCase will edit baby profile directly.
 class EditBabyTestWithoutAdding(BaseTestCase):
-    @classmethod
-    def setUpClass(cls):
-        cls.language = getattr(cls, "language", "zh")
-        cls.locale = getattr(cls, "locale", "TW")
-        super().setUpClass()
+    def __init__(self, methodName='runTest', language="zh", locale="TW"):
+        super().__init__(methodName)
+        self.language = language
+        self.locale = locale
 
     def setUp(self):
-        super().setUp()
+        super().setUp(language=self.language, locale=self.locale)
 
         baby_monitor_page = BabyMonitorPage(self.driver)
         menu_page = MenuPage(self.driver)

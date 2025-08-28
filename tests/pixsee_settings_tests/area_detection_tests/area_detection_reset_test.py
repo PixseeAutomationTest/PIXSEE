@@ -7,23 +7,13 @@ from pages.menu_pages.pixsee_settings_pages.area_detection_page import AreaDetec
 
 
 class AreaDetectionCase1(BaseTestCase):
-    no_reset = False
-    @classmethod
-    def setUpClass(cls):
-        cls.language = getattr(cls, "language", "zh")
-        cls.locale = getattr(cls, "locale", "TW")
-        super().setUpClass()
+    def __init__(self, methodName='runTest', language="zh", locale="TW"):
+        super().__init__(methodName)
+        self.language = language
+        self.locale = locale
 
     def setUp(self):
-        # 每個 test 前都重開 app
-        if self.driver:
-            try:
-                self.driver.quit()
-            except Exception:
-                pass
-            type(self).driver = None
-
-        super().setUp()   # 會重新啟動 driver (no_reset=False)
+        super().setUp(language=self.language, locale=self.locale, no_reset=False)
 
     def test_01_area_detection_tutor_skip_1(self):
         area_detection_page = AreaDetectionPage(self.driver)

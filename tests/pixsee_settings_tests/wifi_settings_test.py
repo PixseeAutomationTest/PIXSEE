@@ -6,14 +6,13 @@ from pages.baby_monitor_page import BabyMonitorPage
 from pages.menu_pages.pixsee_settings_pages.wifi_settings_page import WifiSettingsPage
 
 class WifiSettingsCase1(BaseTestCase):
-	@classmethod
-	def setUpClass(cls):
-		cls.language = getattr(cls, "language", "zh")
-		cls.locale = getattr(cls, "locale", "TW")
-		super().setUpClass()
+	def __init__(self, methodName='runTest', language="zh", locale="TW"):
+		super().__init__(methodName)
+		self.language = language
+		self.locale = locale
 
 	def setUp(self):
-		super().setUp()
+		super().setUp(language=self.language, locale=self.locale)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
@@ -87,14 +86,13 @@ class WifiSettingsCase1(BaseTestCase):
 			raise AssertionError("ok function failed")
 
 class WifiSettingsCase2(BaseTestCase):
-	@classmethod
-	def setUpClass(cls):
-		cls.language = getattr(cls, "language", "zh")
-		cls.locale = getattr(cls, "locale", "TW")
-		super().setUpClass()
+	def __init__(self, methodName='runTest', language="zh", locale="TW"):
+		super().__init__(methodName)
+		self.language = language
+		self.locale = locale
 
 	def setUp(self):
-		super().setUp()
+		super().setUp(language=self.language, locale=self.locale)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
@@ -218,14 +216,13 @@ class WifiSettingsCase2(BaseTestCase):
 			raise AssertionError("quit dialog yes function failed")
 
 class WifiSettingsCase3(BaseTestCase):
-	@classmethod
-	def setUpClass(cls):
-		cls.language = getattr(cls, "language", "zh")
-		cls.locale = getattr(cls, "locale", "TW")
-		super().setUpClass()
+	def __init__(self, methodName='runTest', language="zh", locale="TW"):
+		super().__init__(methodName)
+		self.language = language
+		self.locale = locale
 
 	def setUp(self):
-		super().setUp()
+		super().setUp(language=self.language, locale=self.locale)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)

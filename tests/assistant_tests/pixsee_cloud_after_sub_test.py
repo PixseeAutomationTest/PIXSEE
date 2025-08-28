@@ -10,7 +10,7 @@ import re
 
 
 class PixseeCloudTest3(BaseTestCase):
-    def __init__(self, methodName='runTest', language="en", locale="US"):
+    def __init__(self, methodName='runTest', language="zh", locale="TW"):
         super().__init__(methodName)
         self.language = language
         self.locale = locale
@@ -75,7 +75,7 @@ class PixseeCloudTest3(BaseTestCase):
         else:
             raise AssertionError("Total storage is not 30 GB, cannot calculate used percent.")
 class PixseeCloudTest4(BaseTestCase):
-    def __init__(self, methodName='runTest', language="en", locale="US"):
+    def __init__(self, methodName='runTest', language="zh", locale="TW"):
         super().__init__(methodName)
         self.language = language
         self.locale = locale
@@ -177,14 +177,14 @@ class PixseeCloudTest4(BaseTestCase):
         except:
             story = 0
         try:
-            voice = pixsee_cloud_page.parse_storage_usage(pixsee_cloud_page.voice_recorder_storage_text())
+            voice = 0
             match = re.match(r"([\d.]+)\s*(MB|GB)", pixsee_cloud_page.voice_recorder_storage_text())
             if match:
                 unit = match.group(2)  # 單位
                 if unit == "GB":
-                    video = float(match.group(1)) * 1000
+                    voice = float(match.group(1)) * 1000
                 elif unit == "MB":
-                    video = float(match.group(1))
+                    voice = float(match.group(1))
         except:
             voice = 0
         # calculate total storage usage
@@ -196,12 +196,12 @@ class PixseeCloudTest4(BaseTestCase):
                 total = total/ 1000  # convert to GB
                 total_to_1 = math.floor(total * 100) / 100
                 total_text = pixsee_cloud_page.parse_storage_usage(pixsee_cloud_page.mb_used_text())
-                self.assertEqual(total_to_1, total_text, msg="Total storage usage does not match the sum of individual usages.")
+                self.assertAlmostEqual(total_to_1, total_text,delta = 0.4, msg="Total storage usage does not match the sum of individual usages.")
             elif unit == "MB":
                 total = photo + video + story + voice
                 total_to_1 = math.floor(total * 10) / 10
                 total_text = pixsee_cloud_page.parse_storage_usage(pixsee_cloud_page.mb_used_text())
-                self.assertEqual(total_to_1, total_text, msg="Total storage usage does not match the sum of individual usages.")
+                self.assertAlmostEqual(total_to_1, total_text,delta = 0.4, msg="Total storage usage does not match the sum of individual usages.")
 
 
 

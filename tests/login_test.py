@@ -2,18 +2,17 @@ from base import BaseTestCase
 
 from pages.login_page import LoginPage
 from pages.baby_monitor_page import BabyMonitorPage
+import time
 
 
 class LoginCase(BaseTestCase):
-        no_reset = False
-        @classmethod
-        def setUpClass(cls):
-            cls.language = getattr(cls, "language", "zh")
-            cls.locale = getattr(cls, "locale", "TW")
-            super().setUpClass()
+        def __init__(self, methodName='runTest', language="zh", locale="TW"):
+                super().__init__(methodName)
+                self.language = language
+                self.locale = locale
 
         def setUp(self):
-                super().setUp()
+                super().setUp(language=self.language, locale=self.locale, no_reset=False)
 
 
         def test_01_login_wrong_email_failure(self):
@@ -74,7 +73,8 @@ class LoginCase(BaseTestCase):
                 login_page = LoginPage(self.driver)
                 baby_monitor_page = BabyMonitorPage(self.driver)
 
-                login_page.login("jackypixsee02@gmail.com", "@Aa12345")
+                login_page.login(self.account(), self.password())
+                time.sleep(15)
                 try:
                         self.assertTrue(baby_monitor_page.is_in_baby_monitor_page())
                         print("Login test success")

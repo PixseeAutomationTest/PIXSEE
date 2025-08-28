@@ -10,14 +10,13 @@ from pages.menu_pages.pixsee_settings_pages.covered_face_detection_page import C
 from appium.webdriver.common.appiumby import AppiumBy
 
 class CoveredFaceDetectionCase2(BaseTestCase):
-	@classmethod
-	def setUpClass(cls):
-		cls.language = getattr(cls, "language", "zh")
-		cls.locale = getattr(cls, "locale", "TW")
-		super().setUpClass()
+	def __init__(self, methodName='runTest', language="zh", locale="TW"):
+		super().__init__(methodName)
+		self.language = language
+		self.locale = locale
 
 	def setUp(self):
-		super().setUp()
+		super().setUp(language=self.language, locale=self.locale)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)
@@ -209,14 +208,13 @@ class CoveredFaceDetectionCase2(BaseTestCase):
 			self.check_switch_and_content(after_status, covered_face_detection_page.Sensitivity)
 
 class CoveredFaceDetectionCase3(BaseTestCase):
-	@classmethod
-	def setUpClass(cls):
-		cls.language = getattr(cls, "language", "zh")
-		cls.locale = getattr(cls, "locale", "TW")
-		super().setUpClass()
+	def __init__(self, methodName='runTest', language="zh", locale="TW"):
+		super().__init__(methodName)
+		self.language = language
+		self.locale = locale
 
 	def setUp(self):
-		super().setUp()
+		super().setUp(language=self.language, locale=self.locale)
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		pixsee_settings_page = PixseeSettingsPage(self.driver)

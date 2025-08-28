@@ -48,7 +48,7 @@ class LoginPage():
         self._input_email(email)
         self._input_password(password)
         self._click_signin()
-        time.sleep(15)
+        time.sleep(1)
 
     def get_email_error_text(self):
         try:

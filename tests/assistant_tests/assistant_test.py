@@ -10,14 +10,13 @@ import re
 
 
 class AssistantTest(BaseTestCase):
-    @classmethod
-    def setUpClass(cls):
-        cls.language = getattr(cls, "language", "zh")
-        cls.locale = getattr(cls, "locale", "TW")
-        super().setUpClass()
+    def __init__(self, methodName='runTest', language="zh", locale="TW"):
+        super().__init__(methodName)
+        self.language = language
+        self.locale = locale
 
     def setUp(self):
-        super().setUp()
+        super().setUp(language=self.language, locale=self.locale)
         baby_monitor_page = BabyMonitorPage(self.driver)
         menu_page = MenuPage(self.driver)
         assistant_page = AssistantPage(self.driver)

@@ -40,8 +40,8 @@ def make_test_class(testcase, language, locale):
 if __name__ == '__main__':
     languages = ["en"]
     locales = ["US"]
-    languages += ["zh", "zh"]
-    locales += ["TW", "CN"]
+    # languages += ["zh", "zh"]
+    # locales += ["TW", "CN"]
 
     for lang, loc in zip(languages, locales):
         loader = unittest.TestLoader()

@@ -11,14 +11,13 @@ from pages.menu_pages.pixsee_settings_pages.cry_detection_page import CryDetecti
 
 
 class CryDetectionCase1(BaseTestCase):
-	@classmethod
-	def setUpClass(cls):
-		cls.language = getattr(cls, "language", "zh")
-		cls.locale = getattr(cls, "locale", "TW")
-		super().setUpClass()
+	def __init__(self, methodName='runTest', language="zh", locale="TW"):
+		super().__init__(methodName)
+		self.language = language
+		self.locale = locale
 
 	def setUp(self):
-		super().setUp()
+		super().setUp(language=self.language, locale=self.locale)
 
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		menu_page = MenuPage(self.driver)
@@ -166,14 +165,13 @@ class CryDetectionCase1(BaseTestCase):
 		self.check_switch_and_content(after_status, cry_detection_page.Sensitivity)
 
 class CryDetectionCase2(BaseTestCase):
-	@classmethod
-	def setUpClass(cls):
-		cls.language = getattr(cls, "language", "zh")
-		cls.locale = getattr(cls, "locale", "TW")
-		super().setUpClass()
+	def __init__(self, methodName='runTest', language="zh", locale="TW"):
+		super().__init__(methodName)
+		self.language = language
+		self.locale = locale
 
 	def setUp(self):
-		super().setUp()
+		super().setUp(language=self.language, locale=self.locale)
 
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		menu_page = MenuPage(self.driver)
