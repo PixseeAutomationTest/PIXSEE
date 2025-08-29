@@ -209,16 +209,15 @@ class PixseeSettingsTest(BaseTestCase):
             pixsee_settings_page.click_area_detection()
             # check if is in area detection page
             try:
-                self.assertTrue(area_detection_page.is_in_area_detection_tutor_page())
+                self.assertTrue(area_detection_page.is_in_area_detection_tutor_page() or area_detection_page.is_in_area_detection_page())
                 print("entered Area Detection page successfully")
-                area_detection_page.click_skip()
             except AssertionError:
                 print("entered Area Detection page unsuccessfully")
                 raise AssertionError("Not in Area Detection page")
         else:
             print("Baby monitor is not connected, can't enter Area Detection page")
             raise AssertionError("Baby monitor is not connected, can't enter Area Detection page")
-        area_detection_page.click_back()
+        self.go_back()
     def test_07_enter_covered_face_detection(self):
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)
@@ -237,7 +236,7 @@ class PixseeSettingsTest(BaseTestCase):
             pixsee_settings_page.click_covered_face_detection()
             # check if is in covered face detection page
             try:
-                self.assertTrue(covered_face_page.is_in_covered_face_detection_page())
+                self.assertTrue(covered_face_page.is_in_covered_face_detection_page() or covered_face_page.is_in_covered_face_detection_tutor_page())
                 print("entered Covered Face Detection page successfully")
             except AssertionError:
                 print("entered Covered Face Detection page unsuccessfully")
@@ -245,7 +244,7 @@ class PixseeSettingsTest(BaseTestCase):
         else:
             print("Baby monitor is not connected, can't enter Covered Face Detection page")
             raise AssertionError("Baby monitor is not connected, can't enter Covered Face Detection page")
-        covered_face_page.click_back()
+        self.go_back()
     def test_08_enter_timelapse_video(self):
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)

@@ -25,6 +25,7 @@ def start_driver(language, locale, no_reset = True):
 
     capabilities.app_package = "com.compal.bioslab.pixsee.pixm01"
     capabilities.app_activity = "com.compal.bioslab.pixsee.pixm01.activities.SplashActivity"
+    capabilities.auto_dismiss_alerts = True
     capabilities.no_reset = no_reset
     capabilities.auto_grant_permissions = True
     capabilities.new_command_timeout = 300
@@ -186,7 +187,7 @@ class BaseTestCase(unittest.TestCase):
         except AssertionError:
             raise AssertionError(f"tap on {name} failed")
     def account(self):
-        return "amypixsee03@gmail.com"
+        return "jackypixsee02@gmail.com"
     def password(self):
         return "@Aa12345"
     # def tearDown(self):

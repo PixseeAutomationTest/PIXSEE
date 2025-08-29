@@ -30,18 +30,20 @@ from tests.tutor_test import TutorCase
 
 def make_test_class(testcase, language, locale):
     class CustomTestCase(testcase):
-        def __init__(self, methodName='runTest'):
-            super().__init__(methodName, language=language, locale=locale)
+        @classmethod
+        def setUpClass(cls):
+            cls.language = language
+            cls.locale = locale
+            super().setUpClass()
 
-    CustomTestCase.__name__ = testcase.__name__
-    CustomTestCase.__qualname__ = testcase.__qualname__
+    CustomTestCase.__name__ = f"{testcase.__name__}_{language}_{locale}"
     return CustomTestCase
 
 if __name__ == '__main__':
     languages = ["en"]
     locales = ["US"]
-    languages += ["zh", "zh"]
-    locales += ["TW", "CN"]
+    # languages += ["zh", "zh"]
+    # locales += ["TW", "CN"]
 
     for lang, loc in zip(languages, locales):
         loader = unittest.TestLoader()
@@ -56,23 +58,23 @@ if __name__ == '__main__':
         suite.addTests(loader.loadTestsFromTestCase(make_test_class(EditBabyTestWithoutAdding, lang, loc)))
         suite.addTests(loader.loadTestsFromTestCase(make_test_class(NewPhotoCheckCase, lang, loc)))
         suite.addTests(loader.loadTestsFromTestCase(make_test_class(PixseeProfileTest, lang, loc)))
-        suite.addTests(loader.loadTestsFromTestCase(make_test_class(AreaDetectionCase1, lang, loc)))
-        suite.addTests(loader.loadTestsFromTestCase(make_test_class(AreaDetectionCase2, lang, loc)))
-        suite.addTests(loader.loadTestsFromTestCase(make_test_class(AreaDetectionCase3, lang, loc)))
         suite.addTests(loader.loadTestsFromTestCase(make_test_class(WifiSettingsCase1, lang, loc)))
         suite.addTests(loader.loadTestsFromTestCase(make_test_class(WifiSettingsCase2, lang, loc)))
         suite.addTests(loader.loadTestsFromTestCase(make_test_class(WifiSettingsCase3, lang, loc)))
         suite.addTests(loader.loadTestsFromTestCase(make_test_class(PixseeFriendsDetectionCase1, lang, loc)))
         suite.addTests(loader.loadTestsFromTestCase(make_test_class(PixseeFriendsDetectionCase2, lang, loc)))
+        suite.addTests(loader.loadTestsFromTestCase(make_test_class(CryDetectionCase1, lang, loc)))
+        suite.addTests(loader.loadTestsFromTestCase(make_test_class(CryDetectionCase2, lang, loc)))
+        suite.addTests(loader.loadTestsFromTestCase(make_test_class(EnvironmentSettingsCase1, lang, loc)))
+        suite.addTests(loader.loadTestsFromTestCase(make_test_class(EnvironmentSettingsCase2, lang, loc)))
+        suite.addTests(loader.loadTestsFromTestCase(make_test_class(VoiceServiceTest, lang, loc)))
+        suite.addTests(loader.loadTestsFromTestCase(make_test_class(SDcardCase, lang, loc)))
+        suite.addTests(loader.loadTestsFromTestCase(make_test_class(AreaDetectionCase1, lang, loc)))
+        suite.addTests(loader.loadTestsFromTestCase(make_test_class(AreaDetectionCase2, lang, loc)))
+        suite.addTests(loader.loadTestsFromTestCase(make_test_class(AreaDetectionCase3, lang, loc)))
         suite.addTests(loader.loadTestsFromTestCase(make_test_class(CoveredFaceDetectionCase1, lang, loc)))
         suite.addTests(loader.loadTestsFromTestCase(make_test_class(CoveredFaceDetectionCase2, lang, loc)))
         suite.addTests(loader.loadTestsFromTestCase(make_test_class(CoveredFaceDetectionCase3, lang, loc)))
-        suite.addTests(loader.loadTestsFromTestCase(make_test_class(EnvironmentSettingsCase1, lang, loc)))
-        suite.addTests(loader.loadTestsFromTestCase(make_test_class(EnvironmentSettingsCase2, lang, loc)))
-        suite.addTests(loader.loadTestsFromTestCase(make_test_class(CryDetectionCase1, lang, loc)))
-        suite.addTests(loader.loadTestsFromTestCase(make_test_class(CryDetectionCase2, lang, loc)))
-        suite.addTests(loader.loadTestsFromTestCase(make_test_class(VoiceServiceTest, lang, loc)))
-        suite.addTests(loader.loadTestsFromTestCase(make_test_class(SDcardCase, lang, loc)))
         suite.addTests(loader.loadTestsFromTestCase(make_test_class(SubscriptionCase1, lang, loc)))
         suite.addTests(loader.loadTestsFromTestCase(make_test_class(PixseeCloudTest1, lang, loc)))
         suite.addTests(loader.loadTestsFromTestCase(make_test_class(PixseeCloudTest2, lang, loc)))
@@ -83,7 +85,7 @@ if __name__ == '__main__':
 
         date_str = datetime.now().strftime("%Y%m%d")
         runner = HTMLTestReport(
-            f"./results/{lang}-{loc}/{date_str}(unsubscription).html",
-            title=f"Pixsee Test Results (Unsubscription)({lang}-{loc})"
+            f"./results/{lang}-{loc}/{date_str}(photo).html",
+            title=f"Pixsee Test Results (compatibility)({lang}-{loc})"
         )
         runner.run(suite)

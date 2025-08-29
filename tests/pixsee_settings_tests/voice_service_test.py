@@ -195,7 +195,7 @@ class VoiceServiceTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-
+        self.go_back()
     def test_changing_language_discard_with_yes(self):
         try:
             voice_service_page = VoiceServicePage(self.driver)

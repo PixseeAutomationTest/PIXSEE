@@ -1,3 +1,5 @@
+import time
+
 from base import BaseTestCase
 
 from pages.login_page import LoginPage
@@ -74,7 +76,8 @@ class LoginCase(BaseTestCase):
                 login_page = LoginPage(self.driver)
                 baby_monitor_page = BabyMonitorPage(self.driver)
 
-                login_page.login("jackypixsee02@gmail.com", "@Aa12345")
+                login_page.login(self.account(), self.password())
+                time.sleep(15)
                 try:
                         self.assertTrue(baby_monitor_page.is_in_baby_monitor_page())
                         print("Login test success")
