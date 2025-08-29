@@ -139,6 +139,7 @@ class SDcardCase(BaseTestCase):
 			print("Back to sd card page test success")
 		except AssertionError:
 			raise AssertionError("Back to sd card page test failed")
+		self.go_back()
 		# click format button
 		# sd_card_page.click_format()
 		# click go button

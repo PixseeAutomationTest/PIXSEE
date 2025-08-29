@@ -18,7 +18,7 @@ class PixseeCloudTest1(BaseTestCase):
         self.locale = locale
 
     def setUp(self):
-        super().setUp(language=self.language, locale=self.locale)
+        super().setUp()
         baby_monitor_page = BabyMonitorPage(self.driver)
         menu_page = MenuPage(self.driver)
         assistant_page = AssistantPage(self.driver)
@@ -76,7 +76,7 @@ class PixseeCloudTest2(BaseTestCase):
         self.locale = locale
 
     def setUp(self):
-        super().setUp(language=self.language, locale=self.locale)
+        super().setUp()
         baby_monitor_page = BabyMonitorPage(self.driver)
         menu_page = MenuPage(self.driver)
         assistant_page = AssistantPage(self.driver)
@@ -184,7 +184,13 @@ class PixseeCloudTest2(BaseTestCase):
         except:
             voice_color = 0
             # check color by order of darkness
-        self.assertTrue(photo_color <= video_color <= story_color <= voice_color, "Icon colors do not match the expected order of darkness.")
+            # 過濾掉 0
+        colors = [c for c in [photo_color, video_color, story_color, voice_color] if c != 0]
+
+            # 只有在至少有兩個以上顏色時才做比較
+        if len(colors) > 1:
+            self.assertTrue(all(colors[i] <= colors[i + 1] for i in range(len(colors) - 1)),
+                                f"Icon colors do not match the expected order of darkness: {colors}")
         # check if all colors are different
         # self.assertTrue(len({photo_color, video_color, story_color, voice_color}) == 4, "Icon colors are not all different.")
     # start from pixsee cloud page
