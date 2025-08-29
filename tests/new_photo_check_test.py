@@ -14,7 +14,7 @@ class NewPhotoCheckCase(BaseTestCase):
 		self.locale = locale
 
 	def setUp(self):
-		super().setUp(language=self.language, locale=self.locale)
+		super().setUp()
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		photo_page = PhotoPage(self.driver)
@@ -46,6 +46,7 @@ class NewPhotoCheckCase(BaseTestCase):
 		self.go_back()
 		# self.right_wipe()
 		baby_monitor_page.click_home()
+		time.sleep(1)
 		# get new photo
 		baby_monitor_page.click_capture()
 		self.assertTrue(baby_monitor_page.finish_uploading(), " photo upload failed")
