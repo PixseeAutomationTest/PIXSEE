@@ -1,0 +1,919 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Pixsee Test Results (en-US)</title>
+    <meta name="generator" content="HTMLTestReport 0.0.1"/>
+    <link rel="stylesheet" href="http://unpkg.com/layui@2.6.8/dist/css/layui.css">
+    
+<style type="text/css">
+    .title { width: auto; height: 60px; text-align: center; font: bolder 38px/60px "Microsoft YaHei UI"; color: #009688; }
+    .summary span { font: normal 16px/38px "Microsoft YaHei UI"; margin-left: 20px; }
+    .success-btn { background-color: #28a745; }
+    .skip-btn { background-color: #84898c; }
+    .passClass  { background-color: #bdedbc; }
+    .failClass  { background-color: #ffefa4; }
+    .errorClass { background-color: #ffc9c9; }
+    .passCase   { color: #5cb85c; }
+    .skipCase   { color: #84898c; }
+    .failCase   { color: #FF6600; font-weight: bold; }
+    .errorCase  { color: #c00; font-weight: bold; }
+    .hiddenRow  { display: none; }
+    .testcase   { margin-left: 2em; }
+    .layui-table tbody tr:hover, .layui-table-click, .layui-table-header, .layui-table-hover, .layui-table-mend, .layui-table-patch, .layui-table-tool, .layui-table[lay-even] tr:nth-child(even) {
+        background-color: transparent;
+    }
+</style>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+</head>
+<body>
+    <script language="javascript" type="text/javascript"><!--
+    output_list = Array();
+    function showCase(level) {
+        trs = document.getElementsByTagName("tr");
+        for (var i = 0; i < trs.length; i++) {
+            tr = trs[i];
+            id = tr.id;
+            if (id.substr(0,2) == 'ft') {
+                if (level == 2 || level == 0) {
+                    tr.className = 'hiddenRow';
+                }
+                else {
+                    tr.className = '';
+                }
+            }
+            if (id.substr(0,2) == 'pt') {
+                if (level < 2) {
+                    tr.className = 'hiddenRow';
+                }
+                else {
+                    tr.className = '';
+                }
+            }
+        }      
+    }
+    function showClassDetail(cid, count) {
+        var id_list = Array(count);
+        var toHide = 1;
+        for (var i = 0; i < count; i++) {
+            tid0 = 't' + cid.substr(1) + '.' + (i+1);
+            tid = 'f' + tid0;
+            tr = document.getElementById(tid);
+            if (!tr) {
+                tid = 'p' + tid0;
+                tr = document.getElementById(tid);
+            }
+            id_list[i] = tid;
+            if (tr.className) {
+                toHide = 0;
+            }
+        }
+        for (var i = 0; i < count; i++) {
+            tid = id_list[i];
+            if (toHide) {
+                document.getElementById(tid).className = 'hiddenRow';
+            }
+            else {
+                document.getElementById(tid).className = '';
+            }
+        }
+    }
+    function showTestDetail(div_id){
+        var details_div = document.getElementById(div_id)
+        var displayState = details_div.style.display
+        if (displayState == 'block' || displayState == '' ) {
+            details_div.style.display = 'none'
+        }
+        else {
+            displayState = 'block'
+            details_div.style.display = 'block'
+        }
+    }
+    function html_escape(s) {
+        s = s.replace(/&/g,'&amp;');
+        s = s.replace(/</g,'&lt;');
+        s = s.replace(/>/g,'&gt;');
+        return s;
+    }
+    --></script>
+    <div class="layui-container">
+        
+    <!--报告标题-->
+    <div class="title">Pixsee Test Results (en-US)</div>
+    
+    <!--汇总信息-->
+    <fieldset class="layui-elem-field summary">
+        <legend>测试结果汇总</legend>
+        <div class="layui-field-box">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="50%">
+                    <col width="50%">
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <td>
+                            <button type="button" class="layui-btn">开始时间</button>
+                            <span class="text-dark">2025-08-20 08:40:46</span>
+                        </td>
+                        <td>
+                            <button type="button" class="layui-btn">执行时间</button>
+                            <span class="text-dark">0:13:50.366390 s</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="button" class="layui-btn">用例总数</button>
+                            <span class="text-dark">29</span>
+                        </td>
+                        <td>
+                            <button type="button" class="layui-btn">通过率</button>
+                            <span class="text-dark">89.66%</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <button type="button" class="layui-btn">描述信息</button>
+                            <span class="text-dark"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <button type="button" class="layui-btn success-btn">成功用例：26</button>
+                            <button type="button" class="layui-btn layui-btn-warm">失败用例：3</button>
+                            <button type="button" class="layui-btn layui-btn-danger">错误用例：0</button>
+                            <button type="button" class="layui-btn skip-btn">跳过用例：0</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+    
+    <!--图表展示-->
+    <fieldset class="layui-elem-field summary">
+        <legend>图表展示</legend>
+        <div class="layui-field-box">
+            <div class="char">
+                <div id="chart1" style="width: 49%;height: 400px;float: left"></div>
+                <div id="chart2" style="width: 49%;height: 400px;float: left"></div>
+            </div>
+        </div>
+    </fieldset>
+
+        
+    <fieldset class="layui-elem-field summary">
+        <legend>详细信息</legend>
+        <div class="layui-field-box">
+            <table id='result_table' class="layui-table">
+            <thead>
+                <tr id='header_row' style='background-color: #009688; color: #fff'>
+                    <th>测试用例</th>
+                    <th>总数</th>
+                    <th>通过</th>
+                    <th>失败</th>
+                    <th>错误</th>
+                    <th>跳过</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+				<tbody>
+                
+    <tr class='failClass'>
+        <td class="text-center">LoginCase</td>
+        <td class="text-center">5</td>
+        <td class="text-center">4</td>
+        <td class="text-center">1</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c1',5)">详细</button></td>
+    </tr>
+
+<tr id='pt1.1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_01_login_wrong_email_failure</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt1.1')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt1.1' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt1.1: Wrong email test success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1.2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_02_login_wrong_password_failure</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt1.2')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt1.2' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt1.2: Wrong password test success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1.3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_03_login_empty_email_failure</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt1.3')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt1.3' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt1.3: Empty email test success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1.4' class=''>
+    <td class='failCase'><div class='testcase'>test_04_login_empty_password_failure</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_ft1.4')">
+        失败</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_ft1.4' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>ft1.4: Empty password test failed
+Traceback (most recent call last):
+  File "C:\Users\Joshua_Wang\PycharmProjects\PIXSEE\tests\login_test.py", line 65, in test_04_login_empty_password_failure
+    self.assertEqual(login_page.get_password_error_text(), hint)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'Please enter password.' != 'Please enter password'
+- Please enter password.
+?                      -
++ Please enter password
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Joshua_Wang\PycharmProjects\PIXSEE\tests\login_test.py", line 69, in test_04_login_empty_password_failure
+    raise AssertionError("Empty password test failed, expected error message not found")
+AssertionError: Empty password test failed, expected error message not found
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1.5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_05_login_success</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt1.5')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt1.5' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt1.5: Login test success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td class="text-center">TutorCase</td>
+        <td class="text-center">5</td>
+        <td class="text-center">5</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c2',5)">详细</button></td>
+    </tr>
+
+<tr id='pt2.1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_01_skip_first_four_tutor</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt2.1')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt2.1' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt2.1: First tutor success
+First tutor description success
+Second tutor success
+Second tutor description success
+Third tutor success
+Third tutor description success
+Fourth tutor success
+Fourth tutor description success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2.2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_02_menu_tutor</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt2.2')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt2.2' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt2.2: Pixsee Friends tutor title success
+Pixsee Friends tutor description success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2.3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_03_tree_tutor</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt2.3')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt2.3' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt2.3: Tree tutor title success
+Tree tutor description success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2.4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_04_album_tutor</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt2.4')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt2.4' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt2.4: new function title success
+new function message description success
+I know button text success
+View tutor title success
+View tutor description success
+Create tutor title success
+Create tutor description success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2.5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_05_camera_tutor</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt2.5')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt2.5' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt2.5: Camera tutor title success
+Camera tutor description success
+Playback first tutor title success
+Playback first tutor description success
+Playback second tutor title success
+Playback second tutor description success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+    <tr class='failClass'>
+        <td class="text-center">NewPhotoCheckCase</td>
+        <td class="text-center">2</td>
+        <td class="text-center">1</td>
+        <td class="text-center">1</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c3',2)">详细</button></td>
+    </tr>
+
+<tr id='pt3.1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_01_new_photo_storaged</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt3.1')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt3.1' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt3.1: Finish opening app.
+no photo today
+new photo storage success origin amount: 0, current amount: 1
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft3.2' class=''>
+    <td class='failCase'><div class='testcase'>test_02_photo_button</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_ft3.2')">
+        失败</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_ft3.2' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>ft3.2: Traceback (most recent call last):
+  File "C:\Users\Joshua_Wang\PycharmProjects\PIXSEE\tests\new_photo_check_test.py", line 73, in test_02_photo_button
+    self.assertTrue(photo_page.is_in_dialog(), "photo button click failed, not in dialog")
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : photo button click failed, not in dialog
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td class="text-center">TimeLapseVideoCase1</td>
+        <td class="text-center">2</td>
+        <td class="text-center">2</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c4',2)">详细</button></td>
+    </tr>
+
+<tr id='pt4.1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_01_time_lapse_video_subscriptio_not_subscribe</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt4.1')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt4.1' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt4.1: Finish opening app.
+time-lapse header text right
+time_lapse_video title right
+time_lapse_video subtitle right
+In time lapse video upgrade dialog
+Upgrade dialog title right
+Upgrade dialog subscription right
+Upgrade dialog no text right
+Back to time lapse video page
+In subscription page
+x works, back to time lapse video page
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt4.2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_02_time_lapse_subscribe</div></td>
+    <td>通过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+    <tr class='passClass'>
+        <td class="text-center">TimeLapseVideoCase2</td>
+        <td class="text-center">4</td>
+        <td class="text-center">4</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c5',4)">详细</button></td>
+    </tr>
+
+<tr id='pt5.1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_05_time_lapse_video_save</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt5.1')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt5.1' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt5.1: Finish opening app.
+Save diable test pass
+save function success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt5.2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_06_time_lapse_video_back</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt5.2')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt5.2' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt5.2: Back to pixsee settings page
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt5.3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_07_time_lapse_video_discard_dialog</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt5.3')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt5.3' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt5.3: In discard dialog
+Discard dialog title right
+Discard dialog cancel text right
+Discard dialog confirm text right
+Back to pixsee settings page after discard
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt5.4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_08_time_lapse_video_switch</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt5.4')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt5.4' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt5.4: switch off success
+switch on success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td class="text-center">TimeLapseVideoCase3</td>
+        <td class="text-center">3</td>
+        <td class="text-center">3</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c6',3)">详细</button></td>
+    </tr>
+
+<tr id='pt6.1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_09_time_lapse_video_check_text</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt6.1')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt6.1' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt6.1: time_lapse_video recording mode text right
+time_lapse_video time span text right
+time_lapse_video start time text right
+time_lapse_video entire time text right
+time_lapse_video people in view text right
+time_lapse_video twelve hour text right
+time_lapse_video twenty four hour text right
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt6.2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_10_time_lapse_video_checkbox</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt6.2')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt6.2' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt6.2: tap on Entire Time success
+tap on People in view success
+Twelve hours checkbox is checked
+Twenty four hours checkbox is checked
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt6.3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_11_time_lapse_video_select_time</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt6.3')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt6.3' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt6.3: In time selecter
+In time selecter
+Start time block cancel text right
+Start time block confirm text right
+timer confirm function success
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td class="text-center">SubscriptionCase2</td>
+        <td class="text-center">5</td>
+        <td class="text-center">5</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c7',5)">详细</button></td>
+    </tr>
+
+<tr id='pt7.1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_01_subscription_check_text</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt7.1')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt7.1' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt7.1: Finish opening app.
+In subscription page
+Subscription current plan text right
+Subscription payment method text right
+Subscription in app purchase text right
+Subscription expiration text right
+Subscription promotion text right
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt7.2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_02_subscription_click_back</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt7.2')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt7.2' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt7.2: x works, back to baby monitor page
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt7.3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_03_subscription_information</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt7.3')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt7.3' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt7.3: In subscription information page
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt7.4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_04_subscription_coupon</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt7.4')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt7.4' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt7.4: In coupon dialog
+Coupon dialog title right
+Coupon dialog cancel text right
+Coupon dialog confirm text right
+Coupon code hint text right
+0 digit code test pass
+1 digit code test pass
+2 digit code test pass
+3 digit code test pass
+4 digit code test pass
+5 digit code test pass
+6 digit code test pass
+Wrong code text right
+In coupon information page
+Back to subscription page after click cancel
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt7.5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_05_subscription_button</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_pt7.5')">
+        通过</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_pt7.5' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>pt7.5: gold star button works, in prize plan dialog
+Checkbox is checkable
+Ok button text right
+Ok button works, back to baby monitor page
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+    <tr class='failClass'>
+        <td class="text-center">PixseeCloudTest3</td>
+        <td class="text-center">1</td>
+        <td class="text-center">0</td>
+        <td class="text-center">1</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c8',1)">详细</button></td>
+    </tr>
+
+<tr id='ft8.1' class=''>
+    <td class='failCase'><div class='testcase'>test_01_pixsee_cloud_page_check_storage</div></td>
+    <td>
+    <a onfocus='this.blur();' data-toggle="collapse" href="javascript:showTestDetail('div_ft8.1')">
+        失败</a>
+    </td>
+    <td colspan='5'>
+    <div id='div_ft8.1' class="collapse in">
+        <blockquote class="layui-elem-quote">
+            <pre>ft8.1: Finish opening app.
+Traceback (most recent call last):
+  File "C:\Users\Joshua_Wang\PycharmProjects\PIXSEE\tests\assistant_tests\pixsee_cloud_after_sub_test.py", line 63, in test_01_pixsee_cloud_page_check_storage
+    self.assertEqual(outside[0], inside_used, "Storage usage text does not match between outside and inside text.")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1.1 != 1.14 : Storage usage text does not match between outside and inside text.
+</pre>
+        </blockquote>
+    </div>
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td class="text-center">PixseeCloudTest4</td>
+        <td class="text-center">2</td>
+        <td class="text-center">2</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center">0</td>
+        <td class="text-center"><button type="button" class="layui-btn layui-btn-xs" onclick="showClassDetail('c9',2)">详细</button></td>
+    </tr>
+
+<tr id='pt9.1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_02_pixsee_cloud_page_check_all_texts</div></td>
+    <td>通过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+<tr id='pt9.2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_03_pixsee_cloud_page_check_usage_sum</div></td>
+    <td>通过</td>
+    <td colspan='5' align='center' style="color:#428bca"></td>
+</tr>
+
+                </tbody>
+                <tr id='total_row' class="text-center active">
+                    <td align="right">总计</td>
+                    <td>29</td>
+                    <td>26</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+	</fieldset>
+
+        <a href="#">
+    <ul class="layui-fixbar"><li class="layui-icon layui-fixbar-top" lay-type="top" style="display: list-item;"></li></ul>
+    </a>
+    
+        
+    <script type="text/javascript">
+        // 初始化echarts实例
+        var myChart1 = echarts.init(document.getElementById('chart1'));
+        var myChart2 = echarts.init(document.getElementById('chart2'));
+        // 指定图表的配置项和数据
+        option1 = {
+            tooltip: {
+                formatter: '{a} <br/>{b} : {c}%'
+            },
+            toolbox: {
+                feature: {
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+            series: [{
+                name: '测试结果',
+                type: 'gauge',
+                detail: {
+                    formatter: '89.66%'
+                },
+                data: [{
+                    value: '89.66',
+                    name: '用例通过率'
+                }],
+                axisLine: {
+                    lineStyle: {
+                        color: [
+                            [0.2, '#c20000'],
+                            [0.8, '#ddb518'],
+                            [1, '#00a10a']
+                        ]
+                    }
+                }
+            }]
+        };
+        option2 = {
+            color: ['#00a10a', '#ddb518', 'rgba(204,46,41,0.73)', '#85898c'],
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b}: {c} ({d}%)'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 10,
+                data: ['通过', '失败', '错误', '跳过']
+            },
+            series: [{
+                name: '测试结果',
+                type: 'pie',
+                radius: ['50%', '70%'],
+                avoidLabelOverlap: false,
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: '30',
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [{
+                        value: 26,
+                        name: '通过'
+                    },
+                    {
+                        value: 3,
+                        name: '失败'
+                    },
+                    {
+                        value: 0,
+                        name: '错误'
+                    },
+                    {
+                        value: 0,
+                        name: '跳过'
+                    }
+                ]
+            }]
+        };
+
+        myChart1.setOption(option1);
+        myChart2.setOption(option2);
+    </script>
+    
+    </div>
+</body>
+</html>
