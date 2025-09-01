@@ -19,7 +19,7 @@ class PixseeProfileTest(BaseTestCase):
         cls.language = getattr(cls, "language", "zh")
         cls.locale = getattr(cls, "locale", "TW")
         super().setUpClass()
-
+    # start from pixsee profile page
     def setUp(self):
         super().setUp()
 
@@ -42,7 +42,7 @@ class PixseeProfileTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-    def test_select_location(self):
+    def test_11_select_location(self):
         try:
             baby_monitor_page = BabyMonitorPage(self.driver)
             menu_page = MenuPage(self.driver)
@@ -86,7 +86,7 @@ class PixseeProfileTest(BaseTestCase):
             raise e
 
     # FIXME: No checking the time in Baby Monitor Page because Android doesn't support Daylight Saving Time (DST).
-    def test_select_time_zone(self):
+    def test_12_select_time_zone(self):
         try:
             pixsee_profile_page = PixseeProfilePage(self.driver)
 
@@ -113,7 +113,7 @@ class PixseeProfileTest(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    def test_check_device_info(self):
+    def test_03_check_device_info(self):
         try:
             pixsee_profile_page = PixseeProfilePage(self.driver)
 
@@ -155,7 +155,7 @@ class PixseeProfileTest(BaseTestCase):
             raise e
 
     @unittest.skip("Important: This test reboot the device. If you want to run other tests after this. Please check your network signal.")
-    def test_reboot_device(self):
+    def test_09_reboot_device(self):
         try:
             baby_monitor_page = BabyMonitorPage(self.driver)
             pixsee_profile_page = PixseeProfilePage(self.driver)
@@ -185,7 +185,7 @@ class PixseeProfileTest(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    def test_rotate_screen(self):
+    def test_10_rotate_screen(self):
         try:
             pixsee_profile_page = PixseeProfilePage(self.driver)
 
@@ -214,7 +214,7 @@ class PixseeProfileTest(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    def test_IQ_setting_with_no_changing(self):
+    def test_02_IQ_setting_with_no_changing(self):
         try:
             pixsee_profile_page = PixseeProfilePage(self.driver)
 
@@ -244,7 +244,7 @@ class PixseeProfileTest(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    def test_IQ_setting_with_changing(self):
+    def test_01_IQ_setting_with_changing(self):
         try:
             pixsee_profile_page = PixseeProfilePage(self.driver)
 
@@ -277,7 +277,7 @@ class PixseeProfileTest(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    def test_check_update(self):
+    def test_04_check_update(self):
         try:
             pixsee_profile_page = PixseeProfilePage(self.driver)
 
@@ -305,7 +305,7 @@ class PixseeProfileTest(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    def test_device_unbind_dialog_with_no(self):
+    def test_05_device_unbind_dialog_with_no(self):
         try:
             pixsee_profile_page = PixseeProfilePage(self.driver)
 
@@ -340,7 +340,7 @@ class PixseeProfileTest(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    def test_device_unbind_page_with_close(self):
+    def test_07_device_unbind_page_with_close(self):
         try:
             pixsee_profile_page = PixseeProfilePage(self.driver)
             device_unbind_page = DeviceUnbindPage(self.driver)
@@ -386,7 +386,7 @@ class PixseeProfileTest(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    def test_device_unbind_page_with_cancel(self):
+    def test_06_device_unbind_page_with_cancel(self):
         try:
             pixsee_profile_page = PixseeProfilePage(self.driver)
             device_unbind_page = DeviceUnbindPage(self.driver)
@@ -433,7 +433,7 @@ class PixseeProfileTest(BaseTestCase):
             raise e
 
     @unittest.skip("Important: This test will unbind the device. If you want to run other tests after this, you may need to bind the device manually.")
-    def test_device_unbind_success(self):
+    def test_08_device_unbind_success(self):
         try:
             baby_timeline_page = BabyTimelinePage(self.driver)
             menu_page = MenuPage(self.driver)

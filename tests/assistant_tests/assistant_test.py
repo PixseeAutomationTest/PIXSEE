@@ -15,7 +15,7 @@ class AssistantTest(BaseTestCase):
         cls.language = getattr(cls, "language", "zh")
         cls.locale = getattr(cls, "locale", "TW")
         super().setUpClass()
-
+    # all start from assistant page
     def setUp(self):
         super().setUp()
         baby_monitor_page = BabyMonitorPage(self.driver)
@@ -36,7 +36,6 @@ class AssistantTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-    # all start from assistant page
     def test_01_background_play(self):
         assistant_page = AssistantPage(self.driver)
         background_play_page = BackgroundPlayPage(self.driver)

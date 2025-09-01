@@ -16,6 +16,7 @@ class SDcardCase(BaseTestCase):
 		cls.locale = getattr(cls, "locale", "TW")
 		super().setUpClass()
 
+	# start from pixsee settings page
 	def setUp(self):
 		super().setUp()
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -37,7 +38,6 @@ class SDcardCase(BaseTestCase):
 		except Exception as e:
 			print(f"Test failed with exception: {e}")
 			raise e
-	# start from pixsee settings page
 	def test_01_check_word_back(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)

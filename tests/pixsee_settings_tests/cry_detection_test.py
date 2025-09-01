@@ -17,6 +17,7 @@ class CryDetectionCase1(BaseTestCase):
 		cls.locale = getattr(cls, "locale", "TW")
 		super().setUpClass()
 
+	# start from pixsee settings page
 	def setUp(self):
 		super().setUp()
 
@@ -39,7 +40,6 @@ class CryDetectionCase1(BaseTestCase):
 		except Exception as e:
 			print(f"Test failed with exception: {e}")
 			raise e
-	# start from pixsee settings page
 	def test_01_cry_detection_back(self):
 		cry_detection_page = CryDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
@@ -172,6 +172,7 @@ class CryDetectionCase2(BaseTestCase):
 		cls.locale = getattr(cls, "locale", "TW")
 		super().setUpClass()
 
+	# start from cry detection page
 	def setUp(self):
 		super().setUp()
 
@@ -195,7 +196,6 @@ class CryDetectionCase2(BaseTestCase):
 		except Exception as e:
 			print(f"Test failed with exception: {e}")
 			raise e
-	# start from cry detection page
 	def test_05_cry_detection_tap_checkbox(self):
 		cry_detection_page = CryDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)

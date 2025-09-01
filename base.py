@@ -1,4 +1,6 @@
 import unittest
+
+from cffi.model import unknown_type
 from selenium.webdriver.support import expected_conditions as EC
 
 from appium import webdriver
@@ -19,24 +21,21 @@ wait_time = 5
 def start_driver(language, locale, no_reset = True):
     capabilities = UiAutomator2Options()
     capabilities.platform_name = "Android"
-    capabilities.device_name = "38161FDJG00DXJ"
+    capabilities.device_name = "2A141FDH2009E8"
     capabilities.language = language
     capabilities.locale = locale
 
     capabilities.app_package = "com.compal.bioslab.pixsee.pixm01"
     capabilities.app_activity = "com.compal.bioslab.pixsee.pixm01.activities.SplashActivity"
+    # ignore the notifications
     capabilities.auto_dismiss_alerts = True
     capabilities.no_reset = no_reset
     capabilities.auto_grant_permissions = True
+    # the time between two actions
     capabilities.new_command_timeout = 300
     return webdriver.Remote("http://localhost:4723", options=capabilities)
 
 class BaseTestCase(unittest.TestCase):
-    # def setUp(self, language = "zh", locale = "TW", no_reset=True):
-    #     self.tutor_id = "com.compal.bioslab.pixsee.pixm01:id/tvDescription"
-    #     self.driver = start_driver(language, locale, no_reset)
-    #     self.driver.update_settings({"waitForIdleTimeout": 300})
-    #     time.sleep(wait_time)
     driver = None
     language = "zh"
     locale = "TW"
@@ -61,9 +60,6 @@ class BaseTestCase(unittest.TestCase):
             if wait_time_for_change_language:
                 time.sleep(wait_time)
             cls.tutor_id = "com.compal.bioslab.pixsee.pixm01:id/tvDescription"
-
-    # def setUp(self):
-    #     pass
     def setUp(self):
         # 如果前一個 test 把 driver 弄壞了，這裡會自動重建
         if not self.driver:
@@ -116,6 +112,7 @@ class BaseTestCase(unittest.TestCase):
             AppiumBy.ANDROID_UIAUTOMATOR,
             'new UiScrollable(new UiSelector().scrollable(true)).setAsVerticalList().scrollToEnd(1)'
         )
+    # actually click the middle bottom of screen
     def click_middle(self):
         size = self.driver.get_window_size()
         x = size['width'] // 2
@@ -126,11 +123,11 @@ class BaseTestCase(unittest.TestCase):
             "y": y
         })
         time.sleep(1)
-
+    # go to desktop
     def go_to_home_screen(self):
         self.driver.press_keycode(AndroidKey.HOME)
         time.sleep(1)
-
+    # go back to previous screen
     def go_back(self):
         self.driver.press_keycode(AndroidKey.BACK)
         time.sleep(1)
@@ -141,7 +138,7 @@ class BaseTestCase(unittest.TestCase):
         for i in range(4):
             self.click_middle()
             time.sleep(1)
-
+    # mostly use to check word
     def get_string(self, key="", language = None):
         if language is None:
             if self.driver.capabilities.get("language") == "zh" and self.driver.capabilities.get("locale") == "TW":
@@ -160,6 +157,11 @@ class BaseTestCase(unittest.TestCase):
                 if row["Identifier Android"] == key:
                     return re.sub(r'</?[^>]+>', '', row.get(language, f"[Missing:{key}]"))
         return f"[NotFound:{key}]"
+
+    # These two functions check whether the switch is pressed or checkbox is tapped.
+    # If the switch(checkbxw) is pressed, the corresponding screen should appear.
+    # If the switch(checkbox) is not pressed, the screen should not appear.
+    # This ensures that the display correctly responds to the switch(checkbox) state.
     def check_switch_and_content(self, expected_on: bool, itemid):
         if expected_on:
             try:
@@ -186,12 +188,12 @@ class BaseTestCase(unittest.TestCase):
             print(f"tap on {name} success")
         except AssertionError:
             raise AssertionError(f"tap on {name} failed")
+    # these are two important factor you should enter
     def account(self):
         return "jackypixsee02@gmail.com"
     def password(self):
         return "@Aa12345"
-    # def tearDown(self):
-    #         self.driver.quit()
+    # shutdown each session to avoid unknown error
     def tearDown(self):
         # 檢查 driver 是否健康
         try:

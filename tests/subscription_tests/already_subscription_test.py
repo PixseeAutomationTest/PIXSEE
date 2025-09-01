@@ -12,6 +12,7 @@ class SubscriptionCase2(BaseTestCase):
         cls.locale = getattr(cls, "locale", "TW")
         super().setUpClass()
 
+    # start from subscription page
     def setUp(self):
         super().setUp()
         baby_monitor_page = BabyMonitorPage(self.driver)
@@ -32,7 +33,6 @@ class SubscriptionCase2(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-    # start from subscription page
     def test_01_subscription_check_text(self):
         subscription_page = SubscriptionPage2(self.driver)
         menu_page = MenuPage(self.driver)

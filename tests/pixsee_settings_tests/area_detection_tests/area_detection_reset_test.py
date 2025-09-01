@@ -13,7 +13,7 @@ class AreaDetectionCase1(BaseTestCase):
         cls.language = getattr(cls, "language", "zh")
         cls.locale = getattr(cls, "locale", "TW")
         super().setUpClass()
-
+    # reset everytime unlike login test only first time
     def setUp(self):
         # 每個 test 前都重開 app
         if self.driver:
@@ -24,7 +24,6 @@ class AreaDetectionCase1(BaseTestCase):
             type(self).driver = None
 
         super().setUp()   # 會重新啟動 driver (no_reset=False)
-
     def test_01_area_detection_tutor_skip_1(self):
         area_detection_page = AreaDetectionPage(self.driver)
         menu_page = MenuPage(self.driver)

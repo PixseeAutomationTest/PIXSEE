@@ -16,8 +16,6 @@ class LoginCase(BaseTestCase):
 
         def setUp(self):
                 super().setUp()
-
-
         def test_01_login_wrong_email_failure(self):
                 login_page = LoginPage(self.driver)
 

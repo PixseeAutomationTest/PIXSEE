@@ -16,6 +16,7 @@ class CoveredFaceDetectionCase2(BaseTestCase):
 		cls.locale = getattr(cls, "locale", "TW")
 		super().setUpClass()
 
+	# start from pixsee settings page
 	def setUp(self):
 		super().setUp()
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -37,7 +38,6 @@ class CoveredFaceDetectionCase2(BaseTestCase):
 		except Exception as e:
 			print(f"Test failed with exception: {e}")
 			raise e
-	# start from pixsee settings page
 	def test_02_covered_face_detection_back(self):
 		covered_face_detection_page = CoveredFaceDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
@@ -215,6 +215,7 @@ class CoveredFaceDetectionCase3(BaseTestCase):
 		cls.locale = getattr(cls, "locale", "TW")
 		super().setUpClass()
 
+	# start from covered face detection page
 	def setUp(self):
 		super().setUp()
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -237,7 +238,6 @@ class CoveredFaceDetectionCase3(BaseTestCase):
 		except Exception as e:
 			print(f"Test failed with exception: {e}")
 			raise e
-	# start from covered face detection page
 	def test_01_covered_face_detection_tap_checkbox_sensitivity(self):
 		covered_face_detection_page = CoveredFaceDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)

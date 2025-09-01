@@ -43,7 +43,7 @@ class EditBabyTestWithAdding(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-    def test_delete_baby_profile_success(self):
+    def test_03_delete_baby_profile_success(self):
         try:
             baby_monitor_page = BabyMonitorPage(self.driver)
             edit_baby_profile_page = EditBabyProfilePage(self.driver)
@@ -89,7 +89,7 @@ class EditBabyTestWithAdding(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    def test_change_baby_profile_cancel(self):
+    def test_01_change_baby_profile_cancel(self):
         try:
             menu_page = MenuPage(self.driver)
             add_baby_profile_page = AddBabyProfilePage(self.driver)
@@ -155,7 +155,7 @@ class EditBabyTestWithAdding(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    def test_change_baby_profile_save(self):
+    def test_02_change_baby_profile_save(self):
         try:
             menu_page = MenuPage(self.driver)
             add_baby_profile_page = AddBabyProfilePage(self.driver)
@@ -249,7 +249,7 @@ class EditBabyTestWithoutAdding(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-    def test_delete_baby_profile_dialog_with_cancel(self):
+    def test_05_delete_baby_profile_dialog_with_cancel(self):
         try:
             edit_baby_profile_page = EditBabyProfilePage(self.driver)
 
@@ -281,7 +281,7 @@ class EditBabyTestWithoutAdding(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    def test_delete_baby_profile_page_with_cancel(self):
+    def test_06_delete_baby_profile_page_with_cancel(self):
         try:
             edit_baby_profile_page = EditBabyProfilePage(self.driver)
             delete_profile_page = DeleteProfilePage(self.driver)
@@ -323,7 +323,7 @@ class EditBabyTestWithoutAdding(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    def test_backup_baby_profile_dialog_with_ok(self):
+    def test_02_backup_baby_profile_dialog_with_ok(self):
         try:
             edit_baby_profile_page = EditBabyProfilePage(self.driver)
             download_account_data_page = DownloadAccountDataPage(self.driver)
@@ -360,7 +360,7 @@ class EditBabyTestWithoutAdding(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    def test_backup_baby_profile_dialog_with_cancel(self):
+    def test_01_backup_baby_profile_dialog_with_cancel(self):
         try:
             edit_baby_profile_page = EditBabyProfilePage(self.driver)
             download_account_data_page = DownloadAccountDataPage(self.driver)
@@ -397,11 +397,11 @@ class EditBabyTestWithoutAdding(BaseTestCase):
 
     # Please confirm the baby profile has photos from over 280 days ago before running this test.
     @unittest.skip("Incomplete test: Because the app bug found (2025/7/30).")
-    def test_change_baby_birthday_dialog_cancel(self):
+    def test_03_change_baby_birthday_dialog_cancel(self):
         pass
 
     # Please confirm the baby profile has photos from over 280 days ago before running this test.
     @unittest.skip("Incomplete test: Because the app bug found (2025/7/30).")
-    def test_change_baby_birthday_dialog_ok(self):
+    def test_04_change_baby_birthday_dialog_ok(self):
         pass
 
