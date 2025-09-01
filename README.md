@@ -1,5 +1,4 @@
-# PIXSEE
-# appium --use-plugins=inspector --allow-cors
-# https://docs.google.com/document/d/1cYf_5tufW1Qxk8VM55Vf_IJhmtI-Nhav9p-2nJ3ZHno/edit?usp=drive_link
+# PIXSEE AUTOMATION 
+### powershell : appium --use-plugins=inspector --allow-cors
+### 說明文件 : https://drive.google.com/drive/folders/1aXvqvS8GBj83i1jdijVb5sZESfhnSr2a?usp=drive_link
 
-AAA
