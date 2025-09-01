@@ -15,6 +15,7 @@ class AreaDetectionCase2(BaseTestCase):
 		cls.locale = getattr(cls, "locale", "TW")
 		super().setUpClass()
 
+	# start from pixsee settings page
 	def setUp(self):
 		super().setUp()
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -35,7 +36,6 @@ class AreaDetectionCase2(BaseTestCase):
 		except Exception as e:
 			print(f"Test failed with exception: {e}")
 			raise e
-	# start from pixsee settings page
 	def test_01_area_detection_back(self):
 		area_detection_page = AreaDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)
@@ -209,6 +209,7 @@ class AreaDetectionCase3(BaseTestCase):
 		cls.locale = getattr(cls, "locale", "TW")
 		super().setUpClass()
 
+	# start from area detection page
 	def setUp(self):
 		super().setUp()
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -231,7 +232,6 @@ class AreaDetectionCase3(BaseTestCase):
 		except Exception as e:
 			print(f"Test failed with exception: {e}")
 			raise e
-	# start from area detection page
 	def test_01_area_detection_tap_checkbox_sensitivity(self):
 		area_detection_page = AreaDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)

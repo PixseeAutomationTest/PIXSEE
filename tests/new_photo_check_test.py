@@ -8,10 +8,11 @@ import time
 
 
 class NewPhotoCheckCase(BaseTestCase):
-	def __init__(self, methodName='runTest', language="zh", locale="TW"):
-		super().__init__(methodName)
-		self.language = language
-		self.locale = locale
+	@classmethod
+	def setUpClass(cls):
+		cls.language = getattr(cls, "language", "zh")
+		cls.locale = getattr(cls, "locale", "TW")
+		super().setUpClass()
 
 	def setUp(self):
 		super().setUp()
@@ -59,21 +60,21 @@ class NewPhotoCheckCase(BaseTestCase):
 		if after == origin + 1:
 			print(f"new photo storage success origin amount: {origin}, current amount: {after}")
 		else:
-			raise AssertionError(f"failed origin amount: {origin}, current amount: {after}")
+			raise AssertionError(f"failed origin amount: {origin} not equal to current amount: {after} +1")
 
-	def test_02_photo_button(self):
+	def test_02_slide_button(self):
 		photo_page = PhotoPage(self.driver)
 		# click photo button
 		photo_page.click_plus_button()
 		photo_page.click_slide_button()
 		time.sleep(1)
-		self.assertTrue(photo_page.is_in_dialog(), "photo button click failed, not in dialog")
+		self.assertTrue(photo_page.is_in_dialog(), "click slide button click failed, not in dialog")
 		# check text
 		self.assertEqual(self.get_string("slideshow_subscription_info"), photo_page.dialog_text(),
-						 "dialog text is wrong")
+						 "need to subscribe dialog text is wrong")
 		self.assertEqual(self.get_string("subscription_go_to_subscription"), photo_page.dialog_yes_text(),
-						 "dialog yes text is wrong")
-		self.assertEqual(self.get_string("no_thanks_action"), photo_page.dialog_no_text(), "dialog no text is wrong")
+						 "need to subscribe dialog yes text is wrong")
+		self.assertEqual(self.get_string("no_thanks_action"), photo_page.dialog_no_text(), "need to subscribe dialog no text is wrong")
 		# click no
 		photo_page.click_dialog_no()
 		self.go_back()

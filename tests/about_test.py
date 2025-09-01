@@ -11,7 +11,7 @@ class AboutTest(BaseTestCase):
         cls.language = getattr(cls, "language", "zh")
         cls.locale = getattr(cls, "locale", "TW")
         super().setUpClass()
-
+    # start from about page
     def setUp(self):
         super().setUp()
 

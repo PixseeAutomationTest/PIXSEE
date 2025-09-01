@@ -15,34 +15,6 @@ from pages.menu_pages.pixsee_settings_pages.time_lapse_video_page import TimeLap
 from pages.menu_pages.pixsee_settings_pages.voice_service_pages.voice_service_page import VoiceServicePage
 from pages.menu_pages.pixsee_settings_pages.wifi_settings_page import WifiSettingsPage
 
-
-
-# class PixseeSettingsTest(BaseTestCase):
-#     def __init__(self, methodName='runTest', language="zh", locale="TW"):
-#         super().__init__(methodName)
-#         self.language = language
-#         self.locale = locale
-#
-#     def setUp(self):
-#         super().setUp(language=self.language, locale=self.locale)
-#         baby_monitor_page = BabyMonitorPage(self.driver)
-#         menu_page = MenuPage(self.driver)
-#         pixsee_settings_page = PixseeSettingsPage(self.driver)
-#         try:
-#             while self.driver.current_package != self.driver.capabilities.get("appPackage"):
-#                 self.driver.terminate_app(self.driver.current_package)
-#                 self.open_app()
-#             if pixsee_settings_page.is_in_settings():
-#                 return
-#             elif not baby_monitor_page.is_in_baby_monitor_page():
-#                 self.shutdown_app()
-#                 self.open_app()
-#             print("Finish opening app.")
-#             baby_monitor_page.click_home()
-#             menu_page.click_settings()
-#         except Exception as e:
-#             print(f"Test failed with exception: {e}")
-#             raise e
 class PixseeSettingsTest(BaseTestCase):
     @classmethod
     def setUpClass(cls):
@@ -50,6 +22,7 @@ class PixseeSettingsTest(BaseTestCase):
         cls.locale = getattr(cls, "locale", "TW")
         super().setUpClass()
 
+    # all start from pixsee settings page end up in pixsee settings page too
     def setUp(self):
         super().setUp()
         # 確保進到 settings page
@@ -71,8 +44,6 @@ class PixseeSettingsTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-
-    # all start from pixsee settings page end up in pixsee settings page too
     def test_01_enter_pixsee_profile(self):
         menu_page = MenuPage(self.driver)
         baby_monitor_page = BabyMonitorPage(self.driver)

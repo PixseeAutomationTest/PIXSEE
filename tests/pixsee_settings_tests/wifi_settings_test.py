@@ -12,6 +12,7 @@ class WifiSettingsCase1(BaseTestCase):
 		cls.locale = getattr(cls, "locale", "TW")
 		super().setUpClass()
 
+	# start from pixsee settings page
 	def setUp(self):
 		super().setUp()
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -33,7 +34,6 @@ class WifiSettingsCase1(BaseTestCase):
 		except Exception as e:
 			print(f"Test failed with exception: {e}")
 			raise e
-	# start from pixsee settings page
 	def test_01_wifi_reset_cancel(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -93,6 +93,7 @@ class WifiSettingsCase2(BaseTestCase):
 		cls.locale = getattr(cls, "locale", "TW")
 		super().setUpClass()
 
+	# start from wifi settings page
 	def setUp(self):
 		super().setUp()
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -116,7 +117,6 @@ class WifiSettingsCase2(BaseTestCase):
 		except Exception as e:
 			print(f"Test failed with exception: {e}")
 			raise e
-	# start from wifi settings page
 	def test_01_wifi_settings_next_empty_password(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -224,6 +224,7 @@ class WifiSettingsCase3(BaseTestCase):
 		cls.locale = getattr(cls, "locale", "TW")
 		super().setUpClass()
 
+	# start from pixsee settings page
 	def setUp(self):
 		super().setUp()
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -245,7 +246,6 @@ class WifiSettingsCase3(BaseTestCase):
 		except Exception as e:
 			print(f"Test failed with exception: {e}")
 			raise e
-	# start from pixsee settings page
 	def test_03_wifi_settings_next(self):
 		menu_page = MenuPage(self.driver)
 		baby_monitor_page = BabyMonitorPage(self.driver)

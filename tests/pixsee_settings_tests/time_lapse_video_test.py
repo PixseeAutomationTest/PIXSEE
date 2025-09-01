@@ -7,7 +7,7 @@ from pages.baby_monitor_page import BabyMonitorPage
 from pages.login_page import LoginPage
 from pages.menu_pages.pixsee_settings_pages.time_lapse_video_page import TimeLapseVideoPage
 from pages.menu_pages.subscription_pages.havent_subscription_page import SubscriptionPage1
-
+# haven't subscribed
 class TimeLapseVideoCase1(BaseTestCase):
     @classmethod
     def setUpClass(cls):
@@ -15,6 +15,7 @@ class TimeLapseVideoCase1(BaseTestCase):
         cls.locale = getattr(cls, "locale", "TW")
         super().setUpClass()
 
+    # start from pixsee settings page
     def setUp(self):
         super().setUp()
 
@@ -41,7 +42,6 @@ class TimeLapseVideoCase1(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-    # start from pixsee settings page
     def test_01_time_lapse_video_subscriptio_not_subscribe(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
         menu_page = MenuPage(self.driver)
@@ -133,6 +133,7 @@ class TimeLapseVideoCase1(BaseTestCase):
         except AssertionError:
             raise AssertionError("Not in time lapse video page")
 
+# Already subscribed
 class TimeLapseVideoCase2(BaseTestCase):
     @classmethod
     def setUpClass(cls):
@@ -140,6 +141,7 @@ class TimeLapseVideoCase2(BaseTestCase):
         cls.locale = getattr(cls, "locale", "TW")
         super().setUpClass()
 
+    # start from pixsee settings page
     def setUp(self):
         super().setUp()
 
@@ -163,7 +165,6 @@ class TimeLapseVideoCase2(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-    # start from pixsee settings page
     def test_05_time_lapse_video_save(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
         menu_page = MenuPage(self.driver)
@@ -186,8 +187,8 @@ class TimeLapseVideoCase2(BaseTestCase):
         if origin_status != new_status:
             print("save function success")
         else:
-            print("save function failed")
-            raise AssertionError("save function failed, status not changed")
+            print("save function failed maybe still not subscribed manually")
+            raise AssertionError("save function failed maybe still not subscribed manually")
     # same
     def test_06_time_lapse_video_back(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
@@ -274,6 +275,7 @@ class TimeLapseVideoCase3(BaseTestCase):
         cls.locale = getattr(cls, "locale", "TW")
         super().setUpClass()
 
+    # start from time lapse video page
     def setUp(self):
         super().setUp()
 
@@ -298,7 +300,6 @@ class TimeLapseVideoCase3(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-    # start from time lapse video page
     def test_09_time_lapse_video_check_text(self):
         time_lapse_video = TimeLapseVideoPage(self.driver)
         menu_page = MenuPage(self.driver)

@@ -18,7 +18,7 @@ class UserProfileTest(BaseTestCase):
         cls.language = getattr(cls, "language", "zh")
         cls.locale = getattr(cls, "locale", "TW")
         super().setUpClass()
-
+    # start from userprofile page
     def setUp(self):
         super().setUp()
 
@@ -39,7 +39,7 @@ class UserProfileTest(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-    def test_change_password_success(self):
+    def test_10_change_password_success(self):
         try:
             login_page = LoginPage(self.driver)
             baby_monitor_page = BabyMonitorPage(self.driver)
@@ -99,7 +99,7 @@ class UserProfileTest(BaseTestCase):
             raise e
 
     @unittest.skip("Spec doesn't mention about what error messages should be. Please wait for the spec to be updated and modify this test case.")
-    def test_change_password_with_empty(self):
+    def test_12_change_password_with_empty(self):
         try:
             user_profile_page = UserProfilePage(self.driver)
             change_password_page = ChangePasswordPage(self.driver)
@@ -141,7 +141,7 @@ class UserProfileTest(BaseTestCase):
             raise e
 
     @unittest.skip("Spec doesn't mention about what error messages should be. Please wait for the spec to be updated and modify this test case.")
-    def test_change_password_with_less_words(self):
+    def test_14_change_password_with_less_words(self):
         try:
             user_profile_page = UserProfilePage(self.driver)
             change_password_page = ChangePasswordPage(self.driver)
@@ -192,7 +192,7 @@ class UserProfileTest(BaseTestCase):
             raise e
 
     @unittest.skip("Spec doesn't mention about what error messages should be. Please wait for the spec to be updated and modify this test case.")
-    def test_change_password_with_no_lowercase_letter(self):
+    def test_15_change_password_with_no_lowercase_letter(self):
         try:
             user_profile_page = UserProfilePage(self.driver)
             change_password_page = ChangePasswordPage(self.driver)
@@ -236,7 +236,7 @@ class UserProfileTest(BaseTestCase):
             raise e
 
     @unittest.skip("Spec doesn't mention about what error messages should be. Please wait for the spec to be updated and modify this test case.")
-    def test_change_password_with_no_uppercase_letter(self):
+    def test_18_change_password_with_no_uppercase_letter(self):
         try:
             user_profile_page = UserProfilePage(self.driver)
             change_password_page = ChangePasswordPage(self.driver)
@@ -280,7 +280,7 @@ class UserProfileTest(BaseTestCase):
             raise e
 
     @unittest.skip("Spec doesn't mention about what error messages should be. Please wait for the spec to be updated and modify this test case.")
-    def test_change_password_with_no_number(self):
+    def test_16_change_password_with_no_number(self):
         try:
             user_profile_page = UserProfilePage(self.driver)
             change_password_page = ChangePasswordPage(self.driver)
@@ -324,7 +324,7 @@ class UserProfileTest(BaseTestCase):
             raise e
 
     @unittest.skip("Spec doesn't mention about what error messages should be. Please wait for the spec to be updated and modify this test case.")
-    def test_change_password_with_no_special_character(self):
+    def test_17_change_password_with_no_special_character(self):
         try:
             user_profile_page = UserProfilePage(self.driver)
             change_password_page = ChangePasswordPage(self.driver)
@@ -368,7 +368,7 @@ class UserProfileTest(BaseTestCase):
             raise e
 
     @unittest.skip("Spec doesn't mention about what error messages should be. Please wait for the spec to be updated and modify this test case.")
-    def test_change_password_with_inconsistent_input(self):
+    def test_13_change_password_with_inconsistent_input(self):
         try:
             user_profile_page = UserProfilePage(self.driver)
             change_password_page = ChangePasswordPage(self.driver)
@@ -410,7 +410,7 @@ class UserProfileTest(BaseTestCase):
             raise e
 
     @unittest.skip("Spec doesn't mention about what error messages should be. Please wait for the spec to be updated and modify this test case.")
-    def test_change_password_with_wrong_current_password(self):
+    def test_19_change_password_with_wrong_current_password(self):
         try:
             user_profile_page = UserProfilePage(self.driver)
             change_password_page = ChangePasswordPage(self.driver)
@@ -451,7 +451,7 @@ class UserProfileTest(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    def test_change_password_with_cancel(self):
+    def test_11_change_password_with_cancel(self):
         try:
             user_profile_page = UserProfilePage(self.driver)
             change_password_page = ChangePasswordPage(self.driver)
@@ -489,7 +489,7 @@ class UserProfileTest(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    def test_change_user_profile_success(self):
+    def test_20_change_user_profile_success(self):
         try:
             menu_page = MenuPage(self.driver)
             user_profile_page = UserProfilePage(self.driver)
@@ -528,7 +528,7 @@ class UserProfileTest(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    def test_change_user_profile_with_cancel(self):
+    def test_21_change_user_profile_with_cancel(self):
         try:
             menu_page = MenuPage(self.driver)
             user_profile_page = UserProfilePage(self.driver)
@@ -569,7 +569,7 @@ class UserProfileTest(BaseTestCase):
             raise e
 
     # Please check the account has no backup email before run this test
-    def test_add_backup_email_dialog_with_cancel(self):
+    def test_01_add_backup_email_dialog_with_cancel(self):
         try:
             user_profile_page = UserProfilePage(self.driver)
 
@@ -605,7 +605,7 @@ class UserProfileTest(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    def test_add_or_change_backup_email_with_close(self):
+    def test_02_add_or_change_backup_email_with_close(self):
         try:
             user_profile_page = UserProfilePage(self.driver)
             add_backup_email_page = AddBackupEmailPage(self.driver)
@@ -650,7 +650,7 @@ class UserProfileTest(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    def test_add_or_change_backup_email_with_invalid_email(self):
+    def test_03_add_or_change_backup_email_with_invalid_email(self):
         try:
             user_profile_page = UserProfilePage(self.driver)
             add_backup_email_page = AddBackupEmailPage(self.driver)
@@ -704,7 +704,7 @@ class UserProfileTest(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    def test_add_or_change_backup_email_with_registered_email(self):
+    def test_04_add_or_change_backup_email_with_registered_email(self):
         try:
             user_profile_page = UserProfilePage(self.driver)
             add_backup_email_page = AddBackupEmailPage(self.driver)
@@ -756,7 +756,7 @@ class UserProfileTest(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    def test_backup_email_with_cancel_verification_code(self):
+    def test_07_backup_email_with_cancel_verification_code(self):
         try:
             user_profile_page = UserProfilePage(self.driver)
             add_backup_email_page = AddBackupEmailPage(self.driver)
@@ -814,7 +814,7 @@ class UserProfileTest(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    def test_backup_email_with_wrong_verification_code(self):
+    def test_09_backup_email_with_wrong_verification_code(self):
         try:
             user_profile_page = UserProfilePage(self.driver)
             add_backup_email_page = AddBackupEmailPage(self.driver)
@@ -876,7 +876,7 @@ class UserProfileTest(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    def test_backup_email_with_resend_verification_code(self):
+    def test_08_backup_email_with_resend_verification_code(self):
         try:
             user_profile_page = UserProfilePage(self.driver)
             add_backup_email_page = AddBackupEmailPage(self.driver)
@@ -943,7 +943,7 @@ class UserProfileTest(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    def test_delete_account_dialog_with_cancel(self):
+    def test_22_delete_account_dialog_with_cancel(self):
         try:
             user_profile_page = UserProfilePage(self.driver)
 
@@ -980,7 +980,7 @@ class UserProfileTest(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    def test_backup_baby_profile_dialog_with_ok(self):
+    def test_06_backup_baby_profile_dialog_with_ok(self):
         try:
             user_profile_page = UserProfilePage(self.driver)
             download_account_data_page = DownloadAccountDataPage(self.driver)
@@ -1023,7 +1023,7 @@ class UserProfileTest(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    def test_backup_baby_profile_dialog_with_cancel(self):
+    def test_05_backup_baby_profile_dialog_with_cancel(self):
         try:
             user_profile_page = UserProfilePage(self.driver)
             download_account_data_page = DownloadAccountDataPage(self.driver)
@@ -1065,7 +1065,7 @@ class UserProfileTest(BaseTestCase):
             raise e
 
     @unittest.skip("Important: This test will delete the account. Please create an account first before run this test.")
-    def test_delete_account_success(self):
+    def test_24_delete_account_success(self):
         try:
             user_profile_page = UserProfilePage(self.driver)
             delete_profile_page = DeleteProfilePage(self.driver)
@@ -1115,7 +1115,7 @@ class UserProfileTest(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    def test_delete_account_page_with_cancel(self):
+    def test_23_delete_account_page_with_cancel(self):
         try:
             user_profile_page = UserProfilePage(self.driver)
             delete_profile_page = DeleteProfilePage(self.driver)

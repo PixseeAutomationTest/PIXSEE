@@ -42,8 +42,8 @@ def make_test_class(testcase, language, locale):
 if __name__ == '__main__':
     languages = ["en"]
     locales = ["US"]
-    # languages += ["zh", "zh"]
-    # locales += ["TW", "CN"]
+    languages += ["zh", "zh"]
+    locales += ["TW", "CN"]
 
     for lang, loc in zip(languages, locales):
         loader = unittest.TestLoader()
@@ -85,7 +85,7 @@ if __name__ == '__main__':
 
         date_str = datetime.now().strftime("%Y%m%d")
         runner = HTMLTestReport(
-            f"./results/{lang}-{loc}/{date_str}(photo).html",
-            title=f"Pixsee Test Results (compatibility)({lang}-{loc})"
+            f"./results/{lang}-{loc}/{date_str}(unsub).html",
+            title=f"Pixsee Test Results (unsub)({lang}-{loc})"
         )
         runner.run(suite)

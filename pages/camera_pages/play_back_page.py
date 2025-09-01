@@ -11,7 +11,7 @@ class PlayBackPage():
 		self.CalenderButton = "com.compal.bioslab.pixsee.pixm01:id/ib_playback_calendar"
 		self.LiveButton = "com.compal.bioslab.pixsee.pixm01:id/ibLiveButton"
 
-
+	# get text
 	def tutor_title(self):
 		WebDriverWait(self.driver, 10).until(
 			EC.presence_of_element_located((AppiumBy.ID, self.TutorTitle))
