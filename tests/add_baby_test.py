@@ -15,6 +15,7 @@ class AddBabyTest(BaseTestCase):
         cls.language = getattr(cls, "language", "zh")
         cls.locale = getattr(cls, "locale", "TW")
         super().setUpClass()
+    # start from add baby profile page
     def setUp(self):
         super().setUp()
 
@@ -36,7 +37,7 @@ class AddBabyTest(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    def test_add_baby_profile_success(self):
+    def test_03_add_baby_profile_success(self):
         try:
             baby_timeline_page = BabyTimelinePage(self.driver)
             menu_page = MenuPage(self.driver)
@@ -121,7 +122,7 @@ class AddBabyTest(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    def test_add_baby_profile_cancel_with_yes(self):
+    def test_02_add_baby_profile_cancel_with_yes(self):
         try:
             menu_page = MenuPage(self.driver)
             add_baby_profile_page = AddBabyProfilePage(self.driver)
@@ -185,7 +186,7 @@ class AddBabyTest(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
 
-    def test_add_baby_profile_cancel_with_no(self):
+    def test_01_add_baby_profile_cancel_with_no(self):
         try:
             add_baby_profile_page = AddBabyProfilePage(self.driver)
 

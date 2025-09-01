@@ -12,7 +12,7 @@ class VoiceServiceTest(BaseTestCase):
         cls.language = getattr(cls, "language", "zh")
         cls.locale = getattr(cls, "locale", "TW")
         super().setUpClass()
-
+    # start from voice service page
     def setUp(self):
         super().setUp()
 
@@ -196,6 +196,7 @@ class VoiceServiceTest(BaseTestCase):
             print(f"Test failed with exception: {e}")
             raise e
         self.go_back()
+
     def test_changing_language_discard_with_yes(self):
         try:
             voice_service_page = VoiceServicePage(self.driver)

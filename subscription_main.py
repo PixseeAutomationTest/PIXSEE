@@ -9,8 +9,11 @@ from tests.assistant_tests.pixsee_cloud_after_sub_test import PixseeCloudTest3, 
 
 def make_test_class(testcase, language, locale):
 	class CustomTestCase(testcase):
-		def __init__(self, methodName='runTest'):
-			super().__init__(methodName, language=language, locale=locale)
+		@classmethod
+		def setUpClass(cls):
+			cls.language = language
+			cls.locale = locale
+			super().setUpClass()
 
 	CustomTestCase.__name__ = testcase.__name__
 	CustomTestCase.__qualname__ = testcase.__qualname__
@@ -19,8 +22,8 @@ def make_test_class(testcase, language, locale):
 if __name__ == '__main__':
 	languages = ["en"]
 	locales = ["US"]
-	# languages += ["zh", "zh"]
-	# locales += ["TW", "CN"]
+	languages += ["zh", "zh"]
+	locales += ["TW", "CN"]
 
 	for lang, loc in zip(languages, locales):
 		loader = unittest.TestLoader()

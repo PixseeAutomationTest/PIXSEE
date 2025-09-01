@@ -10,13 +10,15 @@ import re
 
 
 class PixseeCloudTest3(BaseTestCase):
-    def __init__(self, methodName='runTest', language="en", locale="US"):
-        super().__init__(methodName)
-        self.language = language
-        self.locale = locale
+    @classmethod
+    def setUpClass(cls):
+        cls.language = getattr(cls, "language", "zh")
+        cls.locale = getattr(cls, "locale", "TW")
+        super().setUpClass()
 
+    # start from assistant page
     def setUp(self):
-        super().setUp(language=self.language, locale=self.locale)
+        super().setUp()
         baby_monitor_page = BabyMonitorPage(self.driver)
         menu_page = MenuPage(self.driver)
         assistant_page = AssistantPage(self.driver)
@@ -36,7 +38,6 @@ class PixseeCloudTest3(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-    # start from assistant page
     def test_01_pixsee_cloud_page_check_storage(self):
         pixsee_cloud_page = PixseeCloudPage(self.driver)
         assistant_page = AssistantPage(self.driver)
@@ -75,13 +76,15 @@ class PixseeCloudTest3(BaseTestCase):
         else:
             raise AssertionError("Total storage is not 30 GB, cannot calculate used percent.")
 class PixseeCloudTest4(BaseTestCase):
-    def __init__(self, methodName='runTest', language="en", locale="US"):
-        super().__init__(methodName)
-        self.language = language
-        self.locale = locale
+    @classmethod
+    def setUpClass(cls):
+        cls.language = getattr(cls, "language", "zh")
+        cls.locale = getattr(cls, "locale", "TW")
+        super().setUpClass()
 
+    # start from pixsee cloud page
     def setUp(self):
-        super().setUp(language=self.language, locale=self.locale)
+        super().setUp()
         baby_monitor_page = BabyMonitorPage(self.driver)
         menu_page = MenuPage(self.driver)
         assistant_page = AssistantPage(self.driver)
@@ -102,7 +105,6 @@ class PixseeCloudTest4(BaseTestCase):
         except Exception as e:
             print(f"Test failed with exception: {e}")
             raise e
-    # start from pixsee cloud page
     def test_02_pixsee_cloud_page_check_all_texts(self):
         pixsee_cloud_page = PixseeCloudPage(self.driver)
 

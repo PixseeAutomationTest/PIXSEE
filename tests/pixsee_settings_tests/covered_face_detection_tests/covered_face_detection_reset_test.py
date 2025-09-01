@@ -14,6 +14,7 @@ class CoveredFaceDetectionCase1(BaseTestCase):
 		cls.locale = getattr(cls, "locale", "TW")
 		super().setUpClass()
 
+	# reset everytime unlike login test
 	def setUp(self):
 		if self.driver:
 			try:
@@ -23,7 +24,6 @@ class CoveredFaceDetectionCase1(BaseTestCase):
 			type(self).driver = None
 
 		super().setUp()  # 會重新啟動 driver (no_reset=False)
-
 	def test_01_covered_face_detection_tutor_skip(self):
 		covered_face_detection_page = CoveredFaceDetectionPage(self.driver)
 		menu_page = MenuPage(self.driver)

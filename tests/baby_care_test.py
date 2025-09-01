@@ -13,6 +13,7 @@ class BabyCareCase(BaseTestCase):
 		cls.locale = getattr(cls, "locale", "TW")
 		super().setUpClass()
 
+	# start from the baby monitor page
 	def setUp(self):
 		super().setUp()
 
@@ -30,7 +31,6 @@ class BabyCareCase(BaseTestCase):
 		except Exception as e:
 			print(f"Test failed with exception: {e}")
 			raise e
-	# start from the baby monitor page
 	def test_baby_care_text(self):
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		baby_care_page = BabyCarePage(self.driver)

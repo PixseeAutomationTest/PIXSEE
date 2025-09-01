@@ -13,6 +13,7 @@ class PixseeFriendsDetectionCase1(BaseTestCase):
 		cls.locale = getattr(cls, "locale", "TW")
 		super().setUpClass()
 
+	# start from pixsee settings page
 	def setUp(self):
 		super().setUp()
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -23,9 +24,8 @@ class PixseeFriendsDetectionCase1(BaseTestCase):
 			while self.driver.current_package != self.driver.capabilities.get("appPackage"):
 				self.driver.terminate_app(self.driver.current_package)
 				self.open_app()
+
 			if pixsee_settings_page.is_in_settings():
-				return
-			elif pixsee_friends_page.is_in_pixsee_friends_det_page():
 				return
 			elif not baby_monitor_page.is_in_baby_monitor_page():
 				self.shutdown_app()
@@ -36,7 +36,6 @@ class PixseeFriendsDetectionCase1(BaseTestCase):
 		except Exception as e:
 			print(f"Test failed with exception: {e}")
 			raise e
-	# start from pixsee settings page
 	def test_01_friends_detection_back(self):
 		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
 		menu_page = MenuPage(self.driver)
@@ -60,7 +59,7 @@ class PixseeFriendsDetectionCase1(BaseTestCase):
 
 		origin_status = pixsee_settings_page.pixsee_friends_detection_status_text()
 		pixsee_settings_page.click_pixsee_friends_detection()
-		# check save enable = false
+		# check save enable == false
 		try:
 			self.assertFalse(pixsee_friends_page.is_save_enable())
 			print("Save diable test pass")
@@ -161,6 +160,7 @@ class PixseeFriendsDetectionCase2(BaseTestCase):
 		cls.locale = getattr(cls, "locale", "TW")
 		super().setUpClass()
 
+	# start from friends detection page
 	def setUp(self):
 		super().setUp()
 		baby_monitor_page = BabyMonitorPage(self.driver)
@@ -183,7 +183,6 @@ class PixseeFriendsDetectionCase2(BaseTestCase):
 		except Exception as e:
 			print(f"Test failed with exception: {e}")
 			raise e
-	# start from friends detection page
 	def test_05_friends_detection_tap_checkbox(self):
 		pixsee_friends_page = PixseeFriendsDetPage(self.driver)
 		menu_page = MenuPage(self.driver)

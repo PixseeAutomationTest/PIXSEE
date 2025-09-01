@@ -16,6 +16,7 @@ class EnvironmentSettingsCase1(BaseTestCase):
 		cls.locale = getattr(cls, "locale", "TW")
 		super().setUpClass()
 
+	# start from the Pixsee Settings page
 	def setUp(self):
 		super().setUp()
 
@@ -38,7 +39,6 @@ class EnvironmentSettingsCase1(BaseTestCase):
 		except Exception as e:
 			print(f"Test failed with exception: {e}")
 			raise e
-	# start from the Pixsee Settings page
 	def test_01_environment_set_back(self):
 			environment_settings_page = EnvironmentSettingsPage(self.driver)
 			menu_page = MenuPage(self.driver)
@@ -161,6 +161,7 @@ class EnvironmentSettingsCase2(BaseTestCase):
 		cls.locale = getattr(cls, "locale", "TW")
 		super().setUpClass()
 
+	# start from environment page
 	def setUp(self):
 		super().setUp()
 
@@ -184,7 +185,6 @@ class EnvironmentSettingsCase2(BaseTestCase):
 		except Exception as e:
 			print(f"Test failed with exception: {e}")
 			raise e
-	# start from environment page
 	def test_05_environment_set_tap_checkbox(self):
 		environment_settings_page = EnvironmentSettingsPage(self.driver)
 		menu_page = MenuPage(self.driver)
