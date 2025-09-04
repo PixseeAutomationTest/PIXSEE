@@ -9,7 +9,7 @@
 1. **Clone 專案** → 把這個 GitHub 連結到自己的電腦  
 2. **設定裝置名稱** → 到 `base.py` 改 `capabilities.device_name = 你的device`  
    - ✅ 用 `adb devices` 查裝置 ID（在 PowerShell 輸入）  
-3. **設定帳號/密碼**  
+3. **設定帳號/密碼**  → 到 `base.py` 改 `self.account`,`self.password`
    - ⚠️ 如果兩台機器同時跑，**不能用同一組帳號**  
 4. 打開 **PyCharm Terminal**  
 5. 第一次跑的時候輸入：  
