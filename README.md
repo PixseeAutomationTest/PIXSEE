@@ -31,7 +31,7 @@
 此為字串表需要放在專案資料夾裡，跟 pages 、 results 、 tests 同一層。最常用到 base 裡的 get_string(“ID”)，ID 必須對表找。
 
 ## 一些功能說明
-1.如果找不到id而且xpath又是裡面包含會因為中英文不一樣的時候可以先找上層的id，再往下找之下的xpath前面幾個字
+###1.如果找不到id而且xpath又是裡面包含會因為中英文不一樣的時候可以先找上層的id，再往下找之下的xpath前面幾個字
 像是pixsee cloud裡面的釋出空間有好幾個項目，但是隨便抓一個xpath會長這樣:
 ```xpath
 //android.widget.TextView[@resource-id="com.compal.bioslab.pixsee.pixm01:id/tvPlanDefinition" and @text="清除25%，保留約604.6 MB"]
