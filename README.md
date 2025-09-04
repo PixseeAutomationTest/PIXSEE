@@ -1,8 +1,6 @@
 
 
----
 
-````markdown
 # 🌟 PIXSEE AUTOMATION
 
 ## 🚀 啟動步驟
@@ -173,7 +171,4 @@ def dialog_delete_25_percent_text(self):
 
 ```
 
----
 
-要我幫你把這份 README **加上每個 page 的功能快速查表 (Markdown Table)** 嗎？這樣在 GitHub 上看會更像文件手冊。
-```
