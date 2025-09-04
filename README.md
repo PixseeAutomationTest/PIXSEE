@@ -46,7 +46,7 @@
 * **狀態檢查**（is\_xxx, has\_xxx）
 * **進階操作**（滑動、日期選取、刪除驗證…）
 
-👉 **新增功能重點：**
+👉 **以下是各類功能統整，如果有需要寫新功能可以用這些去改：**
 
 #### 🔸 `album_page.py`
 
@@ -144,7 +144,7 @@
 
 ---
 
-## 🔍 功能操作小技巧
+##  功能操作小技巧
 
 ### 1️⃣ 找不到 ID，用 XPath 的技巧
 
@@ -157,7 +157,7 @@
 //android.widget.TextView[@resource-id="com.compal.bioslab.pixsee.pixm01:id/tvPlanDefinition" and @text="清除25%，保留約604.6 MB"]
 ```
 
-📸 範例截圖： <img width="848" height="371" alt="image" src="https://github.com/user-attachments/assets/5df151f3-9e5c-4dba-bc88-8ee40bd4ac55" />
+ 範例截圖： <img width="848" height="371" alt="image" src="https://github.com/user-attachments/assets/5df151f3-9e5c-4dba-bc88-8ee40bd4ac55" />
 
 ### 2️⃣ 程式碼示例
 
