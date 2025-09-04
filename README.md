@@ -7,7 +7,7 @@
 5. 第一次跑的時候要輸入pip install -r requirements.txt
 6. 確認檔案裏面都沒有毛毛蟲紅線
 7. 打開powershell輸入appium --use-plugins=inspector --allow-cors
-8. pycharm 這邊選好要執行的檔案看是要測訂閱或是未訂閱並按下執行，如果是訂閱的話需要手動先在手機按下訂閱，如果是未訂閱需要檢查手機是否取消訂閱了
+8. pycharm 這邊選好要執行的檔案看是要測訂閱或是未訂閱(unsubscription_main,subscription_main)並按下執行，如果是訂閱的話需要手動先在手機按下訂閱，如果是未訂閱需要檢查手機是否取消訂閱了
 9. 看pycharm那邊有沒有第一個test出現
 
 ### [說明文件](https://drive.google.com/drive/folders/1aXvqvS8GBj83i1jdijVb5sZESfhnSr2a?usp=drive_link)
