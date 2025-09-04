@@ -37,6 +37,7 @@
 //android.widget.TextView[@resource-id="com.compal.bioslab.pixsee.pixm01:id/tvPlanDefinition" and @text="清除25%，保留約604.6 MB"]
 ```
 <img width="848" height="371" alt="image" src="https://github.com/user-attachments/assets/5df151f3-9e5c-4dba-bc88-8ee40bd4ac55" />
+
 ```python 
     def dialog_delete_25_percent_text(self):
         WebDriverWait(self.driver, 10).until(
