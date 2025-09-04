@@ -2,7 +2,7 @@ from base import BaseTestCase
 from pages.baby_monitor_page import BabyMonitorPage
 from pages.menu_pages.menu_page import MenuPage
 from pages.baby_timeline_page import BabyTimelinePage
-from pages.menu_pages.album_pages.photo_page import PhotoPage
+from pages.menu_pages.album_pages.album_page import AlbumPage
 from pages.camera_pages.camera_main_page import CameraMainPage
 from pages.camera_pages.play_back_page import PlayBackPage
 import time
@@ -171,13 +171,13 @@ class TutorCase(BaseTestCase):
     def test_04_album_tutor(self):
             baby_monitor_page = BabyMonitorPage(self.driver)
             menu_page = MenuPage(self.driver)
-            photo_page = PhotoPage(self.driver)
+            album_page = AlbumPage(self.driver)
             errors = []
 
             baby_monitor_page.click_home()
             menu_page.click_album()
             try:
-                    album_title = photo_page.new_function_title()
+                    album_title = album_page.new_function_title()
                     hint = self.get_string("slideshow_whats_new").replace("\\", "")
                     self.assertEqual(album_title, hint)
                     print("new function title success")
@@ -185,7 +185,7 @@ class TutorCase(BaseTestCase):
                     print("new function title FAIL: text mismatch")
                     errors.append(e)
             try:
-                    album_description = photo_page.new_function_msg()
+                    album_description = album_page.new_function_msg()
                     hint = self.get_string("slideshow_whats_new_info")
                     self.assertEqual(album_description, hint)
                     print("new function message description success")
@@ -193,16 +193,16 @@ class TutorCase(BaseTestCase):
                     print("new function message FAIL: text mismatch")
                     errors.append(e)
             try:
-                    iknow_button_text = photo_page.iknow_button_text()
+                    iknow_button_text = album_page.iknow_button_text()
                     hint = self.get_string("slideshow_i_got_it")
                     self.assertEqual(iknow_button_text, hint)
                     print("I know button text success")
             except AssertionError as e:
                     print("I know button text FAIL: text mismatch")
                     errors.append(e)
-            photo_page.click_iknow_button()
+            album_page.click_iknow_button()
             try:
-                    view_tutor_title = photo_page.tutor_title()
+                    view_tutor_title = album_page.tutor_title()
                     hint = self.get_string("first_tip_preview_photo_title")
                     self.assertEqual(view_tutor_title, hint)
                     print("View tutor title success")
@@ -210,7 +210,7 @@ class TutorCase(BaseTestCase):
                     print("View tutor title FAIL: text mismatch")
                     errors.append(e)
             try:
-                    view_tutor_description = photo_page.tutor_description()
+                    view_tutor_description = album_page.tutor_description()
                     hint = self.get_string("first_tip_preview_photo_info")
                     self.assertEqual(view_tutor_description, hint)
                     print("View tutor description success")
@@ -218,10 +218,10 @@ class TutorCase(BaseTestCase):
                     print("View tutor description FAIL: text mismatch")
                     errors.append(e)
             self.click_middle()
-            photo_page.click_plus_button()
+            album_page.click_plus_button()
             time.sleep(1)
             try:
-                    create_tutor_title = photo_page.tutor_title()
+                    create_tutor_title = album_page.tutor_title()
                     hint = self.get_string("first_tip_create_slideshow_title")
                     self.assertEqual(create_tutor_title, hint)
                     print("Create tutor title success")
@@ -229,7 +229,7 @@ class TutorCase(BaseTestCase):
                     print("Create tutor title FAIL: text mismatch")
                     errors.append(e)
             try:
-                    create_tutor_description = photo_page.tutor_description()
+                    create_tutor_description = album_page.tutor_description()
                     hint = self.get_string("first_tip_create_slideshow_info")
                     self.assertEqual(create_tutor_description, hint)
                     print("Create tutor description success")
@@ -237,7 +237,7 @@ class TutorCase(BaseTestCase):
                     print("Create tutor description FAIL: text mismatch")
                     errors.append(e)
             self.click_middle()
-            photo_page.click_plus_button()
+            album_page.click_plus_button()
             self.go_back()
             baby_monitor_page.click_home()
 

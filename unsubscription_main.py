@@ -20,7 +20,7 @@ from tests.pixsee_settings_tests.time_lapse_video_test import TimeLapseVideoCase
 from tests.pixsee_settings_tests.voice_service_test import VoiceServiceTest
 from tests.pixsee_settings_tests.SD_card_test import SDcardCase
 from tests.about_test import AboutTest
-from tests.new_photo_check_test import NewPhotoCheckCase
+from tests.album_test import AlbumCase
 from tests.subscription_tests.havent_subscription_test import SubscriptionCase1
 from tests.assistant_tests.assistant_test import AssistantTest
 from tests.assistant_tests.pixsee_cloud_test import PixseeCloudTest1, PixseeCloudTest2
@@ -40,10 +40,10 @@ def make_test_class(testcase, language, locale):
     return CustomTestCase
 
 if __name__ == '__main__':
-    languages = ["en"]
-    locales = ["US"]
-    languages += ["zh", "zh"]
-    locales += ["TW", "CN"]
+    languages = ["zh"]
+    locales = ["CN"]
+    languages += ["zh", "en"]
+    locales += ["TW", "US"]
 
     for lang, loc in zip(languages, locales):
         loader = unittest.TestLoader()
@@ -56,7 +56,7 @@ if __name__ == '__main__':
         suite.addTests(loader.loadTestsFromTestCase(make_test_class(AddBabyTest, lang, loc)))
         suite.addTests(loader.loadTestsFromTestCase(make_test_class(EditBabyTestWithAdding, lang, loc)))
         suite.addTests(loader.loadTestsFromTestCase(make_test_class(EditBabyTestWithoutAdding, lang, loc)))
-        suite.addTests(loader.loadTestsFromTestCase(make_test_class(NewPhotoCheckCase, lang, loc)))
+        suite.addTests(loader.loadTestsFromTestCase(make_test_class(AlbumCase, lang, loc)))
         suite.addTests(loader.loadTestsFromTestCase(make_test_class(PixseeProfileTest, lang, loc)))
         suite.addTests(loader.loadTestsFromTestCase(make_test_class(WifiSettingsCase1, lang, loc)))
         suite.addTests(loader.loadTestsFromTestCase(make_test_class(WifiSettingsCase2, lang, loc)))
