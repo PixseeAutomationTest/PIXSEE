@@ -1,4 +1,7 @@
+懂了 👍
+我幫你直接生成一個 **完整的 `README.md` 檔案**，排版跟格式都調整過，你可以直接貼到 GitHub 專案上。
 
+---
 
 
 # 🌟 PIXSEE AUTOMATION
@@ -13,7 +16,7 @@
 5. 第一次跑的時候輸入：  
    ```bash
    pip install -r requirements.txt
-````
+    ```
 
 6. 確認檔案裡面 **沒有紅色波浪線** 🪱
 7. 打開 PowerShell，啟動 Appium：
@@ -167,8 +170,6 @@ def dialog_delete_25_percent_text(self):
     uplayer = self.driver.find_element("id", self.ListUpLayer)
     elements = uplayer.find_elements("xpath", self.List)
     return elements[0].text
-```
-
 ```
 
 
