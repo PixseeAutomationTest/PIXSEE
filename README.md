@@ -3,9 +3,9 @@
 ---
 
 
-# 🌟 PIXSEE AUTOMATION
+# PIXSEE AUTOMATION
 
-## 🚀 啟動步驟
+## 啟動步驟
 1. **Clone 專案** → 把這個 GitHub 連結到自己的電腦  
 2. **設定裝置名稱** → 到 `base.py` 改 `capabilities.device_name = 你的device`  
    - ✅ 用 `adb devices` 查裝置 ID（在 PowerShell 輸入）  
@@ -17,7 +17,7 @@
    pip install -r requirements.txt
     ```
 
-6. 確認檔案裡面 **沒有紅色波浪線** 🪱
+6. 確認檔案裡面 **沒有紅色波浪線** 
 7. 打開 PowerShell，啟動 Appium：
 
    ```bash
@@ -25,8 +25,8 @@
    ```
 8. 在 PyCharm 選好要執行的檔案並執行：
 
-   * 📌 `subscription_main.py` → 測 **訂閱**（要手動先在手機按訂閱）
-   * 📌 `unsubscription_main.py` → 測 **未訂閱**（要確認手機已取消訂閱）
+   *  `subscription_main.py` → 測 **訂閱**（要手動先在手機按訂閱）
+   *  `unsubscription_main.py` → 測 **未訂閱**（要確認手機已取消訂閱）
 9. 查看 PyCharm 是否有跑出 **第一個 test** ✅
 
 ---
