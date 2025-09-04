@@ -32,8 +32,10 @@
 
 ## 一些功能說明
 1.如果找不到id而且xpath又是裡面包含會因為中英文不一樣的時候可以先找上層的id，再往下找之下的xpath前面幾個字
-像是pixsee cloud裡面的釋出空間有好幾個項目，但是隨便抓一個xpath會長這樣://android.widget.TextView[@resource-id="com.compal.bioslab.pixsee.pixm01:id/tvPlanDefinition" and @text="清除25%，保留約604.6 MB"]
+像是pixsee cloud裡面的釋出空間有好幾個項目，但是隨便抓一個xpath會長這樣:
+//android.widget.TextView[@resource-id="com.compal.bioslab.pixsee.pixm01:id/tvPlanDefinition" and @text="清除25%，保留約604.6 MB"]
 <img width="848" height="371" alt="image" src="https://github.com/user-attachments/assets/5df151f3-9e5c-4dba-bc88-8ee40bd4ac55" />
+'''python 
     def dialog_delete_25_percent_text(self):
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located(("id", self.ListUpLayer))
@@ -41,5 +43,5 @@
         uplayer = self.driver.find_element("id", self.ListUpLayer)
         elements = uplayer.find_elements("xpath", self.List)
         return elements[0].text
-
+'''
 
