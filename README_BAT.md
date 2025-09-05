@@ -2,6 +2,8 @@
 
 
 # PIXSEE 自動化測試使用者完整操作流程
+---
+## 這個是跑整體的，可以直接先去看[下載篇](https://docs.google.com/document/d/1ItL32rgG6MNTK-BSXAnEmVTSNSz00fPfkFMwrz_ic6Q/edit?tab=t.0)就可以跳過1-4步驟
 
 ## 1️⃣ 下載專案
 
@@ -73,12 +75,7 @@
 
 ## 5️⃣ 使用批次檔跑測試
 
-假設專案資料夾裡有：
-
-* `base.py`（讀環境變數）
-* `subscription_main.py` / `unsubscription_main.py`
-* `requirements.txt`
-* `run.bat`
+## 可以直接下載整個ZIP在解壓縮
 
 ### 執行步驟：
 
@@ -112,7 +109,7 @@
 
 7. 測試跑完後批次檔會停在 `pause`，方便查看測試結果。
    
-8. 檔案要去results資料夾看
+8. 檔案要去results資料夾看(如果要測單項還是要去看README_PYCHARM)
 
 ---
 
