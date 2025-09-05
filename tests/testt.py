@@ -1,6 +1,10 @@
-from base import BaseTestCase
-from pages.menu_pages.edit_baby_profile_page import EditBabyProfilePage
+from appium.options.android import UiAutomator2Options
+from appium import webdriver
+import unittest
+import time
 
+from pages.base import BaseTestCase
+from pages.menu_pages.pixsee_friends_pages.pixsee_friends_page import PixseeFriendsPage
 
 
 
@@ -12,7 +16,7 @@ class TestCase(BaseTestCase):
     def setUp(self):
         super().setUp(language=self.language, locale=self.locale)
     def test_test(self):
-        edit_baby_profile_page = EditBabyProfilePage(self.driver)
-        edit_baby_profile_page.select_baby_birthday(self.locale, 2020, 5, 31)
-        edit_baby_profile_page.select_baby_birthday(self.locale)
-        edit_baby_profile_page.select_baby_birthday(self.locale, 2025, 8, 15)
+        pixsee_friends_page = PixseeFriendsPage(self.driver)
+        pixsee_friends_page.scroll_up_dolls_list()
+        time.sleep(2)
+        pixsee_friends_page.scroll_down_dolls_list()
