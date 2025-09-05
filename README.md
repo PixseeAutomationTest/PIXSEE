@@ -10,8 +10,8 @@
 2. **設定裝置名稱** → 到 `base.py` 改 [`capabilities.device_name = 你的device`](https://github.com/PixseeAutomationTest/PIXSEE/blob/dd96d55ca76915b44416ea36aae0819206c093aa/base.py#L24C5-L24C48)
 > [!TIP]
 > PYCHARM裡面可以直接crl+r就可以搜尋
-   - ✅ 用 `adb devices` 查裝置 ID（在 PowerShell 輸入）  
-4. **設定帳號/密碼**  → 到 `base.py` 改 [`self.account`](https://github.com/PixseeAutomationTest/PIXSEE/blob/49f028969b8e17daa92fbc708bf81039ee2ea89e/base.py#L192),`self.password`
+   - [ ] 用 `adb devices` 查裝置 ID（在 PowerShell 輸入）  
+4. **設定帳號/密碼**  → 到 `base.py` 改 [`self.account`](https://github.com/PixseeAutomationTest/PIXSEE/blob/49f028969b8e17daa92fbc708bf81039ee2ea89e/base.py#L192),[`self.password`](https://github.com/PixseeAutomationTest/PIXSEE/blob/5aea4700ed4c3089c599d95bf0392f280d9cee1e/base.py#L194)
 > [!WARNING]
 >   - 如果兩台機器同時跑，**不能用同一組帳號**  
 5. 打開 **PyCharm Terminal**  
@@ -30,7 +30,7 @@
 
    *  `subscription_main.py` → 測 **訂閱**（要手動先在手機按訂閱）
    *  `unsubscription_main.py` → 測 **未訂閱**（要確認手機已取消訂閱）
-10. 查看 PyCharm 是否有跑出 **第一個 test** ✅
+10. 查看 PyCharm 是否有跑出 **第一個 test** 
 
 ---
 
@@ -115,6 +115,39 @@ graph TD;
   * `is_in_edit_baby_profile_page()` → 確認是否在編輯頁
   * `has_calendar()` / `has_selection_list()` / `has_dialog()` → 元素存在檢查
 
+#### 🔸 [`pixsee_cloud_page.py`](pages/menu_pages/cloud_pages/pixsee_cloud_page.py)
+
+* **儲存容量解析**
+
+  * `parse_storage_usage(text)` → 從字串解析出「已用 / 總容量」數值
+
+* **刪除選項**
+
+  * `dialog_delete_25_percent_text()` / `50_percent` / `75_percent` / `all_text()` → 取得刪除比例選項文字
+  * `is_dialog_delete_25_percent_clickable()` / `50` / `75` / `all` → 驗證刪除選項是否可點擊
+
+* **顏色與像素**
+
+  * `photo_color()` / `videos_color()` / `story_color()` / `voice_recorder_color()` → 取得儲存指示條中心座標
+  * `is_pixel_color(x, y)` → 截圖並檢查指定像素的平均顏色
+
+#### 🔸 [`area_detection_page.py`](pages/menu_pages/detection_pages/area_detection_page.py)
+
+* **教學頁**
+
+  * `is_in_tutor_first_page()` / `is_in_tutor_second_page()` → 確認是否在教學的第一頁 / 第二頁
+
+* **顏色判斷**
+
+  * `find_stream_left_top()` → 找出串流畫面左上座標
+  * `is_color_in_range(x, y, color_range)` → 截圖並檢查像素是否在指定顏色範圍內
+
+#### 🔸 [`enviroment_settings_page.py`](pages/menu_pages/settings_pages/enviroment_settings_page.py)
+
+* **滑桿資訊**
+
+  * `temperature_bar_location()` / `temperature_bar_size()` → 取得溫度滑桿位置與大小
+  * `humidity_bar_location()` / `humidity_bar_size()` → 取得濕度滑桿位置與大小
 ---
 
 ### 📁 [`tests/`](tests)
