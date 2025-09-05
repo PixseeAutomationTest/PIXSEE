@@ -5,6 +5,8 @@
 
 # PIXSEE AUTOMATION
 
+## [`English instruction/`](README_EN.md)
+
 ## 啟動步驟
 1. **Clone 專案** → 把這個 GitHub 連結到自己的電腦  
 2. **設定裝置名稱** → 到 `base.py` 改 [`capabilities.device_name = 你的device`](https://github.com/PixseeAutomationTest/PIXSEE/blob/dd96d55ca76915b44416ea36aae0819206c093aa/base.py#L24C5-L24C48)
