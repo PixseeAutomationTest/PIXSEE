@@ -1,4 +1,4 @@
-from pages.base import BaseTestCase
+from base import BaseTestCase
 from pages.baby_monitor_page import BabyMonitorPage
 from pages.menu_pages.menu_page import MenuPage
 from pages.menu_pages.pixsee_friends_pages.pixsee_friends_page import PixseeFriendsPage
@@ -10,13 +10,14 @@ from pages.menu_pages.pixsee_friends_pages.doll_box_page import DollBoxPage
 import time
 
 class PixseeFriendsTest(BaseTestCase):
-	def __init__(self, methodName='runTest', language="zh", locale="TW"):
-		super().__init__(methodName)
-		self.language = language
-		self.locale = locale
+	@classmethod
+	def setUpClass(cls):
+		cls.language = getattr(cls, "language", "zh")
+		cls.locale = getattr(cls, "locale", "TW")
+		super().setUpClass()
 
 	def setUp(self):
-		super().setUp(language=self.language, locale=self.locale)
+		super().setUp()
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		pixsee_friends_page = PixseeFriendsPage(self.driver)
@@ -105,13 +106,14 @@ class PixseeFriendsTest(BaseTestCase):
 			raise e
 
 class PixseeFriendsTestInActivationService(BaseTestCase):
-	def __init__(self, methodName='runTest', language="zh", locale="TW"):
-		super().__init__(methodName)
-		self.language = language
-		self.locale = locale
+	@classmethod
+	def setUpClass(cls):
+		cls.language = getattr(cls, "language", "zh")
+		cls.locale = getattr(cls, "locale", "TW")
+		super().setUpClass()
 
 	def setUp(self):
-		super().setUp(language=self.language, locale=self.locale)
+		super().setUp()
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		pixsee_friends_page = PixseeFriendsPage(self.driver)
@@ -243,16 +245,18 @@ class PixseeFriendsTestInActivationService(BaseTestCase):
 			raise e
 
 class PixseeFriendsTestInDollPlaylist(BaseTestCase):
-	def __init__(self, methodName='runTest', language="zh", locale="TW"):
-		super().__init__(methodName)
-		self.language = language
-		self.locale = locale
+	@classmethod
+	def setUpClass(cls):
+		cls.language = getattr(cls, "language", "zh")
+		cls.locale = getattr(cls, "locale", "TW")
+		super().setUpClass()
 
 	def setUp(self):
-		super().setUp(language=self.language, locale=self.locale)
+		super().setUp()
 		baby_monitor_page = BabyMonitorPage(self.driver)
 		menu_page = MenuPage(self.driver)
 		pixsee_friends_page = PixseeFriendsPage(self.driver)
+		activation_service_page = ActivateServicePage(self.driver)
 		music_doll_playlist_page = MusicDollPlaylistPage(self.driver)
 		story_doll_playlist_page = StoryDollPlaylistPage(self.driver)
 

@@ -1,7 +1,7 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from appium.webdriver.common.appiumby import AppiumBy
-import pages.base as base
+import base as base
 
 class PixseeFriendsPage:
 	def __init__(self, driver):
