@@ -117,7 +117,7 @@ graph TD;
   * `is_in_edit_baby_profile_page()` → 確認是否在編輯頁
   * `has_calendar()` / `has_selection_list()` / `has_dialog()` → 元素存在檢查
 
-#### 🔸 [`pixsee_cloud_page.py`](pages/menu_pages/cloud_pages/pixsee_cloud_page.py)
+#### 🔸 [`pixsee_cloud_page.py`](pages/menu_pages/assistant_pages/pixsee_cloud_page.py)
 
 * **儲存容量解析**
 
@@ -133,7 +133,7 @@ graph TD;
   * `photo_color()` / `videos_color()` / `story_color()` / `voice_recorder_color()` → 取得儲存指示條中心座標
   * `is_pixel_color(x, y)` → 截圖並檢查指定像素的平均顏色
 
-#### 🔸 [`area_detection_page.py`](pages/menu_pages/detection_pages/area_detection_page.py)
+#### 🔸 [`area_detection_page.py`](pages/menu_pages/pixsee_settings_pages/area_detection_page.py)
 
 * **教學頁**
 
@@ -144,7 +144,7 @@ graph TD;
   * `find_stream_left_top()` → 找出串流畫面左上座標
   * `is_color_in_range(x, y, color_range)` → 截圖並檢查像素是否在指定顏色範圍內
 
-#### 🔸 [`enviroment_settings_page.py`](pages/menu_pages/settings_pages/enviroment_settings_page.py)
+#### 🔸 [`enviroment_settings_page.py`](pages/menu_pages/pixsee_settings_pages/enviroment_settings_page.py)
 
 * **滑桿資訊**
 
