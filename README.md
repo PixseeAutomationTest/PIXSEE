@@ -89,7 +89,7 @@
 2. 批次檔會依序詢問：
 
    * **裝置名稱（adb devices ID）** → 例如 `2A141FDH2009E8`
-   * **帳號** → 例如 `jackypixsee02@gmail.com`
+   * **帳號** → 例如 `jackypixsee02@gmail.com`記得同時測試多台時不要用同一個帳號
    * **密碼** → 例如 `@Aa12345`
 
 3. 批次檔會檢查是否第一次跑，如果第一次會安裝 `requirements.txt` 裡的套件。
