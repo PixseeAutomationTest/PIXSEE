@@ -10,7 +10,7 @@
 2. **設定裝置名稱** → 到 `base.py` 改 [`capabilities.device_name = 你的device`](https://github.com/PixseeAutomationTest/PIXSEE/blob/dd96d55ca76915b44416ea36aae0819206c093aa/base.py#L24C5-L24C48)
 > [!TIP]
 > PYCHARM裡面可以直接crl+r就可以搜尋
-   - [ ] 用 `adb devices` 查裝置 ID（在 PowerShell 輸入）  
+   - [x] 用 `adb devices` 查裝置 ID（在 PowerShell 輸入）  
 4. **設定帳號/密碼**  → 到 `base.py` 改 [`self.account`](https://github.com/PixseeAutomationTest/PIXSEE/blob/49f028969b8e17daa92fbc708bf81039ee2ea89e/base.py#L192),[`self.password`](https://github.com/PixseeAutomationTest/PIXSEE/blob/5aea4700ed4c3089c599d95bf0392f280d9cee1e/base.py#L194)
 > [!WARNING]
 >   - 如果兩台機器同時跑，**不能用同一組帳號**  
