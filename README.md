@@ -139,7 +139,7 @@
   * 降低重複 code
   * 提供常用方法（回上一頁、滑動、讀字串表...）
 
-### 📑 [`Pixsee App translations - master_202403.csv`](Pixsee App translations - master_202403.csv)
+### 📑 `Pixsee App translations - master_202403.csv`
 
 * 字串表 (需與 `pages/`、`tests/`、`results/` 同層)
 * 常用 `base.get_string("ID")` 來取字串
