@@ -66,7 +66,7 @@ graph TD;
 
 * **縮圖操作**
 
-   `click_recent_thumbnails(count)` → 點選多張最新縮圖
+  * `click_recent_thumbnails(count)` → 點選多張最新縮圖
   * `click_specific_thumbnail(index)` → 點選特定索引的縮圖
   * `delete_and_verify_thumbnail(index)` → 刪除縮圖並驗證是否消失
 * **日期範圍**
@@ -80,17 +80,6 @@ graph TD;
 
 #### 🔸 [`photo_page.py`](pages/menu_pages/album_pages/photo_page.py)
 
-* **備註功能**
-
-  * `input_note()` → 輸入備註
-  * `get_note_text()` / `note_input_hint()` → 檢查備註文字
-  * `get_chart_count()` → 取得字數限制狀態
-* **照片操作**
-
-  * `click_trash()` / `click_dialog_delete()` → 刪除照片
-  * `click_share()` → 分享
-  * `click_download()` → 下載
-  * `click_eye()` → 隱藏 / 顯示
 * **檢查**
 
   * `is_in_photo_page()` → 確認是否在單張照片頁面
@@ -103,19 +92,11 @@ graph TD;
   * `input_baby_name(new_name)` → 修改寶寶名字（自動避免重複）
   * `select_avatar(number)` → 換大頭貼（選擇相簿照片）
   * `select_baby_birthday(locale, year, month, day)` → 設定生日
+    
 * **選單操作**
 
   * `select_nation(number=51)` → 選擇國籍（預設 Taiwan）
   * `select_relative(number=2)` → 選擇關係（預設 Mommy）
-* **刪除 / 對話框**
-
-  * `click_delete_baby_profile()` → 按下刪除寶寶資料
-  * `get_dialog_title()` / `get_dialog_message()` / `get_dialog_warning_message()` → 取得對話框文字
-  * `click_dialog_yes()` / `click_dialog_no()` / `click_dialog_cancel()` → 操作確認對話框
-* **檢查**
-
-  * `is_in_edit_baby_profile_page()` → 確認是否在編輯頁
-  * `has_calendar()` / `has_selection_list()` / `has_dialog()` → 元素存在檢查
 
 #### 🔸 [`pixsee_cloud_page.py`](pages/menu_pages/assistant_pages/pixsee_cloud_page.py)
 
@@ -134,10 +115,6 @@ graph TD;
   * `is_pixel_color(x, y)` → 截圖並檢查指定像素的平均顏色
 
 #### 🔸 [`area_detection_page.py`](pages/menu_pages/pixsee_settings_pages/area_detection_page.py)
-
-* **教學頁**
-
-  * `is_in_tutor_first_page()` / `is_in_tutor_second_page()` → 確認是否在教學的第一頁 / 第二頁
 
 * **顏色判斷**
 
