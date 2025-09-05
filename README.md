@@ -7,27 +7,29 @@
 
 ## 啟動步驟
 1. **Clone 專案** → 把這個 GitHub 連結到自己的電腦  
-2. **設定裝置名稱** → 到 `base.py` 改 `capabilities.device_name = 你的device`  
+2. **設定裝置名稱** → 到 `base.py` 改 `capabilities.device_name = 你的device`
+> [!TIP]
+> 可以直接crl+r就可以搜尋
    - ✅ 用 `adb devices` 查裝置 ID（在 PowerShell 輸入）  
-3. **設定帳號/密碼**  → 到 `base.py` 改 `self.account`,`self.password`
+4. **設定帳號/密碼**  → 到 `base.py` 改 `self.account`,`self.password`
    - ⚠️ 如果兩台機器同時跑，**不能用同一組帳號**  
-4. 打開 **PyCharm Terminal**  
-5. 第一次跑的時候輸入：  
+5. 打開 **PyCharm Terminal**  
+6. 第一次跑的時候輸入：  
    ```bash
    pip install -r requirements.txt
     ```
 
-6. 確認檔案裡面 **沒有紅色波浪線** 
-7. 打開 PowerShell，啟動 Appium：
+7. 確認檔案裡面 **沒有紅色波浪線** 
+8. 打開 PowerShell，啟動 Appium：
 
    ```bash
    appium --use-plugins=inspector --allow-cors
    ```
-8. 在 PyCharm 選好要執行的檔案並執行：
+9. 在 PyCharm 選好要執行的檔案並執行：
 
    *  `subscription_main.py` → 測 **訂閱**（要手動先在手機按訂閱）
    *  `unsubscription_main.py` → 測 **未訂閱**（要確認手機已取消訂閱）
-9. 查看 PyCharm 是否有跑出 **第一個 test** ✅
+10. 查看 PyCharm 是否有跑出 **第一個 test** ✅
 
 ---
 
@@ -37,7 +39,7 @@
 
 ## 📂 檔案說明
 
-### 📁 `pages/`
+### 📁 `pages/`(pages)
 
 每個頁面都有獨立的 **Page Object**，主要提供：
 
@@ -48,7 +50,7 @@
 
 👉 **以下是各類功能統整，如果有需要寫新功能可以用這些去改：**
 
-#### 🔸 `album_page.py`
+#### 🔸 `album_page.py`(pages/menu_pages/album_pages/album_page.py)
 
 * **縮圖操作**
 
@@ -64,7 +66,7 @@
 
   * `select_baby_birthday(locale, year, month, day)` → 打開日曆並選日期
 
-#### 🔸 `photo_page.py`
+#### 🔸 `photo_page.py`(pages/menu_pages/album_pages/photo_page.py)
 
 * **備註功能**
 
@@ -82,7 +84,7 @@
   * `is_in_photo_page()` → 確認是否在單張照片頁面
   * `find_numbers_in_text(text)` → 從字串中抓取數字（例如容量/張數）
 
-#### 🔸 `edit_baby_profile_page.py`
+#### 🔸 `edit_baby_profile_page.py`(pages/menu_pages/edit_baby_profile_page.py)
 
 * **基本資訊**
 
@@ -105,7 +107,7 @@
 
 ---
 
-### 📁 `tests/`
+### 📁 `tests/`(tests)
 
 * 每個測試檔對應一組 **testcase**
 * 所有測試都會依序跑：
@@ -114,7 +116,7 @@
   * 🧹 `tearDown()` → 測試結束後執行
 * ⚠️ **目前無法檢查圖片是否正確顯示**
 
-### 📁 `results/`
+### 📁 `results/`(results)
 
 * 存放測試結果
 * 預設檔名 = **測試日期**（可自行修改）
@@ -129,7 +131,7 @@
   * **測試項目 / 順序**
 * 目前有 **2 個 main**
 
-### ⚙️ `base.py`
+### ⚙️ `base.py`(base.py)
 
 * 所有 `test.py` **繼承**的核心 class
 * 功能：
@@ -137,7 +139,7 @@
   * 降低重複 code
   * 提供常用方法（回上一頁、滑動、讀字串表...）
 
-### 📑 `Pixsee App translations - master_202403.csv`
+### 📑 `Pixsee App translations - master_202403.csv`(Pixsee App translations - master_202403.csv)
 
 * 字串表 (需與 `pages/`、`tests/`、`results/` 同層)
 * 常用 `base.get_string("ID")` 來取字串
