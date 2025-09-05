@@ -50,7 +50,7 @@
 
 👉 **以下是各類功能統整，如果有需要寫新功能可以用這些去改：**
 
-#### 🔸 `album_page.py`(pages/menu_pages/album_pages/album_page.py)
+#### 🔸 [`album_page.py`](pages/menu_pages/album_pages/album_page.py)
 
 * **縮圖操作**
 
@@ -66,7 +66,7 @@
 
   * `select_baby_birthday(locale, year, month, day)` → 打開日曆並選日期
 
-#### 🔸 `photo_page.py`(pages/menu_pages/album_pages/photo_page.py)
+#### 🔸 [`photo_page.py`](pages/menu_pages/album_pages/photo_page.py)
 
 * **備註功能**
 
@@ -84,7 +84,7 @@
   * `is_in_photo_page()` → 確認是否在單張照片頁面
   * `find_numbers_in_text(text)` → 從字串中抓取數字（例如容量/張數）
 
-#### 🔸 `edit_baby_profile_page.py`(pages/menu_pages/edit_baby_profile_page.py)
+#### 🔸 [`edit_baby_profile_page.py`](pages/menu_pages/edit_baby_profile_page.py)
 
 * **基本資訊**
 
@@ -107,7 +107,7 @@
 
 ---
 
-### 📁 `tests/`(tests)
+### 📁 [`tests/`](tests)
 
 * 每個測試檔對應一組 **testcase**
 * 所有測試都會依序跑：
@@ -116,7 +116,7 @@
   * 🧹 `tearDown()` → 測試結束後執行
 * ⚠️ **目前無法檢查圖片是否正確顯示**
 
-### 📁 `results/`(results)
+### 📁 [`results/`](results)
 
 * 存放測試結果
 * 預設檔名 = **測試日期**（可自行修改）
@@ -131,7 +131,7 @@
   * **測試項目 / 順序**
 * 目前有 **2 個 main**
 
-### ⚙️ `base.py`(base.py)
+### ⚙️ [`base.py`](base.py)
 
 * 所有 `test.py` **繼承**的核心 class
 * 功能：
@@ -139,7 +139,7 @@
   * 降低重複 code
   * 提供常用方法（回上一頁、滑動、讀字串表...）
 
-### 📑 `Pixsee App translations - master_202403.csv`(Pixsee App translations - master_202403.csv)
+### 📑 [`Pixsee App translations - master_202403.csv`](Pixsee App translations - master_202403.csv)
 
 * 字串表 (需與 `pages/`、`tests/`、`results/` 同層)
 * 常用 `base.get_string("ID")` 來取字串
