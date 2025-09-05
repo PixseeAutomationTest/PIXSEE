@@ -7,9 +7,9 @@
 
 ## 啟動步驟
 1. **Clone 專案** → 把這個 GitHub 連結到自己的電腦  
-2. **設定裝置名稱** → 到 `base.py` 改 `capabilities.device_name = 你的device`
+2. **設定裝置名稱** → 到 `base.py` 改 [`capabilities.device_name = 你的device`](https://github.com/PixseeAutomationTest/PIXSEE/blob/dd96d55ca76915b44416ea36aae0819206c093aa/base.py#L24C5-L24C48)
 > [!TIP]
-> 可以直接crl+r就可以搜尋
+> PYCHARM裡面可以直接crl+r就可以搜尋
    - ✅ 用 `adb devices` 查裝置 ID（在 PowerShell 輸入）  
 4. **設定帳號/密碼**  → 到 `base.py` 改 `self.account`,`self.password`
    - ⚠️ 如果兩台機器同時跑，**不能用同一組帳號**  
@@ -39,6 +39,15 @@
 
 ## 📂 檔案說明
 
+### 關係圖
+```mermaid
+graph TD;
+    A[xxx_main.py<br>測試進入點] --> B[tests/<br>測試案例]
+    B --> C[base.py<br>測試基底]
+    B --> D[pages/<br>頁面物件]
+    C --> E[Pixsee App translations - master_202403.csv<br>字串表]
+    B --> F[results/<br>測試結果輸出]
+```
 ### 📁 [`pages/`](pages)
 
 每個頁面都有獨立的 **Page Object**，主要提供：
