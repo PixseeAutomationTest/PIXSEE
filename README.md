@@ -5,7 +5,7 @@
 
 # PIXSEE AUTOMATION
 
-## [`English instruction/`](README_EN.md)
+## [`English instruction`](README_EN.md)
 
 ## 啟動步驟
 1. **Clone 專案** → 把這個 GitHub 連結到自己的電腦  
