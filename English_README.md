@@ -14,7 +14,7 @@
 5. For the first run, install dependencies:  
    ```bash
    pip install -r requirements.txt
-````
+   ```
 
 6. Make sure there are **⚠️ no red squiggly lines** in your code.
 7. Open PowerShell and start Appium:
