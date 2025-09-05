@@ -172,7 +172,7 @@ Each page has its own **Page Object**, mainly providing:
 
 ---
 
-## 🔧 Usage Tips
+## 🔧 Find element Tips(when its id is not available
 
 ### 1️⃣ Handling missing IDs with XPath
 
