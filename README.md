@@ -11,8 +11,9 @@
 > [!TIP]
 > PYCHARM裡面可以直接crl+r就可以搜尋
    - ✅ 用 `adb devices` 查裝置 ID（在 PowerShell 輸入）  
-4. **設定帳號/密碼**  → 到 `base.py` 改 `self.account`,`self.password`
-   - ⚠️ 如果兩台機器同時跑，**不能用同一組帳號**  
+4. **設定帳號/密碼**  → 到 `base.py` 改 [`self.account`](https://github.com/PixseeAutomationTest/PIXSEE/blob/49f028969b8e17daa92fbc708bf81039ee2ea89e/base.py#L192),`self.password`
+> [!WARNING]
+>   - 如果兩台機器同時跑，**不能用同一組帳號**  
 5. 打開 **PyCharm Terminal**  
 6. 第一次跑的時候輸入：  
    ```bash
