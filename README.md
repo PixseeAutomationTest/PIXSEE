@@ -30,9 +30,8 @@
 
    *  `subscription_main.py` → 測 **訂閱**（要手動先在手機按訂閱）
    *  `unsubscription_main.py` → 測 **未訂閱**（要確認手機已取消訂閱）
-10. 查看 PyCharm 是否有跑出 **第一個 test** 
+10. 查看 PyCharm 是否有跑出 **第一個 test**
 
----
 
 ## 📖 [說明文件](https://drive.google.com/drive/folders/1aXvqvS8GBj83i1jdijVb5sZESfhnSr2a?usp=drive_link)
 
@@ -49,6 +48,9 @@ graph TD;
     C --> E[Pixsee App translations - master_202403.csv<br>字串表]
     B --> F[results/<br>測試結果輸出]
 ```
+
+---
+
 ### 📁 [`pages/`](pages)
 
 每個頁面都有獨立的 **Page Object**，主要提供：
@@ -159,6 +161,8 @@ graph TD;
   * 🧹 `tearDown()` → 測試結束後執行
 * ⚠️ **目前無法檢查圖片是否正確顯示**
 
+---
+
 ### 📁 [`results/`](results)
 
 * 存放測試結果
@@ -174,6 +178,8 @@ graph TD;
   * **測試項目 / 順序**
 * 目前有 **2 個 main**
 
+---
+
 ### ⚙️ [`base.py`](base.py)
 
 * 所有 `test.py` **繼承**的核心 class
@@ -181,6 +187,8 @@ graph TD;
 
   * 降低重複 code
   * 提供常用方法（回上一頁、滑動、讀字串表...）
+ 
+---
 
 ### 📑 [`Pixsee App translations - master_202403.csv`](./Pixsee%20App%20translations%20-%20master_202403.csv)
 
